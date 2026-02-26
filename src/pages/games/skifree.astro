@@ -9,43 +9,22 @@ import Window from '../../components/Window.astro';
     </div>
   </Window>
 </DesktopLayout>
-
-<!-- Intercept canvas.width/height setters BEFORE the game loads so it renders
-     at the container's resolution instead of window.innerWidth × window.innerHeight.
-     This makes all game objects appear at their intended size. -->
-<script is:inline>
-(function () {
-  var canvas = document.getElementById('skifree-canvas');
-  if (!canvas) return;
-  var container = canvas.parentElement;
-  var dpr = window.devicePixelRatio || 1;
-
-  function cw() { return Math.max(container.offsetWidth  || 640, 320); }
-  function ch() { return Math.max(container.offsetHeight || 480, 240); }
-
-  var wDesc = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'width');
-  var hDesc = Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype, 'height');
-
-  Object.defineProperty(canvas, 'width', {
-    get() { return wDesc.get.call(this); },
-    set(_v) { wDesc.set.call(this, Math.round(cw() * dpr)); },
-    configurable: true,
-  });
-  Object.defineProperty(canvas, 'height', {
-    get() { return hDesc.get.call(this); },
-    set(_v) { hDesc.set.call(this, Math.round(ch() * dpr)); },
-    configurable: true,
-  });
-})();
-</script>
 <script is:inline src="/games/skifree/skifree.js"></script>
 
 <style>
-  /* Keep the canvas display-size within the window regardless of what the game
-     sets via element.style.width/height (CSS !important beats JS inline style). */
+  /*
+   * The game renders at window.innerWidth × window.innerHeight.
+   * We contain it inside the Win98 window with width/height 100% (!important beats
+   * the game's inline style assignments).
+   * Then we scale up 1.5× from the center so the player and objects are bigger —
+   * the center of the game world (where the player always is) stays centered, and
+   * the container's overflow:hidden clips the edges.
+   */
   #skifree-canvas {
     width: 100% !important;
     height: 100% !important;
     image-rendering: pixelated;
+    transform: scale(1.5);
+    transform-origin: center center;
   }
 </style>
