@@ -2,6 +2,7 @@ export interface Env {
   MEDIA_BUCKET: R2Bucket;
   ADMIN_TOKEN: string;
   ALLOWED_ORIGIN: string;
+  KIT_API_KEY: string;
 }
 
 const corsHeaders = (origin: string, allowedOrigin: string) => ({
@@ -82,6 +83,28 @@ export default {
       object.writeHttpMetadata(headers);
       headers.set('Cache-Control', 'public, max-age=31536000');
       return new Response(object.body, { headers });
+    }
+
+    // POST /api/subscribe — proxy to Kit API v4
+    if (request.method === 'POST' && pathname === '/api/subscribe') {
+      let body: { email_address?: string };
+      try {
+        body = await request.json() as { email_address?: string };
+      } catch {
+        return json({ error: 'Invalid JSON' }, 400);
+      }
+      if (!body.email_address) return json({ error: 'email_address required' }, 400);
+
+      const kitRes = await fetch('https://api.kit.com/v4/subscribers', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${env.KIT_API_KEY}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email_address: body.email_address }),
+      });
+      const data = await kitRes.json();
+      return json(data, kitRes.status);
     }
 
     return new Response('Not found', { status: 404 });

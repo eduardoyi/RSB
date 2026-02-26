@@ -196,6 +196,7 @@ function createTaskbarButtons(): void {
 
   let first = true;
   document.querySelectorAll<HTMLElement>('.w98-window').forEach(win => {
+    if (win.dataset.noTaskbar) return;
     const titleEl = win.querySelector<HTMLElement>('.title-bar-text');
     if (!titleEl) return;
 

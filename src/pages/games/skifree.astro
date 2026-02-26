@@ -10,3 +10,13 @@ import Window from '../../components/Window.astro';
   </Window>
 </DesktopLayout>
 <script is:inline src="/games/skifree/skifree.js"></script>
+
+<style>
+  /* Override game's inline style.width/height so canvas stays inside the window */
+  #skifree-canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+</style>

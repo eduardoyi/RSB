@@ -3,6 +3,7 @@
 <div id="subscribe-wrap" style="display:none;">
   <div
     class="w98-window"
+    data-no-taskbar="true"
     data-window-path="/subscribe"
     data-default-width="360"
     data-default-height="230"
@@ -103,9 +104,9 @@
     this.textContent        = 'Subscribing...';
 
     try {
-      var res = await fetch('https://app.convertkit.com/forms/9139222/subscriptions', {
+      var res = await fetch('https://rsb-assets.eduardoyi.workers.dev/api/subscribe', {
         method:  'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ email_address: email }),
       });
       if (res.ok) {
