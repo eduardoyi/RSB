@@ -41,6 +41,10 @@ const programs = await getCollection('programs');
       <img src="/icons/win98/directory_net_web.ico" alt="" width="18" height="18" />
       RSS Feed
     </a>
+    <a class="start-menu-item" href="#" role="menuitem" onclick="event.preventDefault();document.getElementById('start-menu').classList.remove('open');document.getElementById('start-btn').setAttribute('aria-expanded','false');showSubscribeWindow();">
+      <img src="/icons/win98/envelope_closed.ico" alt="" width="18" height="18" />
+      Newsletter
+    </a>
     <a class="start-menu-item" href="/about" role="menuitem">
       <img src="/icons/win98/help_book_small.ico" alt="" width="18" height="18" />
       About

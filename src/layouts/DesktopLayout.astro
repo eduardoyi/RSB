@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import Taskbar from '../components/Taskbar.astro';
 import StartMenu from '../components/StartMenu.astro';
+import SubscribeWindow from '../components/SubscribeWindow.astro';
 import '../styles/desktop.css';
 import '../styles/window.css';
 import '../styles/monitor.css';
@@ -43,10 +44,15 @@ const { title = 'Real Serious Business', description, ogImage, ogType } = Astro.
         <img src="/icons/win98/notepad_file.ico" alt="Terms" />
         <span>Terms</span>
       </a>
+      <a class="desktop-icon" href="#" title="Newsletter" onclick="event.preventDefault();showSubscribeWindow();">
+        <img src="/icons/win98/envelope_closed.ico" alt="Newsletter" />
+        <span>Newsletter</span>
+      </a>
     </div>
 
     <slot />
 
+    <SubscribeWindow />
     <StartMenu />
     <Taskbar />
   </div>

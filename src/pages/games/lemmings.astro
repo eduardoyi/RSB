@@ -1,0 +1,50 @@
+---
+import DesktopLayout from '../../layouts/DesktopLayout.astro';
+import Window from '../../components/Window.astro';
+---
+<DesktopLayout title="Lemmings — Real Serious Business">
+  <Window title="Lemmings" icon="/icons/win98/users_green.ico" path="/games/lemmings" backHref="/games" defaultWidth={820} defaultHeight={560} defaultX={40} defaultY={20} noBodyScroll={true}>
+    <div style="background:#000;width:100%;height:100%;overflow:hidden;display:flex;align-items:center;justify-content:center;">
+      <div class="lemmings-container">
+        <canvas width="800" height="480" id="gameCanvas" style="display:block;max-width:100%;max-height:100%;object-fit:contain;image-rendering:pixelated;"></canvas>
+        <span id="levelName" style="display:block;color:white;font-size:13px;position:relative;bottom:20px;left:2px;font-family:monospace;pointer-events:none;"></span>
+        <img class="lemming-arrow lemming-arrow-l" src="/games/lemmings/img/arrow_l.png" alt="Previous level" />
+        <img class="lemming-arrow lemming-arrow-r" src="/games/lemmings/img/arrow_r.png" alt="Next level" />
+      </div>
+    </div>
+  </Window>
+</DesktopLayout>
+
+<script is:inline src="/games/lemmings/js/jquery.js"></script>
+<script is:inline src="/games/lemmings/js/lemmings.js"></script>
+<script is:inline>
+  var lemmings;
+  window.addEventListener('load', function () {
+    lemmings = new Lemmings.GameView();
+    lemmings.elementLevelName = document.getElementById('levelName');
+    lemmings.gameCanvas       = document.getElementById('gameCanvas');
+    lemmings.setup();
+  });
+</script>
+
+<style>
+  .lemmings-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .lemming-arrow {
+    position: absolute;
+    bottom: 28px;
+    cursor: pointer;
+    opacity: 0.8;
+    touch-action: manipulation;
+  }
+  .lemming-arrow:hover { opacity: 1; }
+  .lemming-arrow-l { left:  8px; }
+  .lemming-arrow-r { right: 8px; }
+</style>

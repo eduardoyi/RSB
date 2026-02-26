@@ -1,0 +1,124 @@
+---
+---
+<div id="subscribe-wrap" style="display:none;">
+  <div
+    class="w98-window"
+    data-window-path="/subscribe"
+    data-default-width="360"
+    data-default-height="230"
+    data-default-x="300"
+    data-default-y="160"
+    style="width:360px;height:230px;left:300px;top:160px;"
+  >
+    <div class="window" style="width:100%;height:100%;display:flex;flex-direction:column;">
+      <div class="title-bar">
+        <div class="title-bar-text">
+          <img src="/icons/win98/envelope_closed.ico" alt="" width="16" height="16" style="image-rendering:pixelated;margin-right:4px;vertical-align:middle;" />
+          Newsletter
+        </div>
+        <div class="title-bar-controls">
+          <button aria-label="Minimize"></button>
+          <button aria-label="Close" id="subscribe-close"></button>
+        </div>
+      </div>
+      <div class="window-body" style="flex:1;padding:20px 24px;display:flex;flex-direction:column;justify-content:center;gap:10px;">
+
+        <div id="subscribe-form-area">
+          <p style="margin:0 0 12px;font-size:13px;font-family:Arial,sans-serif;">Get new posts straight to your inbox. No spam, ever.</p>
+          <div style="display:flex;gap:6px;">
+            <input
+              type="email"
+              id="subscribe-email"
+              placeholder="your@email.com"
+              style="flex:1;font-size:12px;"
+            />
+            <button id="subscribe-btn">Subscribe</button>
+          </div>
+          <p id="subscribe-error" style="color:red;font-size:11px;margin:6px 0 0;display:none;"></p>
+        </div>
+
+        <div id="subscribe-success" style="display:none;text-align:center;">
+          <p style="margin:0 0 14px;font-size:13px;font-family:Arial,sans-serif;">You're in! Thanks for subscribing.</p>
+          <button id="subscribe-done">Close</button>
+        </div>
+
+      </div>
+    </div>
+    <div class="resize-handle" aria-hidden="true"></div>
+  </div>
+</div>
+
+<script is:inline>
+  window.showSubscribeWindow = function () {
+    var wrap = document.getElementById('subscribe-wrap');
+    if (!wrap) return;
+
+    // Center on first open if no saved position
+    var win = wrap.querySelector('.w98-window');
+    if (win && !localStorage.getItem('w98:window:/subscribe')) {
+      var w = 360, h = 230;
+      var x = Math.round((window.innerWidth  - w) / 2);
+      var y = Math.round((window.innerHeight - h) / 3);
+      win.style.left = x + 'px';
+      win.style.top  = y + 'px';
+    }
+
+    // Reset form state
+    document.getElementById('subscribe-form-area').style.display = '';
+    document.getElementById('subscribe-success').style.display   = 'none';
+    document.getElementById('subscribe-email').value             = '';
+    document.getElementById('subscribe-error').style.display     = 'none';
+    var btn = document.getElementById('subscribe-btn');
+    btn.disabled    = false;
+    btn.textContent = 'Subscribe';
+
+    wrap.style.display = 'block';
+    document.getElementById('subscribe-email').focus();
+  };
+
+  function hideSubscribeWindow() {
+    var wrap = document.getElementById('subscribe-wrap');
+    if (wrap) wrap.style.display = 'none';
+  }
+
+  document.getElementById('subscribe-close').addEventListener('click', hideSubscribeWindow);
+  document.getElementById('subscribe-done').addEventListener('click', hideSubscribeWindow);
+
+  document.getElementById('subscribe-email').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') document.getElementById('subscribe-btn').click();
+  });
+
+  document.getElementById('subscribe-btn').addEventListener('click', async function () {
+    var email    = document.getElementById('subscribe-email').value.trim();
+    var errorEl  = document.getElementById('subscribe-error');
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      errorEl.textContent    = 'Please enter a valid email address.';
+      errorEl.style.display  = 'block';
+      return;
+    }
+
+    errorEl.style.display  = 'none';
+    this.disabled           = true;
+    this.textContent        = 'Subscribing...';
+
+    try {
+      var res = await fetch('https://app.convertkit.com/forms/9139222/subscriptions', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body:    JSON.stringify({ email_address: email }),
+      });
+      if (res.ok) {
+        document.getElementById('subscribe-form-area').style.display = 'none';
+        document.getElementById('subscribe-success').style.display   = 'block';
+      } else {
+        throw new Error();
+      }
+    } catch (_) {
+      errorEl.textContent   = 'Something went wrong. Please try again.';
+      errorEl.style.display = 'block';
+      this.disabled          = false;
+      this.textContent       = 'Subscribe';
+    }
+  });
+</script>
