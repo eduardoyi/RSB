@@ -1,9 +1,9 @@
 ---
-id: example
-title: Example Program
+id: clickminded
+title: ClickMinded
 version: 1.0.0
-description: This is an example program entry. Replace it with your actual software projects.
-launch_url: https://github.com/eduardoyi
+description: 10x Your Traffic And Revenue. Cut Your Work In Half.
+launch_url: https://www.clickminded.com/
 ---
 
 An example program placeholder.
