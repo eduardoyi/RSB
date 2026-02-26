@@ -6,7 +6,6 @@ import { resolve } from 'path';
 export default defineConfig({
   site: 'https://realseriousbusiness.com',
   output: 'static',
-  trailingSlash: 'always',
   integrations: [sitemap()],
   markdown: {
     syntaxHighlight: false,
