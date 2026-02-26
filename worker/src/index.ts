@@ -98,7 +98,7 @@ export default {
       const kitRes = await fetch('https://api.kit.com/v4/subscribers', {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${env.KIT_API_KEY}`,
+          'X-Kit-Api-Key': env.KIT_API_KEY,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email_address: body.email_address }),
