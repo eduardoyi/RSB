@@ -12,6 +12,10 @@ import '../../styles/games.css';
         <button class="ms-diff active" data-cols="9"  data-rows="9"  data-mines="10">Beginner</button>
         <button class="ms-diff"       data-cols="16" data-rows="16" data-mines="40">Intermediate</button>
         <button class="ms-diff"       data-cols="30" data-rows="16" data-mines="99">Expert</button>
+        <!-- Flag mode toggle — useful on touch where right-click isn't available -->
+        <label class="ms-flag-label" title="Tap to flag instead of reveal">
+          <input type="checkbox" id="ms-flag-toggle"> 🚩 Flag
+        </label>
       </div>
 
       <!-- Canvas — scrollable so Expert (920px wide) fits -->
@@ -44,6 +48,7 @@ import '../../styles/games.css';
     init();
     jsminesweeper(9, 9, 10);
 
+    // Difficulty buttons
     document.querySelectorAll('.ms-diff').forEach(function (btn) {
       btn.addEventListener('click', function () {
         document.querySelectorAll('.ms-diff').forEach(function (b) { b.classList.remove('active'); });
@@ -53,21 +58,16 @@ import '../../styles/games.css';
         var rows  = parseInt(this.dataset.rows,  10);
         var mines = parseInt(this.dataset.mines, 10);
 
-        // Resize canvas to match what drawGame() will paint:
-        //   width  = c*cols + 20   (c = 30)
-        //   height = c*rows + 2c + 20
         var canvas = document.getElementById('jsminesweeper');
         canvas.width  = 30 * cols + 20;
         canvas.height = 30 * rows + 80;
 
-        // Also resize the window to fit comfortably (canvas + toolbar + chrome)
         var wEl = document.querySelector('.w98-window[data-window-path="/games/minesweeper"]');
         if (wEl) {
           wEl.style.width  = (canvas.width  + 32) + 'px';
-          wEl.style.height = (canvas.height + 90) + 'px';  // 90 = toolbar + title bar + borders
+          wEl.style.height = (canvas.height + 90) + 'px';
         }
 
-        // Reset global game state (mirrors the new-game path inside init())
         clearInterval(gametimer);
         gametimer     = null;
         timer         = 0;
@@ -78,5 +78,34 @@ import '../../styles/games.css';
         jsminesweeper(cols, rows, mines);
       });
     });
+
+    // Touch-to-flag: when flag mode is on, a tap flags the cell instead of revealing it
+    var msCanvas = document.getElementById('jsminesweeper');
+    msCanvas.addEventListener('touchend', function (e) {
+      var flagMode = document.getElementById('ms-flag-toggle').checked;
+      if (!flagMode) return; // let the default tap-as-click handle reveal
+      e.preventDefault();
+      var touch = e.changedTouches[0];
+      var rect  = msCanvas.getBoundingClientRect();
+      var i = Math.floor((touch.clientX - rect.left  - xo) / c);
+      var j = Math.floor((touch.clientY - rect.top   - yo) / c);
+      if (i >= 0 && j >= 0 && i < size.w && j < size.h) {
+        if (gametimer === null && !end) {
+          gametimer = setInterval(function () {
+            timer++;
+            win = checkGame();
+            if (win) { end = true; }
+            updateHeader();
+          }, 1000);
+        }
+        var mine = mines[i][j];
+        if (!mine.isDown) {
+          if (numberofmines !== 0 || mine.isFlagged) {
+            mine.isFlagged = !mine.isFlagged;
+          }
+        }
+        update();
+      }
+    }, { passive: false });
   });
 </script>

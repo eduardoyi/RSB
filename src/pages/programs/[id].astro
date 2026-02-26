@@ -32,10 +32,10 @@ const { prog } = Astro.props;
         />
       )}
       <div style="text-align:center;">
-        <h2 style="margin:0 0 4px;">{prog.data.title}</h2>
-        <p style="margin:0;color:#666;font-size:12px;">Version {prog.data.version}</p>
+        <h2 style="margin:0 0 4px;font-family:Arial,sans-serif;-webkit-font-smoothing:antialiased;">{prog.data.title}</h2>
+        <p style="margin:0;color:#666;font-size:12px;font-family:Arial,sans-serif;">Version {prog.data.version}</p>
       </div>
-      <p style="text-align:center;max-width:320px;font-size:13px;">{prog.data.description}</p>
+      <p style="text-align:center;max-width:320px;font-size:13px;font-family:Arial,sans-serif;-webkit-font-smoothing:antialiased;">{prog.data.description}</p>
 
       <!-- Fake loading bar -->
       <div class="progress-bar" style="width:280px;margin-top:8px;">

@@ -23,6 +23,28 @@ import '../../styles/games.css';
   </Window>
 </DesktopLayout>
 <script src="/games/snake/snake.js" is:inline></script>
+<script is:inline>
+  // Swipe-to-steer for touch devices
+  (function () {
+    var canvas = document.getElementById('gameCanvas');
+    var sx = 0, sy = 0;
+    canvas.addEventListener('touchstart', function (e) {
+      e.preventDefault();
+      sx = e.touches[0].clientX;
+      sy = e.touches[0].clientY;
+    }, { passive: false });
+    canvas.addEventListener('touchend', function (e) {
+      e.preventDefault();
+      var dx = e.changedTouches[0].clientX - sx;
+      var dy = e.changedTouches[0].clientY - sy;
+      if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return; // ignore taps
+      var key = Math.abs(dx) > Math.abs(dy)
+        ? (dx > 0 ? 'ArrowRight' : 'ArrowLeft')
+        : (dy > 0 ? 'ArrowDown' : 'ArrowUp');
+      document.dispatchEvent(new KeyboardEvent('keydown', { key: key, bubbles: true }));
+    }, { passive: false });
+  })();
+</script>
 <style>
   #gameCanvas { width: 100%; height: 100%; display: block; }
 </style>
