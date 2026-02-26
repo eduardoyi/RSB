@@ -4,7 +4,7 @@ import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
 export default defineConfig({
-  site: 'https://realseriousbusiness.pages.dev',
+  site: 'https://realseriousbusiness.com',
   output: 'static',
   integrations: [sitemap()],
   markdown: {

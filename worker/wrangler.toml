@@ -7,4 +7,4 @@ binding = "MEDIA_BUCKET"
 bucket_name = "rsb-media"
 
 [vars]
-ALLOWED_ORIGIN = "https://realseriousbusiness.pages.dev"
+ALLOWED_ORIGIN = "https://realseriousbusiness.com"
