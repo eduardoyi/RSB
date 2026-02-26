@@ -1,0 +1,23 @@
+---
+import DesktopLayout from '../../layouts/DesktopLayout.astro';
+import Window from '../../components/Window.astro';
+import '../../styles/games.css';
+---
+<DesktopLayout title="Games — Real Serious Business">
+  <Window title="Games" icon="/icons/win98/joystick.ico" path="/games" backHref="/" defaultWidth={480} defaultHeight={360} defaultX={100} defaultY={60}>
+    <div class="games-grid">
+      <a class="game-tile" href="/games/snake">
+        <img src="/icons/win98/joystick_button.ico" alt="Snake" />
+        <span>Snake</span>
+      </a>
+      <a class="game-tile" href="/games/tetris">
+        <img src="/icons/win98/joystick_alt.ico" alt="Tetris" />
+        <span>Tetris</span>
+      </a>
+      <a class="game-tile" href="/games/minesweeper">
+        <img src="/icons/win98/minesweeper.ico" alt="Minesweeper" />
+        <span>Minesweeper</span>
+      </a>
+    </div>
+  </Window>
+</DesktopLayout>

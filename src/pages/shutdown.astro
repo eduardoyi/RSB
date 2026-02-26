@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Shut Down — Real Serious Business">
+  <div id="shutdown-screen" style="background:#000080;color:white;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;font-family:'Arial',sans-serif;">
+    <div style="border:4px solid white;padding:32px 48px;text-align:center;max-width:420px;">
+      <h1 style="margin:0 0 16px;font-size:20px;">Windows 98</h1>
+      <p style="margin:0 0 8px;">It is now safe to turn off your computer.</p>
+      <p style="font-size:12px;color:#aad;">
+        (Just kidding — <a href="/" style="color:#88aaff;">go back to desktop</a>)
+      </p>
+    </div>
+    <p style="font-size:11px;color:#88aaff;">Real Serious Business &copy; {new Date().getFullYear()}</p>
+  </div>
+</BaseLayout>
+
+<script is:inline>
+  // Play Windows 98 shutdown tune approximation via Web Audio API
+  function playShutdownTune() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+
+    // Approximate Win98 logoff sound: descending 4-note arpeggio
+    const notes = [
+      { freq: 523.25, time: 0.0, dur: 0.35 },   // C5
+      { freq: 392.00, time: 0.3, dur: 0.35 },    // G4
+      { freq: 329.63, time: 0.6, dur: 0.35 },    // E4
+      { freq: 261.63, time: 0.9, dur: 0.7  },    // C4 (hold)
+    ];
+
+    notes.forEach(({ freq, time, dur }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.type = 'sine';
+      osc.frequency.value = freq;
+
+      const t = ctx.currentTime + time;
+      gain.gain.setValueAtTime(0, t);
+      gain.gain.linearRampToValueAtTime(0.25, t + 0.04);
+      gain.gain.setValueAtTime(0.25, t + dur - 0.08);
+      gain.gain.linearRampToValueAtTime(0, t + dur);
+
+      osc.start(t);
+      osc.stop(t + dur);
+    });
+  }
+
+  // Play on page load (user gesture not required in most cases since it's a navigation)
+  document.addEventListener('DOMContentLoaded', () => {
+    // Small delay so the page renders first
+    setTimeout(playShutdownTune, 300);
+  });
+</script>

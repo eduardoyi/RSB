@@ -1,0 +1,52 @@
+---
+import '../styles/menubar.css';
+
+interface Props {
+  windowPath: string;
+}
+const { windowPath } = Astro.props;
+---
+<div class="word97-toolbar" data-window-path={windowPath}>
+  <!-- Menu bar -->
+  <div class="win-menubar">
+    <button class="win-menubar-btn" data-menu="file">File</button>
+    <button class="win-menubar-btn" data-menu="edit">Edit</button>
+    <button class="win-menubar-btn" data-menu="view">View</button>
+    <button class="win-menubar-btn">Insert</button>
+    <button class="win-menubar-btn">Format</button>
+    <button class="win-menubar-btn">Tools</button>
+    <button class="win-menubar-btn">Table</button>
+    <button class="win-menubar-btn">Window</button>
+    <button class="win-menubar-btn">Help</button>
+
+    <!-- File dropdown -->
+    <ul class="win-dropdown" id="menu-file">
+      <li><button onclick="window.print()">Print...</button></li>
+    </ul>
+
+    <!-- View dropdown -->
+    <ul class="win-dropdown" id="menu-view">
+      <li><button id="btn-reset-window">Reset Window</button></li>
+    </ul>
+  </div>
+
+  <!-- Formatting toolbar -->
+  <div class="win-toolbar-strip">
+    <select id="font-family-select" aria-label="Font family" style="min-width:140px;">
+      <option value="Arial" selected>Arial</option>
+      <option value="'Times New Roman'">Times New Roman</option>
+      <option value="'Courier New'">Courier New</option>
+      <option value="'Comic Sans MS'">Comic Sans MS</option>
+      <option value="Verdana">Verdana</option>
+    </select>
+    <select id="font-size-select" aria-label="Font size">
+      <option value="small">Small</option>
+      <option value="normal" selected>Normal</option>
+      <option value="large">Large</option>
+    </select>
+  </div>
+</div>
+
+<script>
+  import '../scripts/word97-toolbar.ts';
+</script>

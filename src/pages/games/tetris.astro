@@ -1,0 +1,14 @@
+---
+import DesktopLayout from '../../layouts/DesktopLayout.astro';
+import Window from '../../components/Window.astro';
+---
+<DesktopLayout title="Tetris — Real Serious Business">
+  <Window title="Tetris" icon="/icons/win98/joystick_alt.ico" path="/games/tetris" backHref="/games" defaultWidth={540} defaultHeight={680} defaultX={80} defaultY={20} noBodyScroll={true}>
+    <div style="background:silver;height:100%;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:6px;">
+      <div style="box-shadow:inset 1px 1px #808080,inset -1px -1px #fff,inset 2px 2px #404040,inset -2px -2px #dfdfdf;">
+        <div id="root" style="text-align:center;"></div>
+      </div>
+    </div>
+  </Window>
+</DesktopLayout>
+<script src="/games/tetris/tetris.js" is:inline></script>

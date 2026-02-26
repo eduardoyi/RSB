@@ -1,0 +1,113 @@
+/* Floating window positioning */
+.w98-window {
+  position: absolute;
+  min-width: 320px;
+  min-height: 200px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Hide on desktop until JS positions it — prevents flash */
+@media (min-width: 768px) {
+  .w98-window {
+    visibility: hidden;
+  }
+  .w98-window.js-ready {
+    visibility: visible;
+  }
+}
+
+.w98-window .window {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  /* Override 98.css padding */
+  padding: 3px;
+}
+
+/* Default: window-body scrolls */
+.w98-window .window-body {
+  flex: 1;
+  overflow: auto;
+  /* override 98.css default margin */
+  margin: 0;
+  padding: 8px;
+}
+
+/* When the inner content handles its own scrolling (e.g. post viewer) */
+.w98-window.no-body-scroll .window-body {
+  overflow: hidden;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.w98-window .resize-handle {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 16px;
+  height: 16px;
+  cursor: se-resize;
+  z-index: 10;
+  background:
+    linear-gradient(135deg,
+      transparent 0%, transparent 50%,
+      silver 50%, silver 60%,
+      transparent 60%, transparent 70%,
+      silver 70%, silver 80%,
+      transparent 80%, transparent 90%,
+      silver 90%, silver 100%
+    );
+}
+
+.w98-window .title-bar {
+  cursor: move;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Maximized state — position/size set entirely by JS (screenBounds) */
+.w98-window.maximized {}
+
+.w98-window.maximized .resize-handle {
+  display: none;
+}
+
+.w98-window.maximized .title-bar {
+  cursor: default;
+}
+
+/* Notepad-style content area */
+.notepad-body {
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: auto;
+  background: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 4px 6px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Mobile override */
+@media (max-width: 767px) {
+  .w98-window {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100vw !important;
+    height: calc(100vh - 40px) !important;
+    z-index: 200;
+  }
+
+  .w98-window .resize-handle {
+    display: none;
+  }
+}

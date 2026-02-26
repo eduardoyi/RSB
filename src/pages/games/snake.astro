@@ -1,0 +1,28 @@
+---
+import DesktopLayout from '../../layouts/DesktopLayout.astro';
+import Window from '../../components/Window.astro';
+import '../../styles/games.css';
+---
+<DesktopLayout title="Snake — Real Serious Business">
+  <Window title="Snake" icon="/icons/win98/joystick_button.ico" path="/games/snake" backHref="/games" defaultWidth={520} defaultHeight={560} defaultX={80} defaultY={30} noBodyScroll={true}>
+    <div style="background:silver;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;padding:6px;">
+      <div style="position:relative;width:100%;max-width:480px;aspect-ratio:1;overflow:hidden;flex-shrink:0;box-shadow:inset 1px 1px #808080,inset -1px -1px #fff,inset 2px 2px #404040,inset -2px -2px #dfdfdf;">
+        <canvas id="gameCanvas"></canvas>
+        <!-- Win98-style score label -->
+        <div id="score" class="snake-score">Score: 0</div>
+        <!-- Win98 MessageBox-style game-over dialog -->
+        <div id="gameOver" class="snake-gameover" style="display:none">
+          <div class="snake-gameover-titlebar">Snake</div>
+          <div class="snake-gameover-body">
+            <p>Game Over!</p>
+            <button onclick="restartGame()">Play Again</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Window>
+</DesktopLayout>
+<script src="/games/snake/snake.js" is:inline></script>
+<style>
+  #gameCanvas { width: 100%; height: 100%; display: block; }
+</style>

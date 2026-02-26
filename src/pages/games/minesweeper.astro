@@ -1,0 +1,82 @@
+---
+import DesktopLayout from '../../layouts/DesktopLayout.astro';
+import Window from '../../components/Window.astro';
+import '../../styles/games.css';
+---
+<DesktopLayout title="Minesweeper — Real Serious Business">
+  <Window title="Minesweeper" icon="/icons/win98/minesweeper.ico" path="/games/minesweeper" backHref="/games" defaultWidth={320} defaultHeight={440} defaultX={80} defaultY={30} noBodyScroll={true}>
+    <div class="ms-wrapper">
+
+      <!-- Win98-style difficulty toolbar -->
+      <div class="ms-toolbar" role="toolbar" aria-label="Difficulty">
+        <button class="ms-diff active" data-cols="9"  data-rows="9"  data-mines="10">Beginner</button>
+        <button class="ms-diff"       data-cols="16" data-rows="16" data-mines="40">Intermediate</button>
+        <button class="ms-diff"       data-cols="30" data-rows="16" data-mines="99">Expert</button>
+      </div>
+
+      <!-- Canvas — scrollable so Expert (920px wide) fits -->
+      <div class="ms-canvas-wrap">
+        <canvas id="jsminesweeper" width="290" height="350"></canvas>
+      </div>
+
+      <!-- Win98 dialog — replaces the native alert() on win/lose -->
+      <div id="ms-result" class="ms-result" style="display:none">
+        <div class="ms-result-titlebar">Minesweeper</div>
+        <div class="ms-result-body">
+          <p id="ms-result-msg"></p>
+          <button onclick="document.getElementById('ms-result').style.display='none'">OK</button>
+        </div>
+      </div>
+
+    </div>
+  </Window>
+</DesktopLayout>
+
+<script src="/games/minesweeper/minesweeper.js" is:inline></script>
+<script is:inline>
+  // Replace native alert with a Win98 dialog
+  window.alert = function (msg) {
+    document.getElementById('ms-result-msg').textContent = msg;
+    document.getElementById('ms-result').style.display = 'flex';
+  };
+
+  window.addEventListener('load', function () {
+    init();
+    jsminesweeper(9, 9, 10);
+
+    document.querySelectorAll('.ms-diff').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.ms-diff').forEach(function (b) { b.classList.remove('active'); });
+        this.classList.add('active');
+
+        var cols  = parseInt(this.dataset.cols,  10);
+        var rows  = parseInt(this.dataset.rows,  10);
+        var mines = parseInt(this.dataset.mines, 10);
+
+        // Resize canvas to match what drawGame() will paint:
+        //   width  = c*cols + 20   (c = 30)
+        //   height = c*rows + 2c + 20
+        var canvas = document.getElementById('jsminesweeper');
+        canvas.width  = 30 * cols + 20;
+        canvas.height = 30 * rows + 80;
+
+        // Also resize the window to fit comfortably (canvas + toolbar + chrome)
+        var wEl = document.querySelector('.w98-window[data-window-path="/games/minesweeper"]');
+        if (wEl) {
+          wEl.style.width  = (canvas.width  + 32) + 'px';
+          wEl.style.height = (canvas.height + 90) + 'px';  // 90 = toolbar + title bar + borders
+        }
+
+        // Reset global game state (mirrors the new-game path inside init())
+        clearInterval(gametimer);
+        gametimer     = null;
+        timer         = 0;
+        end           = false;
+        win           = false;
+        numberofmines = 0;
+
+        jsminesweeper(cols, rows, mines);
+      });
+    });
+  });
+</script>

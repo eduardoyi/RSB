@@ -1,0 +1,36 @@
+---
+import Window from './Window.astro';
+
+interface Props {
+  title: string;
+  backHref?: string;
+  path: string;
+  defaultWidth?: number;
+  defaultHeight?: number;
+  defaultX?: number;
+  defaultY?: number;
+}
+
+const {
+  title,
+  backHref = '/games',
+  path,
+  defaultWidth = 520,
+  defaultHeight = 560,
+  defaultX = 80,
+  defaultY = 30,
+} = Astro.props;
+---
+<Window
+  title={title}
+  backHref={backHref}
+  path={path}
+  defaultWidth={defaultWidth}
+  defaultHeight={defaultHeight}
+  defaultX={defaultX}
+  defaultY={defaultY}
+>
+  <div class="game-container" id="game-container">
+    <slot />
+  </div>
+</Window>

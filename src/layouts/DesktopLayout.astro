@@ -1,0 +1,65 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Taskbar from '../components/Taskbar.astro';
+import StartMenu from '../components/StartMenu.astro';
+import '../styles/desktop.css';
+import '../styles/window.css';
+import '../styles/monitor.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: string;
+}
+
+const { title = 'Real Serious Business', description, ogImage, ogType } = Astro.props;
+---
+<BaseLayout title={title} description={description} ogImage={ogImage} ogType={ogType}>
+  <slot name="head" slot="head" />
+  <div class="desktop" id="desktop">
+    <div class="desktop-icons" aria-label="Desktop">
+      <a class="desktop-icon" href="/post" title="My Documents">
+        <img src="/icons/win98/directory_open_file_mydocs.ico" alt="My Documents" />
+        <span>My Documents</span>
+      </a>
+      <a class="desktop-icon" href="/games" title="Games">
+        <img src="/icons/win98/joystick.ico" alt="Games" />
+        <span>Games</span>
+      </a>
+      <a class="desktop-icon" href="/programs" title="Programs">
+        <img src="/icons/win98/directory_program_group.ico" alt="Programs" />
+        <span>Programs</span>
+      </a>
+      <a class="desktop-icon" href="/rss.xml" title="RSS Feed">
+        <img src="/icons/win98/directory_net_web.ico" alt="RSS Feed" />
+        <span>RSS Feed</span>
+      </a>
+      <a class="desktop-icon" href="/privacy" title="Privacy Policy">
+        <img src="/icons/win98/notepad_file.ico" alt="Privacy Policy" />
+        <span>Privacy Policy</span>
+      </a>
+      <a class="desktop-icon" href="/terms" title="Terms">
+        <img src="/icons/win98/notepad_file.ico" alt="Terms" />
+        <span>Terms</span>
+      </a>
+    </div>
+
+    <slot />
+
+    <StartMenu />
+    <Taskbar />
+  </div>
+
+  <!-- CRT monitor frame (desktop only, pointer-events:none)              -->
+  <!-- monitor-frame: screen opening → rounded inner corners + depth     -->
+  <!-- monitor-bezel: 3D border lighting + bottom buttons + power LED    -->
+  <div class="monitor-frame" aria-hidden="true"></div>
+  <div class="monitor-bezel" aria-hidden="true"></div>
+</BaseLayout>
+
+<script>
+  import '../scripts/taskbar-clock.ts';
+  import '../scripts/start-menu.ts';
+  import '../scripts/window-manager.ts';
+</script>

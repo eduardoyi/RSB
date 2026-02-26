@@ -1,0 +1,67 @@
+---
+interface Props {
+  title: string;
+  icon?: string;
+  backHref?: string;
+  path: string;
+  defaultWidth?: number;
+  defaultHeight?: number;
+  defaultX?: number;
+  defaultY?: number;
+  resizable?: boolean;
+  noBodyScroll?: boolean;
+  class?: string;
+}
+
+const {
+  title,
+  icon,
+  backHref = '/',
+  path,
+  defaultWidth = 640,
+  defaultHeight = 480,
+  defaultX = 60,
+  defaultY = 40,
+  resizable = true,
+  noBodyScroll = false,
+  class: className = '',
+} = Astro.props;
+---
+<div
+  class={`w98-window${noBodyScroll ? ' no-body-scroll' : ''}${className ? ' ' + className : ''}`}
+  data-window-path={path}
+  data-default-width={defaultWidth}
+  data-default-height={defaultHeight}
+  data-default-x={defaultX}
+  data-default-y={defaultY}
+  style={`width:${defaultWidth}px;height:${defaultHeight}px;left:${defaultX}px;top:${defaultY}px;`}
+>
+  <div class="window" style="width:100%;height:100%;display:flex;flex-direction:column;">
+    <div class="title-bar">
+      <div class="title-bar-text">
+        {icon && <img src={icon} alt="" width="16" height="16" style="image-rendering:pixelated;margin-right:4px;vertical-align:middle;" />}
+        {title}
+      </div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close" data-back-href={backHref}></button>
+      </div>
+    </div>
+    <div class="window-body" style="flex:1;">
+      <slot />
+    </div>
+    {resizable && <div class="resize-handle" aria-hidden="true"></div>}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[aria-label="Close"][data-back-href]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.location.href = btn.dataset.backHref ?? '/';
+    });
+  });
+  document.querySelectorAll<HTMLButtonElement>('[aria-label="Minimize"]').forEach(btn => {
+    btn.addEventListener('click', (e) => e.preventDefault());
+  });
+</script>

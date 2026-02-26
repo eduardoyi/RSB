@@ -1,0 +1,7 @@
+/* Minesweeper game styles — replace with actual game CSS */
+#minesweeper-game {
+  color: white;
+  text-align: center;
+  padding: 40px;
+  font-family: 'Courier New', monospace;
+}

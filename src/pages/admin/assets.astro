@@ -1,0 +1,217 @@
+---
+// This page is served at /admin/assets
+// public/admin/index.html takes precedence at /admin (no conflict)
+export const prerender = true;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>R2 Asset Manager — Real Serious Business</title>
+  <link rel="stylesheet" href="https://unpkg.com/98.css" />
+  <style>
+    body { background: #008080; padding: 20px; margin: 0; font-size: 12px; }
+    .window { width: 100%; max-width: 800px; margin: 0 auto; }
+    .window-body { padding: 12px; }
+    #asset-list { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+    #asset-list th, #asset-list td { padding: 4px 8px; text-align: left; border-bottom: 1px solid silver; font-size: 11px; }
+    #asset-list th { background: #d4d0c8; }
+    .asset-url { max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .upload-area { border: 2px dashed #808080; padding: 16px; text-align: center; margin-bottom: 12px; cursor: pointer; }
+    .upload-area:hover { background: #e8e8e8; }
+    #status { color: #000080; min-height: 20px; }
+    .picker-mode-notice { background: #ffff99; border: 1px solid #808000; padding: 8px; margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <div class="window">
+    <div class="title-bar">
+      <div class="title-bar-text">R2 Asset Manager</div>
+      <div class="title-bar-controls">
+        <button aria-label="Minimize"></button>
+        <button aria-label="Maximize"></button>
+        <button aria-label="Close" onclick="window.close()"></button>
+      </div>
+    </div>
+    <div class="window-body">
+      <div id="picker-notice" class="picker-mode-notice" style="display:none;">
+        Picker mode — click "Select" next to an asset to insert it.
+      </div>
+
+      <div id="auth-section">
+        <p>Enter your admin token to access R2 assets:</p>
+        <input type="password" id="token-input" placeholder="Admin token" style="width:240px;" />
+        <button id="auth-btn" class="button">Connect</button>
+      </div>
+
+      <div id="main-section" style="display:none;">
+        <div class="upload-area" id="upload-area">
+          Drop files here or <label for="file-input" style="color:#000080;cursor:pointer;text-decoration:underline;">browse</label>
+          <input type="file" id="file-input" style="display:none;" multiple />
+        </div>
+
+        <p id="status"></p>
+
+        <table id="asset-list">
+          <thead>
+            <tr>
+              <th>Key</th>
+              <th>Size</th>
+              <th>URL</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="asset-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const workerUrl = import.meta.env.PUBLIC_R2_WORKER_URL || '';
+    const isPicker = new URLSearchParams(location.search).get('picker') === 'true';
+    let adminToken = '';
+
+    if (isPicker) {
+      document.getElementById('picker-notice').style.display = 'block';
+    }
+
+    // Check for stored token
+    const stored = localStorage.getItem('rsb:admin-token');
+    if (stored) {
+      adminToken = stored;
+      showMain();
+      loadAssets();
+    }
+
+    document.getElementById('auth-btn').addEventListener('click', () => {
+      const input = document.getElementById('token-input');
+      adminToken = input.value.trim();
+      if (!adminToken) return;
+      localStorage.setItem('rsb:admin-token', adminToken);
+      showMain();
+      loadAssets();
+    });
+
+    function showMain() {
+      document.getElementById('auth-section').style.display = 'none';
+      document.getElementById('main-section').style.display = 'block';
+    }
+
+    function setStatus(msg) {
+      document.getElementById('status').textContent = msg;
+    }
+
+    async function loadAssets() {
+      setStatus('Loading...');
+      try {
+        const res = await fetch(`${workerUrl}/api/assets`);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const assets = await res.json();
+        renderTable(assets);
+        setStatus(`${assets.length} asset(s) loaded.`);
+      } catch (err) {
+        setStatus('Error loading assets: ' + err.message);
+      }
+    }
+
+    function renderTable(assets) {
+      const tbody = document.getElementById('asset-tbody');
+      tbody.innerHTML = '';
+      assets.forEach(asset => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escHtml(asset.key)}</td>
+          <td>${formatSize(asset.size)}</td>
+          <td class="asset-url"><a href="${escHtml(asset.url)}" target="_blank">${escHtml(asset.url)}</a></td>
+          <td>
+            <button onclick="copyUrl('${escJs(asset.url)}')">Copy URL</button>
+            ${isPicker ? `<button onclick="selectAsset('${escJs(asset.url)}')">Select</button>` : ''}
+            <button onclick="deleteAsset('${escJs(asset.key)}')">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function copyUrl(url) {
+      navigator.clipboard.writeText(url).then(() => setStatus('URL copied!'));
+    }
+
+    function selectAsset(url) {
+      if (window.opener) {
+        window.opener.postMessage({ type: 'r2:select', url }, '*');
+        window.close();
+      }
+    }
+
+    async function deleteAsset(key) {
+      if (!confirm(`Delete "${key}"?`)) return;
+      setStatus('Deleting...');
+      try {
+        const res = await fetch(`${workerUrl}/api/assets/${encodeURIComponent(key)}`, {
+          method: 'DELETE',
+          headers: { Authorization: `Bearer ${adminToken}` },
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        setStatus('Deleted.');
+        loadAssets();
+      } catch (err) {
+        setStatus('Delete failed: ' + err.message);
+      }
+    }
+
+    // Upload
+    const fileInput = document.getElementById('file-input');
+    const uploadArea = document.getElementById('upload-area');
+
+    uploadArea.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', () => uploadFiles(fileInput.files));
+
+    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.background = '#e0e8ff'; });
+    uploadArea.addEventListener('dragleave', () => { uploadArea.style.background = ''; });
+    uploadArea.addEventListener('drop', e => {
+      e.preventDefault();
+      uploadArea.style.background = '';
+      uploadFiles(e.dataTransfer.files);
+    });
+
+    async function uploadFiles(files) {
+      for (const file of files) {
+        setStatus(`Uploading ${file.name}...`);
+        const form = new FormData();
+        form.append('file', file);
+        try {
+          const res = await fetch(`${workerUrl}/api/assets/upload`, {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${adminToken}` },
+            body: form,
+          });
+          if (!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          setStatus(`Uploaded: ${data.key}`);
+        } catch (err) {
+          setStatus(`Upload failed for ${file.name}: ` + err.message);
+        }
+      }
+      loadAssets();
+    }
+
+    function formatSize(bytes) {
+      if (!bytes) return '—';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / 1048576).toFixed(1) + ' MB';
+    }
+
+    function escHtml(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function escJs(s) {
+      return String(s).replace(/'/g, "\\'").replace(/\\/g,'\\\\');
+    }
+  </script>
+</body>
+</html>

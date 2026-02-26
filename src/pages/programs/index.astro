@@ -1,0 +1,24 @@
+---
+import DesktopLayout from '../../layouts/DesktopLayout.astro';
+import Window from '../../components/Window.astro';
+import { getCollection } from 'astro:content';
+
+const programs = await getCollection('programs');
+---
+<DesktopLayout title="Programs — Real Serious Business">
+  <Window title="Programs" path="/programs" backHref="/" defaultWidth={500} defaultHeight={380} defaultX={120} defaultY={70}>
+    <div style="display:flex;flex-wrap:wrap;gap:16px;padding:8px;">
+      {programs.map((prog) => (
+        <a
+          href={`/programs/${prog.data.id}`}
+          style="display:flex;flex-direction:column;align-items:center;gap:6px;width:80px;text-decoration:none;color:black;padding:8px;text-align:center;font-size:11px;"
+          onmouseover="this.style.background='#000080';this.style.color='white';"
+          onmouseout="this.style.background='';this.style.color='black';"
+        >
+          <img src={prog.data.splash_image ?? '/icons/win98/executable.ico'} alt={prog.data.title} width="48" height="48" style="image-rendering:pixelated;object-fit:contain;" />
+          <span>{prog.data.title}</span>
+        </a>
+      ))}
+    </div>
+  </Window>
+</DesktopLayout>

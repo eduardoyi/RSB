@@ -1,0 +1,79 @@
+---
+import DesktopLayout from '../../layouts/DesktopLayout.astro';
+import Window from '../../components/Window.astro';
+import Word97Toolbar from '../../components/Word97Toolbar.astro';
+import { getCollection, render } from 'astro:content';
+import '../../styles/post.css';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const windowPath = `/post/${post.id}`;
+
+const postUrl = new URL(windowPath, Astro.site);
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  ...(post.data.description && { description: post.data.description }),
+  datePublished: post.data.date.toISOString(),
+  dateModified:  post.data.date.toISOString(),
+  url: String(postUrl),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': String(postUrl) },
+  author: {
+    '@type': 'Person',
+    name: 'Eduardo Yi',
+    url: String(Astro.site),
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Real Serious Business',
+    url: String(Astro.site),
+  },
+  ...(post.data.featured_image && {
+    image: String(new URL(post.data.featured_image, Astro.site)),
+  }),
+};
+---
+<DesktopLayout
+  title={`${post.data.title} — Real Serious Business`}
+  description={post.data.description}
+  ogImage={post.data.featured_image}
+  ogType="article"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  <Window
+    title={post.data.title}
+    icon="/icons/win98/notepad_file.ico"
+    path={windowPath}
+    backHref="/post"
+    defaultWidth={960}
+    defaultHeight={700}
+    defaultX={60}
+    defaultY={30}
+    noBodyScroll={true}
+  >
+    <div style="display:flex;flex-direction:column;height:100%;overflow:hidden;">
+      <Word97Toolbar windowPath={windowPath} />
+      <div class="document-wrapper">
+        <article class="document-body font-normal">
+          <div class="document-meta">
+            <strong>{post.data.title}</strong> &mdash;
+            {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </div>
+          {post.data.featured_image && (
+            <img src={post.data.featured_image} alt={post.data.featured_image_alt ?? ''} style="max-width:100%;margin-bottom:1em;" />
+          )}
+          <Content />
+        </article>
+      </div>
+    </div>
+  </Window>
+</DesktopLayout>

@@ -1,0 +1,10 @@
+name = "rsb-assets"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[[r2_buckets]]
+binding = "MEDIA_BUCKET"
+bucket_name = "rsb-media"
+
+[vars]
+ALLOWED_ORIGIN = "https://realseriousbusiness.pages.dev"

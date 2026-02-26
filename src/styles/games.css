@@ -1,0 +1,177 @@
+/* ─── Games index grid ──────────────────────────────────────────────────── */
+
+.games-grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 4px;
+  padding: 8px;
+}
+
+.game-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 84px;
+  text-decoration: none;
+  color: black;
+  padding: 8px 6px;
+  border: 1px solid transparent;
+  text-align: center;
+  font-size: 11px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.game-tile:hover,
+.game-tile:focus {
+  outline: none;
+  border: 1px dotted #000080;
+  background: rgba(0, 0, 128, 0.12);
+  color: #000080;
+}
+
+.game-tile img {
+  width: 32px;
+  height: 32px;
+  image-rendering: pixelated;
+}
+
+/* ─── Minesweeper ────────────────────────────────────────────────────────── */
+
+.ms-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: silver;
+}
+
+/* Difficulty toolbar */
+.ms-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  background: silver;
+  border-bottom: 1px solid #808080;
+  flex-shrink: 0;
+}
+
+.ms-diff {
+  font-size: 11px;
+  font-family: Arial, sans-serif;
+  padding: 2px 10px;
+  min-height: 22px;
+  background: silver;
+  border: none;
+  cursor: pointer;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+.ms-diff.active,
+.ms-diff:active {
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+
+/* Canvas container — scrollable so Expert (920px wide) works */
+.ms-canvas-wrap {
+  flex: 1;
+  overflow: auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+/* Win98-style result dialog (replaces native alert) */
+.ms-result {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: silver;
+  border: 2px solid;
+  border-color: white #808080 #808080 white;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+  min-width: 180px;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.ms-result-titlebar {
+  background: #000080;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 8px;
+}
+
+.ms-result-body {
+  padding: 16px 20px 12px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.ms-result-body p {
+  margin: 0 0 12px;
+}
+
+/* ─── Snake ──────────────────────────────────────────────────────────────── */
+
+/* Win98 score label — absolute overlay, top-left of canvas */
+.snake-score {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  background: silver;
+  border: 1px solid;
+  border-color: #808080 white white #808080;
+  padding: 1px 8px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  color: black;
+  pointer-events: none;
+}
+
+/* Win98 MessageBox-style game-over dialog */
+.snake-gameover {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: silver;
+  border: 2px solid;
+  border-color: white #808080 #808080 white;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+  min-width: 200px;
+  z-index: 10;
+}
+
+.snake-gameover-titlebar {
+  background: #000080;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 3px 8px;
+  user-select: none;
+}
+
+.snake-gameover-body {
+  padding: 16px 20px 12px;
+  text-align: center;
+  font-size: 13px;
+}
+
+.snake-gameover-body p {
+  margin: 0 0 12px;
+}
+
+/* Mobile scaling for games */
+@media (max-width: 767px) {
+  .game-container canvas,
+  .game-container > * {
+    transform-origin: top left;
+    max-width: 100%;
+  }
+}

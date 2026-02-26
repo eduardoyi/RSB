@@ -1,0 +1,83 @@
+---
+import DesktopLayout from '../layouts/DesktopLayout.astro';
+import Window from '../components/Window.astro';
+import '../styles/menubar.css';
+---
+<DesktopLayout title="Privacy Policy — Real Serious Business">
+  <Window
+    title="Privacy Policy - Notepad"
+    icon="/icons/win98/notepad_file.ico"
+    path="/privacy"
+    backHref="/"
+    defaultWidth={580}
+    defaultHeight={520}
+    defaultX={100}
+    defaultY={50}
+    noBodyScroll={true}
+  >
+    <div style="display:flex;flex-direction:column;height:100%;">
+      <div class="win-menubar">
+        <button class="win-menubar-btn">File</button>
+        <button class="win-menubar-btn">Edit</button>
+        <button class="win-menubar-btn">Search</button>
+        <button class="win-menubar-btn">Help</button>
+      </div>
+      <div class="notepad-body">Privacy Policy
+Last updated: February 2026
+----------------------------------------
+
+OVERVIEW
+----------------------------------------
+
+Real Serious Business is a personal blog. This
+policy describes what little data is handled
+when you visit this site.
+
+DATA COLLECTION
+----------------------------------------
+
+This site does not collect, store, or process
+any personal data on a server.
+
+  - No accounts or sign-ups
+  - No contact forms
+  - No analytics or tracking scripts
+  - No cookies from this site
+
+LOCAL STORAGE
+----------------------------------------
+
+Your browser's localStorage is used solely to
+remember window positions and font preferences
+on this site. This data never leaves your
+device and is not accessible to anyone else.
+
+THIRD-PARTY LINKS
+----------------------------------------
+
+Posts may link to external websites. This site
+has no control over and assumes no
+responsibility for the content or privacy
+practices of any third-party sites.
+
+CLOUDFLARE
+----------------------------------------
+
+This site is hosted on Cloudflare Pages.
+Cloudflare may log basic request metadata
+(IP address, user agent) as part of its
+infrastructure. See Cloudflare's privacy
+policy for details.
+
+CONTACT
+----------------------------------------
+
+If you have any questions about this policy,
+you can reach out via the contact information
+listed on this site.
+
+----------------------------------------
+      </div>
+    </div>
+  </Window>
+</DesktopLayout>

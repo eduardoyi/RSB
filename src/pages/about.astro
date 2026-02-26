@@ -1,0 +1,56 @@
+---
+import DesktopLayout from '../layouts/DesktopLayout.astro';
+import Window from '../components/Window.astro';
+---
+<DesktopLayout title="About — Real Serious Business">
+  <Window
+    title="About Real Serious Business"
+    icon="/icons/win98/help_book_small.ico"
+    path="/about"
+    backHref="/"
+    defaultWidth={400}
+    defaultHeight={320}
+    resizable={false}
+  >
+    <menu role="tablist" style="margin:0 0 -2px;">
+      <li role="tab" aria-selected="true"><a href="#tab-general">General</a></li>
+    </menu>
+
+    <div role="tabpanel" id="tab-general" style="padding:16px;">
+      <div style="display:flex;gap:20px;align-items:flex-start;">
+        <img
+          src="/icons/win98/computer_win.ico"
+          alt=""
+          width="64"
+          height="64"
+          style="image-rendering:pixelated;flex-shrink:0;margin-top:4px;"
+        />
+        <div style="font-size:12px;line-height:1.7;">
+          <div style="margin-bottom:10px;">
+            <strong>System:</strong>
+            <div style="padding-left:16px;">
+              Real Serious Business<br>
+              Version 98.2026
+            </div>
+          </div>
+          <div style="margin-bottom:10px;">
+            <strong>Created by:</strong>
+            <div style="padding-left:16px;">Eduardo Yi</div>
+          </div>
+          <div>
+            <strong>Built with:</strong>
+            <div style="padding-left:16px;">
+              Astro (static) &middot; 98.css<br>
+              Cloudflare Pages &middot; Decap CMS<br>
+              Cloudflare R2
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #808080;padding:8px 12px;display:flex;justify-content:flex-end;gap:6px;">
+      <button onclick="location.href='/'" style="min-width:75px;">OK</button>
+    </div>
+  </Window>
+</DesktopLayout>

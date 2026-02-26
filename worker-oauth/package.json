@@ -1,0 +1,13 @@
+{
+  "name": "rsb-oauth-worker",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250224.0",
+    "wrangler": "^3.114.4"
+  }
+}

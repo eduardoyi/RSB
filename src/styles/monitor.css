@@ -1,0 +1,155 @@
+/* ─── CRT Monitor Frame ────────────────────────────────────────────────────
+   Only visible at ≥1100px. Two pointer-events:none overlays:
+
+   .monitor-frame  — positioned as the screen opening.
+                     box-shadow spread fills the bezel area outward.
+                     border-radius rounds the INNER corners (screen edge).
+                     Outer corners appear square because the shadow extends
+                     orders of magnitude beyond the rounded element shape.
+
+   .monitor-bezel  — inset:0 with a CSS border.
+                     Transparent center lets screen content show through.
+                     Per-side border colors give the 3D plastic lighting.
+                     Hosts the bottom buttons (::before) and LED (::after).
+   ─────────────────────────────────────────────────────────────────────── */
+
+@keyframes led-pulse {
+  0%, 100% {
+    box-shadow: 0 0 4px 1px rgba(58, 200, 58, 0.65);
+  }
+  50% {
+    box-shadow: 0 0 10px 4px rgba(58, 200, 58, 0.9), 0 0 18px 7px rgba(58, 200, 58, 0.25);
+  }
+}
+
+@media (min-width: 1100px) {
+  /* Dark desk surface visible around the monitor */
+  body {
+    background: #1a1714;
+  }
+
+  /* ── Layout: push all interactive chrome inside the screen area ───────── */
+
+  /* Taskbar fills the full screen width, extra internal padding gives
+     breathing room so the Start button / clock clear the bezel shadow */
+  .taskbar {
+    bottom: 50px !important;
+    left: 18px !important;
+    right: 18px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  /* Start menu sits above the repositioned taskbar */
+  .start-menu {
+    bottom: 90px !important;
+    left: 18px !important;
+    /* Left-edge shadow matching the screen recess so the menu reads as
+       part of the screen rather than floating above the dark vignette   */
+    box-shadow: -14px 0 22px rgba(0, 0, 0, 0.5), 2px 2px 0 rgba(0, 0, 0, 0.3) !important;
+  }
+
+  /* Desktop scroll area */
+  .desktop {
+    padding-bottom: 90px !important;
+  }
+
+  /* Push icons away from the top/left screen-recess shadow */
+  .desktop-icons {
+    padding: 30px 24px 24px 30px !important;
+    max-height: calc(100vh - 90px) !important;
+  }
+
+  /* ── Screen opening ───────────────────────────────────────────────────
+     Element IS the screen opening (offset from viewport edges by bezel
+     width). box-shadow with huge spread fills the surrounding bezel area.
+     border-radius applies to the INNER edge (where bezel meets screen).  */
+
+  .monitor-frame {
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    right: 18px;
+    bottom: 50px;
+    pointer-events: none;
+    z-index: 99999;
+
+    /* Rounds the inner screen corners */
+    border-radius: 12px;
+
+    box-shadow:
+      /* Warm beige fill — covers the bezel area all the way to the viewport */
+      0 0 0 100vmax #c8c0a8,
+      /* Screen-edge depth: dark ring + vignette + faint glass highlight  */
+      inset 0 0 0 3px #181614,
+      inset 0 0 24px rgba(0, 0, 0, 0.65),
+      inset 2px 2px 0 3px rgba(255, 255, 255, 0.05);
+  }
+
+  /* ── 3D bezel lighting ────────────────────────────────────────────────
+     Transparent center exposes the screen content and the rounded corner
+     fill from .monitor-frame behind it. Per-side border colors simulate
+     light hitting the plastic from the top-left.                         */
+
+  .monitor-bezel {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100000;
+
+    border-style: solid;
+    border-width: 18px 18px 50px;
+    border-radius: 0;              /* square outer corners                */
+
+    /* 3D plastic lighting */
+    border-top-color:    #d8cfb6;
+    border-left-color:   #d0c7ae;
+    border-right-color:  #a8a090;
+    border-bottom-color: #bcb49c;
+  }
+
+  /* ── Bottom bezel: 3D buttons ─────────────────────────────────────────
+     Absolute children are relative to .monitor-bezel's content box
+     (18px inset on sides, 50px on bottom — identical to old .monitor-frame).
+     Negative bottom values reach INTO the 50px bottom border:
+       bottom: -30px  →  button bottom = 20px from viewport bottom        */
+
+  .monitor-bezel::before {
+    content: '';
+    position: absolute;
+    bottom: -30px;               /* 20px from viewport bottom             */
+    left: calc(50% - 40px);      /* centers the 80px-wide 4-button row   */
+
+    width: 14px;
+    height: 10px;
+    border-radius: 2px;
+
+    background: linear-gradient(180deg, #ccc4ac 0%, #9e9882 100%);
+
+    box-shadow:
+      inset 0  1px 0 rgba(255, 255, 255, 0.45),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.30),
+      inset  1px 0 0 rgba(255, 255, 255, 0.20),
+      inset -1px 0 0 rgba(0, 0, 0, 0.20),
+      0 1px 2px rgba(0, 0, 0, 0.40),
+      /* Buttons 2, 3, 4 */
+      22px 0 0 0 #aca498,  22px 1px 2px rgba(0, 0, 0, 0.35),
+      44px 0 0 0 #aca498,  44px 1px 2px rgba(0, 0, 0, 0.35),
+      66px 0 0 0 #aca498,  66px 1px 2px rgba(0, 0, 0, 0.35);
+  }
+
+  /* ── Power LED ────────────────────────────────────────────────────────
+     bottom: -28px  →  LED bottom = 22px from viewport bottom             */
+
+  .monitor-bezel::after {
+    content: '';
+    position: absolute;
+    bottom: -28px;
+    right: 10px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #9af89a, #2ab82a);
+    animation: led-pulse 2.8s ease-in-out infinite;
+  }
+}

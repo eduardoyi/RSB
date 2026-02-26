@@ -1,0 +1,129 @@
+/* Word 97 document area */
+.document-wrapper {
+  background: #808080;
+  padding: 16px;
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.document-body {
+  background: white;
+  width: 100%;
+  max-width: 680px;
+  min-height: 900px;
+  padding: 48px 56px;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+  margin: 0 auto;
+  font-family: var(--doc-font-family, 'Times New Roman'), serif;
+  /* Override 98.css pixel font rendering for document text */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: auto;
+}
+
+/* Font scale variants */
+.document-body.font-small { font-size: 12px; }
+.document-body.font-normal { font-size: 14px; }
+.document-body.font-large { font-size: 18px; }
+
+.document-body h1 { font-size: 2em; margin-bottom: 0.5em; }
+.document-body h2 { font-size: 1.5em; margin: 1em 0 0.5em; }
+.document-body h3 { font-size: 1.25em; margin: 1em 0 0.5em; }
+.document-body p { line-height: 1.6; margin: 0.75em 0; }
+.document-body ul, .document-body ol { padding-left: 2em; }
+.document-body li { line-height: 1.6; margin: 0.25em 0; }
+.document-body blockquote {
+  border-left: 4px solid silver;
+  margin: 1em 0;
+  padding-left: 1em;
+  color: #444;
+}
+.document-body pre {
+  background: #f0f0f0;
+  border: 1px solid silver;
+  padding: 12px 16px;
+  overflow-x: auto;
+  font-family: 'Courier New', monospace;
+  font-size: 0.875em;
+  line-height: 1.5;
+  white-space: pre;
+  word-break: normal;
+}
+.document-body code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875em;
+  background: #f0f0f0;
+  padding: 1px 4px;
+  border: 1px solid #d0d0d0;
+}
+.document-body pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+.document-body img {
+  max-width: 100%;
+  margin: 1em 0;
+}
+.document-body a { color: #000080; }
+
+.document-meta {
+  color: #666;
+  font-size: 0.85em;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+  margin-bottom: 1.5em;
+}
+
+/* Mobile: no page simulation, infinite scroll */
+@media (max-width: 767px) {
+  .document-wrapper {
+    padding: 0;
+    background: white;
+  }
+
+  .document-body {
+    max-width: none;
+    min-height: auto;
+    padding: 20px 16px;
+    box-shadow: none;
+    margin: 0;
+  }
+}
+
+/* Print styles */
+@media print {
+  .taskbar,
+  .start-menu,
+  .w98-window .title-bar,
+  .w98-window .resize-handle,
+  .word97-toolbar,
+  .desktop-icons {
+    display: none !important;
+  }
+
+  .desktop {
+    background: white !important;
+    padding: 0 !important;
+  }
+
+  .w98-window {
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    box-shadow: none !important;
+  }
+
+  .document-wrapper {
+    background: white !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .document-body {
+    box-shadow: none !important;
+    max-width: none !important;
+  }
+}

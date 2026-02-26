@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager — Real Serious Business</title>
+</head>
+<body>
+  <div id="nc-root"></div>
+  <!-- Decap CMS loaded from CDN -->
+  <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
+  <script>
+    // Custom R2 media library integration
+    const R2MediaLibrary = {
+      name: 'r2',
+      init: ({ options }) => {
+        return {
+          show: ({ config, onInsert }) => {
+            const popup = window.open(
+              '/admin/assets?picker=true',
+              'r2-picker',
+              'width=900,height=600,scrollbars=yes'
+            );
+
+            const handler = (event) => {
+              if (event.data && event.data.type === 'r2:select') {
+                window.removeEventListener('message', handler);
+                popup?.close();
+                onInsert({ path: event.data.url });
+              }
+            };
+
+            window.addEventListener('message', handler);
+          },
+          enableStandalone: () => true,
+        };
+      },
+    };
+
+    CMS.registerMediaLibrary(R2MediaLibrary);
+    CMS.init();
+  </script>
+</body>
+</html>

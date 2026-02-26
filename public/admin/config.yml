@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: eduardoyi/RSB
+  branch: main
+  base_url: https://rsb-oauth.YOUR_SUBDOMAIN.workers.dev
+  auth_endpoint: auth
+
+local_backend: true
+
+media_library:
+  name: r2
+
+locale: en
+
+collections:
+  - name: posts
+    label: Blog Posts
+    folder: src/content/posts
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
+      - { label: Description, name: description, widget: string }
+      - { label: Featured Image, name: featured_image, widget: image, required: false, media_library: { name: r2 } }
+      - { label: Featured Image Alt, name: featured_image_alt, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: programs
+    label: Programs
+    folder: src/content/programs
+    create: true
+    slug: "{{fields.id}}"
+    fields:
+      - { label: ID, name: id, widget: string, hint: "URL-safe identifier (e.g. my-app)" }
+      - { label: Title, name: title, widget: string }
+      - { label: Version, name: version, widget: string }
+      - { label: Description, name: description, widget: text }
+      - { label: Splash Image, name: splash_image, widget: image, required: false, media_library: { name: r2 } }
+      - { label: Launch URL, name: launch_url, widget: string, hint: "Full URL to the program" }

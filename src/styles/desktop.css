@@ -1,0 +1,300 @@
+.desktop {
+  background: #008080;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 40px; /* taskbar height */
+}
+
+.desktop-icons {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 8px;
+  padding: 16px;
+  max-height: calc(100vh - 40px);
+  position: relative;
+  z-index: 1;
+}
+
+.desktop-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 80px;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-size: 12px;
+  text-align: center;
+  padding: 6px;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+.desktop-icon:hover,
+.desktop-icon:focus {
+  outline: none;
+  border: 1px dotted white;
+  background: rgba(0, 0, 128, 0.5);
+  color: white;
+}
+
+.desktop-icon img {
+  width: 48px;
+  height: 48px;
+  image-rendering: pixelated;
+}
+
+.desktop-icon span {
+  text-shadow: 1px 1px 1px #000;
+  word-break: break-word;
+  font-size: 12px;
+}
+
+/* Taskbar */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: silver;
+  border-top: 2px solid white;
+  display: flex;
+  align-items: center;
+  padding: 3px 6px;
+  z-index: 9999;
+  gap: 6px;
+}
+
+.taskbar-start {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+  padding: 4px 10px;
+  white-space: nowrap;
+  font-size: 13px;
+  min-height: 30px;
+}
+
+.taskbar-start img {
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+}
+
+.taskbar-separator {
+  width: 2px;
+  height: 28px;
+  border-left: 1px solid #808080;
+  border-right: 1px solid white;
+  margin: 0 2px;
+}
+
+/* Taskbar window buttons */
+#taskbar-windows {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.taskbar-window-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 2px 8px;
+  max-width: 180px;
+  min-width: 100px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  -webkit-font-smoothing: auto;
+  font-smooth: auto;
+  min-height: 28px;
+  cursor: pointer;
+  background: silver;
+  border: none;
+  white-space: nowrap;
+  overflow: hidden;
+  /* Raised Win98 button look */
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+}
+
+.taskbar-window-btn.active {
+  /* Pressed/sunken look for the currently focused window */
+  box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+}
+
+.taskbar-window-btn img {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  image-rendering: pixelated;
+}
+
+.taskbar-window-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.taskbar-tray {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  border: 1px solid;
+  border-color: #808080 white white #808080;
+  padding: 3px 10px;
+  font-size: 13px;
+  white-space: nowrap;
+  min-width: 80px;
+}
+
+/* Start Menu */
+.start-menu {
+  position: fixed;
+  bottom: 40px;
+  left: 0;
+  width: 240px;
+  background: silver;
+  border: 2px solid;
+  border-color: white #808080 #808080 white;
+  z-index: 10000;
+  display: none;
+  flex-direction: row;
+}
+
+.start-menu.open {
+  display: flex;
+}
+
+.start-menu-banner {
+  background: #000080;
+  color: white;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  padding: 8px 4px;
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  width: 34px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.start-menu-items {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 0;
+}
+
+.start-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  position: relative;
+}
+
+.start-menu-item:hover,
+.start-menu-item.active {
+  background: #000080;
+  color: white;
+}
+
+.start-menu-item img {
+  width: 18px;
+  height: 18px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.start-menu-item .submenu-arrow {
+  margin-left: auto;
+  font-size: 10px;
+}
+
+.start-menu-divider {
+  height: 1px;
+  background: #808080;
+  margin: 3px 6px;
+  box-shadow: 0 1px 0 white;
+}
+
+/* Programs submenu */
+.start-submenu {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background: silver;
+  border: 2px solid;
+  border-color: white #808080 #808080 white;
+  min-width: 200px;
+  display: none;
+  flex-direction: column;
+  z-index: 10001;
+  padding: 2px 0;
+}
+
+.start-menu-item:hover .start-submenu,
+.start-menu-item.active .start-submenu {
+  display: flex;
+}
+
+.start-submenu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 12px;
+  text-decoration: none;
+  color: black;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.start-submenu a:hover {
+  background: #000080;
+  color: white;
+}
+
+.start-submenu a img {
+  width: 18px;
+  height: 18px;
+  image-rendering: pixelated;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .desktop {
+    background: #008080;
+  }
+
+  .desktop-icons {
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-height: none;
+    gap: 12px;
+    padding: 16px;
+    justify-content: flex-start;
+  }
+
+  .desktop-icon {
+    width: 72px;
+  }
+}

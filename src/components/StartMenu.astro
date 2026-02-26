@@ -1,0 +1,54 @@
+---
+import { getCollection } from 'astro:content';
+
+const programs = await getCollection('programs');
+---
+<nav class="start-menu" id="start-menu" role="menu" aria-label="Start Menu">
+  <div class="start-menu-banner" aria-hidden="true">Real Serious Business</div>
+  <div class="start-menu-items">
+
+    <!-- Programs flyout submenu -->
+    <div class="start-menu-item" id="programs-item" role="menuitem" aria-haspopup="true">
+      <img src="/icons/win98/directory_program_group.ico" alt="" width="18" height="18" />
+      Programs
+      <span class="submenu-arrow">▶</span>
+      <div class="start-submenu" id="programs-submenu" role="menu">
+        {programs.map((prog) => (
+          <a href={`/programs/${prog.data.id}`} role="menuitem">
+            <img src={prog.data.splash_image ?? '/icons/win98/directory_program_group.ico'} alt="" width="18" height="18" />
+            {prog.data.title}
+          </a>
+        ))}
+        {programs.length === 0 && (
+          <a href="/programs" role="menuitem">
+            <img src="/icons/win98/directory_program_group.ico" alt="" width="18" height="18" />
+            View All Programs
+          </a>
+        )}
+      </div>
+    </div>
+
+    <a class="start-menu-item" href="/post" role="menuitem">
+      <img src="/icons/win98/directory_open_file_mydocs.ico" alt="" width="18" height="18" />
+      My Documents
+    </a>
+    <a class="start-menu-item" href="/games" role="menuitem">
+      <img src="/icons/win98/joystick.ico" alt="" width="18" height="18" />
+      Games
+    </a>
+    <div class="start-menu-divider" role="separator"></div>
+    <a class="start-menu-item" href="/rss.xml" role="menuitem">
+      <img src="/icons/win98/directory_net_web.ico" alt="" width="18" height="18" />
+      RSS Feed
+    </a>
+    <a class="start-menu-item" href="/about" role="menuitem">
+      <img src="/icons/win98/help_book_small.ico" alt="" width="18" height="18" />
+      About
+    </a>
+    <div class="start-menu-divider" role="separator"></div>
+    <a class="start-menu-item" href="/shutdown" role="menuitem">
+      <img src="/icons/win98/shut_down_normal.ico" alt="" width="18" height="18" />
+      Shut Down…
+    </a>
+  </div>
+</nav>

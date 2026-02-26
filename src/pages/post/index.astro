@@ -1,0 +1,179 @@
+---
+import DesktopLayout from '../../layouts/DesktopLayout.astro';
+import Window from '../../components/Window.astro';
+import { getCollection } from 'astro:content';
+import '../../styles/menubar.css';
+
+const posts = (await getCollection('posts')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+<DesktopLayout title="My Documents — Real Serious Business">
+  <Window
+    title="My Documents"
+    icon="/icons/win98/directory_open_file_mydocs.ico"
+    path="/post"
+    backHref="/"
+    defaultWidth={680}
+    defaultHeight={460}
+    defaultX={80}
+    defaultY={50}
+    noBodyScroll={true}
+  >
+    <div class="explorer-window">
+
+      <!-- Menu bar -->
+      <div class="win-menubar">
+        <button class="win-menubar-btn">File</button>
+        <button class="win-menubar-btn">Edit</button>
+        <button class="win-menubar-btn">View</button>
+        <button class="win-menubar-btn">Go</button>
+        <button class="win-menubar-btn">Favorites</button>
+        <button class="win-menubar-btn">Help</button>
+      </div>
+
+      <!-- Address bar -->
+      <div class="explorer-addressbar">
+        <span class="address-label">Address</span>
+        <div class="address-value">
+          <img src="/icons/win98/directory_open_file_mydocs.ico" alt="" width="16" height="16" style="flex-shrink:0;" />
+          <span>My Documents</span>
+        </div>
+      </div>
+
+      <!-- Column headers -->
+      <div class="explorer-header-row">
+        <div class="explorer-col-name">Name</div>
+        <div class="explorer-col-size">Size</div>
+        <div class="explorer-col-type">Type</div>
+        <div class="explorer-col-date">Modified</div>
+      </div>
+
+      <!-- File list -->
+      <div class="explorer-filelist">
+        {posts.map((post) => (
+          <a class="explorer-file-row" href={`/post/${post.id}`}>
+            <div class="explorer-col-name">
+              <img src="/icons/win98/notepad_file.ico" alt="" width="16" height="16" style="flex-shrink:0;" />
+              <span>{post.data.title}</span>
+            </div>
+            <div class="explorer-col-size"></div>
+            <div class="explorer-col-type">Blog Post</div>
+            <div class="explorer-col-date">
+              {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Status bar -->
+      <div class="status-bar explorer-statusbar">
+        <p class="status-bar-field">{posts.length} object{posts.length !== 1 ? 's' : ''}</p>
+        <p class="status-bar-field" style="flex:2;">My Documents</p>
+      </div>
+
+    </div>
+  </Window>
+</DesktopLayout>
+
+<style>
+  .explorer-window {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    font-size: 11px;
+    overflow: hidden;
+  }
+
+  .explorer-addressbar {
+    display: flex;
+    align-items: center;
+    padding: 3px 4px;
+    gap: 6px;
+    border-bottom: 1px solid #808080;
+    flex-shrink: 0;
+    background: silver;
+  }
+
+  .address-label {
+    font-size: 11px;
+    color: black;
+    white-space: nowrap;
+  }
+
+  .address-value {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    padding: 2px 6px;
+    font-size: 11px;
+    height: 21px;
+  }
+
+  .explorer-header-row {
+    display: flex;
+    background: silver;
+    border-bottom: 1px solid #808080;
+    flex-shrink: 0;
+  }
+
+  .explorer-header-row > div {
+    padding: 2px 6px;
+    font-size: 11px;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .explorer-header-row > div:active {
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+  }
+
+  .explorer-filelist {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background: white;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    margin: 2px;
+  }
+
+  .explorer-file-row {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+  }
+
+  .explorer-file-row:hover,
+  .explorer-file-row:focus {
+    background: #000080;
+    color: white;
+    outline: none;
+  }
+
+  .explorer-file-row:hover img,
+  .explorer-file-row:focus img {
+    filter: brightness(10);
+  }
+
+  .explorer-file-row > div {
+    padding: 2px 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .explorer-col-name { flex: 1; display: flex; align-items: center; gap: 6px; min-width: 0; }
+  .explorer-col-name span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .explorer-col-size { width: 60px; text-align: right; flex-shrink: 0; }
+  .explorer-col-type { width: 100px; flex-shrink: 0; }
+  .explorer-col-date { width: 110px; flex-shrink: 0; }
+
+  .explorer-statusbar { flex-shrink: 0; }
+</style>
