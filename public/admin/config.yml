@@ -2,7 +2,7 @@ backend:
   name: github
   repo: eduardoyi/RSB
   branch: main
-  base_url: https://rsb-oauth.YOUR_SUBDOMAIN.workers.dev
+  base_url: https://rsb-oauth.eduardoyi.workers.dev
   auth_endpoint: auth
 
 local_backend: true
