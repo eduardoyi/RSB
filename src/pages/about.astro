@@ -9,11 +9,16 @@ import Window from '../components/Window.astro';
     path="/about"
     backHref="/"
     defaultWidth={400}
-    defaultHeight={320}
+    defaultHeight={360}
     resizable={false}
   >
     <menu role="tablist" style="margin:0 0 -2px;">
-      <li role="tab" aria-selected="true"><a href="#tab-general">General</a></li>
+      <li role="tab" id="tab-btn-general" aria-selected="true">
+        <a href="#" onclick="switchTab('general');return false;">General</a>
+      </li>
+      <li role="tab" id="tab-btn-credits" aria-selected="false">
+        <a href="#" onclick="switchTab('credits');return false;">Credits</a>
+      </li>
     </menu>
 
     <div role="tabpanel" id="tab-general" style="padding:16px;">
@@ -49,8 +54,43 @@ import Window from '../components/Window.astro';
       </div>
     </div>
 
+    <div role="tabpanel" id="tab-credits" style="padding:16px;display:none;">
+      <p style="font-size:12px;margin:0 0 10px;font-weight:bold;">Open-source games — thank you!</p>
+      <div style="font-size:12px;line-height:2;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <img src="/icons/win98/joystick_button.ico" width="16" height="16" style="image-rendering:pixelated;flex-shrink:0;" alt="" />
+          <span>Snake &mdash; <a href="https://github.com/ramazancetinkaya/snake-game" target="_blank" rel="noopener">ramazancetinkaya/snake-game</a></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <img src="/icons/win98/joystick_alt.ico" width="16" height="16" style="image-rendering:pixelated;flex-shrink:0;" alt="" />
+          <span>Tetris &mdash; <a href="https://github.com/hoffhannisyan/javascript-tetris" target="_blank" rel="noopener">hoffhannisyan/javascript-tetris</a></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <img src="/icons/win98/minesweeper.ico" width="16" height="16" style="image-rendering:pixelated;flex-shrink:0;" alt="" />
+          <span>Minesweeper &mdash; <a href="https://github.com/aymanbagabas/jsminesweeper" target="_blank" rel="noopener">aymanbagabas/jsminesweeper</a></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <img src="/icons/win98/joystick.ico" width="16" height="16" style="image-rendering:pixelated;flex-shrink:0;" alt="" />
+          <span>SkiFree &mdash; <a href="https://github.com/basicallydan/skifree.js" target="_blank" rel="noopener">basicallydan/skifree.js</a></span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <img src="/icons/win98/users_green.ico" width="16" height="16" style="image-rendering:pixelated;flex-shrink:0;" alt="" />
+          <span>Lemmings &mdash; <a href="https://github.com/oklemenz/LemmingsJS" target="_blank" rel="noopener">oklemenz/LemmingsJS</a></span>
+        </div>
+      </div>
+    </div>
+
     <div style="border-top:1px solid #808080;padding:8px 12px;display:flex;justify-content:flex-end;gap:6px;">
       <button onclick="location.href='/'" style="min-width:75px;">OK</button>
     </div>
   </Window>
 </DesktopLayout>
+
+<script is:inline>
+  function switchTab(name) {
+    ['general', 'credits'].forEach(function(id) {
+      document.getElementById('tab-' + id).style.display          = id === name ? '' : 'none';
+      document.getElementById('tab-btn-' + id).ariaSelected       = id === name ? 'true' : 'false';
+    });
+  }
+</script>
