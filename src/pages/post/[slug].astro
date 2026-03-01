@@ -9,14 +9,15 @@ import '../../styles/post.css';
 export async function getStaticPaths() {
   const posts = await getCollection('posts');
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.data.slug || post.id },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const windowPath = `/post/${post.id}`;
+const slug = post.data.slug || post.id;
+const windowPath = `/post/${slug}`;
 const authorName = post.data.author ?? 'Eduardo Yi';
 
 const postUrl = new URL(windowPath, Astro.site);

@@ -52,7 +52,7 @@ const posts = (await getCollection('posts')).sort(
       <!-- File list -->
       <div class="explorer-filelist">
         {posts.map((post) => (
-          <a class="explorer-file-row" href={`/post/${post.id}`}>
+          <a class="explorer-file-row" href={`/post/${post.data.slug || post.id}`}>
             <div class="explorer-col-name">
               <img src="/icons/win98/notepad_file.ico" alt="" width="16" height="16" style="flex-shrink:0;" />
               <span>{post.data.title}</span>

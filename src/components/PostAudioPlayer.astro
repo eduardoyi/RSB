@@ -8,76 +8,76 @@ const { src } = Astro.props;
 <div class="post-audio-player">
   <p class="audio-label">&#127897; Listen to the audio version</p>
   <div class="audio-bar">
-    <button class="audio-btn" id="audio-play" title="Play">&#9654;</button>
-    <button class="audio-btn" id="audio-pause" title="Pause" style="display:none">&#9646;&#9646;</button>
-    <button class="audio-btn" id="audio-stop" title="Stop">&#9632;</button>
-    <button class="audio-btn" id="audio-back" title="Back 10s">&#9664;&#9664;</button>
-    <button class="audio-btn" id="audio-fwd" title="Forward 30s">&#9654;&#9654;</button>
-    <div class="audio-progress-track" id="audio-progress-track">
-      <div class="audio-progress-fill" id="audio-progress-fill"></div>
+    <button class="audio-btn" data-action="play" title="Play">&#9654;</button>
+    <button class="audio-btn" data-action="pause" title="Pause" style="display:none">&#9646;&#9646;</button>
+    <button class="audio-btn" data-action="stop" title="Stop">&#9632;</button>
+    <button class="audio-btn" data-action="back" title="Back 10s">&#9664;&#9664;</button>
+    <button class="audio-btn" data-action="fwd" title="Forward 30s">&#9654;&#9654;</button>
+    <div class="audio-progress-track" data-role="track">
+      <div class="audio-progress-fill" data-role="fill"></div>
     </div>
-    <span class="audio-time" id="audio-time">0:00 / 0:00</span>
+    <span class="audio-time" data-role="time">0:00 / 0:00</span>
     <span class="audio-vol-icon">&#128266;</span>
-    <input type="range" class="audio-volume" id="audio-volume" min="0" max="1" step="0.05" value="1" />
+    <input type="range" class="audio-volume" data-role="volume" min="0" max="1" step="0.05" value="1" />
   </div>
-  <audio id="audio-el" src={src} preload="metadata" style="display:none"></audio>
+  <audio data-role="audio" src={src} preload="metadata" style="display:none"></audio>
 </div>
 
-<script>
+<script is:inline>
   (function () {
-    const container = document.currentScript!.previousElementSibling as HTMLElement | null;
+    var container = document.currentScript.previousElementSibling;
     if (!container) return;
 
-    const audio = container.querySelector<HTMLAudioElement>('#audio-el')!;
-    const playBtn = container.querySelector<HTMLButtonElement>('#audio-play')!;
-    const pauseBtn = container.querySelector<HTMLButtonElement>('#audio-pause')!;
-    const stopBtn = container.querySelector<HTMLButtonElement>('#audio-stop')!;
-    const backBtn = container.querySelector<HTMLButtonElement>('#audio-back')!;
-    const fwdBtn = container.querySelector<HTMLButtonElement>('#audio-fwd')!;
-    const track = container.querySelector<HTMLDivElement>('#audio-progress-track')!;
-    const fill = container.querySelector<HTMLDivElement>('#audio-progress-fill')!;
-    const timeEl = container.querySelector<HTMLSpanElement>('#audio-time')!;
-    const volEl = container.querySelector<HTMLInputElement>('#audio-volume')!;
+    var audio = container.querySelector('[data-role="audio"]');
+    var playBtn = container.querySelector('[data-action="play"]');
+    var pauseBtn = container.querySelector('[data-action="pause"]');
+    var stopBtn = container.querySelector('[data-action="stop"]');
+    var backBtn = container.querySelector('[data-action="back"]');
+    var fwdBtn = container.querySelector('[data-action="fwd"]');
+    var track = container.querySelector('[data-role="track"]');
+    var fill = container.querySelector('[data-role="fill"]');
+    var timeEl = container.querySelector('[data-role="time"]');
+    var volEl = container.querySelector('[data-role="volume"]');
 
-    function fmt(s: number): string {
-      const m = Math.floor(s / 60);
-      const sec = Math.floor(s % 60);
-      return `${m}:${sec.toString().padStart(2, '0')}`;
+    function fmt(s) {
+      var m = Math.floor(s / 60);
+      var sec = Math.floor(s % 60);
+      return m + ':' + (sec < 10 ? '0' : '') + sec;
     }
 
     function updateTime() {
-      const dur = isFinite(audio.duration) ? audio.duration : 0;
-      fill.style.width = dur ? `${(audio.currentTime / dur) * 100}%` : '0%';
-      timeEl.textContent = `${fmt(audio.currentTime)} / ${fmt(dur)}`;
+      var dur = isFinite(audio.duration) ? audio.duration : 0;
+      fill.style.width = dur ? ((audio.currentTime / dur) * 100) + '%' : '0%';
+      timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(dur);
     }
 
-    function setPlaying(playing: boolean) {
+    function setPlaying(playing) {
       playBtn.style.display = playing ? 'none' : '';
       pauseBtn.style.display = playing ? '' : 'none';
     }
 
-    playBtn.addEventListener('click', () => { audio.play(); setPlaying(true); });
-    pauseBtn.addEventListener('click', () => { audio.pause(); setPlaying(false); });
-    stopBtn.addEventListener('click', () => {
+    playBtn.addEventListener('click', function () { audio.play(); setPlaying(true); });
+    pauseBtn.addEventListener('click', function () { audio.pause(); setPlaying(false); });
+    stopBtn.addEventListener('click', function () {
       audio.pause();
       audio.currentTime = 0;
       setPlaying(false);
       updateTime();
     });
-    backBtn.addEventListener('click', () => { audio.currentTime = Math.max(0, audio.currentTime - 10); });
-    fwdBtn.addEventListener('click', () => { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
+    backBtn.addEventListener('click', function () { audio.currentTime = Math.max(0, audio.currentTime - 10); });
+    fwdBtn.addEventListener('click', function () { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
 
-    track.addEventListener('click', (e) => {
-      const rect = track.getBoundingClientRect();
-      const ratio = (e.clientX - rect.left) / rect.width;
+    track.addEventListener('click', function (e) {
+      var rect = track.getBoundingClientRect();
+      var ratio = (e.clientX - rect.left) / rect.width;
       if (isFinite(audio.duration)) {
         audio.currentTime = ratio * audio.duration;
       }
     });
 
-    volEl.addEventListener('input', () => { audio.volume = parseFloat(volEl.value); });
+    volEl.addEventListener('input', function () { audio.volume = parseFloat(volEl.value); });
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateTime);
-    audio.addEventListener('ended', () => { setPlaying(false); updateTime(); });
+    audio.addEventListener('ended', function () { setPlaying(false); updateTime(); });
   })();
 </script>
