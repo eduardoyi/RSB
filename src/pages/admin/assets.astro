@@ -135,18 +135,18 @@ export const prerender = true;
       });
     }
 
-    function copyUrl(url) {
+    window.copyUrl = function(url) {
       navigator.clipboard.writeText(url).then(() => setStatus('URL copied!'));
     }
 
-    function selectAsset(url) {
+    window.selectAsset = function(url) {
       const bc = new BroadcastChannel('r2-picker');
       bc.postMessage({ type: 'r2:select', url });
       bc.close();
       window.close();
     }
 
-    async function deleteAsset(key) {
+    window.deleteAsset = async function(key) {
       if (!confirm(`Delete "${key}"?`)) return;
       setStatus('Deleting...');
       try {
