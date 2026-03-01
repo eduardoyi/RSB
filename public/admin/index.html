@@ -4,6 +4,42 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager — Real Serious Business</title>
+  <style>
+    /* 2-column post editor layout */
+    [data-cms-layout="post"] {
+      display: grid !important;
+      grid-template-columns: 1fr 288px !important;
+      align-items: start !important;
+      max-width: none !important;
+    }
+
+    /* Main column: title + body */
+    [data-field-name="title"],
+    [data-field-name="body"] {
+      grid-column: 1 !important;
+      padding-right: 24px !important;
+      box-sizing: border-box !important;
+    }
+
+    /* Body spans multiple rows so it aligns with the sidebar height */
+    [data-field-name="body"] {
+      grid-row: 2 / span 10 !important;
+    }
+
+    /* Sidebar column */
+    [data-field-name="slug"],
+    [data-field-name="date"],
+    [data-field-name="description"],
+    [data-field-name="author"],
+    [data-field-name="featured_image"],
+    [data-field-name="featured_image_alt"],
+    [data-field-name="podcast_audio"] {
+      grid-column: 2 !important;
+      border-left: 1px solid #ddd !important;
+      padding-left: 16px !important;
+      box-sizing: border-box !important;
+    }
+  </style>
 </head>
 <body>
   <div id="nc-root"></div>
@@ -55,6 +91,58 @@
 
     CMS.registerMediaLibrary(R2MediaLibrary);
     CMS.init();
+
+    // 2-column post editor layout via MutationObserver.
+    //
+    // Decap CMS (Netlify CMS v2) uses Emotion CSS-in-JS so class names are
+    // unstable hashes. Instead, we detect field wrappers via label[for] attrs:
+    // each field label gets for="{fieldName}-field-{uniqueId}". We walk up 2
+    // parent levels to reach the ControlContainer, then one more to the
+    // ControlPaneContainer, and apply CSS grid via data attributes.
+    (function () {
+      var POST_FIELDS = ['title', 'body', 'slug', 'date', 'description', 'author',
+                         'featured_image', 'featured_image_alt', 'podcast_audio'];
+      var layoutApplied = false;
+      var prevHref = location.href;
+
+      function applyEditorLayout() {
+        var wrappers = {};
+        var controlPane = null;
+
+        for (var i = 0; i < POST_FIELDS.length; i++) {
+          var name = POST_FIELDS[i];
+          var label = document.querySelector('label[for^="' + name + '-field-"]');
+          if (!label) continue;
+          // label → ControlTopbar → ControlContainer
+          var container = label.parentElement && label.parentElement.parentElement;
+          if (!container) continue;
+          wrappers[name] = container;
+          if (!controlPane) controlPane = container.parentElement;
+        }
+
+        var found = Object.keys(wrappers).length;
+        if (found < 5 || !controlPane || controlPane === document.body) return false;
+        if (controlPane.hasAttribute('data-cms-layout')) return true;
+
+        controlPane.setAttribute('data-cms-layout', 'post');
+        for (var fieldName in wrappers) {
+          wrappers[fieldName].setAttribute('data-field-name', fieldName);
+        }
+        return true;
+      }
+
+      var observer = new MutationObserver(function () {
+        if (location.href !== prevHref) {
+          prevHref = location.href;
+          layoutApplied = false;
+        }
+        if (!layoutApplied) {
+          layoutApplied = applyEditorLayout();
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+    })();
   </script>
 </body>
 </html>

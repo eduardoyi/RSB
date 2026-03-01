@@ -21,9 +21,12 @@ collections:
     sortable_fields: [date, title]
     view_filters:
       - { label: "Recent", field: date, pattern: "202" }
+    editor:
+      preview: false
     fields:
-      - { label: Slug, name: slug, widget: string, hint: "URL-safe identifier used as the post URL (e.g. my-post-title)" }
       - { label: Title, name: title, widget: string }
+      - { label: Body, name: body, widget: markdown }
+      - { label: Slug, name: slug, widget: string, hint: "URL-safe identifier used as the post URL (e.g. my-post-title)" }
       - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
       - { label: Description, name: description, widget: string }
       - { label: Author, name: author, widget: string, required: false, default: "Eduardo Yi" }
@@ -34,7 +37,6 @@ collections:
         widget: file
         required: false
         hint: "Select the audio file from the R2 media picker"
-      - { label: Body, name: body, widget: markdown }
 
   - name: programs
     label: Programs
