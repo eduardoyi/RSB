@@ -1,5 +1,5 @@
 ---
-slug: the-normie-handbook-for-escaping-the-permanent-underclass
+slug: permanent-underclass
 title: The Normie Handbook for Escaping the Permanent Underclass
 date: 2026-03-01T15:29:26.733Z
 description: There is a phrase that has been circulating in tech circles for a
