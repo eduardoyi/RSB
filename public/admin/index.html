@@ -11,6 +11,7 @@
       grid-template-columns: 1fr 288px !important;
       align-items: start !important;
       max-width: none !important;
+      width: 100% !important;
     }
 
     /* Main column: title + body */
@@ -94,11 +95,10 @@
 
     // 2-column post editor layout via MutationObserver.
     //
-    // Decap CMS (Netlify CMS v2) uses Emotion CSS-in-JS so class names are
-    // unstable hashes. Instead, we detect field wrappers via label[for] attrs:
-    // each field label gets for="{fieldName}-field-{uniqueId}". We walk up 2
-    // parent levels to reach the ControlContainer, then one more to the
-    // ControlPaneContainer, and apply CSS grid via data attributes.
+    // Netlify CMS v2 uses Emotion CSS-in-JS so class names are unstable hashes.
+    // Strategy: find labels by [for] attrs, locate their lowest common ancestor
+    // (the field list container), then walk up from each label to its direct
+    // child of that container. No hardcoded depth assumptions.
     (function () {
       var POST_FIELDS = ['title', 'body', 'slug', 'date', 'description', 'author',
                          'featured_image', 'featured_image_alt', 'podcast_audio'];
@@ -106,28 +106,45 @@
       var prevHref = location.href;
 
       function applyEditorLayout() {
-        var wrappers = {};
-        var controlPane = null;
-
+        // Find labels — try "name-field-N" (Decap) and plain "name" (Netlify CMS v2)
+        var labelMap = {};
         for (var i = 0; i < POST_FIELDS.length; i++) {
-          var name = POST_FIELDS[i];
-          var label = document.querySelector('label[for^="' + name + '-field-"]');
-          if (!label) continue;
-          // label → ControlTopbar → ControlContainer
-          var container = label.parentElement && label.parentElement.parentElement;
-          if (!container) continue;
-          wrappers[name] = container;
-          if (!controlPane) controlPane = container.parentElement;
+          var n = POST_FIELDS[i];
+          var lbl = document.querySelector('label[for^="' + n + '-field-"]') ||
+                    document.querySelector('label[for="' + n + '"]');
+          if (lbl) labelMap[n] = lbl;
         }
+        if (Object.keys(labelMap).length < 5) return false;
 
-        var found = Object.keys(wrappers).length;
-        if (found < 5 || !controlPane || controlPane === document.body) return false;
+        // Walk up from the first label to find the lowest common ancestor
+        // of ALL labels — that's the field-list container (control pane).
+        var names = Object.keys(labelMap);
+        var controlPane = null;
+        var el = labelMap[names[0]].parentElement;
+        while (el && el !== document.body) {
+          var all = true;
+          for (var j = 0; j < names.length; j++) {
+            if (!el.contains(labelMap[names[j]])) { all = false; break; }
+          }
+          if (all) { controlPane = el; break; }
+          el = el.parentElement;
+        }
+        if (!controlPane || controlPane === document.body) return false;
         if (controlPane.hasAttribute('data-cms-layout')) return true;
 
-        controlPane.setAttribute('data-cms-layout', 'post');
-        for (var fieldName in wrappers) {
-          wrappers[fieldName].setAttribute('data-field-name', fieldName);
+        // For each label walk up until its parent IS the control pane —
+        // that element is the field's direct wrapper.
+        for (var k = 0; k < names.length; k++) {
+          var wrapper = labelMap[names[k]];
+          while (wrapper.parentElement && wrapper.parentElement !== controlPane) {
+            wrapper = wrapper.parentElement;
+          }
+          if (wrapper.parentElement === controlPane) {
+            wrapper.setAttribute('data-field-name', names[k]);
+          }
         }
+
+        controlPane.setAttribute('data-cms-layout', 'post');
         return true;
       }
 
