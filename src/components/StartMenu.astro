@@ -7,6 +7,11 @@ const programs = await getCollection('programs');
   <div class="start-menu-banner" aria-hidden="true">Real Serious Business</div>
   <div class="start-menu-items">
 
+    <a class="start-menu-item" href="/post" role="menuitem">
+      <img src="/icons/win98/directory_open_file_mydocs.ico" alt="" width="18" height="18" />
+      My Documents
+    </a>
+
     <!-- Programs flyout submenu -->
     <div class="start-menu-item" id="programs-item" role="menuitem" aria-haspopup="true">
       <img src="/icons/win98/directory_program_group.ico" alt="" width="18" height="18" />
@@ -28,22 +33,18 @@ const programs = await getCollection('programs');
       </div>
     </div>
 
-    <a class="start-menu-item" href="/post" role="menuitem">
-      <img src="/icons/win98/directory_open_file_mydocs.ico" alt="" width="18" height="18" />
-      My Documents
-    </a>
     <a class="start-menu-item" href="/games" role="menuitem">
       <img src="/icons/win98/joystick.ico" alt="" width="18" height="18" />
       Games
     </a>
     <div class="start-menu-divider" role="separator"></div>
-    <a class="start-menu-item" href="/rss.xml" role="menuitem">
-      <img src="/icons/win98/directory_net_web.ico" alt="" width="18" height="18" />
-      RSS Feed
-    </a>
     <a class="start-menu-item" href="#" role="menuitem" onclick="event.preventDefault();document.getElementById('start-menu').classList.remove('open');document.getElementById('start-btn').setAttribute('aria-expanded','false');showSubscribeWindow();">
       <img src="/icons/win98/envelope_closed.ico" alt="" width="18" height="18" />
       Newsletter
+    </a>
+    <a class="start-menu-item" href="/rss.xml" role="menuitem">
+      <img src="/icons/win98/directory_net_web.ico" alt="" width="18" height="18" />
+      RSS Feed
     </a>
     <a class="start-menu-item" href="/about" role="menuitem">
       <img src="/icons/win98/help_book_small.ico" alt="" width="18" height="18" />
