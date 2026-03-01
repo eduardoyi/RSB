@@ -19,9 +19,12 @@
 
         return {
           show: ({ config, onInsert }) => {
-            // Close any stale listener from a previous show() call
+            // Standalone mode (toolbar button) passes no onInsert — ignore it
+            if (typeof onInsert !== 'function') return;
+
+            // Close any stale listener from a previous widget-triggered show()
             if (activeBc) { activeBc.close(); activeBc = null; }
-            activeInsert = onInsert || null;
+            activeInsert = onInsert;
 
             const popup = window.open(
               '/admin/assets?picker=true',
@@ -37,13 +40,12 @@
                 bc.close();
                 activeBc = null;
                 popup?.close();
-                if (typeof activeInsert === 'function') {
-                  activeInsert({ path: event.data.url });
-                }
+                activeInsert(event.data.url);
+                activeInsert = null;
               }
             };
           },
-          enableStandalone: () => true,
+          enableStandalone: () => false,
         };
       },
     };

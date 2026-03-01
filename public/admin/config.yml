@@ -29,10 +29,8 @@ collections:
       - { label: Featured Image Alt, name: featured_image_alt, widget: string, required: false }
       - label: "Podcast Audio"
         name: podcast_audio
-        widget: image
+        widget: file
         required: false
-        media_library:
-          name: r2
         hint: "Select the audio file from the R2 media picker"
       - { label: Body, name: body, widget: markdown }
 
