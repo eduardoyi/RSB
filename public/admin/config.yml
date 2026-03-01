@@ -17,18 +17,23 @@ collections:
     label: Blog Posts
     folder: src/content/posts
     create: true
-    slug: "{{slug}}"
+    slug: "{{fields.slug}}"
+    identifier_field: slug
     fields:
+      - { label: Slug, name: slug, widget: string, hint: "URL-safe identifier used as the post URL (e.g. my-post-title)" }
       - { label: Title, name: title, widget: string }
       - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
       - { label: Description, name: description, widget: string }
+      - { label: Author, name: author, widget: string, required: false, default: "Eduardo Yi" }
       - { label: Featured Image, name: featured_image, widget: image, required: false, media_library: { name: r2 } }
       - { label: Featured Image Alt, name: featured_image_alt, widget: string, required: false }
-      - label: "Podcast Audio URL"
+      - label: "Podcast Audio"
         name: podcast_audio
-        widget: string
+        widget: image
         required: false
-        hint: "Paste the R2 URL of the audio file (upload it first at /admin/assets)"
+        media_library:
+          name: r2
+        hint: "Select the audio file from the R2 media picker"
       - { label: Body, name: body, widget: markdown }
 
   - name: programs

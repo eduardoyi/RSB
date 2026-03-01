@@ -1,4 +1,5 @@
 ---
+slug: pocket-ai-assistant
 title: How to build Sebastian's pocket AI assistant using a Raspberry Pi Zero 2 W and OpenClaw
 date: 2026-02-26
 description: A short description shown in the blog index.

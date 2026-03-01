@@ -17,6 +17,18 @@ function isAuthorized(request: Request, env: Env): boolean {
   return auth === `Bearer ${env.ADMIN_TOKEN}`;
 }
 
+function guessContentType(filename: string, mimeType: string): string {
+  if (mimeType) return mimeType;
+  const ext = filename.split('.').pop()?.toLowerCase() ?? '';
+  const map: Record<string, string> = {
+    mp3: 'audio/mpeg', m4a: 'audio/mp4', ogg: 'audio/ogg',
+    wav: 'audio/wav', flac: 'audio/flac',
+    jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png',
+    gif: 'image/gif', webp: 'image/webp', svg: 'image/svg+xml',
+  };
+  return map[ext] || 'application/octet-stream';
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
@@ -58,7 +70,7 @@ export default {
 
       const key = `${Date.now()}-${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
       await env.MEDIA_BUCKET.put(key, file.stream(), {
-        httpMetadata: { contentType: file.type },
+        httpMetadata: { contentType: guessContentType(file.name, file.type) },
       });
 
       return json({ key, url: `${url.origin}/media/${key}` });
