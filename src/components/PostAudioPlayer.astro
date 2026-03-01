@@ -7,18 +7,31 @@ const { src } = Astro.props;
 
 <div class="post-audio-player">
   <p class="audio-label">&#127897; Listen to the audio version</p>
-  <div class="audio-bar">
-    <button class="audio-btn" data-action="play" title="Play">&#9654;</button>
-    <button class="audio-btn" data-action="pause" title="Pause" style="display:none">&#9646;&#9646;</button>
-    <button class="audio-btn" data-action="stop" title="Stop">&#9632;</button>
-    <button class="audio-btn" data-action="back" title="Back 10s">&#9664;&#9664;</button>
-    <button class="audio-btn" data-action="fwd" title="Forward 30s">&#9654;&#9654;</button>
-    <div class="audio-progress-track" data-role="track">
-      <div class="audio-progress-fill" data-role="fill"></div>
+  <div class="audio-panel">
+    <!-- Top row: seek bar spanning full width -->
+    <div class="audio-seek-row">
+      <span class="audio-time" data-role="current">0:00</span>
+      <div class="audio-progress-track" data-role="track">
+        <div class="audio-progress-fill" data-role="fill"></div>
+        <div class="audio-progress-thumb" data-role="thumb"></div>
+      </div>
+      <span class="audio-time" data-role="duration">0:00</span>
     </div>
-    <span class="audio-time" data-role="time">0:00 / 0:00</span>
-    <span class="audio-vol-icon">&#128266;</span>
-    <input type="range" class="audio-volume" data-role="volume" min="0" max="1" step="0.05" value="1" />
+    <!-- Bottom row: transport controls left, volume right -->
+    <div class="audio-controls-row">
+      <div class="audio-transport">
+        <button class="audio-btn" data-action="back" title="Back 10s">&#9664;&#9664;</button>
+        <button class="audio-btn" data-action="stop" title="Stop">&#9632;</button>
+        <button class="audio-btn audio-btn-play" data-action="play" title="Play">&#9654;</button>
+        <button class="audio-btn audio-btn-play" data-action="pause" title="Pause" style="display:none">&#9646;&#9646;</button>
+        <button class="audio-btn" data-action="fwd" title="Forward 30s">&#9654;&#9654;</button>
+      </div>
+      <div class="audio-volume-group">
+        <span class="audio-vol-icon">&#128264;</span>
+        <input type="range" class="audio-volume" data-role="volume" min="0" max="1" step="0.05" value="1" />
+        <span class="audio-vol-icon">&#128266;</span>
+      </div>
+    </div>
   </div>
   <audio data-role="audio" src={src} preload="metadata" style="display:none"></audio>
 </div>
@@ -36,7 +49,9 @@ const { src } = Astro.props;
     var fwdBtn = container.querySelector('[data-action="fwd"]');
     var track = container.querySelector('[data-role="track"]');
     var fill = container.querySelector('[data-role="fill"]');
-    var timeEl = container.querySelector('[data-role="time"]');
+    var thumb = container.querySelector('[data-role="thumb"]');
+    var currentEl = container.querySelector('[data-role="current"]');
+    var durationEl = container.querySelector('[data-role="duration"]');
     var volEl = container.querySelector('[data-role="volume"]');
 
     function fmt(s) {
@@ -47,13 +62,25 @@ const { src } = Astro.props;
 
     function updateTime() {
       var dur = isFinite(audio.duration) ? audio.duration : 0;
-      fill.style.width = dur ? ((audio.currentTime / dur) * 100) + '%' : '0%';
-      timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(dur);
+      var pct = dur ? ((audio.currentTime / dur) * 100) : 0;
+      fill.style.width = pct + '%';
+      thumb.style.left = pct + '%';
+      currentEl.textContent = fmt(audio.currentTime);
+      durationEl.textContent = fmt(dur);
     }
 
     function setPlaying(playing) {
       playBtn.style.display = playing ? 'none' : '';
       pauseBtn.style.display = playing ? '' : 'none';
+    }
+
+    function seekFromEvent(e) {
+      var rect = track.getBoundingClientRect();
+      var ratio = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+      if (isFinite(audio.duration)) {
+        audio.currentTime = ratio * audio.duration;
+        updateTime();
+      }
     }
 
     playBtn.addEventListener('click', function () { audio.play(); setPlaying(true); });
@@ -67,12 +94,16 @@ const { src } = Astro.props;
     backBtn.addEventListener('click', function () { audio.currentTime = Math.max(0, audio.currentTime - 10); });
     fwdBtn.addEventListener('click', function () { audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 30); });
 
-    track.addEventListener('click', function (e) {
-      var rect = track.getBoundingClientRect();
-      var ratio = (e.clientX - rect.left) / rect.width;
-      if (isFinite(audio.duration)) {
-        audio.currentTime = ratio * audio.duration;
-      }
+    // Click to seek
+    track.addEventListener('mousedown', function (e) {
+      seekFromEvent(e);
+      var onMove = function (ev) { seekFromEvent(ev); };
+      var onUp = function () {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      };
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
     });
 
     volEl.addEventListener('input', function () { audio.volume = parseFloat(volEl.value); });

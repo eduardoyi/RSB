@@ -55,6 +55,96 @@ if (toolbar) {
     window.location.reload();
   });
 
+  // Table of Contents submenu
+  const tocBtn = document.getElementById('btn-toc');
+  const tocMenu = document.getElementById('menu-toc') as HTMLUListElement | null;
+  const viewMenu = document.getElementById('menu-view');
+
+  function populateTOC() {
+    if (!tocMenu) return;
+    tocMenu.innerHTML = '';
+    const headings = Array.from(document.querySelectorAll<HTMLElement>('.document-body h2'));
+    if (headings.length === 0) {
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.textContent = '(No headings)';
+      btn.disabled = true;
+      btn.style.color = '#808080';
+      li.appendChild(btn);
+      tocMenu.appendChild(li);
+      return;
+    }
+    headings.forEach(h => {
+      const li = document.createElement('li');
+      const btn = document.createElement('button');
+      btn.textContent = h.textContent ?? '';
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toolbar.querySelectorAll<HTMLElement>('.win-dropdown').forEach(m => m.classList.remove('open'));
+        toolbar.querySelectorAll<HTMLButtonElement>('.win-menubar-btn').forEach(b => b.classList.remove('open'));
+        h.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+      li.appendChild(btn);
+      tocMenu.appendChild(li);
+    });
+  }
+
+  let tocHideTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function showTOC() {
+    if (!tocMenu || !viewMenu || !tocBtn) return;
+    if (tocHideTimer) { clearTimeout(tocHideTimer); tocHideTimer = null; }
+    populateTOC();
+    const viewRect = viewMenu.getBoundingClientRect();
+    const btnRect = tocBtn.getBoundingClientRect();
+    const wrapper = document.querySelector<HTMLElement>('.document-wrapper');
+    if (wrapper) {
+      const wrapperRect = wrapper.getBoundingClientRect();
+      tocMenu.style.maxHeight = Math.max(80, wrapperRect.height - 20) + 'px';
+    }
+    // Fly out right if there's room; otherwise drop below the button.
+    // Use the CSS max-width (260) as a known upper bound since offsetWidth is
+    // 0 while the menu is display:none.
+    const SUBMENU_W = 260;
+    let left: number;
+    let top: number;
+    if (viewRect.right + SUBMENU_W <= window.innerWidth) {
+      left = viewRect.right - 2;
+      top = btnRect.top;
+    } else {
+      left = viewRect.left;
+      top = btnRect.bottom;
+    }
+    // Final clamp: never let the right edge bleed off screen
+    left = Math.min(left, window.innerWidth - SUBMENU_W - 4);
+    left = Math.max(0, left);
+    tocMenu.style.left = left + 'px';
+    tocMenu.style.top = top + 'px';
+    tocMenu.classList.add('open');
+  }
+
+  function hideTOC(delay = 120) {
+    tocHideTimer = setTimeout(() => {
+      tocMenu?.classList.remove('open');
+    }, delay);
+  }
+
+  tocBtn?.addEventListener('mouseenter', showTOC);
+  tocBtn?.addEventListener('mouseleave', () => hideTOC());
+  tocBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (tocMenu?.classList.contains('open')) {
+      tocMenu.classList.remove('open');
+    } else {
+      showTOC();
+    }
+  });
+  tocMenu?.addEventListener('mouseenter', () => {
+    if (tocHideTimer) { clearTimeout(tocHideTimer); tocHideTimer = null; }
+  });
+  tocMenu?.addEventListener('mouseleave', () => hideTOC());
+  tocMenu?.addEventListener('click', (e) => e.stopPropagation());
+
   // Menu bar dropdowns
   toolbar.querySelectorAll<HTMLButtonElement>('.win-menubar-btn[data-menu]').forEach(btn => {
     btn.addEventListener('click', (e) => {

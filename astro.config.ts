@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import { readFileSync, writeFileSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, renameSync } from 'fs';
 import { resolve, join } from 'path';
 import matter from 'gray-matter';
 
@@ -8,6 +8,23 @@ function cloudflareRedirects() {
   return {
     name: 'cloudflare-redirects',
     hooks: {
+      'astro:build:start': () => {
+        // Auto-rename post files to match their frontmatter slug
+        const postsDir = resolve('./src/content/posts');
+        try {
+          const files = readdirSync(postsDir).filter(f => f.endsWith('.md'));
+          for (const file of files) {
+            const filename = file.replace(/\.md$/, '');
+            const raw = readFileSync(join(postsDir, file), 'utf-8');
+            const { data } = matter(raw);
+            if (data.slug && data.slug !== filename) {
+              const newPath = join(postsDir, data.slug + '.md');
+              renameSync(join(postsDir, file), newPath);
+              console.log(`[redirects] Renamed ${file} → ${data.slug}.md`);
+            }
+          }
+        } catch { /* no posts dir */ }
+      },
       'astro:build:done': ({ dir }: { dir: URL }) => {
         const lines: string[] = [];
 

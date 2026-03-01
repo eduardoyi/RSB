@@ -26,8 +26,13 @@ const { windowPath } = Astro.props;
 
     <!-- View dropdown -->
     <ul class="win-dropdown" id="menu-view">
+      <li><button id="btn-toc" class="has-arrow">Table of Contents</button></li>
+      <li class="win-dropdown-sep"></li>
       <li><button id="btn-reset-window">Reset Window</button></li>
     </ul>
+
+    <!-- Table of Contents submenu (populated by JS) -->
+    <ul class="win-dropdown win-submenu" id="menu-toc"></ul>
   </div>
 
   <!-- Formatting toolbar -->

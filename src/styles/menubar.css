@@ -75,6 +75,36 @@
   box-shadow: 0 1px 0 white;
 }
 
+/* Submenu arrow indicator */
+.win-dropdown li button.has-arrow {
+  position: relative;
+  padding-right: 22px;
+}
+
+.win-dropdown li button.has-arrow::after {
+  content: '▶';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 7px;
+  pointer-events: none;
+}
+
+/* TOC submenu — scrollable flyout */
+.win-submenu {
+  overflow-y: auto;
+  min-width: 160px;
+  max-width: 260px;
+  /* max-height set dynamically via JS */
+}
+
+.win-submenu li button {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
 /* Formatting toolbar strip (below menu bar) */
 .win-toolbar-strip {
   display: flex;
