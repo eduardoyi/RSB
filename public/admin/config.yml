@@ -28,6 +28,8 @@ collections:
         name: podcast_audio
         widget: file
         required: false
+        media_library:
+          name: r2
         hint: "Upload an MP3/M4A/OGG audio file for the listen version"
       - { label: Body, name: body, widget: markdown }
 

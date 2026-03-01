@@ -14,8 +14,15 @@
     const R2MediaLibrary = {
       name: 'r2',
       init: ({ options }) => {
+        let activeBc = null;
+        let activeInsert = null;
+
         return {
           show: ({ config, onInsert }) => {
+            // Close any stale listener from a previous show() call
+            if (activeBc) { activeBc.close(); activeBc = null; }
+            activeInsert = onInsert || null;
+
             const popup = window.open(
               '/admin/assets?picker=true',
               'r2-picker',
@@ -23,11 +30,16 @@
             );
 
             const bc = new BroadcastChannel('r2-picker');
+            activeBc = bc;
+
             bc.onmessage = (event) => {
               if (event.data && event.data.type === 'r2:select') {
                 bc.close();
+                activeBc = null;
                 popup?.close();
-                onInsert({ path: event.data.url });
+                if (typeof activeInsert === 'function') {
+                  activeInsert({ path: event.data.url });
+                }
               }
             };
           },
