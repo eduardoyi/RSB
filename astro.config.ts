@@ -9,8 +9,10 @@ function cloudflareRedirects() {
     name: 'cloudflare-redirects',
     hooks: {
       'astro:build:done': ({ dir }: { dir: URL }) => {
-        const redirectsDir = resolve('./src/content/redirects');
         const lines: string[] = [];
+
+        // 1. Explicit redirects from the redirects content collection
+        const redirectsDir = resolve('./src/content/redirects');
         try {
           const files = readdirSync(redirectsDir).filter(f => f.endsWith('.md'));
           for (const file of files) {
@@ -23,9 +25,28 @@ function cloudflareRedirects() {
         } catch {
           // No redirects directory or files — that's fine
         }
-        if (lines.length > 0) {
+
+        // 2. Auto-redirects: if a post filename differs from its frontmatter
+        //    slug, redirect /post/{filename} → /post/{slug}
+        const postsDir = resolve('./src/content/posts');
+        try {
+          const files = readdirSync(postsDir).filter(f => f.endsWith('.md'));
+          for (const file of files) {
+            const filename = file.replace(/\.md$/, '');
+            const raw = readFileSync(join(postsDir, file), 'utf-8');
+            const { data } = matter(raw);
+            if (data.slug && data.slug !== filename) {
+              lines.push(`/post/${filename} /post/${data.slug} 301`);
+            }
+          }
+        } catch {
+          // No posts directory — that's fine
+        }
+
+        const unique = [...new Set(lines)];
+        if (unique.length > 0) {
           const outPath = join(dir.pathname, '_redirects');
-          writeFileSync(outPath, lines.join('\n') + '\n');
+          writeFileSync(outPath, unique.join('\n') + '\n');
         }
       },
     },
