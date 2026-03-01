@@ -140,10 +140,10 @@ export const prerender = true;
     }
 
     function selectAsset(url) {
-      if (window.opener) {
-        window.opener.postMessage({ type: 'r2:select', url }, '*');
-        window.close();
-      }
+      const bc = new BroadcastChannel('r2-picker');
+      bc.postMessage({ type: 'r2:select', url });
+      bc.close();
+      window.close();
     }
 
     async function deleteAsset(key) {

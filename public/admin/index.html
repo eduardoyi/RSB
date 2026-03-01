@@ -22,15 +22,14 @@
               'width=900,height=600,scrollbars=yes'
             );
 
-            const handler = (event) => {
+            const bc = new BroadcastChannel('r2-picker');
+            bc.onmessage = (event) => {
               if (event.data && event.data.type === 'r2:select') {
-                window.removeEventListener('message', handler);
+                bc.close();
                 popup?.close();
                 onInsert({ path: event.data.url });
               }
             };
-
-            window.addEventListener('message', handler);
           },
           enableStandalone: () => true,
         };
