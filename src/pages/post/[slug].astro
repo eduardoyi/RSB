@@ -16,6 +16,7 @@ export async function getStaticPaths() {
 const { post } = Astro.props;
 const { Content } = await render(post);
 const windowPath = `/post/${post.id}`;
+const authorName = post.data.author ?? 'Eduardo Yi';
 
 const postUrl = new URL(windowPath, Astro.site);
 const schema = {
@@ -29,7 +30,7 @@ const schema = {
   mainEntityOfPage: { '@type': 'WebPage', '@id': String(postUrl) },
   author: {
     '@type': 'Person',
-    name: 'Eduardo Yi',
+    name: authorName,
     url: String(Astro.site),
   },
   publisher: {
@@ -67,6 +68,7 @@ const schema = {
           <div class="document-meta">
             <strong>{post.data.title}</strong> &mdash;
             {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            &mdash; by {authorName}
           </div>
           {post.data.featured_image && (
             <img src={post.data.featured_image} alt={post.data.featured_image_alt ?? ''} style="max-width:100%;margin-bottom:1em;" />
