@@ -67,6 +67,23 @@
   max-width: 100%;
   margin: 1em 0;
 }
+.document-body figure {
+  margin: 1.25em 0;
+}
+.document-body figure img {
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+.document-body figcaption {
+  font-size: 0.8em;
+  font-style: italic;
+  color: #666;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  padding-top: 6px;
+  margin-top: 6px;
+}
 .document-body a { color: #000080; }
 
 .document-meta {
