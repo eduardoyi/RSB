@@ -5,7 +5,7 @@ description: There is a phrase that has been circulating in tech circles for a
   while now. The phrase is "permanent underclass." It refers, with some
   probability, to you.
 featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/337d2b7c-3129-4497-8d19-66c5f96bd8fa/a2cd6546-8754-4ca2-8f6b-3eae9f4f69f0/edited-1772311102111.webp
-podcast_audio: https://rsb-assets.eduardoyi.workers.dev/media/1772382989993-Escaping_the_Permanent_Underclass.m4a
+podcast_audio: ""
 ---
 ## Everyone in the room already knows
 
