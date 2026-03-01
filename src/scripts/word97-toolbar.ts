@@ -145,6 +145,20 @@ if (toolbar) {
   tocMenu?.addEventListener('mouseleave', () => hideTOC());
   tocMenu?.addEventListener('click', (e) => e.stopPropagation());
 
+  // "Read with AI" tools
+  const postUrl = toolbar.dataset.postUrl;
+  if (postUrl) {
+    const aiPrompt = (url: string) =>
+      `Hey! Got something cool for you—curious what you make of this: ${url}\nIt's a blog post and I want to understand it better.\nStart with a tight summary: one paragraph, bulleted. Then offer to go deeper on what's most interesting.`;
+
+    document.getElementById('btn-read-chatgpt')?.addEventListener('click', () => {
+      window.open(`https://chatgpt.com/?q=${encodeURIComponent(aiPrompt(postUrl))}`, '_blank');
+    });
+    document.getElementById('btn-read-claude')?.addEventListener('click', () => {
+      window.open(`https://claude.ai/new?q=${encodeURIComponent(aiPrompt(postUrl))}`, '_blank');
+    });
+  }
+
   // Menu bar dropdowns
   toolbar.querySelectorAll<HTMLButtonElement>('.win-menubar-btn[data-menu]').forEach(btn => {
     btn.addEventListener('click', (e) => {

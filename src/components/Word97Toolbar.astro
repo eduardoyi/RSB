@@ -3,10 +3,11 @@ import '../styles/menubar.css';
 
 interface Props {
   windowPath: string;
+  postUrl?: string;
 }
-const { windowPath } = Astro.props;
+const { windowPath, postUrl } = Astro.props;
 ---
-<div class="word97-toolbar" data-window-path={windowPath}>
+<div class="word97-toolbar" data-window-path={windowPath} data-post-url={postUrl || ''}>
   <!-- Menu bar -->
   <div class="win-menubar">
     <button class="win-menubar-btn" data-menu="file">File</button>
@@ -14,7 +15,7 @@ const { windowPath } = Astro.props;
     <button class="win-menubar-btn" data-menu="view">View</button>
     <button class="win-menubar-btn">Insert</button>
     <button class="win-menubar-btn">Format</button>
-    <button class="win-menubar-btn">Tools</button>
+    <button class="win-menubar-btn" data-menu="tools">Tools</button>
     <button class="win-menubar-btn">Table</button>
     <button class="win-menubar-btn">Window</button>
     <button class="win-menubar-btn">Help</button>
@@ -33,6 +34,12 @@ const { windowPath } = Astro.props;
 
     <!-- Table of Contents submenu (populated by JS) -->
     <ul class="win-dropdown win-submenu" id="menu-toc"></ul>
+
+    <!-- Tools dropdown -->
+    <ul class="win-dropdown" id="menu-tools">
+      <li><button id="btn-read-chatgpt">Read with ChatGPT</button></li>
+      <li><button id="btn-read-claude">Read with Claude</button></li>
+    </ul>
   </div>
 
   <!-- Formatting toolbar -->

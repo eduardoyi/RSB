@@ -36,7 +36,13 @@ function cloudflareRedirects() {
             const raw = readFileSync(join(redirectsDir, file), 'utf-8');
             const { data } = matter(raw);
             if (data.from && data.to) {
-              lines.push(`${data.from} ${data.to} ${data.status || 301}`);
+              const status = data.status || 301;
+              lines.push(`${data.from} ${data.to} ${status}`);
+              // Also add trailing-slash variant
+              const fromSlash = data.from.endsWith('/') ? data.from : data.from + '/';
+              const fromNoSlash = data.from.endsWith('/') ? data.from.slice(0, -1) : data.from;
+              lines.push(`${fromSlash} ${data.to} ${status}`);
+              lines.push(`${fromNoSlash} ${data.to} ${status}`);
             }
           }
         } catch {
@@ -54,6 +60,7 @@ function cloudflareRedirects() {
             const { data } = matter(raw);
             if (data.slug && data.slug !== filename) {
               lines.push(`/post/${filename} /post/${data.slug} 301`);
+              lines.push(`/post/${filename}/ /post/${data.slug} 301`);
             }
           }
         } catch {

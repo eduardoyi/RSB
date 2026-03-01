@@ -64,7 +64,7 @@ const schema = {
     noBodyScroll={true}
   >
     <div style="display:flex;flex-direction:column;height:100%;overflow:hidden;">
-      <Word97Toolbar windowPath={windowPath} />
+      <Word97Toolbar windowPath={windowPath} postUrl={String(postUrl)} />
       <div class="document-wrapper">
         <article class="document-body font-normal">
           {post.data.featured_image && (
