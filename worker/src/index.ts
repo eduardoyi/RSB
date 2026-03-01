@@ -3,6 +3,7 @@ export interface Env {
   ADMIN_TOKEN: string;
   ALLOWED_ORIGIN: string;
   KIT_API_KEY: string;
+  PUBLIC_R2_URL: string; // e.g. https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev
 }
 
 const corsHeaders = (origin: string, allowedOrigin: string) => ({
@@ -55,7 +56,7 @@ export default {
       const items = listed.objects.map(obj => ({
         key: obj.key,
         size: obj.size,
-        url: `${url.origin}/media/${obj.key}`,
+        url: `${env.PUBLIC_R2_URL}/${obj.key}`,
       }));
       return json(items);
     }
@@ -73,7 +74,7 @@ export default {
         httpMetadata: { contentType: guessContentType(file.name, file.type) },
       });
 
-      return json({ key, url: `${url.origin}/media/${key}` });
+      return json({ key, url: `${env.PUBLIC_R2_URL}/${key}` });
     }
 
     // DELETE /api/assets/:key

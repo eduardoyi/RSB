@@ -15,6 +15,15 @@ const posts = defineCollection({
   }),
 });
 
+const redirects = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/redirects' }),
+  schema: z.object({
+    from: z.string(),
+    to: z.string(),
+    status: z.coerce.number().default(301),
+  }),
+});
+
 const programs = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/programs' }),
   schema: z.object({
@@ -27,4 +36,4 @@ const programs = defineCollection({
   }),
 });
 
-export const collections = { posts, programs };
+export const collections = { posts, programs, redirects };
