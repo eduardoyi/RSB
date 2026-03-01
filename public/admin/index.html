@@ -11,20 +11,23 @@
   <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
   <script>
     // Custom R2 media library integration
+    //
+    // Netlify CMS external media library API:
+    //   init({ options, handleInsert }) => instance
+    //     handleInsert(url) — dispatches insertMedia to Redux store
+    //   instance.show({ id, value, config, allowMultiple, imagesOnly })
+    //     called when a widget opens the media library
+    //   instance.enableStandalone() => bool
+    //     controls whether "Media" nav link appears in the CMS sidebar
+    //
     const R2MediaLibrary = {
       name: 'r2',
-      init: ({ options }) => {
+      init: ({ options, handleInsert }) => {
         let activeBc = null;
-        let activeInsert = null;
 
         return {
-          show: ({ config, onInsert }) => {
-            // Standalone mode (toolbar button) passes no onInsert — ignore it
-            if (typeof onInsert !== 'function') return;
-
-            // Close any stale listener from a previous widget-triggered show()
+          show: ({ config, allowMultiple, imagesOnly } = {}) => {
             if (activeBc) { activeBc.close(); activeBc = null; }
-            activeInsert = onInsert;
 
             const popup = window.open(
               '/admin/assets?picker=true',
@@ -40,12 +43,12 @@
                 bc.close();
                 activeBc = null;
                 popup?.close();
-                activeInsert(event.data.url);
-                activeInsert = null;
+                handleInsert(event.data.url);
               }
             };
           },
-          enableStandalone: () => false,
+          hide: () => {},
+          enableStandalone: () => true,
         };
       },
     };
