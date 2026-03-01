@@ -10,6 +10,7 @@ const posts = defineCollection({
     author: z.string().optional(),
     featured_image: z.string().optional(),
     featured_image_alt: z.string().optional(),
+    podcast_audio: z.string().optional(),
   }),
 });
 

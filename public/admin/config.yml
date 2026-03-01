@@ -24,6 +24,11 @@ collections:
       - { label: Description, name: description, widget: string }
       - { label: Featured Image, name: featured_image, widget: image, required: false, media_library: { name: r2 } }
       - { label: Featured Image Alt, name: featured_image_alt, widget: string, required: false }
+      - label: "Podcast Audio"
+        name: podcast_audio
+        widget: file
+        required: false
+        hint: "Upload an MP3/M4A/OGG audio file for the listen version"
       - { label: Body, name: body, widget: markdown }
 
   - name: programs

@@ -89,10 +89,40 @@
 .document-meta {
   color: #666;
   font-size: 0.85em;
-  border-bottom: 1px solid #ccc;
-  padding-bottom: 8px;
-  margin-bottom: 1.5em;
+  margin-bottom: 1em;
 }
+
+.post-title {
+  font-size: 2em;
+  font-weight: bold;
+  margin: 0 0 0.35em;
+  line-height: 1.2;
+}
+
+.post-title-sep {
+  border: none;
+  border-top: 1px solid #ccc;
+  margin: 0 0 1.5em;
+}
+
+.post-audio-player { margin-bottom: 1.5em; }
+.audio-label { font-size: 0.8em; font-style: italic; color: #444; margin-bottom: 4px; font-family: Arial, sans-serif; }
+.audio-bar {
+  display: flex; align-items: center; gap: 2px;
+  background: silver;
+  border: 2px solid; border-color: white #808080 #808080 white;
+  padding: 3px 4px;
+  font-family: Arial, sans-serif;
+}
+.audio-btn { min-width: 24px; min-height: 22px; padding: 1px 4px; font-size: 9px; }
+.audio-progress-track {
+  flex: 1; height: 12px; background: white; cursor: pointer;
+  border: 1px solid; border-color: #808080 white white #808080;
+  position: relative; margin: 0 4px;
+}
+.audio-progress-fill { height: 100%; background: #000080; width: 0%; pointer-events: none; }
+.audio-time { font-size: 10px; font-family: 'Courier New', monospace; white-space: nowrap; padding: 0 4px; }
+.audio-volume { width: 56px; }
 
 /* Mobile: no page simulation, infinite scroll */
 @media (max-width: 767px) {

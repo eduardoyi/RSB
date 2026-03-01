@@ -73,16 +73,29 @@ export default {
       return new Response(null, { status: 204, headers: cors });
     }
 
-    // GET /media/:key — serve R2 object (public)
+    // GET /media/:key — serve R2 object (public), with Range support for audio seeking
     if (request.method === 'GET' && pathname.startsWith('/media/')) {
       const key = decodeURIComponent(pathname.slice('/media/'.length));
-      const object = await env.MEDIA_BUCKET.get(key);
+      const rangeHeader = request.headers.get('Range');
+      const object = rangeHeader
+        ? await env.MEDIA_BUCKET.get(key, { range: rangeHeader })
+        : await env.MEDIA_BUCKET.get(key);
       if (!object) return new Response('Not found', { status: 404 });
 
       const headers = new Headers(cors);
       object.writeHttpMetadata(headers);
       headers.set('Cache-Control', 'public, max-age=31536000');
-      return new Response(object.body, { headers });
+      headers.set('Accept-Ranges', 'bytes');
+
+      if (rangeHeader && object.range) {
+        const { offset = 0, length } = object.range as { offset?: number; length?: number };
+        const total = object.size;
+        headers.set('Content-Range', `bytes ${offset}-${offset + (length ?? total) - 1}/${total}`);
+        headers.set('Content-Length', String(length ?? total));
+        return new Response(object.body, { status: 206, headers });
+      }
+
+      return new Response(object.body, { status: 200, headers });
     }
 
     // POST /api/subscribe — proxy to Kit API v4
