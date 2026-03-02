@@ -131,14 +131,19 @@ if (toolbar) {
 
   tocBtn?.addEventListener('mouseenter', showTOC);
   tocBtn?.addEventListener('mouseleave', () => hideTOC());
-  tocBtn?.addEventListener('click', (e) => {
+
+  function toggleTOC(e: Event) {
+    e.preventDefault();
     e.stopPropagation();
     if (tocMenu?.classList.contains('open')) {
       tocMenu.classList.remove('open');
     } else {
       showTOC();
     }
-  });
+  }
+
+  tocBtn?.addEventListener('touchend', toggleTOC);
+  tocBtn?.addEventListener('click', toggleTOC);
   tocMenu?.addEventListener('mouseenter', () => {
     if (tocHideTimer) { clearTimeout(tocHideTimer); tocHideTimer = null; }
   });
