@@ -1,0 +1,24 @@
+---
+import DesktopLayout from '../layouts/DesktopLayout.astro';
+import Window from '../components/Window.astro';
+---
+<DesktopLayout title="Paint — Real Serious Business">
+  <Window
+    title="Paint"
+    icon="/icons/win98/paint.ico"
+    path="/paint"
+    backHref="/"
+    defaultWidth={900}
+    defaultHeight={620}
+    defaultX={60}
+    defaultY={30}
+    noBodyScroll={true}
+  >
+    <iframe
+      src="https://jspaint.app#load:https://realseriousbusiness.com/rsb-pixel-min.png"
+      title="MS Paint"
+      allow="clipboard-read; clipboard-write"
+      style="width:100%;height:100%;border:none;display:block;"
+    ></iframe>
+  </Window>
+</DesktopLayout>

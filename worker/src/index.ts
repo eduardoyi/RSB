@@ -13,6 +13,12 @@ const corsHeaders = (origin: string, allowedOrigin: string) => ({
   'Access-Control-Max-Age': '86400',
 });
 
+// Public media assets are open to any origin (images, audio — no auth needed)
+const publicMediaCors = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET',
+};
+
 function isAuthorized(request: Request, env: Env): boolean {
   const auth = request.headers.get('Authorization');
   return auth === `Bearer ${env.ADMIN_TOKEN}`;
@@ -95,7 +101,7 @@ export default {
         : await env.MEDIA_BUCKET.get(key);
       if (!object) return new Response('Not found', { status: 404 });
 
-      const headers = new Headers(cors);
+      const headers = new Headers(publicMediaCors);
       object.writeHttpMetadata(headers);
       headers.set('Cache-Control', 'public, max-age=31536000');
       headers.set('Accept-Ranges', 'bytes');

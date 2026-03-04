@@ -6,6 +6,7 @@ import SubscribeWindow from '../components/SubscribeWindow.astro';
 import '../styles/desktop.css';
 import '../styles/window.css';
 import '../styles/monitor.css';
+import '../styles/boot.css';
 
 interface Props {
   title?: string;
@@ -66,10 +67,64 @@ const { title = 'Real Serious Business', description, ogImage, ogType } = Astro.
   <!-- monitor-bezel: 3D border lighting + bottom buttons + power LED    -->
   <div class="monitor-frame" aria-hidden="true"></div>
   <div class="monitor-bezel" aria-hidden="true"></div>
+
+  <!-- Boot animation overlay (desktop-only, first visit only)           -->
+  <!-- Sits at z-index 99998, inside the screen area defined by          -->
+  <!-- monitor-frame. JS shows it only at ≥1100px on first visit.       -->
+  <div id="boot-overlay" aria-hidden="true">
+
+    <!-- BIOS screen -->
+    <div id="boot-bios">
+
+      <!-- Dell logo + URL — top-right, appears first -->
+      <div class="boot-dell">
+        <img src="/icons/dell-logo-min.png" alt="" width="120" height="auto" />
+        <div class="boot-dell-url">WWW.DELL.COM</div>
+      </div>
+
+      <!-- Phase 2: copyright + model block (top-left) -->
+      <div class="boot-text-top">
+        <div>PhoenixBIOS 4.0 Release 6.0</div>
+        <div>Copyright 1985-1999 Phoenix Technologies Ltd.</div>
+        <div>All Rights Reserved,</div>
+        <div>Copyright 1996-1999 Intel Corporation.</div>
+        <div>4SAEb2M0.10A.0022.P06</div>
+        <br />
+        <div>Dell Dimension XPS T500</div>
+        <div>BIOS Version A05</div>
+        <div>Intel(R) Pentium(R) III processor 500 MHz</div>
+      </div>
+
+      <!-- Phase 3: RAM / device / disk info -->
+      <div class="boot-text-middle">
+        <div>256MB System RAM Passed</div>
+        <br />
+        <div>Keyboard .......... Detected</div>
+        <div>Mouse ............. Detected</div>
+        <br />
+        <div>Fixed Disk 0: WDC WD200EB-00CPF0-(PM)</div>
+        <div>ATAPI CD-ROM: CRD-B400B-(SM)</div>
+        <div>ATAPI CD-ROM: CD-RW CRX100E-(SS)</div>
+      </div>
+
+      <!-- Phase 2 (same timing): bottom prompt -->
+      <div class="boot-text-bottom">
+        <div>Press &lt;Del&gt; to enter SETUP</div>
+      </div>
+
+    </div>
+
+    <!-- Windows 98 splash — fades in over the BIOS screen -->
+    <div id="boot-win98">
+      <img src="/icons/window-98-start.webp" alt="" />
+    </div>
+
+  </div>
 </BaseLayout>
 
 <script>
   import '../scripts/taskbar-clock.ts';
   import '../scripts/start-menu.ts';
   import '../scripts/window-manager.ts';
+  import '../scripts/boot-animation.ts';
 </script>

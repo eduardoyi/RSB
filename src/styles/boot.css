@@ -1,0 +1,127 @@
+/* ─── Boot Animation Overlay ────────────────────────────────────────────────
+   Only visible at ≥1100px (where the monitor bezel is shown).
+   z-index 99998 puts it just below the monitor-frame (99999) so the CRT
+   bezel sits on top — the boot animation plays "inside" the screen area.
+   ─────────────────────────────────────────────────────────────────────── */
+
+@media (min-width: 1100px) {
+
+  #boot-overlay {
+    display: none;
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    right: 18px;
+    bottom: 50px;
+    z-index: 99998;
+    background: #050505;
+    overflow: hidden;
+  }
+
+  #boot-overlay.boot-active {
+    display: block;
+  }
+
+  #boot-overlay.boot-fade-out {
+    display: none;
+  }
+
+  /* ── BIOS screen ──────────────────────────────────────────────────────── */
+
+  #boot-bios {
+    position: absolute;
+    inset: 0;
+    padding: 18px 22px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(10px, 0.85vw, 14px);
+    line-height: 1.45;
+    color: #00b87a;
+    background: #050505;
+  }
+
+  /* Dell logo + URL — top-right corner */
+  .boot-dell {
+    position: absolute;
+    top: 16px;
+    right: 22px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .boot-dell.visible {
+    opacity: 1;
+  }
+
+  .boot-dell img {
+    width: clamp(320px, 30vw, 480px);
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .boot-dell-url {
+    color: #2255ee;
+    font-weight: bold;
+    font-size: clamp(12px, 1.1vw, 18px);
+    margin-top: 8px;
+    letter-spacing: 0.04em;
+  }
+
+  /* Top block: PhoenixBIOS copyright + Dell model info */
+  .boot-text-top {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    /* keep text from overlapping the Dell logo */
+    padding-right: clamp(340px, 32vw, 500px);
+  }
+
+  .boot-text-top.visible {
+    opacity: 1;
+  }
+
+  /* Middle block: RAM check, devices, disks */
+  .boot-text-middle {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    margin-top: 10px;
+  }
+
+  .boot-text-middle.visible {
+    opacity: 1;
+  }
+
+  /* Bottom: "Press <Del> to enter SETUP" */
+  .boot-text-bottom {
+    position: absolute;
+    bottom: 16px;
+    left: 22px;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+
+  .boot-text-bottom.visible {
+    opacity: 1;
+  }
+
+  /* ── Windows 98 splash — abrupt cut, no transition ────────────────────── */
+
+  #boot-win98 {
+    position: absolute;
+    inset: 0;
+    display: none;
+    background: #000;
+  }
+
+  #boot-win98.visible {
+    display: block;
+  }
+
+  #boot-win98 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+}

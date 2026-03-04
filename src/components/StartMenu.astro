@@ -18,6 +18,18 @@ const programs = await getCollection('programs');
       Programs
       <span class="submenu-arrow">▶</span>
       <div class="start-submenu" id="programs-submenu" role="menu">
+        <!-- Accessories sub-submenu (matches Win98 layout) -->
+        <div class="sub-item" role="menuitem" aria-haspopup="true">
+          <img src="/icons/win98/directory_program_group.ico" alt="" width="18" height="18" />
+          Accessories
+          <span class="submenu-arrow">▶</span>
+          <div class="sub-submenu" role="menu">
+            <a href="/paint" role="menuitem">
+              <img src="/icons/win98/paint.ico" alt="" width="18" height="18" />
+              Paint
+            </a>
+          </div>
+        </div>
         {programs.map((prog) => (
           <a href={`/programs/${prog.data.id}`} role="menuitem">
             <img src={prog.data.splash_image ?? '/icons/win98/directory_program_group.ico'} alt="" width="18" height="18" />
