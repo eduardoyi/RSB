@@ -4,10 +4,14 @@
    bezel sits on top — the boot animation plays "inside" the screen area.
    ─────────────────────────────────────────────────────────────────────── */
 
+/* Hidden everywhere by default; JS only activates it at ≥1100px */
+#boot-overlay {
+  display: none;
+}
+
 @media (min-width: 1100px) {
 
   #boot-overlay {
-    display: none;
     position: fixed;
     top: 18px;
     left: 18px;
