@@ -368,17 +368,11 @@
     width: 72px;
   }
 
-  /* Submenus fly out to the right on desktop but go off-screen on mobile.
-     Stack them inline below their parent item instead. */
-  .start-submenu,
+  /* Accessories sub-submenu flies right on desktop (off-screen on mobile).
+     Open it upward above the Accessories item instead. */
   .sub-submenu {
-    position: static;
-    border-left: 2px solid #808080;
-    border-right: none;
-    border-top: none;
-    border-bottom: none;
-    min-width: 0;
-    padding: 0;
-    margin-left: 18px;
+    left: 0;
+    top: auto;
+    bottom: 100%;
   }
 }
