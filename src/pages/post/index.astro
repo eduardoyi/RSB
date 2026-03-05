@@ -175,5 +175,9 @@ const posts = (await getCollection('posts')).sort(
   .explorer-col-type { width: 100px; flex-shrink: 0; }
   .explorer-col-date { width: 110px; flex-shrink: 0; }
 
+  @media (max-width: 767px) {
+    .explorer-col-type { display: none; }
+  }
+
   .explorer-statusbar { flex-shrink: 0; }
 </style>
