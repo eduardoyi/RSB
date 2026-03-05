@@ -2,6 +2,19 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { readFileSync, writeFileSync, readdirSync, renameSync } from 'fs';
 import { resolve, join } from 'path';
+
+function rehypeLazyImages() {
+  return function walk(tree: any) {
+    (tree.children ?? []).forEach((node: any) => {
+      if (node.type === 'element' && node.tagName === 'img') {
+        node.properties ??= {};
+        node.properties.loading  ??= 'lazy';
+        node.properties.decoding ??= 'async';
+      }
+      walk(node);
+    });
+  };
+}
 import matter from 'gray-matter';
 
 function cloudflareRedirects() {
@@ -83,6 +96,7 @@ export default defineConfig({
   integrations: [sitemap(), cloudflareRedirects()],
   markdown: {
     syntaxHighlight: false,
+    rehypePlugins: [rehypeLazyImages],
   },
   vite: {
     plugins: [

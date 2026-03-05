@@ -43,6 +43,8 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site) : undefined;
     <meta name="twitter:description" content={description} />
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
 
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
     <!-- RSS -->
     <link rel="alternate" type="application/rss+xml" title="Real Serious Business" href="/rss.xml" />
 

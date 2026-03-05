@@ -52,6 +52,9 @@ const schema = {
   ogType="article"
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+  {post.data.featured_image && (
+    <link slot="head" rel="preload" as="image" href={post.data.featured_image} fetchpriority="high" />
+  )}
   <Window
     title={post.data.title}
     icon="/icons/win98/notepad_file.ico"
@@ -68,7 +71,15 @@ const schema = {
       <div class="document-wrapper">
         <article class="document-body font-normal">
           {post.data.featured_image && (
-            <img src={post.data.featured_image} alt={post.data.featured_image_alt ?? ''} style="max-width:100%;margin-bottom:1em;" />
+            <img
+              src={post.data.featured_image}
+              alt={post.data.featured_image_alt ?? ''}
+              width="1200"
+              height="675"
+              fetchpriority="high"
+              decoding="async"
+              style="max-width:100%;height:auto;margin-bottom:1em;"
+            />
           )}
           <h1 class="post-title">{post.data.title}</h1>
           <div class="document-meta">
