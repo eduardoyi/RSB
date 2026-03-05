@@ -4,11 +4,6 @@
    bezel sits on top — the boot animation plays "inside" the screen area.
    ─────────────────────────────────────────────────────────────────────── */
 
-/* Hidden everywhere by default; JS only activates it at ≥1100px */
-#boot-overlay {
-  display: none;
-}
-
 @media (min-width: 1100px) {
 
   #boot-overlay {
@@ -22,13 +17,6 @@
     overflow: hidden;
   }
 
-  #boot-overlay.boot-active {
-    display: block;
-  }
-
-  #boot-overlay.boot-fade-out {
-    display: none;
-  }
 
   /* ── BIOS screen ──────────────────────────────────────────────────────── */
 

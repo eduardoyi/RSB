@@ -16,8 +16,8 @@ async function runBoot(): Promise<void> {
   const textBottom = overlay.querySelector('.boot-text-bottom') as HTMLElement;
   const win98      = document.getElementById('boot-win98')!    as HTMLElement;
 
-  // Reveal overlay (black screen)
-  overlay.classList.add('boot-active');
+  // Reveal overlay (black screen) — set directly so inline style is overridden
+  overlay.style.display = 'block';
 
   await delay(100);
 
@@ -39,7 +39,7 @@ async function runBoot(): Promise<void> {
   await delay(1200);
 
   // Phase 5 — abrupt cut to desktop
-  overlay.classList.add('boot-fade-out');
+  overlay.style.display = 'none';
 
   overlay.remove();
 

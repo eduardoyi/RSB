@@ -71,7 +71,7 @@ const { title = 'Real Serious Business', description, ogImage, ogType } = Astro.
   <!-- Boot animation overlay (desktop-only, first visit only)           -->
   <!-- Sits at z-index 99998, inside the screen area defined by          -->
   <!-- monitor-frame. JS shows it only at ≥1100px on first visit.       -->
-  <div id="boot-overlay" aria-hidden="true">
+  <div id="boot-overlay" aria-hidden="true" style="display:none">
 
     <!-- BIOS screen -->
     <div id="boot-bios">
