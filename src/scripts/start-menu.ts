@@ -34,3 +34,14 @@ if (programsItem && programsSubmenu) {
     programsSubmenu.style.display = isShown ? 'none' : 'flex';
   });
 }
+
+// Accessories sub-submenu: same pattern
+const accessoriesItem = document.querySelector<HTMLElement>('.sub-item');
+const accessoriesSubmenu = accessoriesItem?.querySelector<HTMLElement>('.sub-submenu');
+if (accessoriesItem && accessoriesSubmenu) {
+  accessoriesItem.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isShown = accessoriesSubmenu.style.display === 'flex';
+    accessoriesSubmenu.style.display = isShown ? 'none' : 'flex';
+  });
+}
