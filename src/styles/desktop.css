@@ -367,4 +367,18 @@
   .desktop-icon {
     width: 72px;
   }
+
+  /* Submenus fly out to the right on desktop but go off-screen on mobile.
+     Stack them inline below their parent item instead. */
+  .start-submenu,
+  .sub-submenu {
+    position: static;
+    border-left: 2px solid #808080;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+    min-width: 0;
+    padding: 0;
+    margin-left: 18px;
+  }
 }
