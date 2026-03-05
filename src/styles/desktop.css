@@ -379,4 +379,9 @@
     top: auto;
     bottom: 100%;
   }
+
+  .start-submenu,
+  .sub-submenu {
+    min-width: 160px;
+  }
 }
