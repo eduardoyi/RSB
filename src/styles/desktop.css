@@ -368,6 +368,10 @@
     width: 72px;
   }
 
+  .start-menu {
+    width: 200px;
+  }
+
   /* Accessories sub-submenu flies right on desktop (off-screen on mobile).
      Open it upward above the Accessories item instead. */
   .sub-submenu {
