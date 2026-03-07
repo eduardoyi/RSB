@@ -85,6 +85,13 @@
   document.getElementById('subscribe-close').addEventListener('click', hideSubscribeWindow);
   document.getElementById('subscribe-done').addEventListener('click', hideSubscribeWindow);
 
+  // Auto-open via hash: realseriousbusiness.com/#subscribe
+  if (window.location.hash === '#subscribe') {
+    var bootPlayed = localStorage.getItem('rsb:boot-played');
+    var waitMs = (!bootPlayed && window.innerWidth >= 1100) ? 3300 : 0;
+    setTimeout(window.showSubscribeWindow, waitMs);
+  }
+
   document.getElementById('subscribe-email').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') document.getElementById('subscribe-btn').click();
   });

@@ -127,15 +127,28 @@ export default {
       }
       if (!body.email_address) return json({ error: 'email_address required' }, 400);
 
+      const kitHeaders = {
+        'X-Kit-Api-Key': env.KIT_API_KEY,
+        'Content-Type': 'application/json',
+      };
+
       const kitRes = await fetch('https://api.kit.com/v4/subscribers', {
         method: 'POST',
-        headers: {
-          'X-Kit-Api-Key': env.KIT_API_KEY,
-          'Content-Type': 'application/json',
-        },
+        headers: kitHeaders,
         body: JSON.stringify({ email_address: body.email_address }),
       });
-      const data = await kitRes.json();
+      const data = await kitRes.json() as { subscriber?: { id: number } };
+
+      // Apply "Joined Newsletter" tag
+      const subscriberId = data.subscriber?.id;
+      if (kitRes.ok && subscriberId) {
+        await fetch('https://api.kit.com/v4/tags/17192988/subscribers', {
+          method: 'POST',
+          headers: kitHeaders,
+          body: JSON.stringify({ id: subscriberId }),
+        });
+      }
+
       return json(data, kitRes.status);
     }
 
