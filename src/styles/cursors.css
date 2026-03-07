@@ -1,0 +1,55 @@
+/*
+ * Win98 cursor pack — SVG data-URI cursors applied globally.
+ * Arrow, pointer (hand), I-beam, and wait (hourglass).
+ */
+
+/* ── Default arrow ───────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><path d='M3 2 L3 24 L9 18 L13 28 L17 27 L13 17 L21 17 Z' fill='white' stroke='white' stroke-width='2.5' stroke-linejoin='round'/><path d='M3 2 L3 24 L9 18 L13 28 L17 27 L13 17 L21 17 Z' fill='black'/></svg>") 3 2, default;
+}
+
+/* ── Pointer (hand) — links, buttons, interactive elements ──────────────── */
+a[href],
+button,
+[role="button"],
+select,
+label[for],
+summary,
+.desktop-icon,
+.win-menubar-btn,
+.explorer-file-row,
+.start-btn,
+.taskbar-btn,
+.taskbar-item,
+input[type="submit"],
+input[type="button"],
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><path d='M10 1 Q8 1 8 4 L8 18 Q6 18 6 16 L6 12 Q6 10 4 10 Q2 10 2 13 L2 20 Q2 27 9 30 L17 30 Q24 30 24 23 L24 17 Q24 15 22 15 Q20 15 20 17 L20 15 Q20 13 18 13 Q16 13 16 15 L16 4 Q16 2 14 1 Q12 1 12 4 L12 1 Q12 1 10 1 Z' fill='white' stroke='white' stroke-width='2' stroke-linejoin='round'/><path d='M10 2 Q9 2 9 4 L9 19 Q7 19 7 17 L7 13 Q7 11 5 11 Q3 11 3 13 L3 20 Q3 26 9 29 L17 29 Q23 29 23 23 L23 17.5 Q23 16 21.5 16 Q20 16 20 17.5 L20 16 Q20 14 18 14 Q16 14 16 16 L16 4 Q16 2.5 14.5 2 Q13 2 13 4 L13 2 Q13 2 10 2 Z' fill='black'/></svg>") 9 1, pointer;
+}
+
+/* ── I-beam — text inputs ────────────────────────────────────────────────── */
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+input[type="url"],
+input[type="number"],
+textarea,
+[contenteditable="true"] {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><line x1='16' y1='5' x2='16' y2='27' stroke='white' stroke-width='4'/><line x1='10' y1='7' x2='22' y2='7' stroke='white' stroke-width='3.5'/><line x1='10' y1='25' x2='22' y2='25' stroke='white' stroke-width='3.5'/><line x1='16' y1='5' x2='16' y2='27' stroke='black' stroke-width='2'/><line x1='10' y1='7' x2='22' y2='7' stroke='black' stroke-width='2'/><line x1='10' y1='25' x2='22' y2='25' stroke='black' stroke-width='2'/></svg>") 16 16, text;
+}
+
+/* ── Wait / busy — aria-busy elements ───────────────────────────────────── */
+[aria-busy="true"],
+[aria-busy="true"] * {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><rect x='8' y='4' width='16' height='3' rx='1' fill='white'/><rect x='8' y='25' width='16' height='3' rx='1' fill='white'/><polygon points='8,7 24,7 16,16' fill='white'/><polygon points='8,25 24,25 16,16' fill='white'/><rect x='9' y='5' width='14' height='2' fill='black'/><rect x='9' y='25' width='14' height='2' fill='black'/><polygon points='9,7 23,7 16,15' fill='black'/><polygon points='9,25 23,25 16,17' fill='black'/><polygon points='10,7 22,7 16,13' fill='rgb(212,176,80)'/><polygon points='13,24 19,24 16,19' fill='rgb(212,176,80)'/></svg>") 16 16, wait;
+}
+
+/* ── Not-allowed ─────────────────────────────────────────────────────────── */
+[disabled],
+[aria-disabled="true"] {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><circle cx='16' cy='16' r='11' fill='white' stroke='white' stroke-width='2'/><circle cx='16' cy='16' r='10' fill='black'/><circle cx='16' cy='16' r='7' fill='white'/><line x1='9' y1='23' x2='23' y2='9' stroke='black' stroke-width='4'/></svg>") 16 16, not-allowed;
+}
