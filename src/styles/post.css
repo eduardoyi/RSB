@@ -23,9 +23,9 @@
 }
 
 /* Font scale variants */
-.document-body.font-small { font-size: 14px; }
-.document-body.font-normal { font-size: 16px; }
-.document-body.font-large { font-size: 20px; }
+.document-body.font-small { font-size: 16px; }
+.document-body.font-normal { font-size: 18px; }
+.document-body.font-large { font-size: 22px; }
 
 .document-body h1 { font-size: 2em; margin-bottom: 0.5em; }
 .document-body h2 { font-size: 1.5em; margin: 1em 0 0.5em; }
@@ -139,7 +139,7 @@
   pointer-events: none;
 }
 .audio-time {
-  font-size: 10px; font-family: 'Courier New', monospace;
+  font-size: 12px; font-family: 'Courier New', monospace;
   white-space: nowrap; min-width: 30px; text-align: center;
 }
 
@@ -157,7 +157,7 @@
 .audio-volume-group {
   display: flex; align-items: center; gap: 2px;
 }
-.audio-vol-icon { font-size: 12px; line-height: 1; }
+.audio-vol-icon { font-size: 14px; line-height: 1; }
 .audio-volume { width: 64px; }
 
 /* Mobile: no page simulation, infinite scroll */
