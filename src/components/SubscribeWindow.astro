@@ -25,7 +25,11 @@
       <div class="window-body" style="flex:1;padding:20px 24px;display:flex;flex-direction:column;justify-content:center;gap:10px;">
 
         <div id="subscribe-form-area">
-          <p style="margin:0 0 12px;font-size:13px;font-family:Arial,sans-serif;">Get new posts straight to your inbox. No spam, ever.</p>
+          <div style="text-align:center;margin-bottom:12px;">
+            <img src="/icons/win98/envelope_open_sheet.ico" alt="" width="32" height="32" style="image-rendering:pixelated;" />
+          </div>
+          <p style="margin:0 0 4px;font-size:13px;font-weight:bold;font-family:Arial,sans-serif;">Join the RSB mailing list</p>
+          <p style="margin:0 0 12px;font-size:12px;font-family:Arial,sans-serif;color:#444;">New posts and cool stuff, about once a month. No filler.</p>
           <div style="display:flex;gap:6px;">
             <input
               type="email"
@@ -39,7 +43,8 @@
         </div>
 
         <div id="subscribe-success" style="display:none;text-align:center;">
-          <p style="margin:0 0 14px;font-size:13px;font-family:Arial,sans-serif;">You're in! Thanks for subscribing.</p>
+          <img src="/icons/win98/envelope_open_sheet.ico" alt="" width="32" height="32" style="image-rendering:pixelated;margin-bottom:10px;" />
+          <p style="margin:0 0 14px;font-size:13px;font-family:Arial,sans-serif;">You're in! Talk soon.</p>
           <button id="subscribe-done">Close</button>
         </div>
 
@@ -84,6 +89,10 @@
 
   document.getElementById('subscribe-close').addEventListener('click', hideSubscribeWindow);
   document.getElementById('subscribe-done').addEventListener('click', hideSubscribeWindow);
+
+  // Bump default height to fit new content
+  var subWin = document.querySelector('#subscribe-wrap .w98-window');
+  if (subWin) { subWin.style.height = '280px'; }
 
   // Auto-open via hash: realseriousbusiness.com/#subscribe
   if (window.location.hash === '#subscribe') {
@@ -130,3 +139,22 @@
     }
   });
 </script>
+
+<style is:global>
+  /* Override full-screen mobile rule for subscribe window only */
+  @media (max-width: 767px) {
+    #subscribe-wrap .w98-window {
+      width: min(340px, calc(100vw - 32px)) !important;
+      height: auto !important;
+      left: 50% !important;
+      top: 50% !important;
+      transform: translate(-50%, -60%) !important;
+    }
+    #subscribe-wrap .window {
+      height: auto !important;
+    }
+    #subscribe-wrap .window-body {
+      flex: none !important;
+    }
+  }
+</style>
