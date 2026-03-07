@@ -27,7 +27,7 @@
   cursor: pointer;
   text-decoration: none;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   text-align: center;
   padding: 6px;
   user-select: none;
@@ -51,7 +51,7 @@
 .desktop-icon span {
   text-shadow: 1px 1px 1px #000;
   word-break: break-word;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 /* Taskbar */
@@ -77,7 +77,7 @@
   font-weight: bold;
   padding: 4px 10px;
   white-space: nowrap;
-  font-size: 15px;
+  font-size: 13px;
   min-height: 30px;
 }
 
@@ -111,7 +111,7 @@
   padding: 2px 8px;
   max-width: 180px;
   min-width: 100px;
-  font-size: 14px;
+  font-size: 12px;
   font-family: Arial, sans-serif;
   -webkit-font-smoothing: auto;
   font-smooth: auto;
@@ -150,7 +150,7 @@
   border: 1px solid;
   border-color: #808080 white white #808080;
   padding: 3px 10px;
-  font-size: 15px;
+  font-size: 13px;
   white-space: nowrap;
   min-width: 80px;
 }
@@ -203,7 +203,7 @@
   padding: 7px 12px;
   text-decoration: none;
   color: black;
-  font-size: 15px;
+  font-size: 13px;
   cursor: pointer;
   border: none;
   background: none;
@@ -227,7 +227,7 @@
 
 .start-menu-item .submenu-arrow {
   margin-left: auto;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .start-menu-divider {
@@ -264,7 +264,7 @@
   padding: 7px 12px;
   text-decoration: none;
   color: black;
-  font-size: 15px;
+  font-size: 13px;
   white-space: nowrap;
 }
 
@@ -287,7 +287,7 @@
   gap: 8px;
   padding: 7px 12px;
   color: black;
-  font-size: 15px;
+  font-size: 13px;
   white-space: nowrap;
   cursor: default;
 }
@@ -305,7 +305,7 @@
 
 .sub-item .submenu-arrow {
   margin-left: auto;
-  font-size: 12px;
+  font-size: 10px;
   padding-left: 8px;
 }
 
@@ -334,7 +334,7 @@
   padding: 7px 12px;
   text-decoration: none;
   color: black;
-  font-size: 15px;
+  font-size: 13px;
   white-space: nowrap;
 }
 

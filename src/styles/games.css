@@ -19,7 +19,7 @@
   padding: 8px 6px;
   border: 1px solid transparent;
   text-align: center;
-  font-size: 13px;
+  font-size: 11px;
   cursor: pointer;
   user-select: none;
 }
@@ -60,7 +60,7 @@
 }
 
 .ms-diff {
-  font-size: 13px;
+  font-size: 11px;
   font-family: Arial, sans-serif;
   padding: 2px 10px;
   min-height: 22px;
@@ -102,7 +102,7 @@
 .ms-result-titlebar {
   background: #000080;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   padding: 3px 8px;
 }
@@ -110,7 +110,7 @@
 .ms-result-body {
   padding: 16px 20px 12px;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .ms-result-body p {
@@ -128,7 +128,7 @@
   border: 1px solid;
   border-color: #808080 white white #808080;
   padding: 1px 8px;
-  font-size: 14px;
+  font-size: 12px;
   font-family: Arial, sans-serif;
   color: black;
   pointer-events: none;
@@ -151,7 +151,7 @@
 .snake-gameover-titlebar {
   background: #000080;
   color: white;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: bold;
   padding: 3px 8px;
   user-select: none;
@@ -160,7 +160,7 @@
 .snake-gameover-body {
   padding: 16px 20px 12px;
   text-align: center;
-  font-size: 15px;
+  font-size: 13px;
 }
 
 .snake-gameover-body p {
@@ -221,7 +221,7 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 13px;
+  font-size: 11px;
   font-family: Arial, sans-serif;
   cursor: pointer;
   user-select: none;
