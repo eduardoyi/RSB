@@ -1,6 +1,4 @@
 ---
-// This page is served at /admin/assets
-// public/admin/index.html takes precedence at /admin (no conflict)
 export const prerender = true;
 ---
 <!doctype html>
@@ -8,178 +6,519 @@ export const prerender = true;
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>R2 Asset Manager — Real Serious Business</title>
-  <link rel="stylesheet" href="https://unpkg.com/98.css" />
+  <title>Media — Real Serious Business</title>
   <style>
-    body { background: #008080; padding: 20px; margin: 0; font-size: 12px; }
-    .window { width: 100%; max-width: 800px; margin: 0 auto; }
-    .window-body { padding: 12px; }
-    #asset-list { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
-    #asset-list th, #asset-list td { padding: 4px 8px; text-align: left; border-bottom: 1px solid silver; font-size: 11px; }
-    #asset-list th { background: #d4d0c8; }
-    .asset-url { max-width: 280px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-    .upload-area { border: 2px dashed #808080; padding: 16px; text-align: center; margin-bottom: 12px; cursor: pointer; }
-    .upload-area:hover { background: #e8e8e8; }
-    #status { color: #000080; min-height: 20px; }
-    .picker-mode-notice { background: #ffff99; border: 1px solid #808000; padding: 8px; margin-bottom: 12px; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: 13px;
+      background: #f0f0f1;
+      color: #1d2327;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #1d2327;
+      color: #fff;
+      padding: 0 16px;
+      height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .header h1 { font-size: 14px; font-weight: 600; }
+    .header-spacer { flex: 1; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 3px;
+      border: 1px solid transparent;
+      font-size: 13px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn-primary { background: #2271b1; color: #fff; border-color: #2271b1; }
+    .btn-primary:hover { background: #135e96; }
+    .btn-secondary { background: #fff; color: #2271b1; border-color: #2271b1; }
+    .btn-secondary:hover { background: #f0f6fc; }
+    .btn-danger { background: #fff; color: #b32d2e; border-color: #b32d2e; }
+    .btn-danger:hover { background: #fcf0f1; }
+
+    /* ── Toolbar ── */
+    .toolbar {
+      background: #fff;
+      border-bottom: 1px solid #dcdcde;
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .search-input {
+      padding: 5px 10px;
+      border: 1px solid #8c8f94;
+      border-radius: 3px;
+      font-size: 13px;
+      width: 220px;
+      font-family: inherit;
+    }
+    .search-input:focus { outline: none; border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; }
+    .filter-select {
+      padding: 5px 8px;
+      border: 1px solid #8c8f94;
+      border-radius: 3px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #fff;
+    }
+    .status-text { color: #646970; font-size: 12px; margin-left: auto; }
+
+    /* ── Auth screen ── */
+    #auth-screen {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .auth-card {
+      background: #fff;
+      border: 1px solid #dcdcde;
+      border-radius: 4px;
+      padding: 32px;
+      width: 320px;
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    }
+    .auth-card h2 { font-size: 16px; margin-bottom: 16px; }
+    .auth-card input {
+      width: 100%;
+      padding: 8px 10px;
+      border: 1px solid #8c8f94;
+      border-radius: 3px;
+      font-size: 13px;
+      margin-bottom: 12px;
+      font-family: inherit;
+    }
+    .auth-card input:focus { outline: none; border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; }
+    .auth-card .btn { width: 100%; justify-content: center; padding: 8px; }
+
+    /* ── Main layout ── */
+    #main-screen { flex: 1; display: none; flex-direction: column; overflow: hidden; }
+
+    /* ── Upload zone ── */
+    .upload-zone {
+      border: 2px dashed #c3c4c7;
+      border-radius: 4px;
+      padding: 16px;
+      text-align: center;
+      margin: 12px 16px;
+      cursor: pointer;
+      color: #646970;
+      transition: border-color .15s, background .15s;
+      flex-shrink: 0;
+    }
+    .upload-zone:hover, .upload-zone.drag-over {
+      border-color: #2271b1;
+      background: #f0f6fc;
+      color: #2271b1;
+    }
+    .upload-zone input { display: none; }
+
+    /* ── Grid + detail pane ── */
+    .content-area {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .grid-wrap {
+      flex: 1;
+      overflow-y: auto;
+      padding: 0 16px 16px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 8px;
+    }
+
+    .media-item {
+      background: #fff;
+      border: 2px solid #dcdcde;
+      border-radius: 3px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: border-color .1s;
+      position: relative;
+    }
+    .media-item:hover { border-color: #2271b1; }
+    .media-item.selected { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; }
+
+    .media-thumb {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      display: block;
+      background: #f0f0f1;
+    }
+    .media-icon {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f1;
+      font-size: 36px;
+    }
+    .media-name {
+      font-size: 11px;
+      padding: 5px 6px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      border-top: 1px solid #f0f0f1;
+      color: #1d2327;
+    }
+
+    /* ── Detail sidebar ── */
+    .detail-pane {
+      width: 280px;
+      flex-shrink: 0;
+      border-left: 1px solid #dcdcde;
+      background: #fff;
+      overflow-y: auto;
+      display: none;
+      flex-direction: column;
+    }
+    .detail-pane.visible { display: flex; }
+    .detail-preview {
+      width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      background: #f0f0f1;
+      display: block;
+    }
+    .detail-icon {
+      width: 100%;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f0f0f1;
+      font-size: 48px;
+    }
+    .detail-body { padding: 16px; flex: 1; }
+    .detail-body h3 {
+      font-size: 13px;
+      font-weight: 600;
+      word-break: break-all;
+      margin-bottom: 12px;
+    }
+    .detail-meta { font-size: 12px; color: #646970; margin-bottom: 16px; line-height: 1.8; }
+    .detail-url {
+      width: 100%;
+      padding: 5px 8px;
+      border: 1px solid #dcdcde;
+      border-radius: 3px;
+      font-size: 11px;
+      background: #f6f7f7;
+      color: #646970;
+      word-break: break-all;
+      margin-bottom: 12px;
+      font-family: monospace;
+      resize: none;
+      height: 52px;
+    }
+    .detail-actions { display: flex; flex-direction: column; gap: 8px; }
+
+    /* ── Picker banner ── */
+    .picker-banner {
+      background: #d0e8f8;
+      border-bottom: 1px solid #a8d5f0;
+      padding: 8px 16px;
+      font-size: 12px;
+      color: #0a4b78;
+      display: none;
+      flex-shrink: 0;
+    }
+    .picker-banner.visible { display: block; }
+
+    /* ── Toast ── */
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1d2327;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 4px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity .2s;
+      pointer-events: none;
+      z-index: 999;
+    }
+    #toast.show { opacity: 1; }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px;
+      color: #646970;
+    }
   </style>
 </head>
 <body>
-  <div class="window">
-    <div class="title-bar">
-      <div class="title-bar-text">R2 Asset Manager</div>
-      <div class="title-bar-controls">
-        <button aria-label="Minimize"></button>
-        <button aria-label="Maximize"></button>
-        <button aria-label="Close" onclick="window.close()"></button>
-      </div>
+
+  <div class="header">
+    <h1>Media Library</h1>
+    <div class="header-spacer"></div>
+    <label class="btn btn-primary" id="upload-btn-header">
+      ↑ Upload
+      <input type="file" id="file-input-header" style="display:none;" multiple />
+    </label>
+  </div>
+
+  <div id="picker-banner" class="picker-banner">
+    Picker mode — select a file to insert it into the editor.
+  </div>
+
+  <!-- Auth screen -->
+  <div id="auth-screen">
+    <div class="auth-card">
+      <h2>Media Library</h2>
+      <input type="password" id="token-input" placeholder="Admin token" />
+      <button class="btn btn-primary" id="auth-btn">Connect</button>
     </div>
-    <div class="window-body">
-      <div id="picker-notice" class="picker-mode-notice" style="display:none;">
-        Picker mode — click "Select" next to an asset to insert it.
+  </div>
+
+  <!-- Main screen -->
+  <div id="main-screen">
+    <div class="toolbar">
+      <input class="search-input" id="search" type="search" placeholder="Search files…" />
+      <select class="filter-select" id="filter-type">
+        <option value="all">All files</option>
+        <option value="image">Images</option>
+        <option value="audio">Audio</option>
+        <option value="other">Other</option>
+      </select>
+      <span class="status-text" id="status-text"></span>
+    </div>
+
+    <div class="upload-zone" id="upload-zone">
+      Drop files here to upload, or <label for="file-input-zone" style="color:#2271b1;cursor:pointer;text-decoration:underline;">browse</label>
+      <input type="file" id="file-input-zone" multiple />
+    </div>
+
+    <div class="content-area">
+      <div class="grid-wrap">
+        <div class="media-grid" id="media-grid"></div>
       </div>
 
-      <div id="auth-section">
-        <p>Enter your admin token to access R2 assets:</p>
-        <input type="password" id="token-input" placeholder="Admin token" style="width:240px;" />
-        <button id="auth-btn" class="button">Connect</button>
-      </div>
-
-      <div id="main-section" style="display:none;">
-        <div class="upload-area" id="upload-area">
-          Drop files here or <label for="file-input" style="color:#000080;cursor:pointer;text-decoration:underline;">browse</label>
-          <input type="file" id="file-input" style="display:none;" multiple />
+      <!-- Detail sidebar -->
+      <div class="detail-pane" id="detail-pane">
+        <div id="detail-preview-wrap"></div>
+        <div class="detail-body">
+          <h3 id="detail-name"></h3>
+          <div class="detail-meta" id="detail-meta"></div>
+          <textarea class="detail-url" id="detail-url" readonly></textarea>
+          <div class="detail-actions" id="detail-actions"></div>
         </div>
-
-        <p id="status"></p>
-
-        <table id="asset-list">
-          <thead>
-            <tr>
-              <th>Key</th>
-              <th>Size</th>
-              <th>URL</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="asset-tbody"></tbody>
-        </table>
       </div>
     </div>
   </div>
 
-  <script>
-    const workerUrl = import.meta.env.PUBLIC_R2_WORKER_URL || '';
+  <div id="toast"></div>
+
+  <script define:vars={{ workerUrl: import.meta.env.PUBLIC_R2_WORKER_URL || '' }}>
     const isPicker = new URLSearchParams(location.search).get('picker') === 'true';
     let adminToken = '';
+    let allAssets = [];
+    let selectedKey = null;
 
-    if (isPicker) {
-      document.getElementById('picker-notice').style.display = 'block';
+    const IMG_EXTS = ['jpg','jpeg','png','gif','webp','svg','avif'];
+    const AUDIO_EXTS = ['mp3','m4a','ogg','wav','flac'];
+
+    function fileType(key) {
+      const ext = key.split('.').pop()?.toLowerCase() ?? '';
+      if (IMG_EXTS.includes(ext)) return 'image';
+      if (AUDIO_EXTS.includes(ext)) return 'audio';
+      return 'other';
     }
 
-    // Check for stored token
+    function fileIcon(key) {
+      const t = fileType(key);
+      if (t === 'audio') return '🎵';
+      return '📄';
+    }
+
+    function formatSize(bytes) {
+      if (!bytes) return '—';
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+      return (bytes/1048576).toFixed(1) + ' MB';
+    }
+
+    function toast(msg) {
+      const el = document.getElementById('toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      setTimeout(() => el.classList.remove('show'), 2000);
+    }
+
+    // ── Auth ──────────────────────────────────────────────────────────────────
+    if (isPicker) document.getElementById('picker-banner').classList.add('visible');
+
     const stored = localStorage.getItem('rsb:admin-token');
-    if (stored) {
-      adminToken = stored;
-      showMain();
-      loadAssets();
-    }
+    if (stored) { adminToken = stored; showMain(); loadAssets(); }
 
     document.getElementById('auth-btn').addEventListener('click', () => {
-      const input = document.getElementById('token-input');
-      adminToken = input.value.trim();
+      adminToken = document.getElementById('token-input').value.trim();
       if (!adminToken) return;
       localStorage.setItem('rsb:admin-token', adminToken);
       showMain();
       loadAssets();
     });
+    document.getElementById('token-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('auth-btn').click();
+    });
 
     function showMain() {
-      document.getElementById('auth-section').style.display = 'none';
-      document.getElementById('main-section').style.display = 'block';
+      document.getElementById('auth-screen').style.display = 'none';
+      document.getElementById('main-screen').style.display = 'flex';
     }
 
-    function setStatus(msg) {
-      document.getElementById('status').textContent = msg;
-    }
-
+    // ── Load + render ─────────────────────────────────────────────────────────
     async function loadAssets() {
-      setStatus('Loading...');
+      document.getElementById('status-text').textContent = 'Loading…';
       try {
         const res = await fetch(`${workerUrl}/api/assets`);
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const assets = await res.json();
-        renderTable(assets);
-        setStatus(`${assets.length} asset(s) loaded.`);
-      } catch (err) {
-        setStatus('Error loading assets: ' + err.message);
+        allAssets = await res.json();
+        renderGrid();
+      } catch(err) {
+        document.getElementById('status-text').textContent = 'Error: ' + err.message;
       }
     }
 
-    function renderTable(assets) {
-      const tbody = document.getElementById('asset-tbody');
-      tbody.innerHTML = '';
+    function currentFilter() {
+      const q = document.getElementById('search').value.toLowerCase();
+      const t = document.getElementById('filter-type').value;
+      return allAssets.filter(a =>
+        (t === 'all' || fileType(a.key) === t) &&
+        (!q || a.key.toLowerCase().includes(q))
+      );
+    }
+
+    function renderGrid() {
+      const assets = currentFilter();
+      const grid = document.getElementById('media-grid');
+      document.getElementById('status-text').textContent = `${assets.length} file${assets.length !== 1 ? 's' : ''}`;
+      grid.innerHTML = '';
+
+      if (!assets.length) {
+        grid.innerHTML = '<div class="empty-state">No files found.</div>';
+        return;
+      }
+
       assets.forEach(asset => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${escHtml(asset.key)}</td>
-          <td>${formatSize(asset.size)}</td>
-          <td class="asset-url"><a href="${escHtml(asset.url)}" target="_blank">${escHtml(asset.url)}</a></td>
-          <td>
-            <button onclick="copyUrl('${escJs(asset.url)}')">Copy URL</button>
-            ${isPicker ? `<button onclick="selectAsset('${escJs(asset.url)}')">Select</button>` : ''}
-            <button onclick="deleteAsset('${escJs(asset.key)}')">Delete</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
+        const item = document.createElement('div');
+        item.className = 'media-item' + (asset.key === selectedKey ? ' selected' : '');
+        item.dataset.key = asset.key;
+
+        if (fileType(asset.key) === 'image') {
+          item.innerHTML = `<img class="media-thumb" src="${asset.url}" loading="lazy" alt="" /><div class="media-name">${asset.key}</div>`;
+        } else {
+          item.innerHTML = `<div class="media-icon">${fileIcon(asset.key)}</div><div class="media-name">${asset.key}</div>`;
+        }
+
+        item.addEventListener('click', () => selectItem(asset));
+        grid.appendChild(item);
       });
     }
 
-    window.copyUrl = function(url) {
-      navigator.clipboard.writeText(url).then(() => setStatus('URL copied!'));
+    function selectItem(asset) {
+      selectedKey = asset.key;
+      document.querySelectorAll('.media-item').forEach(el =>
+        el.classList.toggle('selected', el.dataset.key === asset.key)
+      );
+
+      const pane = document.getElementById('detail-pane');
+      pane.classList.add('visible');
+
+      // Preview
+      const previewWrap = document.getElementById('detail-preview-wrap');
+      if (fileType(asset.key) === 'image') {
+        previewWrap.innerHTML = `<img class="detail-preview" src="${asset.url}" alt="" />`;
+      } else {
+        previewWrap.innerHTML = `<div class="detail-icon">${fileIcon(asset.key)}</div>`;
+      }
+
+      document.getElementById('detail-name').textContent = asset.key;
+      document.getElementById('detail-meta').textContent = formatSize(asset.size);
+      document.getElementById('detail-url').value = asset.url;
+
+      const actions = document.getElementById('detail-actions');
+      actions.innerHTML = '';
+
+      if (isPicker) {
+        const btn = document.createElement('button');
+        btn.className = 'btn btn-primary';
+        btn.textContent = 'Insert into editor';
+        btn.onclick = () => {
+          const bc = new BroadcastChannel('r2-picker');
+          bc.postMessage({ type: 'r2:select', url: asset.url });
+          bc.close();
+          window.close();
+        };
+        actions.appendChild(btn);
+      }
+
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'btn btn-secondary';
+      copyBtn.textContent = 'Copy URL';
+      copyBtn.onclick = () => {
+        navigator.clipboard.writeText(asset.url).then(() => toast('URL copied!'));
+      };
+      actions.appendChild(copyBtn);
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn btn-danger';
+      delBtn.textContent = 'Delete file';
+      delBtn.onclick = () => deleteAsset(asset.key);
+      actions.appendChild(delBtn);
     }
 
-    window.selectAsset = function(url) {
-      const bc = new BroadcastChannel('r2-picker');
-      bc.postMessage({ type: 'r2:select', url });
-      bc.close();
-      window.close();
-    }
-
-    window.deleteAsset = async function(key) {
+    async function deleteAsset(key) {
       if (!confirm(`Delete "${key}"?`)) return;
-      setStatus('Deleting...');
       try {
         const res = await fetch(`${workerUrl}/api/assets/${encodeURIComponent(key)}`, {
           method: 'DELETE',
           headers: { Authorization: `Bearer ${adminToken}` },
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        setStatus('Deleted.');
+        toast('Deleted.');
+        selectedKey = null;
+        document.getElementById('detail-pane').classList.remove('visible');
         loadAssets();
-      } catch (err) {
-        setStatus('Delete failed: ' + err.message);
+      } catch(err) {
+        toast('Delete failed: ' + err.message);
       }
     }
 
-    // Upload
-    const fileInput = document.getElementById('file-input');
-    const uploadArea = document.getElementById('upload-area');
-
-    uploadArea.addEventListener('click', () => fileInput.click());
-    fileInput.addEventListener('change', () => uploadFiles(fileInput.files));
-
-    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.style.background = '#e0e8ff'; });
-    uploadArea.addEventListener('dragleave', () => { uploadArea.style.background = ''; });
-    uploadArea.addEventListener('drop', e => {
-      e.preventDefault();
-      uploadArea.style.background = '';
-      uploadFiles(e.dataTransfer.files);
-    });
-
+    // ── Upload ────────────────────────────────────────────────────────────────
     async function uploadFiles(files) {
       for (const file of files) {
-        setStatus(`Uploading ${file.name}...`);
+        toast(`Uploading ${file.name}…`);
         const form = new FormData();
         form.append('file', file);
         try {
@@ -189,29 +528,29 @@ export const prerender = true;
             body: form,
           });
           if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
-          setStatus(`Uploaded: ${data.key}`);
-        } catch (err) {
-          setStatus(`Upload failed for ${file.name}: ` + err.message);
+          toast(`Uploaded!`);
+        } catch(err) {
+          toast(`Upload failed: ` + err.message);
         }
       }
       loadAssets();
     }
 
-    function formatSize(bytes) {
-      if (!bytes) return '—';
-      if (bytes < 1024) return bytes + ' B';
-      if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-      return (bytes / 1048576).toFixed(1) + ' MB';
-    }
+    document.getElementById('file-input-header').addEventListener('change', e => uploadFiles(e.target.files));
+    document.getElementById('file-input-zone').addEventListener('change', e => uploadFiles(e.target.files));
 
-    function escHtml(s) {
-      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-    }
+    const zone = document.getElementById('upload-zone');
+    zone.addEventListener('dragover', e => { e.preventDefault(); zone.classList.add('drag-over'); });
+    zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+    zone.addEventListener('drop', e => {
+      e.preventDefault();
+      zone.classList.remove('drag-over');
+      uploadFiles(e.dataTransfer.files);
+    });
 
-    function escJs(s) {
-      return String(s).replace(/'/g, "\\'").replace(/\\/g,'\\\\');
-    }
+    // ── Filters ───────────────────────────────────────────────────────────────
+    document.getElementById('search').addEventListener('input', renderGrid);
+    document.getElementById('filter-type').addEventListener('change', renderGrid);
   </script>
 </body>
 </html>
