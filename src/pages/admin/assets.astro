@@ -140,7 +140,8 @@ export const prerender = true;
 
     .grid-wrap {
       flex: 1;
-      overflow-y: auto;
+      overflow: auto;
+      min-width: 0;
       padding: 0 16px 16px;
     }
 
@@ -164,17 +165,18 @@ export const prerender = true;
     .media-item.selected { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; }
 
     .media-thumb-wrap {
+      position: relative;
       width: 100%;
       height: 120px;
       overflow: hidden;
       background: #f0f0f1;
     }
     .media-thumb {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      max-width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
     .media-icon {
       width: 100%;
