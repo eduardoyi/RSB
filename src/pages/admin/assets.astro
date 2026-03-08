@@ -149,7 +149,6 @@ export const prerender = true;
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: 8px;
-      align-items: start;
     }
 
     .media-item {
@@ -159,15 +158,20 @@ export const prerender = true;
       cursor: pointer;
       overflow: hidden;
       transition: border-color .1s;
-      min-width: 0;
     }
     .media-item:hover { border-color: #2271b1; }
     .media-item.selected { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; }
 
     .media-thumb-wrap {
-      width: 100%;
       height: 120px;
-      background: #f0f0f1 center / cover no-repeat;
+      overflow: hidden;
+      background: #f0f0f1;
+    }
+    .media-thumb-wrap img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .media-icon {
       width: 100%;
@@ -437,10 +441,25 @@ export const prerender = true;
         item.dataset.key = asset.key;
 
         if (fileType(asset.key) === 'image') {
-          item.innerHTML = `<div class="media-thumb-wrap" style="background-image:url('${asset.url}')"></div><div class="media-name">${asset.key}</div>`;
+          const wrap = document.createElement('div');
+          wrap.className = 'media-thumb-wrap';
+          const img = document.createElement('img');
+          img.src = asset.url;
+          img.alt = '';
+          img.loading = 'lazy';
+          wrap.appendChild(img);
+          item.appendChild(wrap);
         } else {
-          item.innerHTML = `<div class="media-icon">${fileIcon(asset.key)}</div><div class="media-name">${asset.key}</div>`;
+          const icon = document.createElement('div');
+          icon.className = 'media-icon';
+          icon.textContent = fileIcon(asset.key);
+          item.appendChild(icon);
         }
+
+        const name = document.createElement('div');
+        name.className = 'media-name';
+        name.textContent = asset.key;
+        item.appendChild(name);
 
         item.addEventListener('click', () => selectItem(asset));
         grid.appendChild(item);
