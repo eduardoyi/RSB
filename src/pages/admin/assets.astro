@@ -165,18 +165,9 @@ export const prerender = true;
     .media-item.selected { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; }
 
     .media-thumb-wrap {
-      position: relative;
       width: 100%;
       height: 120px;
-      overflow: hidden;
-      background: #f0f0f1;
-    }
-    .media-thumb {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      background: #f0f0f1 center / cover no-repeat;
     }
     .media-icon {
       width: 100%;
@@ -210,6 +201,7 @@ export const prerender = true;
     .detail-pane.visible { display: flex; }
     .detail-preview {
       width: 100%;
+      max-width: 100%;
       max-height: 200px;
       object-fit: contain;
       background: #f0f0f1;
@@ -445,7 +437,7 @@ export const prerender = true;
         item.dataset.key = asset.key;
 
         if (fileType(asset.key) === 'image') {
-          item.innerHTML = `<div class="media-thumb-wrap"><img class="media-thumb" src="${asset.url}" loading="lazy" alt="" /></div><div class="media-name">${asset.key}</div>`;
+          item.innerHTML = `<div class="media-thumb-wrap" style="background-image:url('${asset.url}')"></div><div class="media-name">${asset.key}</div>`;
         } else {
           item.innerHTML = `<div class="media-icon">${fileIcon(asset.key)}</div><div class="media-name">${asset.key}</div>`;
         }
