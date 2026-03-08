@@ -158,6 +158,7 @@ export const prerender = true;
       cursor: pointer;
       overflow: hidden;
       transition: border-color .1s;
+      min-width: 0;
     }
     .media-item:hover { border-color: #2271b1; }
     .media-item.selected { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; }
@@ -170,6 +171,7 @@ export const prerender = true;
     }
     .media-thumb {
       width: 100%;
+      max-width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
