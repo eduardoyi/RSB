@@ -15,6 +15,45 @@ function rehypeLazyImages() {
     });
   };
 }
+
+function rehypeFigure() {
+  return function transform(tree: any) {
+    (function walk(node: any) {
+      if (!node.children) return;
+      for (let i = 0; i < node.children.length; i++) {
+        const child = node.children[i];
+        // Match <p> containing a single <img> with a title attribute
+        if (
+          child.type === 'element' &&
+          child.tagName === 'p' &&
+          child.children?.length === 1 &&
+          child.children[0].type === 'element' &&
+          child.children[0].tagName === 'img' &&
+          child.children[0].properties?.title
+        ) {
+          const img = child.children[0];
+          const caption = img.properties.title;
+          delete img.properties.title;
+          node.children[i] = {
+            type: 'element',
+            tagName: 'figure',
+            properties: {},
+            children: [
+              img,
+              {
+                type: 'element',
+                tagName: 'figcaption',
+                properties: {},
+                children: [{ type: 'text', value: caption }],
+              },
+            ],
+          };
+        }
+        walk(child);
+      }
+    })(tree);
+  };
+}
 import matter from 'gray-matter';
 
 function cloudflareRedirects() {
@@ -96,7 +135,7 @@ export default defineConfig({
   integrations: [sitemap(), cloudflareRedirects()],
   markdown: {
     syntaxHighlight: false,
-    rehypePlugins: [rehypeLazyImages],
+    rehypePlugins: [rehypeLazyImages, rehypeFigure],
   },
   vite: {
     plugins: [
