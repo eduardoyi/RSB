@@ -6,6 +6,7 @@ description: What would happen to the world's major religions in the event of al
 author: Eduardo Yi
 featured_image: https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/1773014753682-aliens-arrived.webp
 featured_image_alt: What would happen to the world's major religions in the event of alien contact?
+podcast_audio: https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/1773015736343-What_happens_to_God_when_aliens_land.m4a
 ---
 It started as a perfectly normal Tuesday.
 
