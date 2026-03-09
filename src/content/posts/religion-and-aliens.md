@@ -5,6 +5,7 @@ date: 2026-03-09T00:05:21.738Z
 description: What would happen to the world's major religions in the event of alien contact?
 author: Eduardo Yi
 featured_image: https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/1773014753682-aliens-arrived.webp
+featured_image_alt: What would happen to the world's major religions in the event of alien contact?
 ---
 It started as a perfectly normal Tuesday.
 
