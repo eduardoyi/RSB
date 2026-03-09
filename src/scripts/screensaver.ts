@@ -5,7 +5,7 @@
   if (window.innerWidth < 768) return;
 
   const IDLE_MS = 120_000;
-  const EMBED   = 'https://www.youtube.com/embed/I0hypYunmwI?autoplay=1&mute=1&list=PLfIhUmTWHNva3Tt_L80lErZfEWMROTX5y&index=0';
+  const EMBED   = 'https://www.youtube.com/embed/I0hypYunmwI?autoplay=1&mute=1&loop=1&list=PLfIhUmTWHNva3Tt_L80lErZfEWMROTX5y&index=0';
 
   let overlay: HTMLDivElement | null = null;
 
