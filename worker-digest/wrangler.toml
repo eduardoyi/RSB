@@ -1,0 +1,12 @@
+name = "rsb-digest"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[triggers]
+crons = ["0 14 * * *"]  # 2pm UTC = ~9am ET / 6am PT daily
+
+[vars]
+POSTHOG_HOST = "https://z.realseriousbusiness.com"
+POSTHOG_PROJECT_ID = "337155"
+EMAIL_TO = "hello@realseriousbusiness.com"
+EMAIL_FROM = "digest@emails.realseriousbusiness.com"
