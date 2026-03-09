@@ -14,8 +14,7 @@ She was slicing the breakfast ham when the windows went white.
 
 Not lightning. She'd lived in Ohio her whole life; she knew lightning. This was *sustained*. A white that didn't stop, that pressed through the glass like something outside had decided to become the sun but hadn't quite figured out the scale yet. The ham knife hit the cutting board and Carol walked to the front door on pure animal instinct, the kind that bypasses the part of your brain that would sensibly advise you to *not*.
 
-![Every window in Carol's Diner blazed with a white that wasn't lightning and didn't stop.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/03a27e74-3eba-4a1b-8f3b-84967238c509/final-1773007746479.webp)
-*Every window in Carol's Diner blazed with a white that wasn't lightning and didn't stop.*
+![Every window in Carol's Diner blazed with a white that wasn't lightning and didn't stop\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/03a27e74-3eba-4a1b-8f3b-84967238c509/final-1773007746479.webp "Every window in Carol's Diner blazed with a white that wasn't lightning and didn't stop.")
 
 She opened the door.
 
@@ -27,8 +26,7 @@ The military showed up about forty minutes later, which, honestly, good response
 
 She made six full pots. She charged them.
 
-![They cordoned off Route 30 and asked if she could start a fresh pot.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/ac5126a5-97ff-4a8f-b96f-9a08acfd4025/edited-1773008820344.webp)
-*They cordoned off Route 30 and asked if she could start a fresh pot.*
+![They cordoned off Route 30 and asked if she could start a fresh pot\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/ac5126a5-97ff-4a8f-b96f-9a08acfd4025/edited-1773008820344.webp "They cordoned off Route 30 and asked if she could start a fresh pot.")
 
 By 7 AM her phone was producing a sound she'd never heard before, which was the sound of approximately four hundred text messages arriving in ninety seconds. Her daughter in Columbus. Her sister in Dayton. A cousin she hadn't spoken to since 2019. A group chat for the First Methodist Church of Millfield that had previously been used only to organize the spring potluck now contained 74 new messages and someone had typed, in all caps, REVELATION 19:11 followed by three fire emojis.
 
@@ -36,8 +34,7 @@ Twitter — she still called it Twitter — had opinions. So many opinions. The 
 
 Good, she thought. Good, the markets are pausing. The markets should take a beat here.
 
-![Her phone hadn't stopped buzzing, and someone in the First Methodist group chat had found the fire emoji.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/6515b329-7882-4be6-93e1-7d2c2944a5d4/final-1773007828164.webp)
-*Her phone hadn't stopped buzzing, and someone in the First Methodist group chat had found the fire emoji.*
+![Her phone hadn't stopped buzzing, and someone in the First Methodist group chat had found the fire emoji\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/6515b329-7882-4be6-93e1-7d2c2944a5d4/final-1773007828164.webp "Her phone hadn't stopped buzzing, and someone in the First Methodist group chat had found the fire emoji.")
 
 She refilled the soldiers' mugs. She sliced a pie — peach, the Wednesday pie, though she wasn't sure Wednesday was coming in any normal sense — and stood at the window and looked out at the thing in the sky, which had not moved, and did not look like it was planning to.
 
@@ -51,8 +48,7 @@ The coffee machine beeped. Ready for pot number seven.
 
 "Yeah," said Carol, to nobody in particular. "Same."
 
-![Pot number seven. The cross above the door. A spacecraft the size of a county.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/d03fef0b-923b-4bc7-adf8-2590824fb0dc/final-1773007888502.webp)
-*Pot number seven. The cross above the door. A spacecraft the size of a county.*
+![Pot number seven\. The cross above the door\. A spacecraft the size of a county\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/d03fef0b-923b-4bc7-adf8-2590824fb0dc/final-1773007888502.webp "Pot number seven. The cross above the door. A spacecraft the size of a county.")
 
 ## The Question Nobody Was Ready For
 
@@ -60,15 +56,13 @@ Here's the thing about Carol's crisis, standing at that window with pot number s
 
 And the answer — annoyingly, fascinatingly — is different for every one of them.
 
-![Four traditions, four rooms, one light in the sky — and nobody has a good answer yet.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/a7338030-e257-4ede-8f87-68671de56a7b/final-1773007944766.webp)
-*Four traditions, four rooms, one light in the sky — and nobody has a good answer yet.*
+![Four traditions, four rooms, one light in the sky — and nobody has a good answer yet\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/a7338030-e257-4ede-8f87-68671de56a7b/final-1773007944766.webp "Four traditions, four rooms, one light in the sky — and nobody has a good answer yet.")
 
 Because confirmed extraterrestrial intelligence doesn't just poke science. Science, honestly, would be fine. Physicists would be *thrilled*. Science has been half-expecting this for decades; they'd have a press conference ready in six hours and a peer-reviewed paper draft by Thursday. No, the entity that really takes the hit here is the foundational assumption buried inside almost every major religious tradition on Earth: that *we* are the point.
 
 Not "we" like all carbon-based life. "We" like *humans specifically*. Made in God's image. The crown of creation. The species for whom the entire universe — all 93 billion light-years of it — was apparently constructed as a backdrop. The theological term for this is anthropocentrism, and it is, depending on your tradition, either a core doctrine, a reasonable inference, or something your scripture strongly implies without quite spelling out. Either way, it's doing a LOT of heavy lifting in the world's major religions, and it does not survive Tuesday morning in Millfield, Ohio, without taking some serious structural damage.
 
-![Ninety-three billion light-years of backdrop, all apparently pointing here.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/1007e364-46f0-476a-aadb-5ff2d4d968b2/final-1773007903771.webp)
-*Ninety-three billion light-years of backdrop, all apparently pointing here.*
+![Ninety\-three billion light\-years of backdrop, all apparently pointing here\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/1007e364-46f0-476a-aadb-5ff2d4d968b2/final-1773007903771.webp "Ninety-three billion light-years of backdrop, all apparently pointing here.")
 
 This has happened before, by the way. The Catholic Church spent a good stretch of the 1600s being very upset about heliocentrism, because putting the sun at the center of the solar system implied the Earth wasn't cosmically special, which implied *we* weren't cosmically special, which was a theological problem with Galileo's name on it. \[27] Then came Darwin, and the whole process repeated with extra anguish. Both times, the institutions initially resisted, then reinterpreted, then quietly updated the brochure. The facts won and the theology adapted, like it always does, just slowly enough to be embarrassing. \[28]
 
@@ -76,10 +70,9 @@ Alien contact would be Galileo times a thousand, wearing a spacesuit, hovering o
 
 The question isn't whether the world's religions would survive it. Most of them probably would, in some form. Institutions are stubborn; they have a long history of outlasting the things that were supposed to kill them. The question is *how* each tradition would metabolize the shock: which ones bend, which ones fracture, which ones look at the spacecraft and say, with genuine calm, "yes, we knew about this." \[16]
 
-![The debate is heated; the spacecraft outside is not in a hurry.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/03c400f4-c312-46de-a316-ef831770344e/final-1773010060469.webp)
-*The debate is heated; the spacecraft outside is not in a hurry.*
+![The debate is heated; the spacecraft outside is not in a hurry\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/03c400f4-c312-46de-a316-ef831770344e/final-1773010060469.webp "The debate is heated; the spacecraft outside is not in a hurry.")
 
-Some would scramble. Some would surprise you. And a few billion people who don't fit neatly into any existing tradition might do something else entirely: something new, something strange, something that starts as a group chat and ends up with its own hymns.
+Some would scramble. Some would surprise you. And a few billion people who don't fit neatly into any existing tradition might do something else entirely — something new, something strange, something that starts as a group chat and ends up with its own hymns.
 
 Let's go through it.
 
@@ -91,8 +84,7 @@ The whole architecture of Christian salvation theology — original sin, the Inc
 
 Then the ship lands in Ohio.
 
-![The Book of Hours did not have a chapter for this.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/cc7806af-7550-4a12-aa83-eb4be10cc7cd/final-1773010005257.webp)
-*The Book of Hours did not have a chapter for this.*
+![The Book of Hours did not have a chapter for this\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/cc7806af-7550-4a12-aa83-eb4be10cc7cd/final-1773010005257.webp "The Book of Hours did not have a chapter for this.")
 
 Here's what makes this genuinely interesting rather than just a gotcha: the question isn't whether God exists, or whether Jesus was real. Those are articles of faith that no spacecraft can technically disprove. The question is much more specific and much more thorny. It's this: *did Adam's fall apply to them?*
 
@@ -106,8 +98,7 @@ Because if the aliens *have* rational souls. How you'd test for this is anyone's
 
 Some theologians think yes, that's fine, that's a coherent idea. \[32] Others find this deeply uncomfortable, because it seems to undercut the "once for all" finality that the New Testament goes out of its way to emphasize. \[33] Nobody has a clean answer. Notably, nobody had to have a clean answer until about thirty seconds ago.
 
-![The Vatican has an observatory, a chief astronomer, and apparently a baptism policy — just in case.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/2d8d9497-678f-48a0-8785-6ecf2933549a/final-1773010130583.webp)
-*The Vatican has an observatory, a chief astronomer, and apparently a baptism policy — just in case.*
+![The Vatican has an observatory, a chief astronomer, and apparently a baptism policy — just in case\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/2d8d9497-678f-48a0-8785-6ecf2933549a/final-1773010130583.webp "The Vatican has an observatory, a chief astronomer, and apparently a baptism policy — just in case.")
 
 Now here's where it gets genuinely surprising, because the Vatican has actually engaged this question; not after the landing, but years before it. Brother Guy Consolmagno, the Vatican's chief astronomer (which is a job that exists and is not a bit), said publicly that he would baptize an extraterrestrial if it asked. \[38] \[39] Fr. José Gabriel Funes, a former Vatican Observatory director, gave an interview in which he said aliens could exist and even be closer to God than humans are; that the universe being full of other beings didn't threaten his faith at all. \[25] Pope Francis, in his cheerfully chaotic way, made rhetorical remarks about baptizing Martians if they came to him requesting it. \[40]
 
@@ -115,8 +106,7 @@ These aren't fringe positions. These are people inside the institution doing gen
 
 The evangelical wing of Christianity has its own version of this headache, and it's arguably worse. The Great Commission, "go and make disciples of *all nations*", has typically been understood as: all human nations. But if you believe aliens have souls, and souls can be lost, and Christ is the only way, then the logic of missional theology doesn't stop at the atmosphere. \[34] You are, technically, obligated to evangelize them. \[43] Picture the planning meeting. Picture the missions committee. Picture the budget discussion.
 
-![The missions committee will need a longer piece of string.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/01f858a9-e7ee-4090-bb03-53a9542e81b9/final-1773010110300.webp)
-*The missions committee will need a longer piece of string.*
+![The missions committee will need a longer piece of string\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/01f858a9-e7ee-4090-bb03-53a9542e81b9/final-1773010110300.webp "The missions committee will need a longer piece of string.")
 
 The satirical punchline writes itself, but the underlying theological tension is real: a salvation framework designed for one world has to either expand to cover others, or admit that its scope was always more local than it claimed.
 
@@ -124,8 +114,7 @@ And Catholic theology has a long history of expanding rather than contracting. H
 
 The baptism question, though, is going to need a faster answer. Because if a seven-foot bioluminescent being walks up to a priest in Ohio and says, politely, that it would like to receive the sacrament — Brother Consolmagno already said yes. \[38]
 
-![The shadow arrives before the question does.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/aa688032-5a64-4a6a-bbb9-a53c349db661/final-1773011290199.webp)
-*The shadow arrives before the question does.*
+![The shadow arrives before the question does\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/aa688032-5a64-4a6a-bbb9-a53c349db661/final-1773011290199.webp "The shadow arrives before the question does.")
 
 The machine is already moving. It just needs the alien to ask.
 
@@ -133,8 +122,7 @@ The machine is already moving. It just needs the alien to ask.
 
 Islam has a structural advantage over Christianity when it comes to alien contact, and that advantage is baked right into the opening line of the Quran. *Alhamdulillahi rabb il-'alamin* — "Praise be to God, Lord of the Worlds." Plural. Worlds. Not "Lord of Earth." Not "Lord of the One Place Where Rational Beings Live." The Quran opens with a scope claim that is, by any reading, cosmically ambitious. \[46]
 
-![The Quran's opening line doesn't say 'Lord of Earth' — it says 'Lord of the Worlds,' plural, and that word choice turns out to matter enormously.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/885691b2-bf9a-45d0-b440-4162d7ddcf25/final-1773010199606.webp)
-*The Quran's opening line doesn't say 'Lord of Earth' — it says 'Lord of the Worlds,' plural, and that word choice turns out to matter enormously.*
+![The Quran's opening line doesn't say 'Lord of Earth' — it says 'Lord of the Worlds,' plural, and that word choice turns out to matter enormously\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/885691b2-bf9a-45d0-b440-4162d7ddcf25/final-1773010199606.webp "The Quran's opening line doesn't say 'Lord of Earth' — it says 'Lord of the Worlds,' plural, and that word choice turns out to matter enormously.")
 
 Then there's Surah 42:29, which many commentators read as a direct statement that God scattered living creatures across the heavens and the earth. \[44] \[45] The Arabic word *daabah*, used for those creatures, typically means something that moves: animals, beings, things that walk around and do stuff. \[10] There is genuine scholarly debate about exactly what this implies, but the point is that the Quran at least *leaves the door open* in a way that, say, a text centered entirely on one nation's covenant with God does not.
 
@@ -150,8 +138,7 @@ The logistics problem is somehow even better than the theology problem.
 
 When Malaysian astronaut Sheikh Muszaphar Shukor went to the International Space Station in 2007, it was Ramadan. He needed to fast, pray five times a day facing Mecca, and generally maintain Islamic practice while orbiting Earth at 17,500 miles per hour, crossing a sunrise every 90 minutes. \[49] \[58] Malaysia's National Fatwa Council issued a 12-page guide covering prayer times, the direction of Mecca, and how to handle fasting when "sunset" happens sixteen times a day. The pragmatic conclusion: do your best, face Earth generally, use your judgment. \[50]
 
-![When Malaysia's first astronaut reached the ISS during Ramadan, scholars had to figure out where exactly Mecca was from 250 miles straight up.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/3b2b5529-603a-4344-b004-4fe61db4bff4/final-1773010255758.webp)
-*When Malaysia's first astronaut reached the ISS during Ramadan, scholars had to figure out where exactly Mecca was from 250 miles straight up.*
+![When Malaysia's first astronaut reached the ISS during Ramadan, scholars had to figure out where exactly Mecca was from 250 miles straight up\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/3b2b5529-603a-4344-b004-4fe61db4bff4/final-1773010255758.webp "When Malaysia's first astronaut reached the ISS during Ramadan, scholars had to figure out where exactly Mecca was from 250 miles straight up.")
 
 This is actually a beautiful example of how Islamic jurisprudence works — a living legal tradition that encounters new situations and reasons through them, carefully, using existing principles. The *fiqh* scholars didn't panic. They sat down, applied the methodology, and produced a ruling. The tradition has adaptive muscles.
 
@@ -169,8 +156,7 @@ Christianity has a universal salvation mandate: every soul, everywhere, needs sa
 
 Aliens would almost certainly fall into the "not our legal problem" category. They didn't receive the Torah at Sinai. They're not party to the covenant. A rabbi looking at a seven-foot bioluminescent extraterrestrial would not, theologically speaking, be obligated to hand them a Talmud and get them started on tractate Berakhot. They might, out of interest. But it's not required.
 
-![The rabbi reviewed the case, consulted the relevant tractates, and concluded the seven-foot bioluminescent visitor was, theologically speaking, not his department.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/85364e07-f12a-451f-8772-e8d250c1c191/final-1773010237272.webp)
-*The rabbi reviewed the case, consulted the relevant tractates, and concluded the seven-foot bioluminescent visitor was, theologically speaking, not his department.*
+![The rabbi reviewed the case, consulted the relevant tractates, and concluded the seven\-foot bioluminescent visitor was, theologically speaking, not his department\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/85364e07-f12a-451f-8772-e8d250c1c191/final-1773010237272.webp "The rabbi reviewed the case, consulted the relevant tractates, and concluded the seven-foot bioluminescent visitor was, theologically speaking, not his department.")
 
 This isn't dismissiveness, it's actually a sophisticated theological position. The Jewish tradition has spent millennia being quite clear about what it is and what it isn't. It is a particular covenant, a particular people, a particular set of obligations. It does not require the universe to revolve around it in the way that universalist traditions do. Alien life arriving would require Christians and Muslims to do significant theological restructuring. Judaism gets to say: interesting, tell us more, but also this doesn't technically change our situation.
 
@@ -178,8 +164,7 @@ The rabbis have already been arguing about this, because of course they have. Th
 
 The Lubavitcher Rebbe — Menachem Mendel Schneerson, one of the most influential Jewish figures of the 20th century — went further and actively encouraged the scientific search for extraterrestrial life, arguing that denying the possibility "limits what God can do." \[51] \[53] That's a remarkably open position, and it comes from one of the most traditionally observant streams of Judaism.
 
-![The Lubavitcher Rebbe argued that denying alien life 'limits what God can do' — a position that turns out to be more compatible with radio telescopes than you might expect.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/da536970-1373-45e6-a169-b6eb0bc7c3d2/edited-1773012486202.webp)
-*The Lubavitcher Rebbe argued that denying alien life 'limits what God can do' — a position that turns out to be more compatible with radio telescopes than you might expect.*
+![The Lubavitcher Rebbe argued that denying alien life 'limits what God can do' — a position that turns out to be more compatible with radio telescopes than you might expect\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/da536970-1373-45e6-a169-b6eb0bc7c3d2/edited-1773012486202.webp "The Lubavitcher Rebbe argued that denying alien life 'limits what God can do' — a position that turns out to be more compatible with radio telescopes than you might expect.")
 
 The practical upshot is this: if aliens land, a significant number of rabbis will want to immediately figure out whether the aliens are conscious, whether they have moral agency, and whether they might be subject to Noahide law. Then they will argue about it, vigorously, for several decades, while continuing to observe Shabbat, because Shabbat does not pause for extraterrestrial contact. The disagreements will be recorded in detail. The detail will spawn further disagreements. This is how the tradition works, and it works pretty well.
 
@@ -193,8 +178,7 @@ After Christianity's soul crisis, Islam's qibla geometry problem, and Judaism's 
 
 Not metaphorically. Not "with some creative reinterpretation." Hindu cosmology is, structurally speaking, an alien contact story that's been running for several thousand years without the aliens needing to show up to make it work.
 
-![Fourteen realms, populated by beings that aren't human — Hindu cosmology built the infrastructure long before the question was fashionable.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/8ecdc56e-47eb-458f-8b6d-46afc4e57a7b/final-1773010310727.webp)
-*Fourteen realms, populated by beings that aren't human — Hindu cosmology built the infrastructure long before the question was fashionable.*
+![Fourteen realms, populated by beings that aren't human — Hindu cosmology built the infrastructure long before the question was fashionable\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/8ecdc56e-47eb-458f-8b6d-46afc4e57a7b/final-1773010310727.webp "Fourteen realms, populated by beings that aren't human — Hindu cosmology built the infrastructure long before the question was fashionable.")
 
 Start with the basic architecture. Hindu cosmology describes fourteen *lokas* — distinct realms of existence, seven above the earth and seven below, each populated by different classes of beings. \[67] \[69] Not humans. Not variations on humans. *Devas* (celestial beings with capabilities that would make a NASA engineer weep), *asuras* (their adversaries, equally powerful), *nagas* (serpentine intelligences), *gandharvas*, *apsaras*, *rishis* who have transcended ordinary human limits entirely. These are not angels in the Christian sense, doing administrative tasks for God. They have societies. Politics. Wars. Grudges that span cosmic cycles. \[68]
 
@@ -202,8 +186,7 @@ The word "extraterrestrial" means, literally, beyond Earth. Hinduism has been ca
 
 Then there's the *avatar* doctrine, which is either the most theologically useful or most theologically terrifying idea on this list depending on your perspective. Vishnu, the Preserver, takes form in the world whenever the cosmic balance tips badly enough. Some of those forms are human. Some are decidedly not: Matsya the fish, Kurma the tortoise, Varaha the boar. \[60] The doctrine establishes, at its foundation, that divinity can manifest in non-human, non-terrestrial forms. An alien being that arrives claiming some form of divine expression would not be automatically incompatible with the framework. A Hindu theologian wouldn't necessarily believe them, but they'd have a conceptual drawer to put the idea in. Every other religion we've covered is frantically building that drawer from scratch.
 
-![Fish, tortoise, boar — the avatar doctrine was never especially committed to the idea that divinity looks like us.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/c52552a2-6bf1-4a63-b4d6-695d61f379ff/final-1773012824907.webp)
-*Fish, tortoise, boar — the avatar doctrine was never especially committed to the idea that divinity looks like us.*
+![Fish, tortoise, boar — the avatar doctrine was never especially committed to the idea that divinity looks like us\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/c52552a2-6bf1-4a63-b4d6-695d61f379ff/final-1773012824907.webp "Fish, tortoise, boar — the avatar doctrine was never especially committed to the idea that divinity looks like us.")
 
 And if the lokas and avatars weren't enough, the Puranic tradition describes not just multiple worlds but multiple *universes*, each with its own Brahma, running on timescales that make the Big Bang look like a recent development. \[59] \[60] Some commentators have compared this to the modern multiverse hypothesis. That comparison is probably doing a lot of work, and you shouldn't read too much cosmological precision into ancient mythological texts. But the *structural instinct* — that existence is vast, cyclical, populated, and not arranged primarily for the convenience of one species on one planet — is genuinely baked in there. The universe being full of other intelligent life is not a crisis for Hindu cosmology. It's practically a confirmation of prior expectations.
 
@@ -219,8 +202,7 @@ Buddhism doesn't require a creator God. It doesn't have a covenant, a revelation
 
 This makes Buddhism weirdly portable.
 
-![Buddhism mapped consciousness across realms long before it needed to account for what's inside a grey alien's skull.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/49c57e2e-bfbe-4244-8d3a-157d2dc80b0d/final-1773013095144.webp)
-*Buddhism mapped consciousness across realms long before it needed to account for what's inside a grey alien's skull.*
+![Buddhism mapped consciousness across realms long before it needed to account for what's inside a grey alien's skull\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/49c57e2e-bfbe-4244-8d3a-157d2dc80b0d/final-1773013095144.webp "Buddhism mapped consciousness across realms long before it needed to account for what's inside a grey alien's skull.")
 
 Buddhist cosmology already includes populated multiple world-systems, and each of those worlds can have its own Buddha: an awakened being who has understood the nature of mind and suffering and teaches others to do the same. \[62] \[65] The canonical texts describe *brahma* realms, beings of pure form, and "formless" realms where consciousness exists without any physical substrate at all. \[62] \[65] Whatever the aliens are made of is, in Buddhist terms, largely beside the point. The relevant question is whether they have minds that cling, experience dukkha (suffering), and are capable of awakening to that process.
 
@@ -228,8 +210,7 @@ The Dalai Lama, who has been asked about extraterrestrials on multiple occasions
 
 The doctrine of *anatta*, or "no fixed self", means Buddhism was already skeptical of the idea that there's a permanent, essential human soul to be uniquely threatened by alien existence. And the rebirth cosmology raises a genuinely strange question: could some of the aliens be rebirths of beings who were previously human? Or vice versa? Are some of those arriving spacecraft carrying beings who were, several lifetimes ago, someone's grandmother? \[62] The texts don't give a tidy answer. But the framework at least *allows* the question without immediately short-circuiting. \[63]
 
-![Buddhism never specified that the beings worth helping had to be human.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/946a84fe-3d27-4604-88b5-e05c406bb6c1/final-1773010445078.webp)
-*Buddhism never specified that the beings worth helping had to be human.*
+![Buddhism never specified that the beings worth helping had to be human\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/946a84fe-3d27-4604-88b5-e05c406bb6c1/final-1773010445078.webp "Buddhism never specified that the beings worth helping had to be human.")
 
 What Buddhism doesn't have is a cosmological EGO problem. No doctrine of humans as uniquely central, uniquely salvageable, uniquely worthy of divine attention. If the aliens are conscious and suffering, the compassionate response is the same response you'd give a human: try to help them understand the source of that suffering and the path out of it. The *Bodhisattva* ideal, the commitment to remain engaged with existence until all sentient beings are liberated, doesn't specify "all *human* sentient beings." It just says all of them.
 
@@ -245,8 +226,7 @@ But history has a pattern, and the pattern is this: when contact with something 
 
 After World War Two, allied forces withdrew from several Melanesian islands, taking their supplies, their aircraft, and their inexplicable abundance with them. The islanders who had watched cargo fall from the sky for years responded by building their own runways out of bamboo, constructing wooden headsets, and marching in formation with wooden rifles — ritual imitations of what they'd witnessed, performed in the hope of summoning the cargo back. \[75] \[77] The John Frum movement on Tanna, Vanuatu, blended these imitation-military rituals with revived traditional practices and a millenarian promise: abundance will return, if the right things are done correctly. \[75] \[76] \[83] Decades later, it persists as a genuine cultural and political force on the island.
 
-![The bamboo headset worked about as well as you'd expect, and yet the logic behind it is completely coherent.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/ae2b646f-a48d-4b94-b01d-1a8a8eb8e2ae/edited-1773013909596.webp)
-*The bamboo headset worked about as well as you'd expect, and yet the logic behind it is completely coherent.*
+![The bamboo headset worked about as well as you'd expect, and yet the logic behind it is completely coherent\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/ae2b646f-a48d-4b94-b01d-1a8a8eb8e2ae/edited-1773013909596.webp "The bamboo headset worked about as well as you'd expect, and yet the logic behind it is completely coherent.")
 
 The mechanics are always the same. Disruptive contact. Existing frameworks break. Charismatic leader steps into the gap. New system of meaning assembles around the contact event. Rituals emerge that are partly imitation of the powerful outsiders, partly reinvention of something older, and entirely convinced of their own necessity. \[77]
 
@@ -264,8 +244,7 @@ What makes this fictional cult so instructive is how quickly it fractures. The E
 
 The video-game-as-conversion-tool detail is, honestly, the most plausible part of the whole book.
 
-![Twelve hundred hours in the Trisolaran civilization simulator and somehow you come out the other side having joined a religion.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/9c704cbb-575b-4f5d-92d4-e0ec6af3fee2/final-1773010529589.webp)
-*Twelve hundred hours in the Trisolaran civilization simulator and somehow you come out the other side having joined a religion.*
+![Twelve hundred hours in the Trisolaran civilization simulator and somehow you come out the other side having joined a religion\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/9c704cbb-575b-4f5d-92d4-e0ec6af3fee2/final-1773010529589.webp "Twelve hundred hours in the Trisolaran civilization simulator and somehow you come out the other side having joined a religion.")
 
 Because here's what an alien-contact religion would almost certainly look like, if we extrapolate the historical pattern forward with honesty:
 
@@ -275,8 +254,7 @@ The founding text is assembled from whatever information leaks out of the govern
 
 Because there are factions immediately. There are ALWAYS factions immediately. The Preparationists believe humanity must spiritually purify itself before the aliens will share their knowledge. The Surrenderists believe resistance is the sin. A smaller, quieter group called something like the Listeners believe the aliens have already been communicating with select humans for decades through means we haven't recognized yet — Listeners have a subreddit and a podcast and they are absolutely certain your sleep paralysis was not a coincidence.
 
-![By the end of the first week there were already three factions and a podcast.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/8e539e29-9b6c-4498-b210-e114e3700858/final-1773010567650.webp)
-*By the end of the first week there were already three factions and a podcast.*
+![By the end of the first week there were already three factions and a podcast\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/8e539e29-9b6c-4498-b210-e114e3700858/final-1773010567650.webp "By the end of the first week there were already three factions and a podcast.")
 
 The rituals arrive fast, because humans are ritual-making machines who cannot help themselves. There is a posture for the direction of the ship (facing away from the sun at dawn, probably, because someone will decide the geometry matters). There is a silence observed at whatever hour the ship first appeared on radar. There are dietary restrictions derived from speculation about what the aliens eat, because of course there are. There is a debate about whether the aliens should be referred to by the designation in the official government report, or by the name a seventeen-year-old in São Paulo gave them in a viral post that felt, somehow, more right.
 
@@ -284,8 +262,7 @@ The first major schism happens over whether the contact was a gift or a warning.
 
 By year three, there are temples. Not metaphorical temples. Buildings. Architecture designed to face the coordinates where the ship first appeared. Stained glass depicting the approach trajectory. Choirs developing music in frequencies speculated to resemble alien communication: pure vibration, unresolvable into melody, which the faithful find transcendent and which everyone else finds deeply unpleasant at any volume.
 
-![Year three: the blueprints have already been filed, the coordinates confirmed, the choir frequencies finalized.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/eb44c2a3-a064-4512-b7c4-12ca7578f35f/final-1773010514114.webp)
-*Year three: the blueprints have already been filed, the coordinates confirmed, the choir frequencies finalized.*
+![Year three: the blueprints have already been filed, the coordinates confirmed, the choir frequencies finalized\.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/861e9de8-4676-430a-8258-02d1aa48d853/eb44c2a3-a064-4512-b7c4-12ca7578f35f/final-1773010514114.webp "Year three: the blueprints have already been filed, the coordinates confirmed, the choir frequencies finalized.")
 
 By year ten, there are children who have grown up inside this. For whom the ship is not an event but a fact of the world, like weather, like gravity. And those children will ask the same questions children always ask: *why are we here, what does it mean, what should I do?* The new religion will answer them. It won't answer correctly, necessarily. It will answer with the particular confident warmth that religions generate when they have decided the question is settled.
 
