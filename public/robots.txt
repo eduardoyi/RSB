@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://realseriousbusiness.pages.dev/sitemap-index.xml
+Sitemap: https://realseriousbusiness.com/sitemap-index.xml
