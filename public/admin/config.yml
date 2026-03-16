@@ -18,6 +18,7 @@ collections:
     folder: src/content/posts
     create: true
     slug: "{{fields.slug}}"
+    summary: "{{title}} — {{date}}"
     sortable_fields: [date, title]
     view_filters:
       - { label: "Drafts", field: status, pattern: "draft" }
