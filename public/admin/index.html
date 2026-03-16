@@ -27,6 +27,7 @@
     [data-cms-layout="post"] {
       display: grid !important;
       grid-template-columns: minmax(0, 720px) 288px !important;
+      justify-content: center !important;
       align-items: start !important;
       max-width: none !important;
       width: 100% !important;
@@ -38,6 +39,10 @@
       grid-column: 1 !important;
       padding-right: 24px !important;
       box-sizing: border-box !important;
+    }
+
+    [data-field-name="title"] {
+      grid-row: 1 !important;
     }
 
     /* Body spans multiple rows so it aligns with the sidebar height */
@@ -59,6 +64,15 @@
       padding-left: 16px !important;
       box-sizing: border-box !important;
     }
+
+    [data-field-name="status"] { grid-row: 1 !important; }
+    [data-field-name="slug"] { grid-row: 2 !important; }
+    [data-field-name="date"] { grid-row: 3 !important; }
+    [data-field-name="description"] { grid-row: 4 !important; }
+    [data-field-name="author"] { grid-row: 5 !important; }
+    [data-field-name="featured_image"] { grid-row: 6 !important; }
+    [data-field-name="featured_image_alt"] { grid-row: 7 !important; }
+    [data-field-name="podcast_audio"] { grid-row: 8 !important; }
   </style>
 </head>
 <body>
