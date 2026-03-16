@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Content Manager — Real Serious Business</title>
   <style>
-    /* ── Ink & Slate design tokens ── */
+    /* ── Ink & Slate design tokens (shared with /admin/assets) ── */
     :root {
       --surface-base: #f8f7f5;
       --surface-card: #ffffff;
@@ -13,81 +13,20 @@
       --surface-header: #1a1a1a;
       --text-primary: #1a1a1a;
       --text-secondary: #6b6560;
-      --text-tertiary: #9b9590;
       --accent: #2a7c6f;
       --accent-hover: #1f5f55;
-      --accent-subtle: #e8f4f1;
-      --danger: #c0392b;
       --border-default: #e2e0dc;
       --radius-md: 6px;
-      --shadow-sm: 0 1px 2px rgba(0,0,0,.05);
-      --shadow-md: 0 2px 8px rgba(0,0,0,.08);
       --shadow-focus: 0 0 0 3px rgba(42,124,111,.2);
-      --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
 
-    /* ── Admin nav bar (injected via JS) ── */
-    .admin-nav {
-      background: var(--surface-header);
-      color: #fff;
-      padding: 0 20px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex-shrink: 0;
-      font-family: var(--font-sans);
-    }
-    .admin-nav .nav-monogram {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      color: rgba(255,255,255,.5);
-      margin-right: 24px;
-    }
-    .admin-nav .nav-links {
-      display: flex;
-      gap: 0;
-      height: 100%;
-    }
-    .admin-nav .nav-links a {
-      display: flex;
-      align-items: center;
-      padding: 0 16px;
-      color: rgba(255,255,255,.65);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-      height: 48px;
-      border-bottom: 2px solid transparent;
-      transition: color .15s, border-color .15s;
-    }
-    .admin-nav .nav-links a:hover { color: #fff; }
-    .admin-nav .nav-links a.active {
-      color: #fff;
-      border-bottom-color: var(--accent);
-    }
-    .admin-nav .nav-spacer { flex: 1; }
-    .admin-nav .nav-logout {
-      background: none;
-      border: 1px solid rgba(255,255,255,.2);
-      color: rgba(255,255,255,.65);
-      padding: 5px 12px;
-      border-radius: var(--radius-md);
-      font-size: 12px;
-      cursor: pointer;
-      font-family: inherit;
-      transition: color .15s, border-color .15s;
-    }
-    .admin-nav .nav-logout:hover {
-      color: #fff;
-      border-color: rgba(255,255,255,.4);
-    }
+    /* Warm background instead of default CMS gray */
+    body { background: var(--surface-base) !important; }
 
     /* ── 2-column post editor layout ── */
     [data-cms-layout="post"] {
       display: grid !important;
-      grid-template-columns: 1fr 288px !important;
+      grid-template-columns: minmax(0, 720px) 288px !important;
       align-items: start !important;
       max-width: none !important;
       width: 100% !important;
@@ -106,7 +45,8 @@
       grid-row: 2 / span 10 !important;
     }
 
-    /* Sidebar column */
+    /* Sidebar column: status + metadata fields */
+    [data-field-name="status"],
     [data-field-name="slug"],
     [data-field-name="date"],
     [data-field-name="description"],
@@ -118,23 +58,6 @@
       border-left: 1px solid var(--border-default) !important;
       padding-left: 16px !important;
       box-sizing: border-box !important;
-    }
-
-    /* ── Best-effort Decap CMS overrides ── */
-    #nc-root {
-      font-family: var(--font-sans) !important;
-    }
-    #nc-root button[class*="css-"] {
-      border-radius: var(--radius-md) !important;
-      font-family: var(--font-sans) !important;
-      transition: background .15s, border-color .15s !important;
-    }
-    #nc-root input:focus,
-    #nc-root textarea:focus,
-    #nc-root select:focus {
-      border-color: var(--accent) !important;
-      box-shadow: var(--shadow-focus) !important;
-      outline: none !important;
     }
   </style>
 </head>
@@ -189,40 +112,6 @@
     CMS.registerMediaLibrary(R2MediaLibrary);
     CMS.init();
 
-    // ── Admin nav bar injection ──────────────────────────────────────────────
-    // Waits for #nc-root to populate, then injects a nav bar before it
-    // to match the assets.astro header for visual cohesion.
-    (function () {
-      var navInjected = false;
-
-      function injectNav() {
-        if (navInjected) return;
-        var ncRoot = document.getElementById('nc-root');
-        if (!ncRoot || !ncRoot.firstChild) return;
-        navInjected = true;
-
-        var nav = document.createElement('div');
-        nav.className = 'admin-nav';
-        nav.innerHTML =
-          '<span class="nav-monogram">RSB</span>' +
-          '<div class="nav-links">' +
-            '<a href="/admin/assets">Media</a>' +
-            '<a href="/admin/" class="active">Content</a>' +
-          '</div>' +
-          '<div class="nav-spacer"></div>' +
-          '<button class="nav-logout" id="cms-logout-btn">Log out</button>';
-        ncRoot.parentNode.insertBefore(nav, ncRoot);
-
-        document.getElementById('cms-logout-btn').addEventListener('click', function () {
-          localStorage.removeItem('rsb:admin-token');
-          location.reload();
-        });
-      }
-
-      var navObserver = new MutationObserver(injectNav);
-      navObserver.observe(document.body, { childList: true, subtree: true });
-    })();
-
     // 2-column post editor layout via MutationObserver.
     //
     // Netlify CMS v2 uses Emotion CSS-in-JS so class names are unstable hashes.
@@ -230,7 +119,7 @@
     // (the field list container), then walk up from each label to its direct
     // child of that container. No hardcoded depth assumptions.
     (function () {
-      var POST_FIELDS = ['title', 'body', 'slug', 'date', 'description', 'author',
+      var POST_FIELDS = ['status', 'title', 'body', 'slug', 'date', 'description', 'author',
                          'featured_image', 'featured_image_alt', 'podcast_audio'];
       var layoutApplied = false;
       var prevHref = location.href;
