@@ -20,10 +20,20 @@ collections:
     slug: "{{fields.slug}}"
     sortable_fields: [date, title]
     view_filters:
+      - { label: "Drafts", field: status, pattern: "draft" }
+      - { label: "Published", field: status, pattern: "published" }
       - { label: "Recent", field: date, pattern: "202" }
     editor:
       preview: false
     fields:
+      - label: Status
+        name: status
+        widget: select
+        options:
+          - { label: Draft, value: draft }
+          - { label: Published, value: published }
+        default: draft
+        hint: "Draft posts stay out of the public site, RSS feed, and search indexing until you switch them to Published."
       - { label: Title, name: title, widget: string }
       - { label: Body, name: body, widget: markdown }
       - { label: Slug, name: slug, widget: string, hint: "URL-safe identifier used as the post URL (e.g. my-post-title)" }

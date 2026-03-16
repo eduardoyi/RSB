@@ -34,7 +34,7 @@ async function queryPostHog(env: Env, query: object): Promise<QueryResponse> {
 }
 
 async function getDigestData(env: Env) {
-	const [visitors, pages, referrers, browsers] = await Promise.all([
+	const [visitors, pages, referrers, browsers, countries, cities] = await Promise.all([
 		queryPostHog(env, {
 			kind: "InsightVizNode",
 			source: {
@@ -77,6 +77,26 @@ async function getDigestData(env: Env) {
 				trendsFilter: { display: "ActionsBarValue" },
 			},
 		}),
+		queryPostHog(env, {
+			kind: "InsightVizNode",
+			source: {
+				kind: "TrendsQuery",
+				series: [{ kind: "EventsNode", event: "$pageview", custom_name: "Pageviews", math: "total" }],
+				breakdownFilter: { breakdown: "$geoip_country_name", breakdown_type: "event" },
+				dateRange: { date_from: "-1d", date_to: "-1d" },
+				trendsFilter: { display: "ActionsBarValue" },
+			},
+		}),
+		queryPostHog(env, {
+			kind: "InsightVizNode",
+			source: {
+				kind: "TrendsQuery",
+				series: [{ kind: "EventsNode", event: "$pageview", custom_name: "Pageviews", math: "total" }],
+				breakdownFilter: { breakdown: "$geoip_city_name", breakdown_type: "event" },
+				dateRange: { date_from: "-1d", date_to: "-1d" },
+				trendsFilter: { display: "ActionsBarValue" },
+			},
+		}),
 	]);
 
 	const pageviews = visitors.results[0]?.aggregated_value ?? visitors.results[0]?.data?.reduce((a, b) => a + b, 0) ?? 0;
@@ -97,7 +117,17 @@ async function getDigestData(env: Env) {
 		.slice(0, 5)
 		.map((r) => ({ browser: r.breakdown_value ?? r.label, views: r.aggregated_value ?? 0 }));
 
-	return { pageviews, uniques, topPages, topReferrers, browserList };
+	const topCountries = countries.results
+		.sort((a, b) => (b.aggregated_value ?? 0) - (a.aggregated_value ?? 0))
+		.slice(0, 10)
+		.map((r) => ({ country: r.breakdown_value ?? r.label, views: r.aggregated_value ?? 0 }));
+
+	const topCities = cities.results
+		.sort((a, b) => (b.aggregated_value ?? 0) - (a.aggregated_value ?? 0))
+		.slice(0, 10)
+		.map((r) => ({ city: r.breakdown_value ?? r.label, views: r.aggregated_value ?? 0 }));
+
+	return { pageviews, uniques, topPages, topReferrers, browserList, topCountries, topCities };
 }
 
 function formatDate(d: Date): string {
@@ -118,6 +148,14 @@ function buildEmail(data: Awaited<ReturnType<typeof getDigestData>>): { subject:
 
 	const browserRows = data.browserList.length > 0
 		? data.browserList.map((b) => `<tr><td style="padding:4px 12px 4px 0">${b.browser}</td><td style="padding:4px 0;text-align:right">${b.views}</td></tr>`).join("")
+		: '<tr><td style="padding:4px 0;color:#888">No data</td></tr>';
+
+	const countryRows = data.topCountries.length > 0
+		? data.topCountries.map((c) => `<tr><td style="padding:4px 12px 4px 0">${c.country}</td><td style="padding:4px 0;text-align:right">${c.views}</td></tr>`).join("")
+		: '<tr><td style="padding:4px 0;color:#888">No data</td></tr>';
+
+	const cityRows = data.topCities.length > 0
+		? data.topCities.map((c) => `<tr><td style="padding:4px 12px 4px 0">${c.city}</td><td style="padding:4px 0;text-align:right">${c.views}</td></tr>`).join("")
 		: '<tr><td style="padding:4px 0;color:#888">No data</td></tr>';
 
 	const html = `
@@ -144,6 +182,12 @@ function buildEmail(data: Awaited<ReturnType<typeof getDigestData>>): { subject:
 
   <h3 style="margin:0 0 8px;border-bottom:1px solid #eee;padding-bottom:4px">Browsers</h3>
   <table style="width:100%;margin-bottom:24px;font-size:14px">${browserRows}</table>
+
+  <h3 style="margin:0 0 8px;border-bottom:1px solid #eee;padding-bottom:4px">Countries</h3>
+  <table style="width:100%;margin-bottom:24px;font-size:14px">${countryRows}</table>
+
+  <h3 style="margin:0 0 8px;border-bottom:1px solid #eee;padding-bottom:4px">Cities</h3>
+  <table style="width:100%;margin-bottom:24px;font-size:14px">${cityRows}</table>
 
   <p style="font-size:12px;color:#999;margin-top:32px">Sent by rsb-digest worker</p>
 </div>`;

@@ -1,4 +1,5 @@
 ---
+status: published
 slug: permanent-underclass
 title: The Normie Handbook for Escaping the Permanent Underclass
 date: 2026-03-01T15:29:26.733Z

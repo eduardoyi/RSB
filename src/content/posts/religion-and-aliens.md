@@ -1,4 +1,5 @@
 ---
+status: published
 title: What Happens to God When the Ship Lands
 slug: religion-and-aliens
 date: 2026-03-09T00:05:21.738Z

@@ -1,4 +1,5 @@
 ---
+status: published
 title: The Inverted U of Common Sense
 slug: common-sense
 date: 2026-03-02T22:40:00.694Z

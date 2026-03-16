@@ -132,7 +132,17 @@ function cloudflareRedirects() {
 export default defineConfig({
   site: 'https://realseriousbusiness.com',
   output: 'static',
-  integrations: [sitemap(), cloudflareRedirects()],
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        !page.includes('/admin/') &&
+        !page.includes('/shutdown') &&
+        !page.includes('/ms-dos') &&
+        !page.includes('/paint') &&
+        !page.includes('/games/'),
+    }),
+    cloudflareRedirects(),
+  ],
   markdown: {
     syntaxHighlight: false,
     rehypePlugins: [rehypeLazyImages, rehypeFigure],

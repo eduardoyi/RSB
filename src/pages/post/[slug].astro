@@ -3,11 +3,12 @@ import DesktopLayout from '../../layouts/DesktopLayout.astro';
 import Window from '../../components/Window.astro';
 import Word97Toolbar from '../../components/Word97Toolbar.astro';
 import PostAudioPlayer from '../../components/PostAudioPlayer.astro';
-import { getCollection, render } from 'astro:content';
+import { render } from 'astro:content';
+import { getPublishedPosts } from '../../utils/posts';
 import '../../styles/post.css';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('posts');
+  const posts = await getPublishedPosts();
   return posts.map((post) => ({
     params: { slug: post.data.slug || post.id },
     props: { post },

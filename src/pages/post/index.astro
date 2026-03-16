@@ -1,12 +1,10 @@
 ---
 import DesktopLayout from '../../layouts/DesktopLayout.astro';
 import Window from '../../components/Window.astro';
-import { getCollection } from 'astro:content';
+import { getPublishedPosts } from '../../utils/posts';
 import '../../styles/menubar.css';
 
-const posts = (await getCollection('posts')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const posts = await getPublishedPosts();
 ---
 <DesktopLayout title="My Documents — Real Serious Business">
   <Window
