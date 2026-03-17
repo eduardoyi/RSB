@@ -9,3 +9,4 @@ bucket_name = "rsb-media"
 [vars]
 ALLOWED_ORIGIN = "https://realseriousbusiness.com"
 PUBLIC_R2_URL = "https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev"
+LEGACY_PUBLIC_R2_URLS = "https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev"

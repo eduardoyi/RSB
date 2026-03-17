@@ -1,4 +1,3 @@
-# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms@0.104.3/schema/sveltia-cms.json
 backend:
   name: github
   repo: eduardoyi/RSB
@@ -6,16 +5,10 @@ backend:
   base_url: https://rsb-oauth.eduardoyi.workers.dev
   auth_endpoint: auth
 
-media_library:
-  name: cloudflare_r2
+local_backend: true
 
-media_libraries:
-  cloudflare_r2:
-    bucket: rsb-media
-    account_id: 5214720bdfaad708ec6cbf39c4725c92
-    public_url: https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev
-    prefix: cms-uploads/
-    access_key_id: 57add91debe30bd52c3ab6009a2d5a83
+media_library:
+  name: r2
 
 locale: en
 
@@ -54,10 +47,7 @@ collections:
         name: podcast_audio
         widget: file
         required: false
-        accept: audio/*
-        media_library:
-          name: cloudflare_r2
-        hint: "Upload or select an audio file from Cloudflare R2."
+        hint: "Select the audio file from the R2 media picker"
 
   - name: programs
     label: Programs

@@ -6,6 +6,10 @@
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
   },
+  "dependencies": {
+    "mdast-util-from-markdown": "^2.0.3",
+    "unist-util-visit": "^5.1.0"
+  },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250224.0",
     "wrangler": "^3.114.4"

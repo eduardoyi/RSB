@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager — Real Serious Business</title>
+  <style>
+    /* ── Ink & Slate design tokens (shared with /admin-legacy/assets) ── */
+    :root {
+      --surface-base: #f8f7f5;
+      --surface-card: #ffffff;
+      --surface-sunken: #f0efec;
+      --surface-header: #1a1a1a;
+      --text-primary: #1a1a1a;
+      --text-secondary: #6b6560;
+      --accent: #2a7c6f;
+      --accent-hover: #1f5f55;
+      --border-default: #e2e0dc;
+      --radius-md: 6px;
+      --shadow-focus: 0 0 0 3px rgba(42,124,111,.2);
+    }
+
+    /* Warm background instead of default CMS gray */
+    body { background: var(--surface-base) !important; }
+
+    /* ── 2-column post editor layout ── */
+    [data-cms-layout="post"] {
+      display: grid !important;
+      grid-template-columns: minmax(0, 720px) 288px !important;
+      justify-content: center !important;
+      align-items: start !important;
+      max-width: none !important;
+      width: 100% !important;
+    }
+
+    /* Main column: title + body */
+    [data-field-name="title"],
+    [data-field-name="body"] {
+      grid-column: 1 !important;
+      padding-right: 24px !important;
+      box-sizing: border-box !important;
+    }
+
+    [data-field-name="title"] {
+      grid-row: 1 !important;
+    }
+
+    /* Body spans multiple rows so it aligns with the sidebar height */
+    [data-field-name="body"] {
+      grid-row: 2 / span 10 !important;
+    }
+
+    /* Sidebar column: status + metadata fields */
+    [data-field-name="status"],
+    [data-field-name="slug"],
+    [data-field-name="date"],
+    [data-field-name="description"],
+    [data-field-name="author"],
+    [data-field-name="featured_image"],
+    [data-field-name="featured_image_alt"],
+    [data-field-name="podcast_audio"] {
+      grid-column: 2 !important;
+      border-left: 1px solid var(--border-default) !important;
+      padding-left: 16px !important;
+      box-sizing: border-box !important;
+    }
+
+    [data-field-name="status"] { grid-row: 1 !important; }
+    [data-field-name="slug"] { grid-row: 2 !important; }
+    [data-field-name="date"] { grid-row: 3 !important; }
+    [data-field-name="description"] { grid-row: 4 !important; }
+    [data-field-name="author"] { grid-row: 5 !important; }
+    [data-field-name="featured_image"] { grid-row: 6 !important; }
+    [data-field-name="featured_image_alt"] { grid-row: 7 !important; }
+    [data-field-name="podcast_audio"] { grid-row: 8 !important; }
+  </style>
+</head>
+<body>
+  <div id="nc-root"></div>
+  <!-- Decap CMS loaded from CDN -->
+  <script src="https://unpkg.com/netlify-cms@^2.10.192/dist/netlify-cms.js"></script>
+  <script>
+    // Custom R2 media library integration
+    //
+    // Netlify CMS external media library API:
+    //   init({ options, handleInsert }) => instance
+    //     handleInsert(url) — dispatches insertMedia to Redux store
+    //   instance.show({ id, value, config, allowMultiple, imagesOnly })
+    //     called when a widget opens the media library
+    //   instance.enableStandalone() => bool
+    //     controls whether "Media" nav link appears in the CMS sidebar
+    //
+    const R2MediaLibrary = {
+      name: 'r2',
+      init: ({ options, handleInsert }) => {
+        let activeBc = null;
+
+        return {
+          show: ({ config, allowMultiple, imagesOnly } = {}) => {
+            if (activeBc) { activeBc.close(); activeBc = null; }
+
+            const popup = window.open(
+              '/admin-legacy/assets?picker=true',
+              'r2-picker',
+              'width=900,height=600,scrollbars=yes'
+            );
+
+            const bc = new BroadcastChannel('r2-picker');
+            activeBc = bc;
+
+            bc.onmessage = (event) => {
+              if (event.data && event.data.type === 'r2:select') {
+                bc.close();
+                activeBc = null;
+                popup?.close();
+                handleInsert(event.data.url);
+              }
+            };
+          },
+          hide: () => {},
+          enableStandalone: () => true,
+        };
+      },
+    };
+
+    CMS.registerMediaLibrary(R2MediaLibrary);
+    CMS.init();
+
+    // 2-column post editor layout via MutationObserver.
+    //
+    // Netlify CMS v2 uses Emotion CSS-in-JS so class names are unstable hashes.
+    // Strategy: find labels by [for] attrs, locate their lowest common ancestor
+    // (the field list container), then walk up from each label to its direct
+    // child of that container. No hardcoded depth assumptions.
+    (function () {
+      var POST_FIELDS = ['status', 'title', 'body', 'slug', 'date', 'description', 'author',
+                         'featured_image', 'featured_image_alt', 'podcast_audio'];
+      var layoutApplied = false;
+      var prevHref = location.href;
+
+      function applyEditorLayout() {
+        // Find labels — try "name-field-N" (Decap) and plain "name" (Netlify CMS v2)
+        var labelMap = {};
+        for (var i = 0; i < POST_FIELDS.length; i++) {
+          var n = POST_FIELDS[i];
+          var lbl = document.querySelector('label[for^="' + n + '-field-"]') ||
+                    document.querySelector('label[for="' + n + '"]');
+          if (lbl) labelMap[n] = lbl;
+        }
+        if (Object.keys(labelMap).length < 5) return false;
+
+        // Walk up from the first label to find the lowest common ancestor
+        // of ALL labels — that's the field-list container (control pane).
+        var names = Object.keys(labelMap);
+        var controlPane = null;
+        var el = labelMap[names[0]].parentElement;
+        while (el && el !== document.body) {
+          var all = true;
+          for (var j = 0; j < names.length; j++) {
+            if (!el.contains(labelMap[names[j]])) { all = false; break; }
+          }
+          if (all) { controlPane = el; break; }
+          el = el.parentElement;
+        }
+        if (!controlPane || controlPane === document.body) return false;
+        if (controlPane.hasAttribute('data-cms-layout')) return true;
+
+        // For each label walk up until its parent IS the control pane —
+        // that element is the field's direct wrapper.
+        for (var k = 0; k < names.length; k++) {
+          var wrapper = labelMap[names[k]];
+          while (wrapper.parentElement && wrapper.parentElement !== controlPane) {
+            wrapper = wrapper.parentElement;
+          }
+          if (wrapper.parentElement === controlPane) {
+            wrapper.setAttribute('data-field-name', names[k]);
+          }
+        }
+
+        controlPane.setAttribute('data-cms-layout', 'post');
+        return true;
+      }
+
+      var observer = new MutationObserver(function () {
+        if (location.href !== prevHref) {
+          prevHref = location.href;
+          layoutApplied = false;
+        }
+        if (!layoutApplied) {
+          layoutApplied = applyEditorLayout();
+        }
+      });
+
+      observer.observe(document.body, { childList: true, subtree: true });
+    })();
+  </script>
+</body>
+</html>
