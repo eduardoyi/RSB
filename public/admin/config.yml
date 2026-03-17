@@ -46,7 +46,6 @@ collections:
         default: draft
         hint: "Draft posts stay out of the public site, RSS feed, and search indexing until you switch them to Published."
       - { label: Title, name: title, widget: string }
-      - { label: Body, name: body, widget: markdown }
       - { label: Slug, name: slug, widget: string, hint: "URL-safe identifier used as the post URL (e.g. my-post-title)" }
       - { label: Date, name: date, widget: datetime, date_format: "YYYY-MM-DD", time_format: false }
       - { label: Description, name: description, widget: string, required: false }
@@ -61,6 +60,7 @@ collections:
         media_library:
           name: cloudflare_r2
         hint: "Upload or select an audio file from Cloudflare R2."
+      - { label: Body, name: body, widget: markdown }
 
   - name: programs
     label: Programs

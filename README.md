@@ -7,9 +7,7 @@ Astro-powered personal site for [realseriousbusiness.com](https://realseriousbus
 - `src/content/posts`: blog posts as Markdown with frontmatter
 - `src/content/redirects`: redirect definitions that become Cloudflare `_redirects`
 - `public/admin`: primary Sveltia CMS admin
-- `public/admin-next`: staged Sveltia preview admin
-- `public/admin-legacy` and `src/pages/admin-legacy`: temporary Decap/R2 fallback kept during migration
-- `worker`: Cloudflare Worker for publishing and temporary legacy asset routes
+- `worker`: Cloudflare Worker for publishing and public media delivery
 - `worker-oauth`: GitHub OAuth worker used by the admin UI
 
 ## Local Site Development
@@ -29,7 +27,7 @@ Posts live in `src/content/posts/*.md` and support these frontmatter fields:
 - `slug`: optional in the schema, but always written by the publish worker
 - `date`: required
 - `description`: optional, defaults to `""`
-- `author`: optional, legacy/back-compat only
+- `author`: optional, defaults to `Eduardo Yi` when omitted
 - `featured_image`: optional
 - `featured_image_alt`: optional
 - `podcast_audio`: optional
@@ -38,22 +36,20 @@ Only `published` posts appear on the public site, in generated `/post/*` routes,
 
 ## CMS Setup
 
-The live CMS entrypoint is `/admin/`. During migration or smoke testing, `/admin-next/` loads the same Sveltia config on a separate route. The old Decap flow lives under `/admin-legacy/` temporarily and should be removed once the Sveltia workflow is fully stable.
+The live CMS entrypoint is `/admin/`.
 
 ### GitHub Auth
 
-Both Sveltia admin routes continue to use the GitHub OAuth worker at `worker-oauth`.
+The Sveltia admin continues to use the GitHub OAuth worker at `worker-oauth`.
 
 ### Native Cloudflare R2 Media
 
 Sveltia is configured to use Cloudflare R2 directly for images and audio uploads.
 
-Before using media uploads, update these placeholders in both CMS config files:
+Before using media uploads, update these placeholders in the CMS config file:
 
 - `account_id` in `public/admin/config.yml`
-- `account_id` in `public/admin-next/config.yml`
 - `access_key_id` in `public/admin/config.yml`
-- `access_key_id` in `public/admin-next/config.yml`
 
 Use:
 
@@ -68,7 +64,7 @@ Allow the admin origins that will upload media directly to R2, including:
 
 - `https://realseriousbusiness.com`
 - local dev origins such as `http://localhost:4321`
-- any preview origin you use to validate `/admin-next`
+- any preview origin you use to validate the site admin
 
 ## Worker Setup
 
@@ -94,7 +90,6 @@ Set these in the `worker` directory:
 
 ```bash
 cd /Users/eduardoyi/Coding/RSB/worker
-npx wrangler secret put ADMIN_TOKEN
 npx wrangler secret put PUBLISH_TOKEN
 npx wrangler secret put GITHUB_TOKEN
 npx wrangler secret put KIT_API_KEY
@@ -102,7 +97,6 @@ npx wrangler secret put KIT_API_KEY
 
 What they are for:
 
-- `ADMIN_TOKEN`: temporary protection for the legacy `/admin-legacy/assets` flow and `/api/assets*` routes during migration
 - `PUBLISH_TOKEN`: protects the external `POST /api/posts` publish endpoint
 - `GITHUB_TOKEN`: GitHub token with repository contents write access for `eduardoyi/RSB`
 - `KIT_API_KEY`: newsletter subscription proxy key
@@ -117,10 +111,10 @@ The token owner must also be allowed to push directly to `main`, since the worke
 
 ### Worker Vars
 
-The worker keeps one primary R2 public URL and an optional legacy allowlist:
+The worker keeps one primary R2 public URL and an optional allowlist for older public R2 hosts:
 
 - `PUBLIC_R2_URL`: current public R2 base URL used for newly uploaded/published assets
-- `LEGACY_PUBLIC_R2_URLS`: comma-separated legacy public R2 base URLs that should also count as already-hosted assets during publish mirroring
+- `LEGACY_PUBLIC_R2_URLS`: comma-separated older public R2 base URLs that should also count as already-hosted assets during publish mirroring
 
 ### Generate a Strong Publish Token
 

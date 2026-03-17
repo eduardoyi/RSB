@@ -87,7 +87,7 @@ The worker tries to import:
 Rules:
 
 - Only absolute `http://` and `https://` URLs are eligible
-- URLs already on the site’s current public R2 host, or on any configured legacy public R2 hosts, are left unchanged
+- URLs already on the site’s current public R2 host, or on any configured older public R2 hosts, are left unchanged
 - The same asset URL is only fetched/uploaded once per request
 - Successful imports are rewritten to the new R2 URL before the post is committed
 - Failed imports do not block post creation; the original URL stays in place

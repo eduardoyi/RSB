@@ -3,13 +3,12 @@ import { visit } from 'unist-util-visit';
 
 export interface Env {
   MEDIA_BUCKET: R2Bucket;
-  ADMIN_TOKEN: string;
   PUBLISH_TOKEN: string;
   GITHUB_TOKEN: string;
   ALLOWED_ORIGIN: string;
   KIT_API_KEY: string;
   PUBLIC_R2_URL: string; // e.g. https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev
-  LEGACY_PUBLIC_R2_URLS?: string; // comma-separated public R2 base URLs to treat as already hosted
+  LEGACY_PUBLIC_R2_URLS?: string; // comma-separated older public R2 base URLs to treat as already hosted
 }
 
 type PublishStatus = 'draft' | 'published';
@@ -111,10 +110,6 @@ function isBearerAuthorized(request: Request, token: string): boolean {
   return auth === `Bearer ${token}`;
 }
 
-function isAdminAuthorized(request: Request, env: Env): boolean {
-  return isBearerAuthorized(request, env.ADMIN_TOKEN);
-}
-
 function isPublishAuthorized(request: Request, env: Env): boolean {
   return isBearerAuthorized(request, env.PUBLISH_TOKEN);
 }
@@ -124,25 +119,6 @@ function jsonResponse(data: unknown, status: number, cors: Record<string, string
     status,
     headers: { ...cors, 'Content-Type': 'application/json' },
   });
-}
-
-function guessContentType(filename: string, mimeType: string): string {
-  if (mimeType) return mimeType;
-  const ext = filename.split('.').pop()?.toLowerCase() ?? '';
-  const map: Record<string, string> = {
-    mp3: 'audio/mpeg',
-    m4a: 'audio/mp4',
-    ogg: 'audio/ogg',
-    wav: 'audio/wav',
-    flac: 'audio/flac',
-    jpg: 'image/jpeg',
-    jpeg: 'image/jpeg',
-    png: 'image/png',
-    gif: 'image/gif',
-    webp: 'image/webp',
-    svg: 'image/svg+xml',
-  };
-  return map[ext] || 'application/octet-stream';
 }
 
 function extractMimeType(contentType: string | null): string {
@@ -425,7 +401,7 @@ function getKnownPublicR2Bases(env: Env): URL[] {
       unique.add(key);
       bases.push(base);
     } catch {
-      // Ignore invalid legacy URLs so a bad env var does not break publishing.
+      // Ignore invalid extra URLs so a bad env var does not break publishing.
     }
   }
 
@@ -1153,54 +1129,9 @@ export default {
 
     const { pathname } = url;
 
-    // GET /api/assets — list objects
-    if (request.method === 'GET' && pathname === '/api/assets') {
-      if (!isAdminAuthorized(request, env)) return jsonResponse({ error: 'Unauthorized' }, 401, cors);
-
-      const listed = await env.MEDIA_BUCKET.list();
-      const items = listed.objects.map((obj) => ({
-        key: obj.key,
-        size: obj.size,
-        url: buildPublicAssetUrl(env, obj.key),
-      }));
-      return jsonResponse(items, 200, cors);
-    }
-
-    // POST /api/assets/upload — upload file
-    if (request.method === 'POST' && pathname === '/api/assets/upload') {
-      if (!isAdminAuthorized(request, env)) return jsonResponse({ error: 'Unauthorized' }, 401, cors);
-
-      const formData = await request.formData();
-      const fileEntry = formData.get('file');
-      if (!fileEntry || typeof fileEntry === 'string') {
-        return jsonResponse({ error: 'No file provided' }, 400, cors);
-      }
-
-      const file = fileEntry as unknown as File;
-
-      const key = `${Date.now()}-${sanitizeFileComponent(file.name, 'upload')}`;
-      const upload = await putBucketObject(
-        env,
-        key,
-        file.stream(),
-        guessContentType(file.name, file.type)
-      );
-
-      return jsonResponse({ key: upload.key, url: upload.publicUrl }, 200, cors);
-    }
-
     // POST /api/posts — create a new draft/published post in GitHub
     if (request.method === 'POST' && pathname === '/api/posts') {
       return handlePublishPost(request, env, cors);
-    }
-
-    // DELETE /api/assets/:key
-    if (request.method === 'DELETE' && pathname.startsWith('/api/assets/')) {
-      if (!isAdminAuthorized(request, env)) return jsonResponse({ error: 'Unauthorized' }, 401, cors);
-
-      const key = decodeURIComponent(pathname.slice('/api/assets/'.length));
-      await env.MEDIA_BUCKET.delete(key);
-      return new Response(null, { status: 204, headers: cors });
     }
 
     // GET /media/:key — serve R2 object (public), with Range support for audio seeking
