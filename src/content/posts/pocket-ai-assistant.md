@@ -5,7 +5,8 @@ slug: pocket-ai-assistant
 date: 2026-02-26
 description: Build a $70 pocket AI assistant with a Raspberry Pi Zero 2 W and OpenClaw — a step-by-step guide for complete beginners.
 author: Eduardo Yi
-featured_image_alt: ''
+featured_image: /media/personal-openclaw.png
+featured_image_alt: How to build Sebastian's pocket AI assistant using a Raspberry Pi Zero 2 W and OpenClaw
 ---
 **You're about to hold a tiny computer that talks back to you.**
 
