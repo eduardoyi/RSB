@@ -8,7 +8,7 @@ This document is for external tools that want to create blog posts directly in R
 
 Example production base URL:
 
-`https://<your-worker-domain>/api/posts`
+`https://rsb-assets.eduardoyi.workers.dev/api/posts`
 
 ## Authentication
 
@@ -182,7 +182,7 @@ If your tool needs “edit existing draft” support later, that should be added
 ## Example cURL
 
 ```bash
-curl -X POST https://<your-worker-domain>/api/posts \
+curl -X POST https://rsb-assets.eduardoyi.workers.dev/api/posts \
   -H "Authorization: Bearer YOUR_PUBLISH_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
