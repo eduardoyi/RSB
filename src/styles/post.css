@@ -40,15 +40,37 @@
   color: #444;
 }
 .document-body pre {
+  position: relative;
   background: #f0f0f0;
   border: 1px solid silver;
-  padding: 12px 16px;
+  padding: 12px 40px 12px 16px;
   overflow-x: auto;
   font-family: 'Courier New', monospace;
   font-size: 0.875em;
   line-height: 1.5;
   white-space: pre;
   word-break: normal;
+}
+.document-body pre .copy-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  padding: 2px 6px;
+  cursor: pointer;
+  background: silver;
+  border: 2px solid;
+  border-color: white #808080 #808080 white;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.document-body pre:hover .copy-btn {
+  opacity: 1;
+}
+.document-body pre .copy-btn:active {
+  border-color: #808080 white white #808080;
 }
 .document-body code {
   font-family: 'Courier New', monospace;
