@@ -1,12 +1,14 @@
 ---
-status: "draft"
-title: "The Panda Is Not Your Friend"
-slug: "panda-diplomacy"
-date: "2026-03-17"
-description: "The panda is a Chinese Communist Party propaganda tool (and an evolutionary failure)"
-featured_image: "https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/eb20d056-e44a-4c8c-9106-a0b755becc06/bab044dc-c83a-4698-a6d3-8f744190edd3/edited-1773787241499.webp"
+status: published
+title: The Panda Is Not Your Friend
+slug: panda-diplomacy
+date: 2026-03-17
+description: The panda is a Chinese Communist Party propaganda tool (and an evolutionary failure)
+author: Eduardo Yi
+featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/eb20d056-e44a-4c8c-9106-a0b755becc06/bab044dc-c83a-4698-a6d3-8f744190edd3/edited-1773787241499.webp
+featured_image_alt: ''
 ---
-## Do not be fooled by the face
+## Pandas are the worst.
 
 Right now, somewhere in a zoo, a giant panda is sitting in a pile of bamboo, eating approximately 40 pounds of it, achieving almost nothing, and looking profoundly pleased about this. It will do this for up to 16 hours today. It may also fall off something. [There is footage.](https://x.com/i/status/980339477930487809)
 
@@ -122,7 +124,7 @@ Think about that the next time you see one of these black-and-white idiots at th
 
 [4] Giant Panda Taxonomy Factsheet — [https://ielc.libguides.com/sdzg/factsheets/giantpanda/taxonomy](https://ielc.libguides.com/sdzg/factsheets/giantpanda/taxonomy)
 
-[5] Giant panda — Wikipedia — [https://en.wikipedia.org/wiki/Giant\_panda](https://en.wikipedia.org/wiki/Giant_panda)
+[5] Giant panda — Wikipedia — [https://en.wikipedia.org/wiki/Giant_panda](https://en.wikipedia.org/wiki/Giant_panda)
 
 [6] Giant panda | Britannica — [https://www.britannica.com/animal/giant-panda](https://www.britannica.com/animal/giant-panda)
 
@@ -144,7 +146,7 @@ Think about that the next time you see one of these black-and-white idiots at th
 
 [15] Pandas / Pandaversary (National Archives news/topic) — [https://www.archives.gov/news/topics/pandaversary](https://www.archives.gov/news/topics/pandaversary)
 
-[16] Ling-Ling and Hsing-Hsing — Wikipedia — [https://en.wikipedia.org/wiki/Ling-Ling\_and\_Hsing-Hsing](https://en.wikipedia.org/wiki/Ling-Ling_and_Hsing-Hsing)
+[16] Ling-Ling and Hsing-Hsing — Wikipedia — [https://en.wikipedia.org/wiki/Ling-Ling_and_Hsing-Hsing](https://en.wikipedia.org/wiki/Ling-Ling_and_Hsing-Hsing)
 
 [17] History of Giant Pandas at the National Zoo — [https://nationalzoo.si.edu/animals/history-giant-pandas-zoo](https://nationalzoo.si.edu/animals/history-giant-pandas-zoo)
 
@@ -156,7 +158,7 @@ Think about that the next time you see one of these black-and-white idiots at th
 
 [21] Timeline: Giant Panda Cubs at the National Zoo (SI factsheet) — [https://www.si.edu/newsdesk/factsheets/timeline-giant-panda-cubs-national-zoo](https://www.si.edu/newsdesk/factsheets/timeline-giant-panda-cubs-national-zoo)
 
-[22] Smithsonian Institution Archives collection record (panda-related materials) — [https://siarchives.si.edu/collections/siris\_sic\_1003](https://siarchives.si.edu/collections/siris_sic_1003)
+[22] Smithsonian Institution Archives collection record (panda-related materials) — [https://siarchives.si.edu/collections/siris_sic_1003](https://siarchives.si.edu/collections/siris_sic_1003)
 
 [23] Panda Diplomacy (LTL Beihai blog/article) — [https://ltl-beihai.com/panda-diplomacy/](https://ltl-beihai.com/panda-diplomacy/)
 
@@ -172,7 +174,7 @@ Think about that the next time you see one of these black-and-white idiots at th
 
 [29] Giant Panda Project — Zoo Atlanta — [https://zooatlanta.org/project/giant-panda-2/](https://zooatlanta.org/project/giant-panda-2/)
 
-[30] National Zoological Park records (Smithsonian Institution Archives) — panda loan record (2000) — [https://siarchives.si.edu/collections/siris\_sic\_2360](https://siarchives.si.edu/collections/siris_sic_2360)
+[30] National Zoological Park records (Smithsonian Institution Archives) — panda loan record (2000) — [https://siarchives.si.edu/collections/siris_sic_2360](https://siarchives.si.edu/collections/siris_sic_2360)
 
 [31] Panda diplomacy: biggest winner in China's loan program is the pandas themselves — [https://www.columbian.com/news/2024/jul/20/panda-diplomacy-biggest-winner-in-chinas-loan-program-is-the-pandas-themselves/](https://www.columbian.com/news/2024/jul/20/panda-diplomacy-biggest-winner-in-chinas-loan-program-is-the-pandas-themselves/)
 
@@ -188,7 +190,7 @@ Think about that the next time you see one of these black-and-white idiots at th
 
 [37] Science article referencing panda conservation and international loans — [https://www.science.org/doi/10.1126/science.aba3948](https://www.science.org/doi/10.1126/science.aba3948)
 
-[38] Panda diplomacy — Wikipedia — [https://en.wikipedia.org/wiki/Panda\_diplomacy](https://en.wikipedia.org/wiki/Panda_diplomacy)
+[38] Panda diplomacy — Wikipedia — [https://en.wikipedia.org/wiki/Panda_diplomacy](https://en.wikipedia.org/wiki/Panda_diplomacy)
 
 [39] Panda bond / related rules (NAFMII reference) — [https://www.nafmii.org.cn/englishnew/overseasparticipation/pandabond/selfregulatoryrulesandguidelines/](https://www.nafmii.org.cn/englishnew/overseasparticipation/pandabond/selfregulatoryrulesandguidelines/)
 
@@ -232,17 +234,17 @@ Think about that the next time you see one of these black-and-white idiots at th
 
 [59] 중국의 판다 소유권 정착 (Namu Wiki page) — [https://en.namu.wiki/w/%EC%A4%91%EA%B5%AD%EC%9D%98%20%ED%8C%90%EB%8B%A4%20%EC%86%8C%EC%9C%A0%EA%B6%8C%20%EC%A0%95%EC%B1%85](https://en.namu.wiki/w/%EC%A4%91%EA%B5%AD%EC%9D%98%20%ED%8C%90%EB%8B%A4%20%EC%86%8C%EC%9C%A0%EA%B6%8C%20%EC%A0%95%EC%B1%85)
 
-[60] YouTube video (unnamed in section) on panda ownership/leases — [https://www.youtube.com/watch?v=s\_2l91SGDuU](https://www.youtube.com/watch?v=s_2l91SGDuU)
+[60] YouTube video (unnamed in section) on panda ownership/leases — [https://www.youtube.com/watch?v=s_2l91SGDuU](https://www.youtube.com/watch?v=s_2l91SGDuU)
 
-[61] Soft power — Wikipedia — [https://en.wikipedia.org/wiki/Soft\_power](https://en.wikipedia.org/wiki/Soft_power)
+[61] Soft power — Wikipedia — [https://en.wikipedia.org/wiki/Soft_power](https://en.wikipedia.org/wiki/Soft_power)
 
 [62] Scholarly article on soft power (JSTOR record) — [https://www.jstor.org/stable/25097996](https://www.jstor.org/stable/25097996)
 
 [63] Joseph Nye on Soft Power (E-International Relations) — [https://www.e-ir.info/2013/03/08/joseph-nye-on-soft-power/](https://www.e-ir.info/2013/03/08/joseph-nye-on-soft-power/)
 
-[64] Soft power / related discussion (IA-Forum) — [https://www.ia-forum.org/Content/ViewInternal\_Document.cfm?contenttype\_id=5&ContentID=8393](https://www.ia-forum.org/Content/ViewInternal_Document.cfm?contenttype_id=5&ContentID=8393)
+[64] Soft power / related discussion (IA-Forum) — [https://www.ia-forum.org/Content/ViewInternal_Document.cfm?contenttype_id=5&ContentID=8393](https://www.ia-forum.org/Content/ViewInternal_Document.cfm?contenttype_id=5&ContentID=8393)
 
-[65] Joseph Nye — Soft Power (PDF, Wilson Center / journal reproduction) — [https://www.wilsoncenter.org/sites/default/files/media/documents/page/joseph\_nye\_soft\_power\_journal.pdf](https://www.wilsoncenter.org/sites/default/files/media/documents/page/joseph_nye_soft_power_journal.pdf)
+[65] Joseph Nye — Soft Power (PDF, Wilson Center / journal reproduction) — [https://www.wilsoncenter.org/sites/default/files/media/documents/page/joseph_nye_soft_power_journal.pdf](https://www.wilsoncenter.org/sites/default/files/media/documents/page/joseph_nye_soft_power_journal.pdf)
 
 [66] Soft Power: The Means to Success in World Politics (resource page) — [https://www.diplomacy.edu/resource/soft-power-the-means-to-success-in-world-politics/](https://www.diplomacy.edu/resource/soft-power-the-means-to-success-in-world-politics/)
 
@@ -252,6 +254,6 @@ Think about that the next time you see one of these black-and-white idiots at th
 
 [69] Mohamad Zreik — Panda Diplomacy (2022 PDF) — [https://journal.centruldedic.ro/wp-content/uploads/2022/08/Mohamad-ZREIK-2022.pdf](https://journal.centruldedic.ro/wp-content/uploads/2022/08/Mohamad-ZREIK-2022.pdf)
 
-[70] Thesis: Panda Diplomacy (Aalborg University thesis PDF) — [https://projekter.aau.dk/projekter/files/333641825/Thesis\_Panda\_Diplomacy\_Final.pdf](https://projekter.aau.dk/projekter/files/333641825/Thesis_Panda_Diplomacy_Final.pdf)
+[70] Thesis: Panda Diplomacy (Aalborg University thesis PDF) — [https://projekter.aau.dk/projekter/files/333641825/Thesis_Panda_Diplomacy_Final.pdf](https://projekter.aau.dk/projekter/files/333641825/Thesis_Panda_Diplomacy_Final.pdf)
 
 [71] Diplomats and refugees: Panda diplomacy, soft cuddly power and the new trajectory in panda conservation (Cambridge Core) — [https://cambridge.org/core/journals/environmental-practice/article/environmental-reviews-and-case-studies-diplomats-and-refugees-panda-diplomacy-soft-cuddly-power-and-the-new-trajectory-in-panda-conservation/A23238335C47C1717417060B7AAB05AF](https://cambridge.org/core/journals/environmental-practice/article/environmental-reviews-and-case-studies-diplomats-and-refugees-panda-diplomacy-soft-cuddly-power-and-the-new-trajectory-in-panda-conservation/A23238335C47C1717417060B7AAB05AF)
