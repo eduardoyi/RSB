@@ -6,6 +6,9 @@ backend:
   base_url: https://rsb-oauth.eduardoyi.workers.dev
   auth_endpoint: auth
 
+media_folder: /public/media
+public_folder: /media
+
 media_library:
   name: cloudflare_r2
 
