@@ -25,6 +25,7 @@ locale: en
 collections:
   - name: posts
     label: Blog Posts
+    icon: article
     folder: src/content/posts
     create: true
     slug: "{{fields.slug}}"
@@ -64,6 +65,7 @@ collections:
 
   - name: programs
     label: Programs
+    icon: apps
     folder: src/content/programs
     create: true
     slug: "{{fields.id}}"
@@ -77,6 +79,7 @@ collections:
 
   - name: redirects
     label: Redirects
+    icon: alt_route
     folder: src/content/redirects
     create: true
     slug: "{{fields.from | slugify}}"
