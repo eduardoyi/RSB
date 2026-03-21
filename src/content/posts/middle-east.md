@@ -1,10 +1,12 @@
 ---
-status: "published"
-title: "Middle East Strategic Solutions: The Most Dysfunctional Office in Human History"
-slug: "middle-east"
-date: "2026-03-21"
-description: "Middle East Strategic Solutions (MESS) is a mid-size regional firm with a complicated org chart, a broken HVAC system, and what HR generously describes as \"an ongoing communication breakdown between departments.\""
-featured_image: "https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/837fb299-a60c-49aa-ab0f-874f73066526/2410d76e-5300-44e5-9613-07b1c36797fe/final-1774049755748.webp"
+status: published
+title: 'Middle East Strategic Solutions: The Most Dysfunctional Office in Human History'
+slug: middle-east
+date: 2026-03-21
+description: Middle East Strategic Solutions (MESS) is a mid-size regional firm with a complicated org chart, a broken HVAC system, and what HR generously describes as "an ongoing communication breakdown between departments."
+author: ''
+featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/837fb299-a60c-49aa-ab0f-874f73066526/2410d76e-5300-44e5-9613-07b1c36797fe/final-1774049755748.webp
+featured_image_alt: ''
 ---
 **The office had an incident. Several, actually.**
 
@@ -28,7 +30,7 @@ To understand how we got here, you need to meet the staff.
 
 **THE UNITED STATES: Corporate**
 
-*Title: Majority Shareholder / Remote CEO Who Keeps Flying In Unannounced*
+_Majority Shareholder / Remote CEO Who Keeps Flying In Unannounced_
 
 Corporate's official position is that they are stepping back, letting the regions handle themselves, and definitely not deploying more troops. On March 19, 2026, Trump publicly denied sending additional forces to the Middle East. [16] [17] The Boxer Amphibious Ready Group, the 11th Marine Expeditionary Unit, a repositioned aircraft carrier, and a squadron of F-22s forward-staged to an Israeli base were unavailable for comment.
 
@@ -43,7 +45,7 @@ Signature move: announcing a wind-down while the loading docks fill up.
 
 **ISRAEL: That One Senior Manager**
 
-*Title: The Guy Who Has Decided That This Quarter Is THE Quarter*
+_The Guy Who Has Decided That This Quarter Is THE Quarter_
 
 Israel is the senior manager who has been warning about the guy in accounting for fifteen years, has a binder of documentation nobody read, and has finally just gone ahead and scheduled the corrective action meeting himself, with or without HR's sign-off.
 
@@ -58,7 +60,7 @@ Signature move: just generally having no chill.
 
 **IRAN: The Guy Who Thinks He Runs Everything**
 
-*Title: Founder's Son / Shadow CEO / Currently Indisposed*
+_Founder's Son / Shadow CEO / Currently Indisposed_
 
 Iran didn't invent the org chart at MESS, but it spent decades building a parallel org chart that runs underneath the official one. The Axis of Resistance — Hezbollah, Hamas, the Houthis, and a rotating cast of affiliated contractors — received Iranian funding, weapons, and logistics for years, with supply networks that shifted after 2025 toward crypto transfers, oil smuggling, and decentralized gray-zone economics once the main channels got disrupted. [23] [24] [25]
 
@@ -75,7 +77,7 @@ Signature move: losing the founder and somehow remaining operational.
 
 **SAUDI ARABIA: The Rich Quiet One Who Controls the Parking Lot**
 
-*Title: Facilities Director / Probably Your Next Boss*
+_Facilities Director / Probably Your Next Boss_
 
 Saudi Arabia has the oil, the money, and the parking spaces. It does not always have opinions it shares loudly, which is its primary competitive advantage over everyone else in this building.
 
@@ -90,11 +92,11 @@ Signature move: making everyone come to it.
 
 **QATAR: HR**
 
-*Title: The One Who Knows Where All the Bodies Are Buried and Still Gets Invited to Every Meeting*
+_Title: The One Who Knows Where All the Bodies Are Buried and Still Gets Invited to Every Meeting_
 
 Qatar hosts the largest U.S. military installation in the Middle East at Al Udeid Air Base [28] while serving as the primary back-channel between parties who refuse to be in the same room. It mediates Gaza ceasefire negotiations [54] [58], keeps lines open to Hamas's political leadership, and still waves goodbye to American bomber formations taking off from its own tarmac. "Talking to everyone" has become a foreign policy so successful that nobody can afford to be mad about it.
 
-*What Qatar WANTS:* relevance, insurance, and to never pick a side loudly enough that the other side stops calling.
+_What Qatar WANTS:_ relevance, insurance, and to never pick a side loudly enough that the other side stops calling.
 
 ---
 
@@ -166,9 +168,9 @@ Qatar has not given up on HR. Whether HR can fix any of this depends entirely on
 
 [1] 2026 Iran Conflict — [https://www.britannica.com/event/2026-Iran-Conflict](https://www.britannica.com/event/2026-Iran-Conflict)
 
-[2] Timeline of the 2026 Iran war — [https://en.wikipedia.org/wiki/Timeline\_of\_the\_2026\_Iran\_war](https://en.wikipedia.org/wiki/Timeline_of_the_2026_Iran_war)
+[2] Timeline of the 2026 Iran war — [https://en.wikipedia.org/wiki/Timeline_of_the_2026_Iran_war](https://en.wikipedia.org/wiki/Timeline_of_the_2026_Iran_war)
 
-[3] 2026 Iran war — [https://en.wikipedia.org/wiki/2026\_Iran\_war](https://en.wikipedia.org/wiki/2026_Iran_war)
+[3] 2026 Iran war — [https://en.wikipedia.org/wiki/2026_Iran_war](https://en.wikipedia.org/wiki/2026_Iran_war)
 
 [4] Iran update — US and Israeli strikes, February 28, 2026 (special report) — [https://understandingwar.org/research/middle-east/iran-update-special-report-us-and-israeli-strikes-february-28-2026/](https://understandingwar.org/research/middle-east/iran-update-special-report-us-and-israeli-strikes-february-28-2026/)
 
@@ -214,11 +216,11 @@ Qatar has not given up on HR. Whether HR can fix any of this depends entirely on
 
 [25] Iran’s Axis of Resistance: Weakened but still dangerous — [https://www.stimson.org/2025/irans-axis-of-resistance-weakened-but-still-dangerous/](https://www.stimson.org/2025/irans-axis-of-resistance-weakened-but-still-dangerous/)
 
-[26] Axis of Resistance (Wikipedia) — [https://en.wikipedia.org/wiki/Axis\_of\_Resistance](https://en.wikipedia.org/wiki/Axis_of_Resistance)
+[26] Axis of Resistance (Wikipedia) — [https://en.wikipedia.org/wiki/Axis_of_Resistance](https://en.wikipedia.org/wiki/Axis_of_Resistance)
 
 [27] 12-Day War (Britannica) — [https://www.britannica.com/event/12-Day-War](https://www.britannica.com/event/12-Day-War)
 
-[28] Al Udeid Air Base - Wikipedia — [https://en.wikipedia.org/wiki/Al\_Udeid\_Air\_Base](https://en.wikipedia.org/wiki/Al_Udeid_Air_Base)
+[28] Al Udeid Air Base - Wikipedia — [https://en.wikipedia.org/wiki/Al_Udeid_Air_Base](https://en.wikipedia.org/wiki/Al_Udeid_Air_Base)
 
 [29] Hamad International / OTBH - Skybrary — [https://skybrary.aero/airports/otbh](https://skybrary.aero/airports/otbh)
 
@@ -226,11 +228,11 @@ Qatar has not given up on HR. Whether HR can fix any of this depends entirely on
 
 [31] Timeline: Conflict in the Red Sea (USNI News) — [https://news.usni.org/2024/02/05/usni-news-timeline-conflict-in-the-red-sea](https://news.usni.org/2024/02/05/usni-news-timeline-conflict-in-the-red-sea)
 
-[32] Timeline of the Red Sea crisis - Wikipedia — [https://en.wikipedia.org/wiki/Timeline\_of\_the\_Red\_Sea\_crisis](https://en.wikipedia.org/wiki/Timeline_of_the_Red_Sea_crisis)
+[32] Timeline of the Red Sea crisis - Wikipedia — [https://en.wikipedia.org/wiki/Timeline_of_the_Red_Sea_crisis](https://en.wikipedia.org/wiki/Timeline_of_the_Red_Sea_crisis)
 
 [33] Red Sea Crisis: A Timeline of Maritime Chaos — [https://gcaptain.com/red-sea-crisis-a-timeline-of-maritime-chaos-over-the-past-year/](https://gcaptain.com/red-sea-crisis-a-timeline-of-maritime-chaos-over-the-past-year/)
 
-[34] Red Sea crisis - Wikipedia — [https://en.wikipedia.org/wiki/Red\_Sea\_crisis](https://en.wikipedia.org/wiki/Red_Sea_crisis)
+[34] Red Sea crisis - Wikipedia — [https://en.wikipedia.org/wiki/Red_Sea_crisis](https://en.wikipedia.org/wiki/Red_Sea_crisis)
 
 [35] Map and list of attacks - Lloyd's List — [https://www.lloydslist.com/hot-topics/red-sea-risk/map-and-list-of-attacks](https://www.lloydslist.com/hot-topics/red-sea-risk/map-and-list-of-attacks)
 
@@ -242,23 +244,23 @@ Qatar has not given up on HR. Whether HR can fix any of this depends entirely on
 
 [39] Israeli operations in Lebanon against Hezbollah: Dec 29, 2025-Jan 4, 2026 — [https://www.longwarjournal.org/archives/2026/01/israeli-operations-in-lebanon-against-hezbollah-december-29-2025-january-4-2026.php](https://www.longwarjournal.org/archives/2026/01/israeli-operations-in-lebanon-against-hezbollah-december-29-2025-january-4-2026.php)
 
-[40] 2024 Israeli invasion of Lebanon - Wikipedia — [https://en.wikipedia.org/wiki/2024\_Israeli\_invasion\_of\_Lebanon](https://en.wikipedia.org/wiki/2024_Israeli_invasion_of_Lebanon)
+[40] 2024 Israeli invasion of Lebanon - Wikipedia — [https://en.wikipedia.org/wiki/2024_Israeli_invasion_of_Lebanon](https://en.wikipedia.org/wiki/2024_Israeli_invasion_of_Lebanon)
 
 [41] Israel's goals and challenges in the new Hezbollah war — [https://www.fdd.org/analysis/2026/03/09/israels-goals-and-challenges-in-the-new-hezbollah-war](https://www.fdd.org/analysis/2026/03/09/israels-goals-and-challenges-in-the-new-hezbollah-war)
 
 [42] Israel-Hamas war — timeline / article (Oct 7 coverage) — [https://www.jpost.com/israel-hamas-war/article-823396](https://www.jpost.com/israel-hamas-war/article-823396)
 
-[43] October 7 attacks (Wikipedia) — [https://en.wikipedia.org/wiki/October\_7\_attacks](https://en.wikipedia.org/wiki/October_7_attacks)
+[43] October 7 attacks (Wikipedia) — [https://en.wikipedia.org/wiki/October_7_attacks](https://en.wikipedia.org/wiki/October_7_attacks)
 
 [44] Israel-Hamas war: timeline — CBS News — [https://www.cbsnews.com/news/israel-hamas-war-timeline-major-events-since-october-7-2023/](https://www.cbsnews.com/news/israel-hamas-war-timeline-major-events-since-october-7-2023/)
 
 [45] Tracking the Houthi’s Attacks in the Red Sea, November 2023 to March 2024 (PDF) — [https://cscr.pk/pdf/perspectives/Tracking-the-Houthi%E2%80%99s-Attacks-in-the-Red-Sea-November-2023-to-March-2024.pdf](https://cscr.pk/pdf/perspectives/Tracking-the-Houthi%E2%80%99s-Attacks-in-the-Red-Sea-November-2023-to-March-2024.pdf)
 
-[46] Timeline of the Israel–Hezbollah conflict (27 November 2024 – present) (Wikipedia) — [https://en.wikipedia.org/wiki/Timeline\_of\_the\_Israel%E2%80%93Hezbollah\_conflict\_(27\_November\_2024\_%E2%80%93\_present](https://en.wikipedia.org/wiki/Timeline_of_the_Israel%E2%80%93Hezbollah_conflict_(27_November_2024_%E2%80%93_present))
+[46] Timeline of the Israel–Hezbollah conflict (27 November 2024 – present) (Wikipedia) — [https://en.wikipedia.org/wiki/Timeline_of_the_Israel%E2%80%93Hezbollah_conflict_(27_November_2024_%E2%80%93_present](https://en.wikipedia.org/wiki/Timeline_of_the_Israel%E2%80%93Hezbollah_conflict_(27_November_2024_%E2%80%93_present))
 
 [47] Global Conflict Tracker: Political instability — Lebanon — [https://www.cfr.org/global-conflict-tracker/conflict/political-instability-lebanon](https://www.cfr.org/global-conflict-tracker/conflict/political-instability-lebanon)
 
-[48] 2026 Iranian supreme leader election — [https://en.wikipedia.org/wiki/2026\_Iranian\_supreme\_leader\_election](https://en.wikipedia.org/wiki/2026_Iranian_supreme_leader_election)
+[48] 2026 Iranian supreme leader election — [https://en.wikipedia.org/wiki/2026_Iranian_supreme_leader_election](https://en.wikipedia.org/wiki/2026_Iranian_supreme_leader_election)
 
 [49] After Khamenei killed, Iran set for largely opaque supreme succession — [https://www.timesofisrael.com/after-khamenei-killed-iran-set-for-largely-opaque-supreme-succession/](https://www.timesofisrael.com/after-khamenei-killed-iran-set-for-largely-opaque-supreme-succession/)
 
