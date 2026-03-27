@@ -182,6 +182,11 @@
 .audio-vol-icon { font-size: 12px; line-height: 1; }
 .audio-volume { width: 64px; }
 
+.post-subscribe-section {
+  margin-top: 1.5em;
+  font-family: var(--doc-font-family, 'Times New Roman'), serif;
+}
+
 /* Mobile: no page simulation, infinite scroll */
 @media (max-width: 767px) {
   .document-wrapper {

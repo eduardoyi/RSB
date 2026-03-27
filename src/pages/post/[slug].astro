@@ -92,10 +92,77 @@ const schema = {
             <PostAudioPlayer src={post.data.podcast_audio} />
           )}
           <Content />
+
+          <div class="post-subscribe-section">
+            <hr class="post-title-sep" style="margin-top:2em;" />
+            <div id="post-subscribe-form-area">
+              <p style="margin:0 0 6px;font-weight:bold;">If you read this far, you'll like what's next.</p>
+              <p style="margin:0 0 10px;font-size:0.875em;color:#444;">One essay a month, roughly. No noise, no sponsored content, no threads.</p>
+              <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                <input
+                  type="email"
+                  id="post-subscribe-email"
+                  placeholder="your@email.com"
+                  style="flex:1;min-width:180px;font-family:inherit;font-size:0.875em;border:1px solid #808080;padding:2px 6px;"
+                />
+                <button id="post-subscribe-btn" style="font-family:Arial,sans-serif;font-size:12px;">Subscribe</button>
+              </div>
+              <p id="post-subscribe-error" style="color:red;font-size:0.8em;margin:6px 0 0;display:none;"></p>
+            </div>
+            <div id="post-subscribe-success" style="display:none;">
+              <p style="margin:0;font-size:0.875em;">You're in! Talk soon. ✉️</p>
+            </div>
+          </div>
         </article>
       </div>
     </div>
   </Window>
+  <script>
+    // Newsletter form inside post document
+    (function () {
+      var emailEl = document.getElementById('post-subscribe-email') as HTMLInputElement | null;
+      var btn = document.getElementById('post-subscribe-btn') as HTMLButtonElement | null;
+      var errorEl = document.getElementById('post-subscribe-error');
+      var formArea = document.getElementById('post-subscribe-form-area');
+      var successArea = document.getElementById('post-subscribe-success');
+
+      if (!emailEl || !btn) return;
+
+      emailEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') btn!.click();
+      });
+
+      btn.addEventListener('click', async function () {
+        var email = emailEl!.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          errorEl!.textContent = 'Please enter a valid email address.';
+          errorEl!.style.display = 'block';
+          return;
+        }
+        errorEl!.style.display = 'none';
+        btn!.disabled = true;
+        btn!.textContent = 'Subscribing...';
+        try {
+          var res = await fetch('https://rsb-assets.eduardoyi.workers.dev/api/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email_address: email }),
+          });
+          if (res.ok) {
+            formArea!.style.display = 'none';
+            successArea!.style.display = 'block';
+          } else {
+            throw new Error();
+          }
+        } catch (_) {
+          errorEl!.textContent = 'Something went wrong. Please try again.';
+          errorEl!.style.display = 'block';
+          btn!.disabled = false;
+          btn!.textContent = 'Subscribe';
+        }
+      });
+    })();
+  </script>
   <script>
     document.querySelectorAll('.document-body pre').forEach((pre) => {
       const btn = document.createElement('button');

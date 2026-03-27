@@ -9,6 +9,7 @@ const TASKBAR_HEIGHT = 40;
 const BEZEL_SIDE   = 18;  // top / left / right bezel thickness (px)
 const BEZEL_BOTTOM = 50;  // bottom bezel thickness (px)
 const MIN_SIZE = 320;
+const WINDOW_GAP = 6;     // min gap between window edge and screen boundary (px)
 const STORAGE_PREFIX = 'w98:window:';
 
 /** Returns the usable screen rectangle, accounting for the monitor bezel
@@ -55,11 +56,13 @@ function initWindow(el: HTMLElement): void {
   const bounds = screenBounds();
   const screenW = bounds.right  - bounds.left;
   const screenH = bounds.bottom - bounds.top;
+  const initWidth  = Math.min(defaultWidth,  screenW  - WINDOW_GAP);
+  const initHeight = Math.min(defaultHeight, screenH  - WINDOW_GAP);
   const state: WindowState = stored ?? {
-    x: bounds.left + Math.max(0, Math.round((screenW - defaultWidth)  / 2)),
-    y: bounds.top  + Math.max(0, Math.round((screenH - defaultHeight) / 2)),
-    width: defaultWidth,
-    height: defaultHeight,
+    x: bounds.left + Math.max(0, Math.round((screenW - initWidth)  / 2)),
+    y: bounds.top  + Math.max(0, Math.round((screenH - initHeight) / 2)),
+    width: initWidth,
+    height: initHeight,
   };
 
   applyState(el, state);
@@ -101,10 +104,12 @@ function setupMaximize(el: HTMLElement, state: WindowState): void {
 
 function applyState(el: HTMLElement, state: WindowState): void {
   const b = screenBounds();
+  const screenW = b.right  - b.left;
+  const screenH = b.bottom - b.top;
   el.style.left   = clamp(state.x, b.left, b.right  - 40) + 'px';
   el.style.top    = clamp(state.y, b.top,  b.bottom - 40) + 'px';
-  el.style.width  = Math.max(state.width,  MIN_SIZE) + 'px';
-  el.style.height = Math.max(state.height, MIN_SIZE) + 'px';
+  el.style.width  = clamp(state.width,  MIN_SIZE, screenW - WINDOW_GAP) + 'px';
+  el.style.height = clamp(state.height, MIN_SIZE, screenH - WINDOW_GAP) + 'px';
 }
 
 // Map from window element → taskbar button (populated by createTaskbarButtons)
