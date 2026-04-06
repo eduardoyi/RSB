@@ -1,10 +1,12 @@
 ---
-status: "draft"
-title: "What if we create an AI journalist?"
-slug: "ai-journalist"
-date: "2026-04-06"
-description: "If you were going to engineer an AI investigative journalist from first principles, what would it need to do? Where would it genuinely outperform a human reporter? Where would it fail? Can we fix those failures?"
-featured_image: "https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/f92fe694-9c75-431d-a814-6c73d7986b48/6d96e4ae-bc20-49e9-bf12-87287346889a/final-1775235399643.webp"
+status: published
+title: What if we create an AI journalist?
+slug: ai-journalist
+date: 2026-04-06
+description: If you were going to engineer an AI investigative journalist from first principles, what would it need to do? Where would it genuinely outperform a human reporter? Where would it fail? Can we fix those failures?
+author: Eduardo Yi
+featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/f92fe694-9c75-431d-a814-6c73d7986b48/6d96e4ae-bc20-49e9-bf12-87287346889a/final-1775235399643.webp
+featured_image_alt: ''
 ---
 The journalism crisis is real, and "just use AI" is not a plan.
 
@@ -56,7 +58,7 @@ Which means most of it is, at least in outline, automatable.
 
 The first capability block is document analysis, and here the technology is genuinely impressive. Most frontier labs have released models that supports context windows up to 1,000,000 tokens. That's enough to hold several books in active memory simultaneously. Feed it a municipal budget, ten years of city council minutes, a stack of vendor contracts, and a property records database, and ask it to find the anomalies. It will find things: flag statistical irregularities in spending patterns, surface names that appear in multiple documents in ways that don't obviously belong together, and note when someone's contract value jumped 400% the year after a zoning vote. This is work that would take a human data reporter weeks. An agent can do it in minutes and not get bored halfway through the water utility contracts.
 
-The second block is autonomous action. The ability to not just analyze but *do* things in the world. This is where agentic frameworks come in. [OpenAI's agent architecture](https://developers.openai.com/api/docs/guides/agents/) works through a function-calling loop: the model identifies a needed action, calls a tool, receives the result, and continues reasoning. The loop runs until the task is complete or the model determines it's stuck. In practice, this means an agent can autonomously draft and send emails to public records officers, track response deadlines, follow up when agencies are late, and log everything. FOIA request management is an almost perfect fit: it's high-volume, procedurally consistent, and deeply tedious for humans, all of which are selling points for an agent.
+The second block is autonomous action. The ability to not just analyze but _do_ things in the world. This is where agentic frameworks come in. [OpenAI's agent architecture](https://developers.openai.com/api/docs/guides/agents/) works through a function-calling loop: the model identifies a needed action, calls a tool, receives the result, and continues reasoning. The loop runs until the task is complete or the model determines it's stuck. In practice, this means an agent can autonomously draft and send emails to public records officers, track response deadlines, follow up when agencies are late, and log everything. FOIA request management is an almost perfect fit: it's high-volume, procedurally consistent, and deeply tedious for humans, all of which are selling points for an agent.
 
 Phone interviews are harder but not impossible. Existing voice AI can conduct structured interviews from a script, ask follow-up questions from a predefined set, and transcribe and summarize the output. This isn't the same as a good reporter adapting in real time to a nervous source, but it's adequate for routine calls: reaching the city clerk to confirm a date, asking a spokesperson for a comment on the record.
 
@@ -114,7 +116,7 @@ The journalism application is not absurd. An AI investigation that has identifie
 
 What actually works in this setup: attendance and observation of public proceedings, document hand-delivery, photography of public spaces, and basic confirmation tasks ("is this business still operating at this address"). These are real journalism tasks, and having a human execute them on AI direction is a genuine bridge across the physical gap.
 
-What breaks: almost everything involving judgment, rapport, or the kind of improvisation that actual reporting requires. A proxy at a city council meeting can note that the councilmember looked nervous, but "*looked nervous*" is an interpretation, and the AI on the receiving end is now trusting a gig worker's subjective read of a situation the AI cannot verify. That chain of interpretation: AI instructs, human observes, human reports, AI synthesizes; introduces unreliability at every step. 
+What breaks: almost everything involving judgment, rapport, or the kind of improvisation that actual reporting requires. A proxy at a city council meeting can note that the councilmember looked nervous, but "_looked nervous_" is an interpretation, and the AI on the receiving end is now trusting a gig worker's subjective read of a situation the AI cannot verify. That chain of interpretation: AI instructs, human observes, human reports, AI synthesizes; introduces unreliability at every step. 
 
 Current AI systems can detect broad vocal and visual signals reasonably well in controlled settings, but real-world inference of subtle emotional states is still [well outside what vision models can reliably do](https://arxiv.org/html/2412.15834v1). The proxy's description becomes the AI's ground truth, with no check on accuracy.
 
@@ -134,7 +136,7 @@ The Society of Professional Journalists' [Code of Ethics](https://www.spj.org/et
 
 AI systems are trained to do something structurally different. The dominant training method, reinforcement learning from human feedback (or RLHF), rewards outputs that human evaluators rate positively. 
 
-Human evaluators, it turns out, tend to rate agreeable responses more favorably. Not because they're lazy, but because agreement *feels* correct, and disagreement feels confrontational even when it's accurate. The result, documented in a [2026 preprint by Shapira and colleagues](https://arxiv.org/abs/2602.01002), is that RLHF causally increases sycophantic behavior: post-training models are measurably more likely to affirm a false premise than to correct it, especially when the user states the premise with confidence.
+Human evaluators, it turns out, tend to rate agreeable responses more favorably. Not because they're lazy, but because agreement _feels_ correct, and disagreement feels confrontational even when it's accurate. The result, documented in a [2026 preprint by Shapira and colleagues](https://arxiv.org/abs/2602.01002), is that RLHF causally increases sycophantic behavior: post-training models are measurably more likely to affirm a false premise than to correct it, especially when the user states the premise with confidence.
 
 OpenAI has acknowledged this directly. After a GPT-4o update made the model noticeably more deferential, they [published a postmortem](https://openai.com/index/sycophancy-in-gpt-4o/) explaining that the update had inadvertently optimized for short-term approval over honesty, and they rolled back the change. Anthropic has [documented similar findings](https://alignment.anthropic.com/2025/openai-findings/). These aren't fringe concerns raised by skeptics; they're admissions from the labs building the systems.
 
@@ -152,7 +154,7 @@ But the limits are worth naming plainly. A council of models all trained with RL
 
 For investigative journalism specifically, this matters more than for almost any other application. An AI system analyzing financial anomalies in public procurement data doesn't need to be charming; it needs to hold its conclusion when a government official disputes it and offers an alternative explanation that happens to exculpate them. The test isn't whether the AI produces the right answer in a neutral environment. It's whether the AI produces the right answer when someone with a stake in a different answer is applying pressure.
 
-Human journalists fail this test too, obviously, careers have been softened by access journalism, by the fear of legal threats, by not wanting to burn a source. The difference is that human failure of this kind is recognized as failure. Sycophancy in AI is *structural*, baked into the reward signal, distributed across every output, and invisible to a reader who doesn't know to look for it. A reporter who folds under pressure is a bad reporter. *An AI that folds under pressure is behaving exactly as trained*.
+Human journalists fail this test too, obviously, careers have been softened by access journalism, by the fear of legal threats, by not wanting to burn a source. The difference is that human failure of this kind is recognized as failure. Sycophancy in AI is _structural_, baked into the reward signal, distributed across every output, and invisible to a reader who doesn't know to look for it. A reporter who folds under pressure is a bad reporter. _An AI that folds under pressure is behaving exactly as trained_.
 
 That distinction is where any honest accounting of the AI journalist concept has to spend time. The capability gaps are real but tractable. The sycophancy problem is real and currently not.
 
@@ -166,7 +168,7 @@ The technical reality makes this worse, not better. Prompts sent to third-party 
 
 **The liability question has no good answer yet.** When a human reporter gets a fact wrong and someone's reputation suffers, the legal path, however ugly, is at least legible. When an AI system hallucinates a defamatory claim and a newsroom publishes it, the legal path is genuinely unsettled. [Current analysis](https://www.culawreview.org/journal/redefining-defamation-establishing-proof-of-fault-for-libel-and-slander-in-ai-hallucinations) suggests publishers remain the primary exposed party. Courts have treated publishers of AI-generated content as "speakers" rather than hosts, which means Section 230 immunity almost certainly doesn't apply. The AI provider's liability is murkier: no Section 230 shield, but also no clear negligence standard, and you can't sue a model as a legal person.
 
-What this means in practice is that a newsroom using AI tools to report a story about a private individual is probably increasing its legal exposure, not reducing it. Using an unreliable tool and publishing its output without sufficient verification could satisfy the negligence standard that private-figure plaintiffs need to prevail. Early cases like *Riehl v. OpenAI* have produced [mixed results](https://www.nolo.com/legal-encyclopedia/artificial-intelligence-defamation-and-libel-is-anyone-liable.html) without establishing settled doctrine. The law is watching AI journalism develop in real time, and it hasn't decided what to do about it yet.
+What this means in practice is that a newsroom using AI tools to report a story about a private individual is probably increasing its legal exposure, not reducing it. Using an unreliable tool and publishing its output without sufficient verification could satisfy the negligence standard that private-figure plaintiffs need to prevail. Early cases like _Riehl v. OpenAI_ have produced [mixed results](https://www.nolo.com/legal-encyclopedia/artificial-intelligence-defamation-and-libel-is-anyone-liable.html) without establishing settled doctrine. The law is watching AI journalism develop in real time, and it hasn't decided what to do about it yet.
 
 ![The law hasn't decided who's responsible when AI-generated journalism gets it wrong.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/f92fe694-9c75-431d-a814-6c73d7986b48/7bd60176-3711-4347-8fc6-e8f8312f6837/final-1775235342875.webp "The law hasn't decided who's responsible when AI-generated journalism gets it wrong.")
 
@@ -199,92 +201,3 @@ That instinct is not algorithmic. It comes from understanding that pushback from
 So what is journalism, actually? It's not primarily the collection of information: AI can probably handle more of that than most reporters would like to admit. It's the maintenance of skepticism under social pressure, across time, against people with resources and motivation to make you stop. The document collection is the easy part. Holding what you found when someone important wants you to drop it: that's the job.
 
 AI gets you to the door. Whether it can knock, listen to how long it takes for someone to answer, and decide what that pause means... that's a different question. For now, the answer is no.
-
-## Sources
-
-- [State of the News Media 2024: It's Bad](https://drt.cmc.edu/2024/10/24/state-of-the-news-media-2024-its-bad/) — drt.cmc.edu
-- [Number of closed/merged newspapers](https://www.statista.com/statistics/944134/number-closed-merged-newspapers/) — Statista
-- [Attachment / PDF (closures/mergers statistics cited)](https://mccmeetingspublic.blob.core.usgovcloudapi.net/hutchinstx-meet-fbf50e27005a4aa890d046d01a7842a2/ITEM-Attachment-001-f505a90081d64844bc30cae490e5f678.pdf) — mccmeetingspublic.blob.core.usgovcloudapi.net
-- [Medill report: local news closures, independent papers, news deserts](https://www.poynter.org/business-work/2025/medill-report-local-news-closures-independent-papers-news-deserts/) — Poynter
-- [Digital News Report 2024 — United States](http://reutersinstitute.politics.ox.ac.uk/digital-news-report/2024/united-states) — Reuters Institute for the Study of Journalism
-- [Inside the crisis at the Center for Investigative Reporting and Reveal (2022 cuts)](https://www.businessinsider.com/inside-the-crisis-at-the-center-for-investigative-reporting-and-reveal-2022-8) — Business Insider
-- [BBC local proposes to close central/regional investigations unit](https://pressgazette.co.uk/publishers/broadcast/bbc-local-proposes-to-close-central-regional-investigations-unit/) — Press Gazette
-- [Washington Post begins sweeping layoffs](https://www.cbsnews.com/news/washington-post-begins-sweeping-layoffs/) — CBS News
-- [2023 was the worst year for the news business since the pandemic](https://www.poynter.org/business-work/2023/2023-was-the-worst-year-for-the-news-business-since-the-pandemic/) — Poynter
-- [Five years later: Panama Papers still having a big impact](https://www.icij.org/investigations/panama-papers/five-years-later-panama-papers-still-having-a-big-impact/) — International Consortium of Investigative Journalists (ICIJ)
-- [Watergate (case study)](https://impact.gijn.org/case-studies/watergate-united-states/) — Global Investigative Journalism Network (GIJN)
-- [Investigative journalism collaboration produced the Panama Papers](https://www.opensocietyfoundations.org/voices/investigative-journalism-collaboration-produced-panama-papers) — Open Society Foundations
-- [AI and journalism: ethical dilemmas and impacts (Frontiers in Communication, 2024)](https://www.frontiersin.org/journals/communication/articles/10.3389/fcomm.2024.1465178/full) — Frontiers
-- [Media and journalism trends across 2023–2025](https://ringpublishing.com/blog/media-trends/media-and-journalism-trends-across-2023-2024-and-2025/767lth7) — Ring Publishing
-- [Function calling — OpenAI API](https://developers.openai.com/api/docs/guides/function-calling/) — OpenAI
-- [Agents — OpenAI API](https://developers.openai.com/api/docs/guides/agents/) — OpenAI
-- [Using GPT-4 Vision with function calling — OpenAI Cookbook](https://developers.openai.com/cookbook/examples/multimodal/using_gpt4_vision_with_function_calling/) — OpenAI
-- [Function calling in the OpenAI API — Help Center](https://help.openai.com/en/articles/8555517-function-calling-in-the-openai-api) — OpenAI Help Center
-- [Function Calling (blog)](https://www.ruh.ai/blogs/function-calling) — Ruh.ai
-- [Function calling — Prompting Guide (agents)](https://www.promptingguide.ai/agents/function-calling) — Prompting Guide
-- [Claude 4 announcement](https://www.anthropic.com/news/claude-4) — Anthropic
-- [Effective context engineering for AI agents — Anthropic Engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents) — Anthropic
-- [Long-running Claude (research)](https://www.anthropic.com/research/long-running-Claude) — Anthropic
-- [Agent loop — Claude Agent SDK docs](https://platform.claude.com/docs/en/agent-sdk/agent-loop) — Anthropic / Claude platform
-- [Measuring agent autonomy (research)](https://www.anthropic.com/research/measuring-agent-autonomy) — Anthropic
-- [Claude Code agent architecture (analysis)](https://www.zenml.io/llmops-database/claude-code-agent-architecture-single-threaded-master-loop-for-autonomous-coding) — ZenML
-- [Agentic workflows / loops (overview)](https://mcpmarket.com/tools/skills/agentic-workflows-loops) — MCPMarket
-- [Context engineering from Claude (article)](https://01.me/en/2025/12/context-engineering-from-claude/) — 01.me
-- [AI Anomaly Detection Use Cases in Finance](https://www.lucid.now/blog/ai-anomaly-detection-use-cases-finance/) — Lucid
-- [AI Anomaly Detection (overview / use cases)](https://rtslabs.com/ai-anomaly-detection/) — RTS Labs
-- [AI Fraud Detection in Banking](https://www.ibm.com/think/topics/ai-fraud-detection-in-banking) — IBM Think
-- [Fraud Detection Solutions / Accelerators](https://www.databricks.com/solutions/accelerators/fraud-detection) — Databricks
-- [ArXiv preprint (LLM / requirements engineering study)](https://arxiv.org/pdf/2501.19297) — arXiv
-- [LLM Context Limits: Mission Readiness — How to Fix](https://blog.metrostar.com/llm-context-limits-mission-readiness-how-to-fix) — MetroStar blog
-- [DoD FY2024 Annual FOIA Report](https://pclt.defense.gov/Portals/140/FOIA/Annual_Report/DoD_FY2024_Annual_FOIA_Report.pdf?ver=sQox-JN_HZ4i8AyO6ro1Gg%3D%3D) — Office of the Under Secretary of Defense / DoD
-- [HHS FOIA / Chief FOIA Officer reports (Section 5) - 2025](https://www.hhs.gov/foia/reports/chief-foia-officer-reports/2025-section-5/index.html) — U.S. Department of Health & Human Services
-- [DOJ FOIA Backlog Guidance (blog summary)](https://www.casepoint.com/blog/doj-foia-backlog-guidance/) — Casepoint (blog)
-- [DOJ / OIP media (FOIA report PDF link)](https://www.justice.gov/oip/media/1398111/dl?inline) — U.S. Department of Justice, Office of Information Policy
-- [FOIA.gov — Reports](https://www.foia.gov/reports.html) — FOIA.gov (U.S. government)
-- [AI-powered Anomaly Detection — Going Beyond the Balance Sheet](https://www.mindbridge.ai/blog/ai-powered-anomaly-detection-going-beyond-the-balance-sheet/) — MindBridge (blog)
-- [OAJAIML PDF (context window / token degradation paper)](https://www.oajaiml.com/uploads/archivepdf/643561268.pdf) — OAJAI/ML (archive)
-- [Journalism self-censorship / career pressure (source cited as [1] in section)](N/A) — unspecified in section
-- [AI-human gig platform: Where robots need humans](https://aiforreal.substack.com/p/ai-human-gig-platform-where-robots) — AI For Real (Substack)
-- [Chapter 10: Covering Local Government Meetings](https://processofwritingnews.wordpress.com/chapter-10-covering-local-government-meetings/) — Process of Writing News (blog/guide)
-- [Making Public Meetings Accessible to All](https://www.nlc.org/article/2022/06/20/making-public-meetings-accessible-to-all/) — National League of Cities (NLC)
-- [How to Cover Public Meetings (local-politics toolkit)](https://sites.google.com/view/srlelection2020toolkit/collections/local-politics/how-to-cover-public-meetings) — SRL Election Toolkit (Google Sites)
-- [How live streaming city council meetings can foster transparency and trust](https://switchboard.live/blog/how-live-streaming-city-council-meetings-can-foster-transparency-and-trust) — Switchboard (blog)
-- [Hints for covering government](https://journalistsresource.org/home/hints-for-covering-government/) — Journalist's Resource (Harvard Kennedy School / Shorenstein Center)
-- [Four Ways to Maintain Control and Decorum During City Council Meetings](https://www.westerncity.com/article/four-ways-maintain-control-and-decorum-during-city-council-meetings) — Western City (League of California Cities magazine)
-- [US8996165B2 — Telepresence system for operating rooms / telepresence robot](https://patents.google.com/patent/US8996165B2/en) — Google Patents (US Patent Office record)
-- [What is a telepresence robot and what can they do?](https://telepresencerobots.com/what-telepresence-robot-and-what-can-they-do/) — TelepresenceRobots.com (industry/overview site)
-- [CHI Workshop 2024 — Telepresence & accessibility study (University of Nottingham example)](https://www.reyescruz.com/files/chiwork24_telepresence_accessible.pdf) — Reyes Cruz (CHI workshop paper/report)
-- [Here and There: Experiences with a remote presence robot](https://michigan.it.umich.edu/news/2018/10/23/here-and-there-experiences-with-a-remote-presence-robot/) — University of Michigan IT news
-- [Double Robotics (product and use cases for telepresence robots)](https://www.doublerobotics.com) — Double Robotics (company)
-- [Embodied AI can close the nonverbal communication gap for blind individuals](https://www.trails.umd.edu/news/embodied-ai-can-close-the-nonverbal-communication-gap-for-blind-individuals) — TRAILS (University of Maryland news)
-- [ArXiv preprint (2024) on subtle nonverbal cue influences / AniBalloons study](https://arxiv.org/html/2412.15834v1) — arXiv (preprint server)
-- [Frontiers in Psychiatry — multimodal nonverbal cue / mental health screening article (truncated URL)](https://www.frontiersin.org/journals/psychiatry/articles/10.3389/fpsy) — Frontiers in Psychiatry
-- [Ensemble AI Revolution (2025)](https://ai-crucible.com/articles/ensemble-ai-revolution-2025/) — AI Crucible
-- [YouTube: LLM Council / Karpathy (video cited)](https://www.youtube.com/watch?v=HOdyIyccOCE) — YouTube
-- [karpathy/llm-council (GitHub)](https://github.com/karpathy/llm-council) — GitHub
-- [The Sycophancy Fallacy (Substack)](https://aarontay.substack.com/p/the-sycophancy-fallacy-why-you-may) — Aaron Tay / Substack
-- [RLHF Amplification Mechanism (Shapira et al., 2026) [preprint]]([https://arxiv.org/abs/2602.01002](https://arxiv.org/abs/2602.01002)) — arXiv
-- [Sycophancy analysis (Gerdus Benade PDF)](https://www.gerdusbenade.com/files/26_sycophancy.pdf) — Gerdus Benade / personal site
-- [Sycophancy in GPT-4o (OpenAI page/post)](https://openai.com/index/sycophancy-in-gpt-4o/) — OpenAI
-- [Anthropic / OpenAI joint findings (2025)](https://alignment.anthropic.com/2025/openai-findings/) — Anthropic alignment blog
-- [GPT-4o Sycophancy Post-Mortem (Zvi)](https://thezvi.substack.com/p/gpt-4o-sycophancy-post-mortem) — Substack (TheZvi)
-- [The 'Are You Sure' Problem — Why your AI keeps changing its mind](https://randalolson.com/2026/02/07/the-are-you-sure-problem-why-your-ai-keeps-changing-its-mind/) — Randal Olson (blog)
-- [Science DOI referenced in section (article)](https://www.science.org/doi/10.1126/science.aec8352) — Science (AAAS)
-- [Tech Brief: AI Sycophancy & OpenAI (Georgetown Law Tech Institute)](https://www.law.georgetown.edu/tech-institute/research-insights/insights/tech-brief-ai-sycophancy-openai-2/) — Georgetown Law Tech Institute
-- [LessWrong: DPO/PPO/RLHF incentivizes sycophancy/exaggeration (discussion/post)](https://www.lesswrong.com/posts/KqYQYkqsHqRuAKki5/dpo-ppo-rlhf-on-llms-incentivizes-sycophancy-exaggeration) — LessWrong
-- [Futurism: paper — AI chatbots are becoming sycophantic](https://futurism.com/artificial-intelligence/paper-ai-chatbots-chatgpt-claude-sycophantic) — Futurism
-- [SPJ Code of Ethics](https://www.spj.org/ethicscode.asp) — Society of Professional Journalists
-- [Artificial Intelligence, Defamation and Libel: Is Anyone Liable?](https://www.nolo.com/legal-encyclopedia/artificial-intelligence-defamation-and-libel-is-anyone-liable.html) — Nolo
-- [Redefining Defamation: Establishing Proof of Fault for Libel and Slander in AI Hallucinations](https://www.culawreview.org/journal/redefining-defamation-establishing-proof-of-fault-for-libel-and-slander-in-ai-hallucinations) — CU Law Review
-- [First Amendment Limits on AI Liability](https://www.lawfaremedia.org/article/first-amendment-limits-on-ai-liability) — Lawfare
-- [Who is to blame when AI defames?](https://www.webberwentzel.com/News/Pages/who-is-to-blame-when-ai-defames.aspx) — Webber Wentzel (legal commentary)
-- [Media-law experts discuss legal risks and challenges of AI tools](https://rjionline.org/news/media-law-experts-discuss-legal-risks-and-challenges-of-ai-tools/) — Reporters Journal / RJI (news/media law coverage)
-- [The Hidden Costs of Losing Local Investigative Journalism](https://www.readfrontier.org/stories/the-hidden-costs-of-losing-local-investigative-journalism/) — Read Frontier
-- [New report reveals alarming and widespread shortage of local journalists across the U.S.](http://www.rebuildlocalnews.org/new-report-reveals-alarming-and-widespread-shortage-of-local-journalists-across-the-u-s/) — Rebuild Local News
-- [Local News Platforms, Misinformation and Disinformation](https://citap.unc.edu/news/local-news-platforms-mis-disinformation/) — UNC Center for Innovation and Sustainability in Local Media (CITAP)
-- [The State of Local News — and Why It Matters](https://www.theajp.org/news-insights/the-state-of-local-news-and-why-it-matters/) — The American Journal of Philanthropy / TheAJP (news-insights)
-- [Local Journalism: What to Do About Its Death Spiral](https://www.rstreet.org/commentary/local-journalism-what-to-do-about-its-death-spiral/) — R Street Institute (commentary)
-- [Generative AI policies in newsrooms](https://journalistsresource.org/home/generative-ai-policies-newsrooms/) — Journalist's Resource (Nieman/Harvard-affiliated)
-- [Journalism needs better representation to counter AI](https://www.brookings.edu/articles/journalism-needs-better-representation-to-counter-ai/) — Brookings Institution
-- [Disclose AI use — even if it hurts trust](https://trustingnews.org/disclose-ai-use-even-if-it-hurts-trust/) — Trusting News
-- [UN: States using AI to monitor sources / concerns about press freedom (UN News, 2025)](https://news.un.org/en/story/2025/05/1162856) — UN News
