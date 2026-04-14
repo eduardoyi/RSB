@@ -1,10 +1,12 @@
 ---
-status: "draft"
-title: "Spain Gave a Football League the Power to Block the Internet Every Weekend"
-slug: "laliga-blocks-cloudflare"
-date: "2026-04-14"
-description: ""
-featured_image: "https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/97fbf981-673e-43ce-ae7d-0346f8d36f13/aee4c9fb-6f78-4a5e-8430-b8e45a292620/final-1776194112395.webp"
+status: published
+title: Spain Gave a Football League the Power to Block the Internet Every Weekend
+slug: laliga-blocks-cloudflare
+date: 2026-04-14
+description: ''
+author: Eduardo Yi
+featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/97fbf981-673e-43ce-ae7d-0346f8d36f13/aee4c9fb-6f78-4a5e-8430-b8e45a292620/final-1776194112395.webp
+featured_image_alt: ''
 ---
 ## His father was out there somewhere
 
@@ -95,72 +97,3 @@ The precedent here is the part that travels. Spain did not invent the idea of co
 If a football league can get this, why not a music publisher? A film studio? A pharmaceutical company that doesn't like a news article living behind Cloudflare?
 
 Spain sucks and I'm happy I don't live there anymore.
-
-## Sources
-
-- [LaLiga blocks Cloudflare IPs (Gigazine coverage)](https://gigazine.net/gsc_news/en/20260413-laliga-block-cloudflare/) — Gigazine
-- [LaLiga VPN block Spain court order](https://reclaimthenet.org/laliga-vpn-block-spain-court-order) — Reclaim The Net
-- [Spain's LaLiga blocks Cloudflare-range IPs; collateral damage reported](https://www.techradar.com/vpn/vpn-privacy-security/spains-laliga-blocks-us-governments-vpn-enabled-freedom-gov-in-piracy-crackdown) — TechRadar
-- [Docker fails in Spain as LaLiga blocks Cloudflare IPs](https://byteiota.com/docker-fails-in-spain-la-liga-blocks-cloudflare-ips/) — ByteIota
-- [Hacker News thread (id=47738883) discussing LaLiga blocks](https://news.ycombinator.com/item?id=47738883) — Hacker News
-- [YouTube short referencing cloud/IP blocks (short clip)](https://www.youtube.com/shorts/duqFO5XFc7A) — YouTube
-- [Hacker News thread (id=47740148) on LaLiga/Cloudflare collateral damage](https://news.ycombinator.com/item?id=47740148) — Hacker News
-- [Blog: LaLiga IP blocks overview (2025–2026)](https://jgcarmona.com/laliga-blocks-2025/) — jgcarmona.com
-- [VPNs blocked, collateral damage from LaLiga IP blocks](https://www.medianama.com/2026/02/223-vpns-block-illegal-la-liga-ips-in-spain/) — Medianama
-- [X post (status 2040536442846241114) referencing LaLiga blocks](https://x.com/i/status/2040536442846241114) — X (Twitter)
-- [X post (status 2041101947252416573) about PAJ Portal GPS outage](https://x.com/i/status/2041101947252416573) — X (Twitter)
-- [X post (status 2041683648920031528) reporting app freeze during match](https://x.com/i/status/2041683648920031528) — X (Twitter)
-- [X post (status 2040867100378464513) linking to local reports](https://x.com/i/status/2040867100378464513) — X (Twitter)
-- [X post (status 2040898038797902065) on app support statements](https://x.com/i/status/2040898038797902065) — X (Twitter)
-- [X post (status 2040550566636736566) calling for collective action](https://x.com/i/status/2040550566636736566) — X (Twitter)
-- [Update on Spain and LaLiga blocks of the internet](https://vercel.com/blog/update-on-spain-and-laliga-blocks-of-the-internet) — Vercel (blog)
-- [LaLiga wins court order requiring NordVPN and Proton VPN to block illegal football streams in Spain](https://www.techradar.com/vpn/vpn-privacy-security/la-liga-wins-court-order-requiring-nordvpn-and-proton-vpn-to-block-illegal-football-streams-in-spain-but-vpn-firms-say-they-have-not-been-notified) — TechRadar
-- [Spain just proved why ISPs can't be the Internet's content police](https://mgamble.ca/p/spain-just-proved-why-isps-cant-be-the-internets-content-police) — M. Gamble (newsletter/blog)
-- [Cloudflare statistics (market share, sites, traffic)](https://sqmagazine.co.uk/cloudflare-statistics/) — SQ Magazine
-- [Cloudflare market share and statistics](https://kinsta.com/cloudflare-market-share/) — Kinsta
-- [FC Barcelona generated €556.8 million in commercial revenue — leading LaLiga in 2024/2025](https://www.apd.cat/en/barcelona/the-fc-barcelona-generated-556-8-million-in-commercial-revenue-leading-laliga-in-2024-2025_5278_102.html) — APD.cat
-- [Usage statistics and market share of Cloudflare](https://w3techs.com/technologies/details/cn-cloudflare) — W3Techs
-- [Market share of reverse proxy services: Cloudflare](https://www.statista.com/chart/35487/market-share-of-reverse-proxy-services-cloudflare/) — Statista
-- [What is a CDN? — Cloudflare Learning](https://www.cloudflare.com/learning/cdn/what-is-a-cdn/) — Cloudflare
-- [What is a shared IP address and privacy/impacts](https://www.privateinternetaccess.com/blog/shared-ip-address/) — Private Internet Access (PIA) blog
-- [LaLiga reaches a new historical maximum in revenues and exceeds 17 million spectators](https://www.laliga.com/en-GB/news/laliga-reaches-a-new-historical-maximum-in-revenues-and-exceeds-17-million-spectators) — LaLiga (official)
-- [LaLiga financial report / consolidated figures (PDF)](https://assets.laliga.com/assets/2025/06/17/originals/ce724706eb11fb71e7b4d1638bd1ab0b.pdf) — LaLiga (official report)
-- [LaLiga's war on piracy is breaking the internet in Spain — and your VPN could be the next target](https://www.techradar.com/vpn/vpn-privacy-security/la-ligas-war-on-piracy-is-breaking-the-internet-in-spain-and-your-vpn-could-be-the-next-target) — TechRadar
-- [Tell HN: Docker pull fails in Spain due to football/Cloudflare block](https://app.daily.dev/posts/tell-hn-docker-pull-fails-in-spain-due-to-football-cloudflare-block-nkwjp6ivu) — daily.dev
-- [Official statement in relation to the blocking of IPs during matchdays](https://www.laliga.com/en-GB/news/official-statement-in-relation-to-the-blocking-of-ips-during-the-recent-ea-sports-laliga-matchdays-linked-to-illegal-cloudflare-practices) — LaLiga (official)
-- [La Liga blocking of Cloudflare IPs in Spain](https://cybersecurityadvisors.network/2025/04/15/la-liga-blocking-of-cloudflare-ips-in-spain/) — Cybersecurity Advisors (blog)
-- [Spain court NordVPN / LaLiga pirate streams (coverage)](https://sqmagazine.co.uk/spain-court-nordvpn-block-laliga-pirate-streams/) — SQ Magazine
-- [Spain: LaLiga recommends improvements to dynamic IP blocking proposal](https://piracymonitor.org/spain-laliga-recommends-improvements-to-dynamic-ip-blocking-proposal-which-had-failed/) — Piracy Monitor
-- [Hacker News comments on related Docker/CI failures](https://news.ycombinator.com/item?id=47739575) — Hacker News (Y Combinator)
-- [X post: reports of collateral damage from LaLiga blocks](https://x.com/i/status/2043465664506253709) — X (formerly Twitter)
-- [X post: developers reporting Docker Hub pulls failing during matches](https://x.com/i/status/2043761608829120951) — X (formerly Twitter)
-- [X post: GPS tracker failure reports (vulnerable person)](https://x.com/i/status/2041190426552451487) — X (formerly Twitter)
-- [Spanish soccer league battles Cloudflare over piracy, says US company ignores illegal content](https://www.foxsports.com/articles/soccer/spanish-soccer-league-battles-cloudflare-over-piracy-says-us-company-ignores-illegal-content) — Fox Sports
-- [Spanish Congress supports LaLiga's anti-piracy strategy](https://www.advanced-television.com/2025/10/23/spanish-congress-supports-la-ligas-anti-piracy-strategy/) — Advanced Television
-- [Cloudflare takes legal action over LaLiga's disproportionate blocking efforts](https://www.broadbandtvnews.com/2025/02/19/cloudflare-takes-legal-action-over-laligas-disproportionate-blocking-efforts/) — Broadband TV News
-- [LaLiga is confident that the European Commission will soon strengthen its recommendation on tackling online piracy in sport](https://www.laliga.com/en-GB/news/laliga-is-confident-that-the-european-commission-will-soon-strengthen-its-recommendation-on-tackling-online-piracy-in-sport) — LaLiga
-- [X post: overview of LaLiga vs Cloudflare conflict (example post cited in section)](https://x.com/i/status/2023874210775658595) — X (formerly Twitter)
-- [X post: examples of collateral damage to services during LaLiga matchdays](https://x.com/i/status/2043090637029872099) — X (formerly Twitter)
-- [X post: legal actions and public responses in LaLiga/Cloudflare dispute (representative)](https://x.com/i/status/1859599982250082510) — X (formerly Twitter)
-- [Telefónica wins court backing to expand blocking measures to more sports](https://www.telecompaper.com/news/telefonica-wins-court-backing-to-expand-blocking-measures-to-more-sports--1568045) — Telecompaper
-- [Spain orders NordVPN, ProtonVPN to block LaLiga piracy sites](https://www.bleepingcomputer.com/news/legal/spain-orders-nordvpn-protonvpn-to-block-laliga-piracy-sites/) — BleepingComputer
-- [Spanish court orders NordVPN and ProtonVPN to block piracy sites](https://www.pcrisk.com/internet-threat-news/34968-spanish-court-orders-nordvpn-and-protonvpn-to-block-piracy-sites) — PCRisk
-- [NordVPN and Proton VPN hit with blocking orders as Spain cracks down on illegal soccer streams](https://www.tomsguide.com/computing/vpns/nordvpn-and-proton-vpn-hit-with-blocking-orders-as-spain-cracks-down-on-illegal-soccer-streams) — Tom's Guide
-- [Information note on the precautionary measures granted to LaLiga against NordVPN and ProtonVPN](https://www.laliga.com/en-GB/news/information-note-on-the-precautionary-measures-granted-to-laliga-against-nordvpn-and-protonvpn) — LaLiga (official)
-- [Spain: Nord VPN and Proton VPN are designated as piracy intermediaries](https://piracymonitor.org/spain-nord-vpn-and-proton-vpn-are-designated-as-piracy-intermediaries-a-win-for-rights-holders/) — PiracyMonitor
-- [Wimbledon tennis expansion plans boosted by high court ruling](https://www.skysports.com/tennis/news/12110/13521856/wimbledon-tennis-expansion-plans-boosted-by-high-court-ruling-as-grand-slam-site-looks-to-triple-in-size) — Sky Sports
-- [2026-03-20 Wimbledon expansion plans receive high court boost](https://www.wimbledon.com/en_GB/news/articles/2026-03-20/2026-03-20_wimbledon_expansion_plans_receive_high_court_boost.html) — Wimbledon.com
-- [Hacker News thread on LaLiga/Cloudflare blocks](https://news.ycombinator.com/item?id=47114235) — Hacker News
-- [X status (LaLiga/ VPN block reporting)](https://x.com/i/status/2023730011195232257) — X (formerly Twitter)
-- [Report: Spain ordered NordVPN and ProtonVPN to block pirate football streams without notice](https://hackyourmom.com/en/novyny/ispaniya-nakazala-nordvpn-i-protonvpn-blokuvaty-piratski-futbolni-translyacziyi-bez-poperedzhennya/) — HackYourMom
-- [Football is without borders — except in the digital space](https://www.brusselsreport.eu/2025/04/22/football-is-without-borders-except-in-the-digital-space/) — Brussels Report
-- [Cloudflare vs La Liga](https://daniel.es/blog/cloudflare-vs-la-liga/) — daniel.es (blog)
-- [X thread/post by Gergely Orosz (1912209773895778654)](https://x.com/i/status/1912209773895778654) — X (formerly Twitter) — Gergely Orosz
-- [X post on LaLiga IP-blocking precedent (1914292322692698166)](https://x.com/i/status/1914292322692698166) — X
-- [X thread reporting overblocking and collateral damage (1982471688232079786)](https://x.com/i/status/1982471688232079786) — X
-- [X post on legal challenges and censorship concerns (1968328692070822288)](https://x.com/i/status/1968328692070822288) — X
-- [X post referencing court extensions to intermediaries (2043254064910041285)](https://x.com/i/status/2043254064910041285) — X
-- [X post about weekly blocks and precedents (2023814208865910979)](https://x.com/i/status/2023814208865910979) — X
-- [X post reporting collateral-hit counts and VPN demand (2025643188321714642)](https://x.com/i/status/2025643188321714642) — X
-- [X post on potential Constitutional Court appeal and criticism (2043092268345704479)](https://x.com/i/status/2043092268345704479) — X
-- [X post documenting matchday blocks starting earlier than expected (1982658765150384150)](https://x.com/i/status/1982658765150384150) — X
