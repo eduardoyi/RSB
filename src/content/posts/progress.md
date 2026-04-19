@@ -7,6 +7,7 @@ description: ''
 author: Eduardo Yi
 featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/bafbeab4-f6b8-484b-9e36-f55fa6183922/5e42cf3d-d1e0-4125-b989-c9b90aef054c/edited-1776637067986.webp
 featured_image_alt: ''
+podcast_audio: https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/progress.m4a
 ---
 ## The Iran war is costing $2 billion a day, and that number is designed to feel unreal
 
@@ -253,7 +254,7 @@ Stalinist industrialization was explicitly framed in Marxist-Hegelian terms. The
 
 This is the Progress Camp's position taken to its terminal logic.
 
-The philosopher Theodor Adorno, [writing in the aftermath of the Holocaust](https://journals.sagepub.com/doi/10.1177/0191453710389438), gave the clearest answer to the Progress Camp: after Auschwitz, the idea that history's atrocities serve a rational purpose is not just wrong, **it is obscene**. You cannot look at the death camps and say: necessary step ¯_(ツ)_/¯. You cannot look at the famine dead and say: the price of progress ¯\_(ツ)_/¯. The moment you do, you have decided that the story of history matters more than the people inside it. And once you've decided that, you've handed every future bad guy the same excuse.
+The philosopher Theodor Adorno, [writing in the aftermath of the Holocaust](https://journals.sagepub.com/doi/10.1177/0191453710389438), gave the clearest answer to the Progress Camp: after Auschwitz, the idea that history's atrocities serve a rational purpose is not just wrong, **it is obscene**. You cannot look at the death camps and say: necessary step ¯_(ツ)_/¯. You cannot look at the famine dead and say: the price of progress ¯_(ツ)_/¯. The moment you do, you have decided that the story of history matters more than the people inside it. And once you've decided that, you've handed every future bad guy the same excuse.
 
 Hannah Arendt adds the part that should really keep you up at night. When she covered the trial of Adolf Eichmann, one of the key architects of the Nazi genocide, she expected to find a monster. She found a bureaucrat. Eichmann didn't think of himself as a murderer. He thought he was [doing his job inside a larger process he hadn't designed and couldn't stop](https://aeon.co/ideas/what-did-hannah-arendt-really-mean-by-the-banality-of-evil). He had stopped asking whether what he was doing was right, and started asking only whether he was doing it correctly. He had, in Arendt's framing, stopped thinking altogether. That is the Progress Camp's logic taken to its human conclusion: a person so fully absorbed into the machinery of historical necessity that individual human lives had ceased to register as morally real.
 
