@@ -1,14 +1,16 @@
 ---
-status: "published"
-title: "The Price of Progress is Someone Else's Suffering"
-slug: "progress"
-date: "2026-04-19"
-description: ""
-featured_image: "https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/bafbeab4-f6b8-484b-9e36-f55fa6183922/5e42cf3d-d1e0-4125-b989-c9b90aef054c/edited-1776637067986.webp"
+status: published
+title: The Price of Progress is Someone Else's Suffering
+slug: progress
+date: 2026-04-19
+description: ''
+author: Eduardo Yi
+featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/bafbeab4-f6b8-484b-9e36-f55fa6183922/5e42cf3d-d1e0-4125-b989-c9b90aef054c/edited-1776637067986.webp
+featured_image_alt: ''
 ---
 ## The Iran war is costing $2 billion a day, and that number is designed to feel unreal
 
-I was listening to a *Search Engine* podcast episode called "[The Cost of War](https://www.searchengine.show/the-cost-of-war/)" when the guest, a woman called Linda Bilmes, said something that made me go down a rabbit hole.
+I was listening to a _Search Engine_ podcast episode called "[The Cost of War](https://www.searchengine.show/the-cost-of-war/)" when the guest, a woman called Linda Bilmes, said something that made me go down a rabbit hole.
 
 Bilmes is a public finance researcher at Harvard Kennedy School, and she has spent years studying what wars actually cost: operations, equipment, veterans' care, interest on debt, the works. In her piece, "[The Ghost Budget](https://www.hks.harvard.edu/publications/ghost-budget-us-war-spending-fiscal-transparency)," she explains how much work the US government does to hide how much it really costs to go to war. 
 
@@ -16,9 +18,9 @@ Her claim about the current war in Iran is that [it's costing roughly $2 billion
 
 ![The cost of exporting freedom.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/bafbeab4-f6b8-484b-9e36-f55fa6183922/d9b6b2e4-f3c6-472f-9da1-1aaf626a4c1e/final-1776465203034.webp "The cost of exporting freedom.")
 
-Yet, the American taxpayer doesn't directly *feel* the pain of paying for new tomahawks, because the money is not coming out of their pockets. The government just puts it all on a credit card.
+Yet, the American taxpayer doesn't directly _feel_ the pain of paying for new tomahawks, because the money is not coming out of their pockets. The government just puts it all on a credit card.
 
-After 9/11, the United States changed the way it pays for war. Previous major conflicts had been financed at least partly through tax increases, which meant citizens felt something in their wallets and had concrete reasons to ask whether the war was worth it. The post-9/11 wars were [financed almost entirely through debt](https://costsofwar.watson.brown.edu/sites/default/files/papers/Edwards-Post-9_11-War-Spending.pdf), adding roughly $1.3 trillion to the national debt, about $4,000 per person, while taxes were cut simultaneously. The two moves together produced a war that felt, to most Americans paying bills and buying groceries, *like it cost nothing*. The [Bush-era tax cuts](https://en.wikipedia.org/wiki/Bush_tax_cuts) added an estimated $1.5 trillion to the debt over a decade, running in parallel with war spending so that the fiscal pain was scrambled into background noise. You couldn't easily point to a line on your pay stub and say: that is the war.
+After 9/11, the United States changed the way it pays for war. Previous major conflicts had been financed at least partly through tax increases, which meant citizens felt something in their wallets and had concrete reasons to ask whether the war was worth it. The post-9/11 wars were [financed almost entirely through debt](https://costsofwar.watson.brown.edu/sites/default/files/papers/Edwards-Post-9_11-War-Spending.pdf), adding roughly $1.3 trillion to the national debt, about $4,000 per person, while taxes were cut simultaneously. The two moves together produced a war that felt, to most Americans paying bills and buying groceries, _like it cost nothing_. The [Bush-era tax cuts](https://en.wikipedia.org/wiki/Bush_tax_cuts) added an estimated $1.5 trillion to the debt over a decade, running in parallel with war spending so that the fiscal pain was scrambled into background noise. You couldn't easily point to a line on your pay stub and say: that is the war.
 
 This is not a conspiracy. It's an incentive that politicians responded to. 
 
@@ -78,7 +80,7 @@ The question has never been whether progress costs suffering. It does. It always
 
 ## How much suffering is "worth it"?
 
-Hiding the cost of doing unpopular, and sometimes plain awful, things is how powerful people get away with doing them. The suffering gets absorbed, the forgetting is instantaneous, and the people who decided the cost was acceptable were never the people who *actually* suffered.
+Hiding the cost of doing unpopular, and sometimes plain awful, things is how powerful people get away with doing them. The suffering gets absorbed, the forgetting is instantaneous, and the people who decided the cost was acceptable were never the people who _actually_ suffered.
 
 But if doing those unpopular, sometimes plain awful, things results in outcomes that are undeniably worth having, then hiding the cost isn't just politically convenient. It's probably necessary.
 
@@ -125,7 +127,7 @@ There's no clean answer. But there are 4 camps of people who think their answer 
 
 The Witness position is simple: you are obligated to look. Not because looking fixes anything. Not because documentation leads to justice. But because choosing not to look is still a choice. And it is a choice that benefits the people who hid the cost in the first place.
 
-Walter Benjamin made this argument in 1940, in the ninth of his ["Theses on the Philosophy of History,"](https://warwick.ac.uk/fac/arts/english/currentstudents/postgraduate/masters/modules/marxismandmodernity/benjamin_philosophy_of_history.pdf) and he made it through an image. He owned Paul Klee's 1920 drawing *Angelus Novus*, a figure that looks less like a traditional angel and more like something frozen mid-alarm, eyes wide, mouth open, wings spread. 
+Walter Benjamin made this argument in 1940, in the ninth of his ["Theses on the Philosophy of History,"](https://warwick.ac.uk/fac/arts/english/currentstudents/postgraduate/masters/modules/marxismandmodernity/benjamin_philosophy_of_history.pdf) and he made it through an image. He owned Paul Klee's 1920 drawing _Angelus Novus_, a figure that looks less like a traditional angel and more like something frozen mid-alarm, eyes wide, mouth open, wings spread. 
 
 ![Paul Klee's Angelus Novus, 1920: the painting Walter Benjamin owned, stared at, and turned into the image of an angel condemned to witness history without ever being able to stop it.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/bafbeab4-f6b8-484b-9e36-f55fa6183922/e3fe558c-6413-4742-8f04-01ae3ee28e27/upload-1776471605432.webp "Paul Klee's Angelus Novus, 1920: the painting Walter Benjamin owned, stared at, and turned into the image of an angel condemned to witness history without ever being able to stop it.")
 
@@ -147,9 +149,9 @@ But some people, a few, cannot. After seeing the child, they walk away from Omel
 
 The Hiroshima and Nagasaki bombings are the best examples of the flaw of the Witness camp.
 
-Yoshito Matsushige was a photographer in Hiroshima when the bomb dropped on August 6, 1945. [His account](https://ahf.nuclearmuseum.org/ahf/key-documents/yoshito-matsushiges-account-hiroshima-bombing/) describes scenes so extreme that he could barely force himself to press the shutter. His photos are one of the few taken in the immediate aftermath, and they show human suffering in a register that is hard to look at directly. Survivors, the hibakusha, testified in detail about what they saw and felt and lost, their accounts documented in collections across decades. John Hersey published *Hiroshima* in 1946, an entire issue of the New Yorker given over to six survivors' stories, and it was read by millions. Later photographers including Dōmon Ken and Tōmatsu Shōmei produced bodies of work on the aftermath that entered the permanent record of the 20th century.
+Yoshito Matsushige was a photographer in Hiroshima when the bomb dropped on August 6, 1945. [His account](https://ahf.nuclearmuseum.org/ahf/key-documents/yoshito-matsushiges-account-hiroshima-bombing/) describes scenes so extreme that he could barely force himself to press the shutter. His photos are one of the few taken in the immediate aftermath, and they show human suffering in a register that is hard to look at directly. Survivors, the hibakusha, testified in detail about what they saw and felt and lost, their accounts documented in collections across decades. John Hersey published _Hiroshima_ in 1946, an entire issue of the New Yorker given over to six survivors' stories, and it was read by millions. Later photographers including Dōmon Ken and Tōmatsu Shōmei produced bodies of work on the aftermath that entered the permanent record of the 20th century.
 
-By December 1945, an estimated [140,000 people had died in Hiroshima and approximately 74,000 in Nagasaki](https://www.icrc.org/en/document/meeting-bomb-survivor-after-76-years-testimony-of-hope). The suffering was documented in extraordinary detail. *The world witnessed*.
+By December 1945, an estimated [140,000 people had died in Hiroshima and approximately 74,000 in Nagasaki](https://www.icrc.org/en/document/meeting-bomb-survivor-after-76-years-testimony-of-hope). The suffering was documented in extraordinary detail. _The world witnessed_.
 
 But there were no consequences and no accountability.
 
@@ -169,9 +171,9 @@ Power camp people are Witness camp people who also brought a calculator.
 
 The people in the Power camp, think that those responsible for the suffering, aka those in power, are hiding it on purpose. And their best weapon to expose them is a spreadsheet.
 
-In James C. Scott's *[Seeing Like a State](https://theanarchistlibrary.org/library/james-c-scott-seeing-like-a-state)*, he argues that states don't just fail to see certain things. They build systems that make certain things impossible to see, because counting them would make large projects politically impossible or morally unacceptable. He calls this legibility: the state's drive to turn complex, messy, local reality into clean numbers that can be taxed, drafted, and controlled. What gets left out of the official record isn't an accident. The record was built to leave it out.
+In James C. Scott's [_Seeing Like a State_](https://theanarchistlibrary.org/library/james-c-scott-seeing-like-a-state), he argues that states don't just fail to see certain things. They build systems that make certain things impossible to see, because counting them would make large projects politically impossible or morally unacceptable. He calls this legibility: the state's drive to turn complex, messy, local reality into clean numbers that can be taxed, drafted, and controlled. What gets left out of the official record isn't an accident. The record was built to leave it out.
 
-His example is 18th-century scientific forestry: German states reduced entire forest ecosystems to a single metric, the *yield of marketable timber*. 
+His example is 18th-century scientific forestry: German states reduced entire forest ecosystems to a single metric, the _yield of marketable timber_. 
 
 Everything else, the understory, the soil microbiome, the mosses, the animals, the ways local communities used the forest, ceased to exist in the administrative record. The only thing that mattered was timber, and everything it was beyond timber became, officially, nothing. The first generation of monoculture forests looked like a triumph. The second generation began dying, because the things that weren't being counted were also the things that kept the forest alive.
 
@@ -179,7 +181,7 @@ That pattern, measuring what serves the project and erasing what complicates it,
 
 Which brings me to Ukraine and Kazakhstan, 1929 to 1933.
 
-Soviet collectivization was one of the most thoroughly manufactured instances of illegibility in modern history. In the late 1920s, Stalin's government decided that the Soviet Union needed to industrialize fast, and that the way to pay for it was to [seize food from the countryside](https://en.wikipedia.org/wiki/Holodomor). Peasant farmers were forced off their own land, which was folded into large state-controlled farms. The grain they grew was taken and sold abroad, or sent to feed factory workers in the cities. When the harvests came up short and people began starving, the state did not acknowledge famine. [It blamed the peasants themselves](https://www.husj.harvard.edu/articles/the-collectivization-famine-in-kazakhstan-1931-1933), specifically, a class of supposedly wealthy farmers it called *kulaks*, who were accused of hoarding and sabotage. Local officials who reported the deaths accurately were prosecuted. The 1937 census, which would have made the demographic catastrophe visible in cold official numbers, was suppressed; the demographers who conducted it were arrested.
+Soviet collectivization was one of the most thoroughly manufactured instances of illegibility in modern history. In the late 1920s, Stalin's government decided that the Soviet Union needed to industrialize fast, and that the way to pay for it was to [seize food from the countryside](https://en.wikipedia.org/wiki/Holodomor). Peasant farmers were forced off their own land, which was folded into large state-controlled farms. The grain they grew was taken and sold abroad, or sent to feed factory workers in the cities. When the harvests came up short and people began starving, the state did not acknowledge famine. [It blamed the peasants themselves](https://www.husj.harvard.edu/articles/the-collectivization-famine-in-kazakhstan-1931-1933), specifically, a class of supposedly wealthy farmers it called _kulaks_, who were accused of hoarding and sabotage. Local officials who reported the deaths accurately were prosecuted. The 1937 census, which would have made the demographic catastrophe visible in cold official numbers, was suppressed; the demographers who conducted it were arrested.
 
 Estimates for Ukraine alone range from [3.5 to 5 million dead](https://www.britannica.com/event/Holodomor). In Kazakhstan, [the Kazakh famine](https://yris.yira.org/spring-issue/the-kazakh-famine-of-1930-1933-and-stalinist-collectivization-the-limitation-of-legal-frameworks-for-genocide-in-communist-studies/) killed somewhere between 1.3 and 2.3 million people, dropping the population [from approximately 3.6 million in 1926 to 2.2 million in 1937](https://en.wikipedia.org/wiki/Kazakh_famine_of_1930%E2%80%931933). That gap is visible in census data now. It was made invisible then, deliberately, at every level of the administrative chain.
 
@@ -201,7 +203,7 @@ The Power camp is right that manufactured illegibility is real, that it is not a
 
 Here is the argument I find hardest to dismiss, and I want to give it its full force before I say anything against it.
 
-People are bad at accepting suffering *now* in exchange for vague, uncertain benefit *later*. It's the same reason why people eat more than they should or avoid exercise.
+People are bad at accepting suffering _now_ in exchange for vague, uncertain benefit _later_. It's the same reason why people eat more than they should or avoid exercise.
 
 This is not a cynicism. It's been found time and time again in behavioral economics and public choice research. We [discount future benefits](https://www.cambridge.org/core/journals/british-journal-of-political-science/article/why-do-citizens-discount-the-future-public-opinion-and-the-timing-of-policy-consequences/35302CC17711BF1D8FE267A7FDCE5AEF) not simply because we are impatient, but because we don't trust that the payoff will actually arrive. Politicians on two- and four-year cycles [avoid policies whose costs are visible now and whose benefits land twenty years later](https://www.cogitatiopress.com/politicsandgovernance/article/viewFile/7764/3760). 
 
@@ -225,11 +227,11 @@ But here is what the Realist argument costs you the moment you accept it.
 
 You have just handed every future powerful person a blank check. Once you grant that opacity is sometimes the necessary precondition for progress, you have granted that the people in charge get to decide when this is one of those times. And they will always find a reason. The Manhattan Project's secrecy becomes the model for the next secret project, and the one after that, and the one whose costs turn out not to have been worth it but which followed exactly the same internal logic. There is no stopping point. The blank check doesn't come with an expiration date.
 
-That is what makes the Realist camp genuinely dangerous. The insight is real. The implication is that whoever holds power also holds the authority to decide when your suffering is the price that needs to stay hidden, and they will never tell you they've decided that until after the fact, *if at all*.
+That is what makes the Realist camp genuinely dangerous. The insight is real. The implication is that whoever holds power also holds the authority to decide when your suffering is the price that needs to stay hidden, and they will never tell you they've decided that until after the fact, _if at all_.
 
 ## The Progress Camp: "History has always had a plan for you, personally, and it does not care if you suffer"
 
-There is something seductive about the idea that suffering is not waste. That it is, instead, *fuel*.
+There is something seductive about the idea that suffering is not waste. That it is, instead, _fuel_.
 
 The nineteenth-century German philosopher Georg Hegel created the framework for the Progress camp. His big idea, the one he called [the cunning of reason](https://www.marxists.org/reference/archive/hegel/works/hi/history3.htm),  goes like this: history is always moving somewhere. Not randomly, but toward something. Toward more freedom, more rationality, a better human civilization. History also does not ask you to participate. It just uses you. Your ambitions, your conflicts, your wars, your greed. History takes all of that raw human mess and turns it into fuel. You think you are chasing your own goals. You are not. You are an instrument. And when history is done with you, it discards you. The individuals who drove the process may have suffered, may have died, may have caused enormous harm. That is not history's problem. That was always the plan.
 
@@ -255,7 +257,7 @@ Stalinist industrialization was explicitly framed in Marxist-Hegelian terms. The
 
 This is the Progress Camp's position taken to its terminal logic.
 
-The philosopher Theodor Adorno, [writing in the aftermath of the Holocaust](https://journals.sagepub.com/doi/10.1177/0191453710389438), gave the clearest answer to the Progress Camp: after Auschwitz, the idea that history's atrocities serve a rational purpose is not just wrong, **it is obscene**. You cannot look at the death camps and say: necessary step ¯\\\_(ツ)\_/¯. You cannot look at the famine dead and say: the price of progress ¯\\\_(ツ)\_/¯. The moment you do, you have decided that the story of history matters more than the people inside it. And once you've decided that, you've handed every future bad guy the same excuse.
+The philosopher Theodor Adorno, [writing in the aftermath of the Holocaust](https://journals.sagepub.com/doi/10.1177/0191453710389438), gave the clearest answer to the Progress Camp: after Auschwitz, the idea that history's atrocities serve a rational purpose is not just wrong, **it is obscene**. You cannot look at the death camps and say: necessary step ¯\\_(ツ)_/¯. You cannot look at the famine dead and say: the price of progress ¯\\_(ツ)_/¯. The moment you do, you have decided that the story of history matters more than the people inside it. And once you've decided that, you've handed every future bad guy the same excuse.
 
 Hannah Arendt adds the part that should really keep you up at night. When she covered the trial of Adolf Eichmann, one of the key architects of the Nazi genocide, she expected to find a monster. She found a bureaucrat. Eichmann didn't think of himself as a murderer. He thought he was [doing his job inside a larger process he hadn't designed and couldn't stop](https://aeon.co/ideas/what-did-hannah-arendt-really-mean-by-the-banality-of-evil). He had stopped asking whether what he was doing was right, and started asking only whether he was doing it correctly. He had, in Arendt's framing, stopped thinking altogether. That is the Progress Camp's logic taken to its human conclusion: a person so fully absorbed into the machinery of historical necessity that individual human lives had ceased to register as morally real.
 
@@ -285,133 +287,12 @@ The Realist is not wrong about this. The paralysis causes suffering too: the chi
 
 ---
 
-This is probably the only way to think about the question: "*how much suffering is worth it?*"
+This is probably the only way to think about the question: "_how much suffering is worth it?_"
 
 There's no right number. It will probably always be more than was necessary. Definitely more than what would be considered acceptable. But lower than it would've been if there wasn't any accountability.
 
 The problem is that only one group has their hand on the "suffering" dial and [it's not you](https://laweconcenter.org/resources/defending-democracy-from-the-dodos-part-i-how-power-escapes-democratic-control/). The powerful always control the dial, and [they will always set it in their favor](https://laweconcenter.org/resources/defending-democracy-from-the-dodos-part-i-how-power-escapes-democratic-control/). They will always find a reason why a particular cost needs to stay hidden and why a population's suffering is the necessary price of this project.
 
-Which means the framework we use to decide whose suffering is acceptable never follows what's *right*. It follows who holds the power. The Caribbean laborers who died digging the Canal were not weighed against the shipping executives who profited. They were simply not in the room. The costs stayed hidden because hiding them served someone, and that someone had access to the dial.
+Which means the framework we use to decide whose suffering is acceptable never follows what's _right_. It follows who holds the power. The Caribbean laborers who died digging the Canal were not weighed against the shipping executives who profited. They were simply not in the room. The costs stayed hidden because hiding them served someone, and that someone had access to the dial.
 
 That only changes if someone refuses to let it slide. The people controlling the dial are [organized and powerful](https://en.wikipedia.org/wiki/The_Logic_of_Collective_Action). The people paying the cost are scattered, voiceless, and often dead before anyone asks. The only thing that has ever pushed back, even a little, is someone who decided to keep count anyway. Not because they can fix it. Not because shining a light on something guarantees anything changes. But because the alternative is to go along with it: to do your job, follow the rules, and call that innocence. That's exactly what Eichmann did.
-
-## Sources
-
-- [Professor: War Likely To Cost Taxpayers At Least $1 Trillion](https://mix931.iheart.com/content/2026-04-14-professor-war-likely-to-cost-taxpayers-at-least-1-trillion/) — Mix931 / iHeart
-- [The Real Cost of the War With Iran](https://www.wbur.org/onpoint/2026/04/13/the-real-cost-of-the-war-with-iran) — WBUR On Point
-- [Iran war costs: $1 trillion, rising (Apple Podcasts entry)](https://podcasts.apple.com/us/podcast/iran-war-costs-$1-trillion-rising/id1850546613?i=1000761690662&l=es-MX) — Apple Podcasts (entry)
-- [Linda Bilmes — Media and Videos (faculty page)](https://lbilmes.scholars.harvard.edu/media-and-videos) — Harvard / Linda Bilmes personal site
-- [How Much Will the Iran War Cost Taxpayers? $1 Trillion, Linda Bilmes Says](https://fortune.com/2026/04/15/how-much-will-iran-war-cost-taxpayers-us-1-trillion-dollars/) — Fortune
-- [Bush tax cuts — Wikipedia](https://en.wikipedia.org/wiki/Bush_tax_cuts) — Wikipedia
-- [Tax Relief — Bush White House factsheet](https://georgewbush-whitehouse.archives.gov/infocus/bushrecord/factsheets/taxrelief.html) — George W. Bush White House Archives
-- [Post-9/11 War Spending (Edwards) — Costs of War Project / Watson Institute](https://costsofwar.watson.brown.edu/sites/default/files/papers/Edwards-Post-9_11-War-Spending.pdf) — Watson Institute, Costs of War Project
-- [USA/Iran: Those responsible for deadly and unlawful US strike on school that killed over 100 children must be held accountable](https://www.amnesty.org/en/latest/news/2026/03/usa-iran-those-responsible-for-deadly-and-unlawful-us-strike-on-school-that-killed-over-100-children-must-be-held-accountable/) — Amnesty International (news)
-- [Amnesty's research on the airstrike on the Minab school — background information (PDF)](https://www.amnesty-international.be/sites/default/files/download-files/2026-03/Amnestys-research-on-the-airstrike-on-the-Minab-school-%E2%80%93-background-information-160326.pdf) — Amnesty International (Belgium / Evidence Lab)
-- [Urgent call to protect civilians and respect international law amid escalating regional conflict](https://www.amnesty.org/en/latest/news/2026/03/urgent-call-to-protect-civilians-and-respect-international-law-amid-escalating-regional-conflict-following-us-and-israeli-attacks-on-iran/) — Amnesty International (news)
-- [Report: US strike hit Minab school; dozens killed (Iran International)](https://www.iranintl.com/en/202603167718) — Iran International
-- [Demand accountability for US strike on Iran school (CounterVortex blog)](https://countervortex.org/blog/demand-accountability-for-us-strike-on-iran-school/) — CounterVortex
-- [ECOI report/document referencing Minab school strike](https://www.ecoi.net/en/document/2137955.html) — ECOI (Electronic Communications of the International Organization / document aggregator)
-- [Video — footage related to Minab school strike (YouTube)](https://www.youtube.com/watch?v=PBOKVE3P-to) — YouTube (user-uploaded footage)
-- [World Cup 2022: the difficulty with estimating the number of deaths on Qatar construction sites](https://www.lemonde.fr/en/les-decodeurs/article/2022/11/15/world-cup-2022-the-difficulty-with-estimating-the-number-of-deaths-on-qatar-construction-sites_6004375_8.html) — Le Monde (Les Décodeurs)
-- [Deaths of South Asian migrants in Qatar (chart)](https://www.statista.com/chart/24268/deaths-of-south-asian-migrants-in-qatar/) — Statista
-- [Revealed: 6,500 migrant workers have died in Qatar as it gears up for World Cup](https://www.business-humanrights.org/en/latest-news/revealed-6500-migrant-workers-have-died-in-qatar-as-it-gears-up-for-world-cup/) — Business & Human Rights Resource Centre
-- [Human rights issues involving the 2022 FIFA World Cup](https://en.wikipedia.org/wiki/Human_rights_issues_involving_the_2022_FIFA_World_Cup) — Wikipedia
-- [On This Day in 1933 the Lethal Construction of the Golden Gate Bridge Began](https://www.smithsonianmag.com/smart-news/on-this-day-in-1933-the-lethal-construction-of-the-golden-gate-bridge-began-in-san-francisco-180985773/) — Smithsonian Magazine
-- [Key dates — Golden Gate Bridge history](https://www.goldengate.org/bridge/history-research/moments-events/key-dates/) — Golden Gate Bridge, Highway and Transportation District (goldengate.org)
-- [Health measures during the construction of the Panama Canal (and related mortality)](https://pmc.ncbi.nlm.nih.gov/articles/PMC8314810/) — NIH / PMC (peer-reviewed source)
-- [End of the (U.S.) construction / Panama Canal historical note](https://pancanal.com/en/end-of-the-construction/) — Panama Canal Authority (pancanal.com)
-- [Panama Canal worker mortality down 99.9% from the 1906–1914 project to the 2006–2016 expansion](https://www.progressivepolicy.org/trade-fact-of-the-week-panama-canal-worker-mortality-down-99-9-from-the-1906-1914-project-to-the-2006-2016-expansion/) — Progressive Policy Institute
-- [Child Labor during the British Industrial Revolution](https://eh.net/encyclopedia/child-labor-during-the-british-industrial-revolution/) — EH.net (Economic History Association / Encyclopedia)
-- [Child Labour in the British Industrial Revolution](https://www.worldhistory.org/article/2216/child-labour-in-the-british-industrial-revolution/) — World History Encyclopedia
-- [1833 Factory Act (resource)](https://www.nationalarchives.gov.uk/education/resources/1833-factory-act/) — The National Archives (UK)
-- [Flawed logic: Would 4 billion people die without nitrogen?](https://www.historyoforganic.com/post/flawed-logic-would-4-billion-people-die-without-nitrogen-) — History of Organic Chemistry (blog/post)
-- [H-Diplo/ISSF Roundtable: Taxing (roundtable page)](https://issforum.org/roundtables/10-32-taxing) — ISSF / H-Diplo
-- [The Ghost Budget (Daedalus article PDF) — Linda J. Bilmes](https://www.amacad.org/sites/default/files/publication/downloads/daedalus_fa25_05_bilmes.pdf) — American Academy of Arts & Sciences (Daedalus)
-- [The Ghost Budget: U.S. War Spending & Fiscal Transparency](https://www.hks.harvard.edu/publications/ghost-budget-us-war-spending-fiscal-transparency) — Harvard Kennedy School (publication page)
-- [Ghost Budget: US War Spending & Fiscal Transparency (Daedalus web page)](https://www.amacad.org/daedalus/ghost-budget-us-war-spending-fiscal-transparency) — American Academy of Arts & Sciences (Daedalus)
-- [Daedalus article PDF (hosted at MIT) — Bilmes](https://direct.mit.edu/daed/article-pdf/154/4/87/2566616/daed.a.943.pdf) — MIT Press (Daedalus PDF)
-- [Linda Bilmes Takes on the Big Budget (HKS blog)](https://www.hks.harvard.edu/centers/wiener/programs/economy/our-work/reimagining-economy-blog/linda-bilmes-takes-big-budget) — Harvard Kennedy School (Wiener Center blog)
-- [The Ghost Budget: How America Pays for Endless War](https://www.justsecurity.org/90907/the-ghost-budget-how-america-pays-for-endless-war/) — Just Security
-- [Linda J. Bilmes — Costs of War Project profile](https://costsofwar.watson.brown.edu/people/linda-j-bilmes) — Costs of War Project / Watson Institute (Brown University)
-- [Historical analysis (engaged scholarship repository) — Panama Canal / Roosevelt (thesis/paper)](https://engagedscholarship.csuohio.edu/cgi/viewcontent.cgi?article=1111&context=tdr) — Cleveland State University / Engaged Scholarship
-- [Panama Canal: Troubled History, Astounding Turnaround](https://www.library.hbs.edu/working-knowledge/panama-canal-troubled-history-astounding-turnaround) — Harvard Business School Working Knowledge
-- [Choe Hanul MA thesis / paper (Panama Canal history)](https://openscholar.uga.edu/record/4700/files/Choe_Hanul_C_202108_MA.pdf) — University of Georgia OpenScholar (MA thesis)
-- [Opinion: Trump, the Panama Canal, and the cost to workers](https://www.latimes.com/opinion/story/2025-01-29/trump-panama-canal-cost-workers) — Los Angeles Times (Opinion)
-- [Historical journal article (JSTOR) — Panama Canal / related scholarship](https://www.jstor.org/stable/25611907) — JSTOR / Academic Journal
-- [Collective action and market/infrastructure formation (INFORMS article)](https://pubsonline.informs.org/doi/10.1287/stsc.2020.0105) — INFORMS (Science, Technology & Culture or related journal)
-- [Short-termism (working paper)](https://www.ecgi.global/sites/default/files/working_papers/documents/shorttermism.pdf) — ECGI (working paper)
-- [Prospect theory](https://en.wikipedia.org/wiki/Prospect_theory) — Wikipedia
-- [Theses on the Philosophy of History (Benjamin) — PDF](https://www.sfu.ca/~andrewf/books/Concept_History_Benjamin.pdf) — Simon Fraser University / Andrew F.
-- [Benjamin — On the Concept of History (PDF)](https://platypus1917.org/wp-content/uploads/2011/12/benjamin_onconcepthistory.pdf) — Platypus Review (hosted file)
-- [Theses on the Philosophy of History — PDF (Wordpress host)](https://seansturm.files.wordpress.com/2012/06/benjamin-theses-on-the-philosophy-of-history.pdf) — Sean Sturm / Wordpress (hosted PDF)
-- [Theses on the Philosophy of History — Archive.org scan](https://archive.org/download/zines-misc/Theses_on_the_Philosophy_of_History-screen.pdf) — Internet Archive
-- [Benjamin: Theses on the Philosophy of History — University of Warwick PDF](https://warwick.ac.uk/fac/arts/english/currentstudents/postgraduate/masters/modules/marxismandmodernity/benjamin_philosophy_of_history.pdf) — University of Warwick (course materials)
-- [The Ones Who Walk Away from Omelas — Wikipedia](https://en.wikipedia.org/wiki/The_Ones_Who_Walk_Away_from_Omelas) — Wikipedia
-- [The Ones Who Walk Away from Omelas — Summary & Analysis (LitCharts)](https://www.litcharts.com/lit/the-ones-who-walk-away-from-omelas/summary-and-analysis) — LitCharts
-- [Omelas — 1000-Word Philosophy entry](https://1000wordphilosophy.com/2022/05/19/omelas/) — 1000-Word Philosophy
-- [The Ones Who Walk Away from Omelas — SparkNotes summary](https://www.sparknotes.com/short-stories/the-ones-who-walk-away/summary/) — SparkNotes
-- [The Ones Who Walk Away from Omelas — Research Starter (EBSCO)](https://www.ebsco.com/research-starters/literature-and-writing/ones-who-walk-away-omelas-ursula-k-le-guin) — EBSCO
-- [Yoshito Matsushige's account — Atomic Heritage Foundation / Nuclear Museum](https://ahf.nuclearmuseum.org/ahf/key-documents/yoshito-matsushiges-account-hiroshima-bombing/) — Atomic Heritage Foundation / National Museum of Nuclear Science & History (site)
-- [Nagasaki Peace — Photograph record (part](https://nagasakipeace.jp/en/search/record/photo/part_2_11.html)*[2](https://nagasakipeace.jp/en/search/record/photo/part_2_11.html)*[11)](https://nagasakipeace.jp/en/search/record/photo/part_2_11.html) — Nagasaki Peace Memorial Hall / Nagasaki Peace site
-- [Ground Zero 1945 — Essay (Visualizing Cultures, MIT)](https://visualizingcultures.mit.edu/groundzero1945/gz_essay.pdf) — MIT Visualizing Cultures
-- [Meeting a bomb survivor after 76 years — Testimony (ICRC)](https://www.icrc.org/en/document/meeting-bomb-survivor-after-76-years-testimony-of-hope) — International Committee of the Red Cross (ICRC)
-- [Hibakusha Testimonies — Soka Gakkai (PDF collection)](https://www.sokaglobal.org/wp-content/uploads/pdf/hibakusha-testimonies-book.pdf) — Soka Gakkai
-- [Seeing Like a State (PDF) — James C. Scott](https://c4ss.org/wp-content/uploads/2011/05/James-Scott.pdf) — C4SS (hosted PDF)
-- [A Big Little Idea Called Legibility](https://www.ribbonfarm.com/2010/07/26/a-big-little-idea-called-legibility/) — Ribbonfarm
-- [Seeing Like a State — lecture / talk (YouTube)](https://www.youtube.com/watch?v=jiG5ovTAT3A) — YouTube
-- [Seeing Like a State — full text (The Anarchist Library)](https://theanarchistlibrary.org/library/james-c-scott-seeing-like-a-state) — The Anarchist Library
-- [Seeing Like a State — Intro & ch.1-3 (PDF)](http://kokolabs.org/Scott%20-%20Seeing%20Like%20a%20State%20(Intro,%20cp%201-3).pdf) — Kokolabs (hosted PDF)
-- [Seeing the State: How Certain Schemes That Improve the Human Condition Have Failed (page referencing Scott)](https://politicalscience.yale.edu/publications/seeing-state-how-certain-schemes-improve-human-condition-have-failed) — Yale Department of Political Science
-- [JSTOR entry related to Seeing Like a State (review/article)](https://www.jstor.org/stable/20718148) — JSTOR
-- [The Kazakh Famine of 1930–1933 and Stalinist Collectivization](https://yris.yira.org/spring-issue/the-kazakh-famine-of-1930-1933-and-stalinist-collectivization-the-limitation-of-legal-frameworks-for-genocide-in-communist-studies/) — YRIS (YIRA Spring Issue)
-- [Kazakh famine of 1930–1933 — Wikipedia](https://en.wikipedia.org/wiki/Kazakh_famine_of_1930%E2%80%931933) — Wikipedia
-- [UNC repository document on Soviet collectivization / famine (download)](https://cdr.lib.unc.edu/downloads/x059ch914) — UNC CDR (institutional repository)
-- [Holodomor — Wikipedia](https://en.wikipedia.org/wiki/Holodomor) — Wikipedia
-- [Naumenko (Yale) paper on Soviet famine / demographic estimates (PDF)](https://economics.yale.edu/sites/default/files/2022-11/Naumenko%20paper%20w29089.pdf) — Yale Economics (working paper)
-- [Holodomor — Encyclopaedia Britannica](https://www.britannica.com/event/Holodomor) — Britannica
-- [The Collectivization Famine in Kazakhstan, 1931–1933](https://www.husj.harvard.edu/articles/the-collectivization-famine-in-kazakhstan-1931-1933) — HUSJ (Harvard Undergraduate Social Journal)
-- [Why do citizens discount the future? Public opinion and the timing of policy consequences](https://www.cambridge.org/core/journals/british-journal-of-political-science/article/why-do-citizens-discount-the-future-public-opinion-and-the-timing-of-policy-consequences/35302CC17711BF1D8FE267A7FDCE5AEF) — Cambridge University Press (British Journal of Political Science)
-- [PhilArchive preprint](https://philarchive.org/archive/JOHEFP) — PhilArchive
-- [Politics and Governance article (PDF)](https://www.cogitatiopress.com/politicsandgovernance/article/viewFile/7764/3760) — Cogitatio Press (Politics & Governance)
-- [PMC article](https://pmc.ncbi.nlm.nih.gov/articles/PMC5120865/) — PubMed Central (NIH)
-- [Time preference](https://en.wikipedia.org/wiki/Time_preference) — Wikipedia
-- [Public Choice](https://www.econlib.org/library/Enc/PublicChoice.html) — Library of Economics and Liberty (EconLib)
-- [Gelman research (rational\_final7.pdf)](https://sites.stat.columbia.edu/gelman/research/published/rational_final7.pdf) — Columbia University / Andrew Gelman (research PDF)
-- [Policy Integrity paper (Howard & Schwartz)](https://policyintegrity.org/files/publications/09.-Howard-Schwartz-Final_.-595-657_.pdf) — Institute for Policy Integrity
-- [Civilian displacement — Oak Ridge, TN](https://ahf.nuclearmuseum.org/ahf/history/civilian-displacement-oak-ridge-tn/) — Atomic Heritage Foundation
-- [Secret Cities — Manhattan Project National Historical Park](https://savingplaces.org/stories/secret-cities-manhattan-project-national-historical-park) — National Trust for Historic Preservation (SavingPlaces)
-- [Los Alamos displacement](https://www.nps.gov/mapr/learn/historyculture/losalamos-displacement.htm) — U.S. National Park Service (Manhattan Project National Historical Park)
-- [Displacement (Manhattan Project sites)](https://www.nps.gov/mapr/learn/historyculture/displacement.htm) — U.S. National Park Service (Manhattan Project National Historical Park)
-- [Manhattan Project](https://en.wikipedia.org/wiki/Manhattan_Project) — Wikipedia
-- [Eighty years after Trinity — the horror of the atomic bomb lives on](https://www.reachingcriticalwill.org/news/latest-news/17513-eighty-years-after-trinity-the-horror-of-the-atomic-bomb-lives-on) — Reaching Critical Will
-- [Impacts on Native communities — Hanford site](https://nuclearprinceton.princeton.edu/impacts-native-communities-hanford-site) — Nuclear Princeton (Princeton University)
-- [Lectures on the Philosophy of History — Section(s) on World-Historical Individuals / "The Cunning of Reason"](https://www.marxists.org/reference/archive/hegel/works/hi/history3.htm) — Marxists Internet Archive
-- [Lectures on the Philosophy of World History — Contents / Introduction](https://www.marxists.org/reference/archive/hegel/works/hi/hiconten.htm) — Marxists Internet Archive
-- [Lectures on the Philosophy of History (full scanned text)](https://archive.org/download/lecturesonphilos00hegerich/lecturesonphilos00hegerich_bw.pdf) — Internet Archive (scanned edition)
-- [Lectures on the Philosophy of History (Sibree translation PDF)](https://hegel.net/hegelwerke/Sibree1894-Lectures_on_the_Philosophy_of_History.pdf) — Hegel.net (Sibree translation)
-- [Lectures on the Philosophy of World History — Wikipedia](https://en.wikipedia.org/wiki/Lectures_on_the_Philosophy_of_World_History) — Wikipedia
-- [The Cunning of Reason: A Hegelian (essay / Substack)](https://canonevent.substack.com/p/the-cunning-of-reason-a-hegelian) — Canon Event (Substack)
-- [The Validity of Karl Marx's Theory (scholarly article / PDF)](https://scholarworks.uni.edu/context/mtie/article/1073/viewcontent/5_The_validity_of_Karl_Marxs_theory_Shimp.pdf) — ScholarWorks @ University of Northern Iowa
-- [Historical materialism — Wikipedia](https://en.wikipedia.org/wiki/Historical_materialism) — Wikipedia
-- [Class Struggle: Driving Force of History — Marx (overview article)](https://polsci.institute/western-political-thought/class-struggle-driving-force-history-marx/) — polsci.institute
-- [Adorno's critique of Hegel's philosophy of history in Negative Dialectics (essay / blog)](https://thecharnelhouse.org/2008/06/20/adornos-critique-of-hegels-philosophy-of-history-in-negative-dialectics/) — The Charnel House
-- [PhilArchive: paper on Adorno and theodicy / anti-theodicy](https://philarchive.org/archive/SACTAO-2) — PhilArchive
-- [Scholarly article on Adorno, Auschwitz, and critique of universal history (SAGE Journals)](https://journals.sagepub.com/doi/10.1177/0191453710389438) — SAGE Journals
-- [Article: Adorno after Auschwitz / related scholarship (IATH / UVA mirror)](https://pmc.iath.virginia.edu/issue.105/15.2helmling.html) — IATH / University of Virginia (PMC mirror)
-- [Our Amphibian Problem: Nature in History in Adorno's Hegelian Critique of Hegel (Cambridge Univ. Press chapter / essay)](https://www.cambridge.org/core/books/hegel-on-philosophy-in-history/our-amphibian-problem-nature-in-history-in-adornos-hegelian-critique-of-hegel/281B22726E0A1A27B9F6775943589059) — Cambridge University Press (Cambridge Core)
-- [On Adorno's Anti-Theodicy (blog post / commentary)](https://jasongoroncy.com/2015/04/11/on-adornos-anti-theodicy/) — Jason Goroncy (personal blog)
-- [Eichmann in Jerusalem: A Report on the Banality of Evil](https://d-nb.info/1053467893/34) — German National Library (d-nb)
-- [We Cannot Escape From the Personal Responsibility of Our Actions](https://hac.bard.edu/amor-mundi/we-cannot-escape-from-the-personal-responsibility-of-our-actions-2011-10-17) — Hannah Arendt Center at Bard College
-- [What did Hannah Arendt really mean by 'the banality of evil'?](https://aeon.co/ideas/what-did-hannah-arendt-really-mean-by-the-banality-of-evil) — Aeon
-- [Eichmann in Jerusalem (Wikipedia)](https://en.wikipedia.org/wiki/Eichmann_in_Jerusalem) — Wikipedia
-- [Hannah Arendt Archive / Related Essay (download)](https://www.hannaharendt.net/index.php/han/article/download/148/262?inline=1) — HannahArendt.net
-- [Personal Responsibility Under Dictatorship](https://www.themontrealreview.com/Articles/Personal_Responsibility_Under_Dictatorship.php) — The Montreal Review
-- [The Trial of Hannah Arendt](https://www.neh.gov/humanities/2014/marchapril/feature/the-trial-hannah-arendt) — National Endowment for the Humanities (NEH) / Humanities
-- [The Logic of Collective Action (Wikipedia summary of Mancur Olson)](https://en.wikipedia.org/wiki/The_Logic_of_Collective_Action) — Wikipedia
-- [Defending Democracy from the Dodos, Part I: How Power Escapes Democratic Control](https://laweconcenter.org/resources/defending-democracy-from-the-dodos-part-i-how-power-escapes-democratic-control/) — Law & Economics Center
-- [Understanding Accountability in Democratic Governance](https://www.cambridge.org/core/elements/understanding-accountability-in-democratic-governance/21D041C3604D7FCD4ECCCD75A299B56D) — Cambridge University Press
-- [Perverse Accountability](https://www.congressionalresearch.org/PerverseAccountability.html) — CongressionalResearch.org
-- [Two-and-a-half theories about the operation of democratic capitalism](https://www.opendemocracy.net/en/democracy-in-crisis-two-and-half-theories-about-operation-of-democratic-capitalism/) — openDemocracy
-- [Article in Political Studies / Taylor & Francis (doi:10.1080/01402382.2010.486126)](https://www.tandfonline.com/doi/full/10.1080/01402382.2010.486126) — Taylor & Francis Online
-- [JSTOR article (stable/23275347)](https://www.jstor.org/stable/23275347) — JSTOR
-- [DukeSpace bitstream / thesis or paper on Arendt/Eichmann](https://dukespace.lib.duke.edu/bitstreams/46d588fd-872b-4746-b631-d9fd59c6addc/download) — Duke University Repository (DukeSpace)
