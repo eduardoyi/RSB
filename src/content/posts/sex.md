@@ -132,11 +132,11 @@ And the whole package got exported abroad by to the new world.
 
 In America, John Harvey Kellogg was solving a problem nobody had asked him to solve, and he was solving it with his entire life. _The man never consummated his marriage_. He and his wife slept in separate bedrooms. He apparently [spent his honeymoon writing a book about the dangers of sex](https://www.mentalfloss.com/article/32042/corn-flakes-were-invented-part-anti-masturbation-crusade). 
 
+(🚩🚩🚩 amirite?)
+
 This was not a phase. This was a philosophy, a career, and apparently also a breakfast strategy. 
 
 Kellogg believed, with the full conviction of a man who had given the matter enormous personal thought, that sexual activity of any kind, including masturbation, drained the body, corrupted the spirit, and derailed a person from their higher purpose. The solution, naturally, was diet. Bland food, he reasoned, cooled the passions. Spicy food inflamed them. 
-
-(🚩🚩🚩 _amirite_?)
 
 In his 1877 book, he catalogued 39 symptoms he pinned on masturbation and prescribed, among other remedies, a deliberately dull, sugar-free cereal designed to make desire give up and go home. That cereal became Corn Flakes. His brother later added sugar. Kellogg was reportedly furious. A man organized his marriage, his medicine, and his menu around a single obsession, and the lasting legacy is a slightly sweet morning snack enjoyed by millions of children. History is something.
 
@@ -160,7 +160,7 @@ The mechanism responsible is called the _superego_, which is less a conscience a
 
 And here's the part that makes it genuinely diabolical: the more you comply with the superego, the STRICTER it gets. Obedience doesn't satisfy the superego. It just raises its expectations.
 
-![If not for this little guy, you wouldn't get anything done.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/16e1aba0-dd18-4b06-b3bb-2470deea0815/final-1778162133833.webp "If not for this little guy, you wouldn't get anything done.")
+![If not for this little guy, your horny brain wouldn't let you get anything done.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/16e1aba0-dd18-4b06-b3bb-2470deea0815/final-1778162133833.webp "If not for this little guy, your horny brain wouldn't let you get anything done.")
 
 The Church used guilt. Governments used laws. Freud just pointed out that at some point you start repressing your own sexual desires, which is cheaper and requires no clergy.
 
