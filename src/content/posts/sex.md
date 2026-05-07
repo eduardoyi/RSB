@@ -17,7 +17,7 @@ Picture a Roman walking past a [stone phallus carved into a street corner](https
 None of this was weird or edgy at the time. 
 
 - The [Venus of Willendorf](https://www.britannica.com/topic/Venus-of-Willendorf), carved around 25,000 BCE, is basically a pocket-sized fertility goddess. All hips and breasts, zero embarrassment. She's not an outlier either: there are [over 200 similar figurines](https://en.wikipedia.org/wiki/Venus_figurine) scattered across Europe and Siberia. 
-- Ancient Greeks planted herms at crossroads and front doors, stone pillars with a head on top and an erection in the middle, used as everyday good-luck markers. Romans had the [fascinum](https://www.ancientworldmagazine.com/articles/phallus-evil-eye/), a divine phallus they hung up to ward off evil. 
+- Ancient Greeks planted herms at crossroads and front doors, stone pillars with a head on top and an erection in the middle, used as everyday good-luck markers. Romans had the [fascinum](https://www.ancientworldmagazine.com/articles/phallus-evil-eye/), a divine phallus used ejaculation to ward off evil. 
 - In South Asian temples, the Shiva lingam, a cylindrical stone pillar representing Shiva's generative power, has been a central object of devotion for millennia. _Devotees pour milk and flowers over it daily_, which is exactly the kind of sentence that would get flagged by a school email filter and yet describes a completely sincere religious practice. 
 
 Different continents, different centuries, same basic idea: sex was sacred, not shameful.
