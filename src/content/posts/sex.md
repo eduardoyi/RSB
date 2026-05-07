@@ -4,7 +4,7 @@ title: Why is sex taboo?
 slug: sex
 date: 2026-05-07
 description: How we went from "sex is pretty amazing, actually" to "don't even THINK about it"
-author: ''
+author: Eduardo Yi
 featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/a0bec5f6-2e78-4b37-aac8-a5befb21db93/final-1778172734479.webp
 featured_image_alt: ''
 ---
