@@ -1,10 +1,12 @@
 ---
-status: "draft"
-title: "Why is sex taboo?"
-slug: "sex"
-date: "2026-05-07"
-description: ""
-featured_image: "https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/a0bec5f6-2e78-4b37-aac8-a5befb21db93/final-1778172734479.webp"
+status: published
+title: Why is sex taboo?
+slug: sex
+date: 2026-05-07
+description: How we went from "sex is pretty amazing, actually" to "don't even THINK about it"
+author: ''
+featured_image: https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/a0bec5f6-2e78-4b37-aac8-a5befb21db93/final-1778172734479.webp
+featured_image_alt: ''
 ---
 ## Humanity used to be very chill about this
 
@@ -16,7 +18,7 @@ None of this was weird or edgy at the time.
 
 - The [Venus of Willendorf](https://www.britannica.com/topic/Venus-of-Willendorf), carved around 25,000 BCE, is basically a pocket-sized fertility goddess. All hips and breasts, zero embarrassment. She's not an outlier either: there are [over 200 similar figurines](https://en.wikipedia.org/wiki/Venus_figurine) scattered across Europe and Siberia. 
 - Ancient Greeks planted herms at crossroads and front doors, stone pillars with a head on top and an erection in the middle, used as everyday good-luck markers. Romans had the [fascinum](https://www.ancientworldmagazine.com/articles/phallus-evil-eye/), a divine phallus they hung up to ward off evil. 
-- In South Asian temples, the Shiva lingam, a cylindrical stone pillar representing Shiva's generative power, has been a central object of devotion for millennia. *Devotees pour milk and flowers over it daily*, which is exactly the kind of sentence that would get flagged by a school email filter and yet describes a completely sincere religious practice. 
+- In South Asian temples, the Shiva lingam, a cylindrical stone pillar representing Shiva's generative power, has been a central object of devotion for millennia. _Devotees pour milk and flowers over it daily_, which is exactly the kind of sentence that would get flagged by a school email filter and yet describes a completely sincere religious practice. 
 
 Different continents, different centuries, same basic idea: sex was sacred, not shameful.
 
@@ -24,9 +26,9 @@ Then, at some point, sex became a problem.
 
 ## Ancient humans: "Sex is cool, actually"
 
-Think about what ancient humans were actually working with. Rain shows up, crops grow. Sex happens, babies appear. No chemistry textbooks, no biology class, no one explaining mechanisms. If you're piecing together how existence works from scratch, landing on *sex as the engine behind all creation* is honestly pretty reasonable.
+Think about what ancient humans were actually working with. Rain shows up, crops grow. Sex happens, babies appear. No chemistry textbooks, no biology class, no one explaining mechanisms. If you're piecing together how existence works from scratch, landing on _sex as the engine behind all creation_ is honestly pretty reasonable.
 
-[Inanna](https://en.wikipedia.org/wiki/Inanna), the Sumerian goddess of love, sex, and war, was worshipped at the Eanna temple in Uruk for thousands of years. The hymns written in her honor include agricultural metaphors so explicit they would get flagged by Instagram's content moderation today. Scholars refer to passages where Inanna asks someone to "*plow her well-watered field*" (side note: 🥵) as sacred poetry. Which, sure, it was. The oldest written love literature on earth is also, depending on your personal threshold, extremely not safe for work.
+[Inanna](https://en.wikipedia.org/wiki/Inanna), the Sumerian goddess of love, sex, and war, was worshipped at the Eanna temple in Uruk for thousands of years. The hymns written in her honor include agricultural metaphors so explicit they would get flagged by Instagram's content moderation today. Scholars refer to passages where Inanna asks someone to "_plow her well-watered field_" (side note: 🥵) as sacred poetry. Which, sure, it was. The oldest written love literature on earth is also, depending on your personal threshold, extremely not safe for work.
 
 ![TL;DR: 🍆🍑🥵👉👌💦🔞](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/61880436-efed-449d-b3a1-0998b2999cb7/final-1778162002741.webp "TL;DR: 🍆🍑🥵👉👌💦🔞")
 
@@ -38,7 +40,7 @@ This was about to become very inconvenient for some people with ambitions.
 
 Every time a new power center needed to consolidate control, regulating sex shot straight to the top of the agenda. 
 
-Control who reproduces with whom and you control inheritance, family lines, labor, and loyalty. Who owes what to whom. *Who belongs and who doesn't*. 
+Control who reproduces with whom and you control inheritance, family lines, labor, and loyalty. Who owes what to whom. _Who belongs and who doesn't_. 
 
 [Leviticus 18 and 20](https://www.biblegateway.com/passage/?search=Leviticus%2018-20&version=NIV) make this logic almost embarrassingly explicit: a detailed list of prohibited sexual combinations, delivered with the calm administrative thoroughness of a municipal zoning code. 
 
@@ -63,13 +65,13 @@ Scholars who read the text as a purity code point out that the prohibitions map 
 
 That was still fairly vanilla. 
 
-The religious nuclear option came later courtesy of Augustine of Hippo. In the early 5th century, he landed on an idea so effective it is still quietly running in the background of how Western culture thinks about bodies. Augustine's argument was simple and devastating: original sin doesn't pass down through bad behavior. It passes through [the wanting](https://theo.kuleuven.be/apps/christian-ethics/sex/history/h2b.html). His theory was that, before *the Fall*, when Adam and Eve ruined everything for the rest of us, humans could have reproduced calmly and rationally. No messy longing, no irrational urges, just sensible reproduction like filing paperwork. 
+The religious nuclear option came later courtesy of Augustine of Hippo. In the early 5th century, he landed on an idea so effective it is still quietly running in the background of how Western culture thinks about bodies. Augustine's argument was simple and devastating: original sin doesn't pass down through bad behavior. It passes through [the wanting](https://theo.kuleuven.be/apps/christian-ethics/sex/history/h2b.html). His theory was that, before _the Fall_, when Adam and Eve ruined everything for the rest of us, humans could have reproduced calmly and rationally. No messy longing, no irrational urges, just sensible reproduction like filing paperwork. 
 
 Fun stuff.
 
-After *the Fall*, the desire itself became the problem. He treated marriage as a [damage-control institution](https://theotherjournal.com/2006/04/a-sinful-doctrine-sexuality-and-gender-in-augustines-doctrine-of-original-sin-part-1/): permitted for making children, but not something you were supposed to enjoy. The twist was genuinely radical. You didn't have to do anything wrong. Feeling desire was already the problem. The wanting.
+After _the Fall_, the desire itself became the problem. He treated marriage as a [damage-control institution](https://theotherjournal.com/2006/04/a-sinful-doctrine-sexuality-and-gender-in-augustines-doctrine-of-original-sin-part-1/): permitted for making children, but not something you were supposed to enjoy. The twist was genuinely radical. You didn't have to do anything wrong. Feeling desire was already the problem. The wanting.
 
-Augustine was like: *don't even THINK about it*.
+Augustine was like: _don't even THINK about it_.
 
 Paul had already set the table for Augustine in [1 Corinthians 7](https://www.biblegateway.com/passage/?search=1+Corinthians+7&version=NIV). Celibacy was the ideal. Marriage was basically a concession to people who couldn't handle themselves. "Better to marry than to burn," he wrote, which is arguably the least romantic endorsement of marriage in human history.
 
@@ -89,7 +91,7 @@ Around 1008, a German bishop named Burchard of Worms sat down and wrote out [a c
 - Intercourse during menstruation: forty days of fasting.
 - Intercourse during pregnancy: forty days of fasting.
 - Intercourse with a woman in a non-standard position (i.e., from behind, in the manner of quadrupeds): three years of fasting.
-- A woman who has baked bread using her own bodily fluids and fed it to her husband as a love charm, or as I like to call it *[Erotic Baking](https://lampsedinburgh.wordpress.com/2021/04/06/womens-sexuality-as-threat-erotic-magic-in-burchard-of-worms-corrector-sive-medicus/)*: two years of fasting.
+- A woman who has baked bread using her own bodily fluids and fed it to her husband as a love charm, or as I like to call it [_Erotic Baking_](https://lampsedinburgh.wordpress.com/2021/04/06/womens-sexuality-as-threat-erotic-magic-in-burchard-of-worms-corrector-sive-medicus/): two years of fasting.
 - Use of contraceptive herbs or magical preparations to prevent conception: five years of fasting.
 - Masturbation: twenty days of fasting for a layman; thirty for a cleric.
 - Sexual relations with an animal: ten years of fasting; fifteen if the act was repeated.
@@ -102,7 +104,7 @@ Around 1008, a German bishop named Burchard of Worms sat down and wrote out [a c
 > So "seven years of fasting" doesn't mean starving for seven straight years. It means living on a restricted diet on designated fast days for seven years. **Still a long time to eat sad bread over a blowjob**, but not quite as dramatic as it first reads.
 > Also, how many years did YOU get? 😏
 
-The level of detail on that list implies a man who was, professionally speaking, thinking about this constantly. Which is *kinda sus* if you think about it.
+The level of detail on that list implies a man who was, professionally speaking, thinking about this constantly. Which is _kinda sus_ if you think about it.
 
 Then in 1215, the [Fourth Lateran Council](https://pages.uoregon.edu/dluebke/Witches442/FourthLateran1215.html) essentially turned marriage into a government department. Every union needed a priest's sign-off. Secret marriages were penalized. The Church had made reproduction an institutional process with official channels, required paperwork, and absolutely no shortcuts permitted.
 
@@ -114,15 +116,15 @@ Repression, it turns out, requires paperwork.
 
 The Church spent a thousand years making sex a spiritual problem. The Victorians secularized it and made it worse.
 
-By the 19th century, God was mostly out of the loop. Shame had new management: medicine, law, and a bone-deep terror of seeming lower class. Respectable people didn't talk about sex because respectable people had, you know, *evolved past that*.
+By the 19th century, God was mostly out of the loop. Shame had new management: medicine, law, and a bone-deep terror of seeming lower class. Respectable people didn't talk about sex because respectable people had, you know, _evolved past that_.
 
-*"Sex was a poor-person activity."*
+_"Sex was a poor-person activity."_
 
-The [separate spheres doctrine](https://www.britannica.com/topic/separate-spheres) handed women the role of naturally pure, spiritually elevated creatures who presumably just didn't think about any of that, while men's sexuality was acknowledged as a dangerous force that needed managing before it ruined the furniture. Women got purity. Men got the problem. *Nobody got much fun*. 
+The [separate spheres doctrine](https://www.britannica.com/topic/separate-spheres) handed women the role of naturally pure, spiritually elevated creatures who presumably just didn't think about any of that, while men's sexuality was acknowledged as a dangerous force that needed managing before it ruined the furniture. Women got purity. Men got the problem. _Nobody got much fun_. 
 
 And the whole package got exported abroad by to the new world.
 
-In America, John Harvey Kellogg was solving a problem nobody had asked him to solve, and he was solving it with his entire life. *The man never consummated his marriage*. He and his wife slept in separate bedrooms. He apparently [spent his honeymoon writing a book about the dangers of sex](https://www.mentalfloss.com/article/32042/corn-flakes-were-invented-part-anti-masturbation-crusade). 
+In America, John Harvey Kellogg was solving a problem nobody had asked him to solve, and he was solving it with his entire life. _The man never consummated his marriage_. He and his wife slept in separate bedrooms. He apparently [spent his honeymoon writing a book about the dangers of sex](https://www.mentalfloss.com/article/32042/corn-flakes-were-invented-part-anti-masturbation-crusade). 
 
 This was not a phase. This was a philosophy, a career, and apparently also a breakfast strategy. 
 
@@ -146,7 +148,7 @@ Push something unbearable into the unconscious and it comes back as anxiety, par
 
 In [Civilization and Its Discontents](https://en.wikipedia.org/wiki/Civilization_and_Its_Discontents), Freud argued that civilization only functions because we bottle up our sexual energy and redirect it into socially acceptable activities, things like making art, showing up to work, and asking your coworker how their weekend was. All that redirected desire keeps the lights on, but it also produces a steady background hum of guilt that never fully goes away. 
 
-The mechanism responsible is called the *superego*, which is less a conscience and more a cop you installed inside your own skull. It's the part of your brain that makes you feel vaguely guilty about a thought before you've done anything at all, before you've even decided whether you want to do anything. No priest required. No law needed. Just you, judging yourself, preemptively. 
+The mechanism responsible is called the _superego_, which is less a conscience and more a cop you installed inside your own skull. It's the part of your brain that makes you feel vaguely guilty about a thought before you've done anything at all, before you've even decided whether you want to do anything. No priest required. No law needed. Just you, judging yourself, preemptively. 
 
 And here's the part that makes it genuinely diabolical: the more you comply with the superego, the STRICTER it gets. Obedience doesn't satisfy the superego. It just raises its expectations.
 
