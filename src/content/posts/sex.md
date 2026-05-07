@@ -12,7 +12,7 @@ featured_image_alt: ''
 
 Picture a Roman walking past a [stone phallus carved into a street corner](https://www.ancientworldmagazine.com/articles/phallus-evil-eye/) and doing absolutely nothing about it. No double take. No shielding the kids. Just a regular guy, running a regular errand, walking past a giant protective penis on the wall like it's a fire hydrant.
 
-![The useful signal is the one that changes what the team does next.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/af3504b0-3350-46fc-81f9-0f38c7f9d216/final-1778163220949.webp "The useful signal is the one that changes what the team does next.")
+![To get to the market, just turn left when you see the big, girthy dick](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/af3504b0-3350-46fc-81f9-0f38c7f9d216/final-1778163220949.webp "To get to the market, just turn left when you see the big, girthy dick")
 
 None of this was weird or edgy at the time. 
 
