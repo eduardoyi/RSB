@@ -28,11 +28,17 @@ Then, at some point, sex became a problem.
 
 Think about what ancient humans were actually working with. Rain shows up, crops grow. Sex happens, babies appear. No chemistry textbooks, no biology class, no one explaining mechanisms. If you're piecing together how existence works from scratch, landing on _sex as the engine behind all creation_ is honestly pretty reasonable.
 
-[Inanna](https://en.wikipedia.org/wiki/Inanna), the Sumerian goddess of love, sex, and war, was worshipped at the Eanna temple in Uruk for thousands of years. The hymns written in her honor include agricultural metaphors so explicit they would get flagged by Instagram's content moderation today. Scholars refer to passages where Inanna asks someone to "_plow her well-watered field_" (side note: 🥵) as sacred poetry. Which, sure, it was. The oldest written love literature on earth is also, depending on your personal threshold, extremely not safe for work.
+Across the ancient world, culture after culture landed on the same answer: sex is basically divine, let's build a whole religion around it. Here are a few examples:
+
+[Inanna](https://en.wikipedia.org/wiki/Inanna), the Sumerian goddess of love, sex, and war, was worshipped for thousands of years. The hymns written in her honor include agricultural metaphors so explicit they would get flagged by Instagram's content moderation today. Scholars refer to passages where Inanna asks someone to "_plow her well-watered field_" (side note: 🥵) as sacred poetry. Which, sure, it was. The oldest written love literature on Earth is also, depending on your personal threshold, extremely not safe for work.
 
 ![TL;DR: 🍆🍑🥵👉👌💦🔞](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/61880436-efed-449d-b3a1-0998b2999cb7/final-1778162002741.webp "TL;DR: 🍆🍑🥵👉👌💦🔞")
 
-In the [Epic of Gilgamesh](https://www.britannica.com/topic/Ishtar-Mesopotamian-goddess), Ishtar propositions Gilgamesh outright, sex with a goddess framed as a straight-up blessing. The [Dionysian mysteries](https://en.wikipedia.org/wiki/Dionysian_Mysteries) built whole ritual systems around ecstatic release, and when those rites migrated to Rome as Bacchanalia, the Roman Senate panicked and [banned them in 186 BCE](https://en.wikipedia.org/wiki/Dionysian_Mysteries). Whether those temples also housed what ancient writers called "sacred prostitution" is [heavily disputed by scholars](https://www.historynewsnetwork.org/article/did-prostitution-really-exist-in-the-temples-of-an), but the core point stands: sex was almost religious. It explained creation. It connected people to something bigger than themselves.
+Then there were the [Dionysian mysteries](https://en.wikipedia.org/wiki/Dionysian_Mysteries), built around Dionysus, the Greek god of wine, chaos, and a genuinely good time. His worship involved wine, obviously, but also frenzied dancing, altered states, and groups of women called maenads who would head up into the hills and, by ancient accounts, completely lose themselves in divine possession (_iykyk_). This was considered religion. Perfectly normal religion. The idea was that you dissolved your individual self into something larger, which sounds either very spiritual or very much like a music festival, depending on your perspective.
+
+When the rites traveled to Rome as [_Bacchanalia_](https://en.wikipedia.org/wiki/Bacchanalia), they caught on fast, possibly because Romans also enjoyed wine and chaos. The Senate, alarmed by what had become a very popular and very unsupervised gathering of citizens in various states of ecstasy, banned them in 186 BCE. The point worth sitting with is that the Senate didn't ban a party. They banned a religious practice, one that used pleasure, frenzy, and collective dissolution as a way of touching something divine. These people weren't being depraved. They were doing theology.
+
+The point is: sex used to be almost religious. It explained creation. It connected people to something bigger than themselves.
 
 This was about to become very inconvenient for some people with ambitions.
 
@@ -67,11 +73,11 @@ That was still fairly vanilla.
 
 The religious nuclear option came later courtesy of Augustine of Hippo. In the early 5th century, he landed on an idea so effective it is still quietly running in the background of how Western culture thinks about bodies. Augustine's argument was simple and devastating: original sin doesn't pass down through bad behavior. It passes through [the wanting](https://theo.kuleuven.be/apps/christian-ethics/sex/history/h2b.html). His theory was that, before _the Fall_, when Adam and Eve ruined everything for the rest of us, humans could have reproduced calmly and rationally. No messy longing, no irrational urges, just sensible reproduction like filing paperwork. 
 
-Fun stuff.
+I imagine it like unironically sending a Google Calendar invite titled "Intercourse."
 
 After _the Fall_, the desire itself became the problem. He treated marriage as a [damage-control institution](https://theotherjournal.com/2006/04/a-sinful-doctrine-sexuality-and-gender-in-augustines-doctrine-of-original-sin-part-1/): permitted for making children, but not something you were supposed to enjoy. The twist was genuinely radical. You didn't have to do anything wrong. Feeling desire was already the problem. The wanting.
 
-Augustine was like: _don't even THINK about it_.
+Augustine's one rule: _don't even THINK about it_.
 
 Paul had already set the table for Augustine in [1 Corinthians 7](https://www.biblegateway.com/passage/?search=1+Corinthians+7&version=NIV). Celibacy was the ideal. Marriage was basically a concession to people who couldn't handle themselves. "Better to marry than to burn," he wrote, which is arguably the least romantic endorsement of marriage in human history.
 
