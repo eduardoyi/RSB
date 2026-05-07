@@ -136,6 +136,8 @@ This was not a phase. This was a philosophy, a career, and apparently also a bre
 
 Kellogg believed, with the full conviction of a man who had given the matter enormous personal thought, that sexual activity of any kind, including masturbation, drained the body, corrupted the spirit, and derailed a person from their higher purpose. The solution, naturally, was diet. Bland food, he reasoned, cooled the passions. Spicy food inflamed them. 
 
+(🚩🚩🚩 _amirite_?)
+
 In his 1877 book, he catalogued 39 symptoms he pinned on masturbation and prescribed, among other remedies, a deliberately dull, sugar-free cereal designed to make desire give up and go home. That cereal became Corn Flakes. His brother later added sugar. Kellogg was reportedly furious. A man organized his marriage, his medicine, and his menu around a single obsession, and the lasting legacy is a slightly sweet morning snack enjoyed by millions of children. History is something.
 
 ![Eat your cereal or else you'll be horny all day.](https://pub-38f0f370b6cc492f84909cfc294bbc8a.r2.dev/images/8737fc94-44d7-4133-93ee-e6c947f21e2c/57703c9a-4227-42f5-ac3a-d85a7562291d/final-1778172872443.webp "Eat your cereal or else you'll be horny all day.")
