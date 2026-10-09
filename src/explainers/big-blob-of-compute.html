@@ -1,0 +1,573 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<style>
+/* Layout: a single magazine reading column (~640px) with full-bleed watercolor plates and wider figure wells for the interactives. */
+:root{
+  --paper:#f8f7f4; --ink:#1a1e2c; --muted:#5a5f6e; --rule:#dddcd4; --well:#efeee8;
+  --ultra:#2d4aa6; --cerul:#2f7fa8; --ochre:#a8680f; --rose:#b2365e; --violet:#5e4596;
+  --plate-radius:0px; --plate-shadow:none;
+  --f-display:"Libre Caslon Display", "Libre Caslon Text", Georgia, serif;
+  --f-body:"Newsreader", Georgia, "Times New Roman", serif;
+  --f-ui:"Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#12141b; --ink:#e8e7e1; --muted:#a0a3af; --rule:#2b2f3b; --well:#1a1d26;
+  --ultra:#93a8f2; --cerul:#7cc0e0; --ochre:#e3a84f; --rose:#ec7f9f; --violet:#b39cec;
+  --plate-radius:6px; --plate-shadow:0 0 0 1px #2b2f3b; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#12141b; --ink:#e8e7e1; --muted:#a0a3af; --rule:#2b2f3b; --well:#1a1d26;
+  --ultra:#93a8f2; --cerul:#7cc0e0; --ochre:#e3a84f; --rose:#ec7f9f; --violet:#b39cec;
+  --plate-radius:6px; --plate-shadow:0 0 0 1px #2b2f3b; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:19px;line-height:1.6;
+  font-optical-sizing:auto;-webkit-font-smoothing:antialiased;padding-inline:20px;padding-block:0 64px}
+.col{max-width:640px;margin-inline:auto}
+.wide{max-width:900px;margin-inline:auto}
+.bleed{max-width:1180px;margin-inline:auto}
+p{margin:0 0 1.05em}
+a{color:var(--ultra);text-decoration-thickness:1px;text-underline-offset:3px}
+em{font-style:italic}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0}
+h1{font-size:clamp(46px,10vw,92px);line-height:.98;letter-spacing:-.01em}
+h2{font-size:clamp(32px,6vw,46px);line-height:1.08;margin-bottom:.45em}
+h3{font-size:24px;line-height:1.2}
+.kicker{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ultra)}
+.dek{font-size:clamp(20px,3.4vw,24px);line-height:1.45;color:var(--muted);margin-top:18px}
+.byline{font-family:var(--f-ui);font-size:13px;color:var(--muted);margin-top:18px;letter-spacing:.01em}
+
+header{padding-top:40px}
+.plate{display:block;width:100%;height:auto;max-width:100%;border-radius:var(--plate-radius);box-shadow:var(--plate-shadow)}
+figure{margin:0}
+figcaption{font-family:var(--f-ui);font-size:13px;line-height:1.45;color:var(--muted);margin-top:8px}
+section{margin-top:72px}
+.sec-label{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-label::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+.big-idea{font-family:var(--f-display);font-size:clamp(28px,5.4vw,40px);line-height:1.18;text-wrap:balance;
+  border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);padding-block:22px;margin-block:36px}
+.big-idea span{color:var(--ultra)}
+
+.drop::first-letter{font-family:var(--f-display);float:left;font-size:4.1em;line-height:.82;padding:.06em .08em 0 0;color:var(--ultra)}
+
+/* Figure wells for interactives */
+.well{background:var(--well);border-radius:4px;padding:22px 18px 18px;margin-block:28px}
+.well h4{font-family:var(--f-ui);font-size:15px;font-weight:700;margin:0 0 4px;letter-spacing:.005em}
+.well .sub{font-family:var(--f-ui);font-size:13.5px;color:var(--muted);margin:0 0 14px;line-height:1.45}
+.ui{font-family:var(--f-ui);font-size:14px}
+.tag{font-family:var(--f-ui);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button,.btn{font-family:var(--f-ui);font-size:14px;font-weight:500;border:1px solid var(--rule);background:var(--paper);color:var(--ink);
+  padding:8px 12px;border-radius:999px;cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary{background:var(--ultra);border-color:var(--ultra);color:var(--paper);font-weight:600}
+.btn:disabled{opacity:.45;cursor:default}
+button:focus-visible,input:focus-visible{outline:2px solid var(--ultra);outline-offset:2px}
+
+/* Rulebook vs learner */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.verdict{background:var(--paper);border-radius:4px;padding:14px;min-width:0}
+.verdict .who{font-family:var(--f-ui);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.verdict .ans{font-family:var(--f-display);font-size:30px;line-height:1.1;margin:6px 0 6px}
+.verdict .why{font-family:var(--f-ui);font-size:13.5px;line-height:1.45;color:var(--muted)}
+.ok{color:var(--cerul)} .bad{color:var(--rose)}
+.rulecard{font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;font-size:13px;background:var(--paper);border-left:3px solid var(--ochre);padding:10px 12px;margin-top:14px;overflow-x:auto;color:var(--ink)}
+.who.r{color:var(--ochre)} .who.l{color:var(--ultra)}
+
+/* charts */
+.chart{width:100%;height:auto;display:block;overflow:visible}
+.chart text{font-family:var(--f-ui);fill:var(--muted);font-size:11px}
+.chart .axis{stroke:var(--rule);stroke-width:1}
+.chart .grid{stroke:var(--rule);stroke-width:1;stroke-dasharray:2 4}
+.readout{font-family:var(--f-ui);font-size:14.5px;line-height:1.5;margin-top:10px;min-height:3em}
+.readout b{font-weight:700}
+input[type=range]{width:100%;accent-color:var(--ultra);height:28px}
+.slider-row{display:grid;grid-template-columns:96px 1fr 44px;gap:10px;align-items:center;font-family:var(--f-ui);font-size:14px}
+.slider-row output{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.illus{font-family:var(--f-ui);font-size:11.5px;color:var(--muted);margin-top:10px;font-style:italic}
+
+/* recipe */
+.recipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1px;background:var(--rule);border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);margin-block:28px}
+.ing{background:var(--paper);padding:18px 16px 18px 0;display:grid;grid-template-columns:44px 1fr;gap:12px;min-width:0}
+.ing:nth-child(even){padding-left:16px}
+@media (max-width:560px){.ing:nth-child(even){padding-left:0}}
+.ing .dot{width:36px;height:36px;border-radius:50% 46% 52% 48%/48% 52% 46% 50%;opacity:.85;margin-top:4px}
+.ing h3{font-family:var(--f-display);font-size:22px;margin-bottom:2px}
+.ing .k{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ing p{font-size:16.5px;line-height:1.5;margin:6px 0 0}
+
+/* mixer */
+.mixer{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:720px){.mixer{grid-template-columns:1.1fr 1fr;align-items:center}}
+.mixer canvas{width:100%;aspect-ratio:1/1;max-width:100%;display:block}
+.sliders{display:grid;gap:10px;min-width:0}
+
+/* staircase */
+.stairs-ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.cost{font-family:var(--f-ui);font-size:14px;font-variant-numeric:tabular-nums;margin-left:auto;color:var(--muted)}
+.cost b{color:var(--ink)}
+
+/* flow */
+.flow canvas{width:100%;height:220px;display:block;border-radius:3px}
+.numrow{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:12px}
+.numrow div{background:var(--paper);border-radius:3px;padding:8px 10px;font-family:var(--f-ui);min-width:0}
+.numrow .l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.numrow .v{font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+
+/* debate */
+.debate{display:grid;grid-template-columns:1fr;gap:28px;margin-top:20px}
+@media (min-width:720px){.debate{grid-template-columns:1fr 1fr}}
+.debate h3{font-size:22px;margin-bottom:8px;padding-top:10px;border-top:2px solid var(--ink)}
+.debate ul{margin:0;padding-left:1.1em}
+.debate li{margin-bottom:.6em;font-size:17px;line-height:1.5}
+
+/* timeline */
+.tl{list-style:none;margin:20px 0 0;padding:0;border-left:1px solid var(--rule)}
+.tl li{position:relative;padding:0 0 22px 22px}
+.tl li::before{content:"";position:absolute;left:-5px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--muted)}
+.tl li.key::before{background:var(--ultra);width:13px;height:13px;left:-7px;top:6px}
+.tl .yr{font-family:var(--f-ui);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.tl .ev{font-size:17px;line-height:1.5}
+
+.recap{border-top:2px solid var(--ink);padding-top:16px;margin-top:20px}
+.recap ol{margin:0;padding-left:1.2em}
+.recap li{margin-bottom:.7em}
+.next{display:block;margin-top:28px;padding:18px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink)}
+.next .kicker{color:var(--rose)}
+.next .t{font-family:var(--f-display);font-size:28px;line-height:1.15;display:block;margin-top:4px}
+.sources{font-family:var(--f-ui);font-size:13px;line-height:1.55;color:var(--muted);margin-top:48px;border-top:1px solid var(--rule);padding-top:14px}
+.sources a{color:var(--muted)}
+@media (prefers-reduced-motion: reduce){*{scroll-behavior:auto}}
+</style>
+
+<header class="col">
+  <div class="kicker">Big ideas in AI, illustrated · No. 1</div>
+  <h1>The Big Blob of Compute</h1>
+  <p class="dek">In 2017, Dario Amodei wrote a short internal memo making an unfashionable bet: the path to smarter AI isn't a stream of clever inventions. It's a simple, general recipe, scaled up until it's enormous.</p>
+  <div class="byline"><!--rsb:byline--> · An explainer for non-engineers · about 10 minutes · 5 things to play with</div>
+</header>
+
+<figure class="bleed" style="margin-top:28px">
+  <img class="plate" src="https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/explainers/big-blob-of-compute/hero.webp" alt="Watercolor: a trail of small colorful dabs flowing into a large blue blob" width="1600" height="1000">
+  <figcaption class="col">Data goes in, one dab at a time. The blob is the AI model; it grows more capable as it gets bigger and is fed more.</figcaption>
+</figure>
+
+<section class="col">
+  <div class="sec-label">The idea</div>
+  <p class="drop">Imagine two chefs trying to make the world's best soup. The first spends years inventing secret techniques: a special knife cut, a precise stirring rhythm, a sauce only she understands. The second does something that sounds almost lazy. She gets a bigger pot, more and better ingredients, and lets it simmer longer.</p>
+  <p>For most of AI's history, researchers acted like the first chef. Dario's memo argued that the second chef wins, and that she keeps winning as the pot gets bigger. He called the idea "the Big Blob of Compute": a blob, because the model is a big shapeless mass of adjustable numbers, and compute, because what feeds it is raw calculating power.</p>
+  <div class="big-idea">Most progress in AI comes from <span>a bigger pot, more ingredients, and a longer simmer</span>, not from cleverer recipes.</div>
+  <p>He wrote it before ChatGPT, before GPT-3, before almost anyone outside a few labs had heard of a large language model. In a February 2026 interview with Dwarkesh Patel, he said he still holds the same hypothesis and hasn't seen much that contradicts it.</p>
+</section>
+
+<section class="col">
+  <div class="sec-label">Two ways to build a mind</div>
+  <h2>Writing rules vs. learning from examples</h2>
+  <p>Say you want a computer to recognize dogs. The old way is to write down what a dog <em>is</em>: four legs, fur, barks. The blob way is to show a big, general-purpose learner millions of photos labeled "dog" or "not dog" and let it work out the pattern on its own.</p>
+</section>
+<figure class="wide" style="margin-top:20px">
+  <img class="plate" src="https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/explainers/big-blob-of-compute/rules.webp" alt="Watercolor: a rigid ink grid with some ochre squares filled in, next to a soft blue blob" width="1600" height="760" loading="lazy">
+  <figcaption class="col">Left, the rulebook: tidy, human-designed, brittle. Right, the blob: shapeless, but it fills in whatever the examples teach it.</figcaption>
+</figure>
+<div class="col">
+  <div class="well" id="dogs">
+    <h4>Try it: is this a dog?</h4>
+    <p class="sub">Pick an animal. See how a hand-written rule copes, versus a learner trained on millions of photos.</p>
+    <div class="seg" role="group" aria-label="Choose an animal">
+      <button type="button" id="d0" data-i="0" aria-pressed="true">Golden retriever</button>
+      <button type="button" id="d1" data-i="1" aria-pressed="false">Three-legged rescue</button>
+      <button type="button" id="d2" data-i="2" aria-pressed="false">Hairless dog</button>
+      <button type="button" id="d3" data-i="3" aria-pressed="false">Fox</button>
+      <button type="button" id="d4" data-i="4" aria-pressed="false">Dog in the dark</button>
+    </div>
+    <div class="rulecard">IF legs = 4 AND has_fur AND barks → "dog"</div>
+    <div class="vs">
+      <div class="verdict"><div class="who r">The rulebook</div><div class="ans" id="rA"></div><div class="why" id="rW"></div></div>
+      <div class="verdict"><div class="who l">The learner</div><div class="ans" id="lA"></div><div class="why" id="lW"></div></div>
+    </div>
+  </div>
+  <p>Every fix to the rulebook ("dogs can have three legs… unless it's a cat") makes it longer and more fragile. The learner doesn't need fixes. It needs <em>more examples and a bigger brain</em> to absorb them. That's the trade the Big Blob makes: give up on hand-crafting, and spend on scale instead.</p>
+</div>
+
+<section class="col">
+  <div class="sec-label">The bitter lesson</div>
+  <h2>Why clever loses in the long run</h2>
+  <p>Two years after Dario's memo, the computer scientist Rich Sutton published a short essay called "The Bitter Lesson" that reached the same conclusion from 70 years of AI history. In chess, Go, speech recognition and computer vision, researchers built systems around human knowledge. Those systems won early. Then simpler methods that could soak up more computing power overtook them, and the clever versions were abandoned.</p>
+  <p>It's "bitter" because it stings: the cleverness researchers were proudest of turned out to be a short-term advantage.</p>
+  <div class="well">
+    <h4>Drag the slider: how much computing power do you have?</h4>
+    <p class="sub">The rulebook approach starts strong and stalls. The general learner starts weak and keeps climbing.</p>
+    <svg class="chart" id="bitter" viewBox="0 0 360 230" role="img" aria-label="Chart of skill versus computing power for two approaches"></svg>
+    <input type="range" id="bitterSlider" min="0" max="100" value="22" aria-label="Computing power">
+    <div class="readout" id="bitterOut" aria-live="polite"></div>
+    <div class="illus">Illustrative shape, not measured data.</div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-label">The recipe</div>
+  <h2>What actually goes into the blob</h2>
+  <p>The memo's core claim is that only a handful of things really matter. Dario has said he listed seven. Here they are, in kitchen terms.</p>
+</section>
+<div class="wide">
+  <div class="recipe">
+    <div class="ing"><div class="dot" style="background:var(--ultra)"></div><div><div class="k">Raw compute</div><h3>The size of the stove</h3><p>How many calculations you can afford. Today that means warehouses of specialized chips running for months.</p></div></div>
+    <div class="ing"><div class="dot" style="background:var(--cerul)"></div><div><div class="k">Quantity of data</div><h3>How many groceries</h3><p>The amount of text, images and examples the model gets to learn from. A big pot with three carrots makes thin soup.</p></div></div>
+    <div class="ing"><div class="dot" style="background:var(--ochre)"></div><div><div class="k">Quality and breadth of data</div><h3>Fresh, varied ingredients</h3><p>A cookbook that only has soups won't teach you desserts. The data has to be good, and it has to cover the range of things you want the model to do.</p></div></div>
+    <div class="ing"><div class="dot" style="background:var(--violet)"></div><div><div class="k">Training time</div><h3>How long it simmers</h3><p>How long the model keeps practicing on that data. Pull it off the heat too early and the flavors never come together.</p></div></div>
+    <div class="ing"><div class="dot" style="background:var(--rose)"></div><div><div class="k">An objective that scales</div><h3>A goal that never runs out</h3><p>A task you can keep getting better at forever. "Guess the next word" is the famous one: there's always another sentence to practice on. Newer models also learn from rewards for good answers, the way you'd train with practice problems.</p></div></div>
+    <div class="ing"><div class="dot" style="background:var(--muted)"></div><div><div class="k">Stability (normalization and conditioning)</div><h3>Keeping the heat even</h3><p>Technical tricks that stop the giant calculation from boiling over or going cold, so, in Dario's word, it flows "laminar": smooth instead of turbulent.</p></div></div>
+  </div>
+</div>
+<div class="col">
+  <p>Notice what's missing from the list: there's no ingredient called "a brilliant new idea about how thinking works." Ideas still matter, but mostly as ways to let the blob get bigger without falling apart. The next companion piece, on the 2017 paper "Attention Is All You Need", is a perfect example: its big contribution was a design that let computers learn from far more data, far faster.</p>
+</div>
+
+<section class="col">
+  <div class="sec-label">Balance</div>
+  <h2>The weakest ingredient sets the size</h2>
+  <p>The ingredients have to grow together. Picture a barrel made of wooden planks: it can only hold water up to its shortest plank. Pour in a mountain of computing power with too little data, and most of it is wasted.</p>
+  <p>This isn't hypothetical. In 2022, researchers at DeepMind showed that many of the largest models of the time had been fed too little data for their size. A smaller model trained on more text, which they called Chinchilla, beat much bigger rivals for the same budget.</p>
+  <div class="well">
+    <h4>Mix your own blob</h4>
+    <p class="sub">Move the sliders. The blob only grows when the ingredients grow together.</p>
+    <div class="mixer">
+      <canvas id="mixCanvas" aria-label="A watercolor blob that grows with the ingredients" role="img"></canvas>
+      <div class="sliders">
+        <label class="slider-row" for="sC"><span>Compute</span><input type="range" id="sC" min="5" max="100" value="80"><output id="oC">80</output></label>
+        <label class="slider-row" for="sD"><span>Data</span><input type="range" id="sD" min="5" max="100" value="25"><output id="oD">25</output></label>
+        <label class="slider-row" for="sT"><span>Training time</span><input type="range" id="sT" min="5" max="100" value="60"><output id="oT">60</output></label>
+        <div class="readout" id="mixOut" aria-live="polite"></div>
+      </div>
+    </div>
+    <div class="illus">A cartoon of the idea, not a real formula.</div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-label">Scaling laws</div>
+  <h2>Every 10× buys another step</h2>
+  <p>Here's the part that turned the hypothesis into a business. In 2020, a group of researchers at OpenAI, Dario among them, measured how a language model's mistakes shrink as you scale it up. The result was startlingly regular: each time you multiply the compute by ten, the error drops by about the same proportion. They called these patterns <em>scaling laws</em>.</p>
+  <p>Think of a staircase where every step costs ten times more than the last, but the steps are reliably the same height. Expensive, yes. But predictable, and predictability is what lets a company justify spending a billion dollars before it knows exactly what it will get.</p>
+</section>
+<figure class="wide" style="margin-top:8px">
+  <img class="plate" src="https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/explainers/big-blob-of-compute/grow.webp" alt="Watercolor: three blue blobs, each much larger than the last" width="1600" height="600" loading="lazy">
+</figure>
+<div class="col">
+  <div class="well">
+    <h4>Climb the staircase</h4>
+    <p class="sub">Each click multiplies the compute by 10. Watch the error fall by the same fraction each time, and the bill grow.</p>
+    <svg class="chart" id="stairs" viewBox="0 0 360 240" role="img" aria-label="Error rate falling as compute grows by powers of ten"></svg>
+    <div class="stairs-ctl">
+      <button class="btn primary" type="button" id="up">Multiply compute ×10</button>
+      <button class="btn" type="button" id="reset">Start over</button>
+      <div class="cost">Training bill: <b id="bill">$10K</b></div>
+    </div>
+    <div class="readout" id="stairsOut" aria-live="polite"></div>
+    <div class="illus">Illustrative numbers. Real scaling curves have the same shape: straight lines when both axes use powers of ten.</div>
+  </div>
+</div>
+
+<section class="col">
+  <div class="sec-label">Stability</div>
+  <h2>Keep it flowing smoothly</h2>
+  <p>The last two items on Dario's list sound the most technical, but the idea is familiar. Inside a model, numbers get passed through hundreds of layers, multiplied again and again. If each layer makes them just a little bigger, they explode. A little smaller, and they fade to nothing. It's the screech of a microphone held too close to a speaker: a tiny signal, fed back on itself, becomes a roar.</p>
+  <p>Normalization is the fix. After each layer, the numbers get gently re-centered, the way a thermostat keeps a room at the same temperature. Boring, essential, and the reason the blob can grow huge without collapsing.</p>
+</section>
+<figure class="bleed" style="margin-top:8px">
+  <img class="plate" src="https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/explainers/big-blob-of-compute/flow.webp" alt="Watercolor: long parallel bands of blue and teal flowing smoothly" width="1600" height="560" loading="lazy">
+  <figcaption class="col">Laminar flow: every stream stays in its lane. This is what a healthy training run looks like.</figcaption>
+</figure>
+<div class="col">
+  <div class="well flow">
+    <h4>Flip the switch</h4>
+    <p class="sub">Each layer nudges the numbers 40% bigger. Watch what happens with and without re-centering.</p>
+    <div class="seg" role="group" aria-label="Normalization">
+      <button type="button" id="fOn" aria-pressed="true">With normalization</button>
+      <button type="button" id="fOff" aria-pressed="false">Without</button>
+    </div>
+    <canvas id="flowCanvas" style="margin-top:12px" aria-label="Animated streams of particles" role="img"></canvas>
+    <div class="numrow" id="numrow"></div>
+  </div>
+</div>
+
+<section class="col">
+  <div class="sec-label">The debate</div>
+  <h2>Is that really all it takes?</h2>
+  <p>It's a hypothesis, and smart people push back on it. Here is the strongest version of each side.</p>
+</section>
+<div class="wide">
+  <div class="debate">
+    <div>
+      <h3>The case for the blob</h3>
+      <ul>
+        <li>The bet has paid off for almost a decade. Models kept getting more capable as they got bigger, roughly on schedule.</li>
+        <li>Many celebrated "new ideas" turned out to matter mainly because they let models scale further.</li>
+        <li>Abilities nobody trained for directly, like writing code or explaining jokes, appeared as models grew.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>The case for caution</h3>
+      <ul>
+        <li>High-quality human text is finite. At some point the groceries run low, and synthetic data may not fully replace them.</li>
+        <li>A child learns language from a tiny fraction of the data a model sees, which suggests something about learning is still missing.</li>
+        <li>Each step up the staircase costs ten times more. Money, chips and electricity may run out before the steps do.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<section class="col">
+  <div class="sec-label">How the bet played out</div>
+  <ol class="tl">
+    <li><div class="yr">1997</div><div class="ev">IBM's Deep Blue beats chess champion Garry Kasparov, mostly by searching through enormous numbers of moves rather than "understanding" chess.</div></li>
+    <li><div class="yr">2012</div><div class="ev">A neural network called AlexNet, trained on gaming chips, crushes hand-engineered systems at recognizing images.</div></li>
+    <li class="key"><div class="yr">2017</div><div class="ev">Dario writes the Big Blob of Compute memo. The same year, Google researchers publish "Attention Is All You Need", the design that makes scaling language models practical.</div></li>
+    <li><div class="yr">2019</div><div class="ev">Rich Sutton publishes "The Bitter Lesson".</div></li>
+    <li class="key"><div class="yr">2020</div><div class="ev">Scaling laws are published. GPT-3 shows what a much bigger language model can do.</div></li>
+    <li><div class="yr">2022</div><div class="ev">DeepMind's Chinchilla shows data has to grow along with model size. ChatGPT launches in November.</div></li>
+    <li><div class="yr">2026</div><div class="ev">Dario tells Dwarkesh Patel he holds the same hypothesis he wrote down in 2017.</div></li>
+  </ol>
+</section>
+
+<section class="col">
+  <div class="sec-label">One-minute recap</div>
+  <div class="recap">
+    <ol>
+      <li>Don't hand-craft intelligence. Build a simple, general learner and let it learn from examples.</li>
+      <li>A few ingredients decide how good it gets: compute, lots of good and varied data, training time, a goal that never runs out, and tricks that keep the math stable.</li>
+      <li>Grow them together, and the results improve predictably with every 10× step. That predictability is why the industry spends so much on chips.</li>
+    </ol>
+  </div>
+  <a class="next" id="nextLink" href="/post/attention-is-all-you-need">
+    <span class="kicker">Next in the series</span>
+    <span class="t">Attention Is All You Need</span>
+    <span class="ui" style="color:var(--muted)">The 2017 paper that made the blob practical for language.</span>
+  </a>
+  <div class="sources">
+    Sources: <a href="https://www.dwarkesh.com/p/dario-amodei-2" target="_blank" rel="noopener">Dario Amodei on the Dwarkesh Podcast (Feb 2026)</a> ·
+    <a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html" target="_blank" rel="noopener">Rich Sutton, "The Bitter Lesson" (2019)</a> ·
+    <a href="https://arxiv.org/abs/2001.08361" target="_blank" rel="noopener">Kaplan et al., "Scaling Laws for Neural Language Models" (2020)</a> ·
+    <a href="https://arxiv.org/abs/2203.15556" target="_blank" rel="noopener">Hoffmann et al., "Training Compute-Optimal Large Language Models" (2022)</a>.
+    The 2017 memo itself is internal; its contents here come from Dario's public descriptions. Watercolor plates generated with OpenCV.
+  </div>
+</section>
+
+<script>
+(function(){
+const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS='http://www.w3.org/2000/svg';
+const el=(tag,attrs,parent,text)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;};
+
+/* ---------- dogs ---------- */
+const DOGS=[
+ {r:['Dog','ok','Four legs, fur, barks. Rule satisfied.'], l:['Dog','ok','Looks like thousands of retrievers it has seen.']},
+ {r:['Not a dog','bad','Three legs fails "legs = 4". The rule has no idea.'], l:['Dog','ok','Plenty of photos of dogs with missing legs, dogs mid-jump, dogs lying down.']},
+ {r:['Not a dog','bad','No fur, so the rule says no. Someone would have to add an exception.'], l:['Dog','ok','The face, ears and posture still say dog.']},
+ {r:['Dog','bad','Four legs, fur, and foxes do bark. Fooled.'], l:['Not a dog','ok','It has also seen thousands of foxes labeled "not dog".']},
+ {r:['No answer','bad','Can’t count legs or check fur in a dark photo.'], l:['Probably dog','ok','Blurry, dark photos were in its training set too. Not perfect, but usually right.']}
+];
+const dogBtns=[...document.querySelectorAll('#dogs .seg button')];
+function setDog(i){
+  dogBtns.forEach(b=>b.setAttribute('aria-pressed', b.dataset.i==i));
+  const d=DOGS[i];
+  const rA=document.getElementById('rA'), lA=document.getElementById('lA');
+  rA.textContent=d.r[0]; rA.className='ans '+d.r[1]; document.getElementById('rW').textContent=d.r[2];
+  lA.textContent=d.l[0]; lA.className='ans '+d.l[1]; document.getElementById('lW').textContent=d.l[2];
+}
+dogBtns.forEach(b=>b.addEventListener('click',()=>setDog(b.dataset.i)));
+setDog(0);
+
+/* ---------- bitter lesson chart ---------- */
+const B={x0:34,x1:350,y0:196,y1:14};
+const hand=x=>8+58*(1-Math.exp(-x/14));
+const learn=x=>4+90/(1+Math.exp(-(x-56)/10));
+const bx=x=>B.x0+(B.x1-B.x0)*x/100, by=y=>B.y0-(B.y0-B.y1)*y/100;
+const bsvg=document.getElementById('bitter');
+let bMarker, bDotH, bDotL;
+function drawBitter(){
+  bsvg.innerHTML='';
+  const ultra=css('--ultra'), ochre=css('--ochre');
+  [25,50,75,100].forEach(v=>{el('line',{x1:B.x0,x2:B.x1,y1:by(v),y2:by(v),class:'grid'},bsvg);});
+  el('line',{x1:B.x0,x2:B.x1,y1:B.y0,y2:B.y0,class:'axis'},bsvg);
+  el('text',{x:B.x0,y:B.y0+16},bsvg,'A little');
+  el('text',{x:B.x1,y:B.y0+16,'text-anchor':'end'},bsvg,'A lot');
+  el('text',{x:(B.x0+B.x1)/2,y:B.y0+30,'text-anchor':'middle'},bsvg,'Computing power →');
+  el('text',{x:12,y:by(50),transform:`rotate(-90 12 ${by(50)})`,'text-anchor':'middle'},bsvg,'Skill →');
+  const path=f=>{let d='';for(let x=0;x<=100;x+=1)d+=(x?'L':'M')+bx(x).toFixed(1)+' '+by(f(x)).toFixed(1);return d;};
+  el('path',{d:path(hand),fill:'none',stroke:ochre,'stroke-width':3,'stroke-linecap':'round'},bsvg);
+  el('path',{d:path(learn),fill:'none',stroke:ultra,'stroke-width':3,'stroke-linecap':'round'},bsvg);
+  el('text',{x:bx(3),y:by(80),style:`fill:${ochre};font-weight:600;font-size:12px`},bsvg,'Hand-written rules');
+  el('text',{x:bx(62),y:by(26),style:`fill:${ultra};font-weight:600;font-size:12px`},bsvg,'General learner');
+  bMarker=el('line',{y1:B.y1,y2:B.y0,stroke:css('--ink'),'stroke-width':1,'stroke-dasharray':'3 3'},bsvg);
+  bDotH=el('circle',{r:5,fill:ochre,stroke:css('--paper'),'stroke-width':2},bsvg);
+  bDotL=el('circle',{r:5,fill:ultra,stroke:css('--paper'),'stroke-width':2},bsvg);
+  updBitter();
+}
+function updBitter(){
+  const x=+document.getElementById('bitterSlider').value;
+  bMarker.setAttribute('x1',bx(x));bMarker.setAttribute('x2',bx(x));
+  bDotH.setAttribute('cx',bx(x));bDotH.setAttribute('cy',by(hand(x)));
+  bDotL.setAttribute('cx',bx(x));bDotL.setAttribute('cy',by(learn(x)));
+  const h=hand(x),l=learn(x),o=document.getElementById('bitterOut');
+  if(h-l>6) o.innerHTML='<b>The rules win.</b> With little computing power, human cleverness is the best shortcut. This is where researchers spent decades, and why the rulebook looked like the right bet.';
+  else if(Math.abs(h-l)<=6) o.innerHTML='<b>Neck and neck.</b> The learner is catching up fast, and the rulebook has almost stopped improving. Adding more rules now barely helps.';
+  else o.innerHTML='<b>The learner pulls away.</b> Every extra bit of computing power makes it better, while the rulebook stays stuck. This is the bitter lesson.';
+}
+document.getElementById('bitterSlider').addEventListener('input',updBitter);
+
+/* ---------- mixer blob (canvas watercolor) ---------- */
+const mc=document.getElementById('mixCanvas'), mctx=mc.getContext('2d');
+let mixT=0, mixTarget=0, mixCur=0, mixRaf=null;
+function sizeCanvas(c,h){const r=c.getBoundingClientRect();const dpr=Math.min(2,window.devicePixelRatio||1);c.width=Math.max(10,r.width*dpr);c.height=Math.max(10,(h||r.height)*dpr);return dpr;}
+function noise(a,t,seed){return Math.sin(a*3+seed+t*0.7)*0.5+Math.sin(a*5-seed*2+t*0.45)*0.3+Math.sin(a*9+seed*3-t*0.3)*0.2;}
+function hexA(hex,a){hex=hex.replace('#','');if(hex.length===3)hex=hex.split('').map(c=>c+c).join('');const n=parseInt(hex,16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;}
+function drawMix(){
+  const w=mc.width,h=mc.height,cx=w/2,cy=h/2;
+  mctx.clearRect(0,0,w,h);
+  const maxR=Math.min(w,h)*0.44, R=maxR*(0.16+0.84*mixCur);
+  const cols=[css('--cerul'),css('--ultra'),css('--violet')];
+  for(let layer=0;layer<3;layer++){
+    const rr=R*(1-layer*0.22);
+    for(let k=0;k<7;k++){
+      mctx.beginPath();
+      const seed=layer*7+k*1.3;
+      for(let i=0;i<=72;i++){
+        const a=i/72*Math.PI*2;
+        const rad=rr*(1+0.11*noise(a,mixT,seed))*(0.9+k*0.025);
+        const x=cx+Math.cos(a)*rad, y=cy+Math.sin(a)*rad;
+        i?mctx.lineTo(x,y):mctx.moveTo(x,y);
+      }
+      mctx.closePath();
+      mctx.fillStyle=hexA(cols[layer],0.07);
+      mctx.fill();
+      if(k===6){mctx.strokeStyle=hexA(cols[layer],0.22);mctx.lineWidth=1.2*(window.devicePixelRatio||1);mctx.stroke();}
+    }
+  }
+}
+function mixLoop(){
+  mixCur+= (mixTarget-mixCur)*0.08; mixT+=0.016;
+  drawMix();
+  if(!reduce) mixRaf=requestAnimationFrame(mixLoop);
+}
+function updMix(){
+  const c=+sC.value,d=+sD.value,t=+sT.value;
+  oC.textContent=c;oD.textContent=d;oT.textContent=t;
+  const lo=Math.min(c,d,t), avg=(c+d+t)/3;
+  mixTarget=(lo*0.8+avg*0.2)/100;
+  const names={c:'compute',d:'data',t:'training time'};
+  const lowKey=lo===d?'d':lo===c?'c':'t';
+  const highs=[['c',c],['d',d],['t',t]].filter(([k,v])=>v-lo>=30).map(([k])=>names[k]);
+  const out=document.getElementById('mixOut');
+  if(highs.length===0) out.innerHTML=`<b>Balanced.</b> Every ingredient is pulling its weight, so nothing is wasted. ${lo>70?'This is a big, well-fed blob.':'Raise all three together to grow it.'}`;
+  else out.innerHTML=`<b>${names[lowKey][0].toUpperCase()+names[lowKey].slice(1)} is the short plank.</b> Much of your extra ${highs.join(' and ')} is going to waste until you raise it.`;
+  if(reduce){mixCur=mixTarget;drawMix();}
+}
+const sC=document.getElementById('sC'),sD=document.getElementById('sD'),sT=document.getElementById('sT');
+const oC=document.getElementById('oC'),oD=document.getElementById('oD'),oT=document.getElementById('oT');
+[sC,sD,sT].forEach(s=>s.addEventListener('input',updMix));
+
+/* ---------- staircase ---------- */
+const S={x0:44,x1:346,y0:200,y1:14,n:6};
+const ssvg=document.getElementById('stairs');
+let step=0;
+const err=k=>100*Math.pow(0.78,k);
+const bills=['$10K','$100K','$1M','$10M','$100M','$1B','$10B'];
+const sx=k=>S.x0+(S.x1-S.x0)*k/S.n, sy=v=>S.y0-(S.y0-S.y1)*v/100;
+function drawStairs(){
+  ssvg.innerHTML='';
+  const ultra=css('--ultra'), ink=css('--ink');
+  [0,25,50,75,100].forEach(v=>{el('line',{x1:S.x0,x2:S.x1,y1:sy(v),y2:sy(v),class:'grid'},ssvg);el('text',{x:S.x0-6,y:sy(v)+4,'text-anchor':'end'},ssvg,v+'%');});
+  el('line',{x1:S.x0,x2:S.x1,y1:S.y0,y2:S.y0,class:'axis'},ssvg);
+  const labels=['1×','10×','100×','1K×','10K×','100K×','1M×'];
+  labels.forEach((t,k)=>el('text',{x:sx(k),y:S.y0+16,'text-anchor':'middle',style:k<=step?`fill:${ink}`:''},ssvg,t));
+  el('text',{x:(S.x0+S.x1)/2,y:S.y0+32,'text-anchor':'middle'},ssvg,'Compute (each tick is 10× the last)');
+  el('text',{x:10,y:sy(50),transform:`rotate(-90 10 ${sy(50)})`,'text-anchor':'middle'},ssvg,'Mistakes →');
+  // ghost full line
+  let d='';for(let k=0;k<=S.n;k++)d+=(k?'L':'M')+sx(k)+' '+sy(err(k));
+  el('path',{d,fill:'none',stroke:css('--rule'),'stroke-width':2,'stroke-dasharray':'4 4'},ssvg);
+  // stairs walked
+  let p='M'+sx(0)+' '+sy(err(0));
+  for(let k=1;k<=step;k++){p+=' L'+sx(k)+' '+sy(err(k-1))+' L'+sx(k)+' '+sy(err(k));}
+  el('path',{d:p,fill:'none',stroke:ultra,'stroke-width':3,'stroke-linejoin':'round'},ssvg);
+  for(let k=0;k<=step;k++){el('circle',{cx:sx(k),cy:sy(err(k)),r:k===step?6:4,fill:ultra,stroke:css('--paper'),'stroke-width':2},ssvg);}
+  el('text',{x:sx(step)+(step>4?-10:10),y:step===0?sy(err(0))+22:sy(err(step))-10,'text-anchor':step>4?'end':'start',style:`fill:${ink};font-weight:700;font-size:13px`},ssvg,err(step).toFixed(0)+'% error');
+  document.getElementById('bill').textContent=bills[step];
+  document.getElementById('up').disabled=step>=S.n;
+  const o=document.getElementById('stairsOut');
+  const msgs=[
+   'You start with a small model trained for about the price of a used car.',
+   'Ten times more compute: mistakes drop by about a fifth. Nice.',
+   'Another 10×, another fifth of the remaining mistakes gone. Same-sized step, ten times the price.',
+   'The pattern holds. This is what convinced labs that bigger would keep working.',
+   'Now you’re spending what a mid-sized company earns in a year, for one training run.',
+   'A billion dollars. Still the same-sized step. This is roughly the frontier of the mid-2020s.',
+   'Ten billion. Whether the staircase keeps going this far is the big open question.'];
+  o.textContent=msgs[step];
+}
+document.getElementById('up').addEventListener('click',()=>{if(step<S.n){step++;drawStairs();}});
+document.getElementById('reset').addEventListener('click',()=>{step=0;drawStairs();});
+
+/* ---------- flow ---------- */
+const fc=document.getElementById('flowCanvas'), fctx=fc.getContext('2d');
+let norm=true, parts=[], fRaf=null, fDpr=1;
+function initParts(){
+  parts=[];const lanes=9;
+  for(let i=0;i<110;i++){parts.push({x:Math.random(),lane:i%lanes,ph:Math.random()*6.28,amp:0,seed:Math.random()*2-1});}
+}
+function drawFlow(dt){
+  const w=fc.width,h=fc.height,lanes=9;
+  fctx.fillStyle=hexA(css('--well'),0.28);
+  fctx.fillRect(0,0,w,h);
+  const cols=[css('--cerul'),css('--ultra'),css('--violet')], rose=css('--rose');
+  for(const p of parts){
+    p.x+=0.0022*dt;
+    if(p.x>1){p.x=0;p.ph=Math.random()*6.28;p.seed=Math.random()*2-1;}
+    const laneY=(p.lane+0.5)/lanes*h;
+    let y, col=cols[p.lane%3], size=2.2*fDpr;
+    if(norm){ y=laneY+Math.sin(p.x*9+p.ph)*3*fDpr; }
+    else{
+      const g=Math.pow(1.4,p.x*14)-1; // grows ~40% per "layer"
+      y=laneY+p.seed*g*6*fDpr+Math.sin(p.x*30+p.ph)*g*2*fDpr;
+      size=(2.2+Math.min(6,g*0.25))*fDpr;
+      if(g>18) col=rose;
+    }
+    fctx.beginPath();fctx.arc(p.x*w,y,size,0,6.283);fctx.fillStyle=col;fctx.fill();
+  }
+}
+let last=0;
+function flowLoop(ts){const dt=last?Math.min(3,(ts-last)/16.7):1;last=ts;drawFlow(dt);fRaf=requestAnimationFrame(flowLoop);}
+function setNorm(v){
+  norm=v;document.getElementById('fOn').setAttribute('aria-pressed',v);document.getElementById('fOff').setAttribute('aria-pressed',!v);
+  fctx.clearRect(0,0,fc.width,fc.height);
+  const row=document.getElementById('numrow');
+  const layers=[1,10,20,40];
+  row.innerHTML=layers.map(L=>{const val=v?1.0:Math.pow(1.4,L);
+    const s=v?'≈ 1':val>=1000?Math.round(val).toLocaleString('en-US'):val.toFixed(1);
+    return `<div><div class="l">Layer ${L}</div><div class="v" style="color:${v?'var(--ink)':(val>100?'var(--rose)':'var(--ink)')}">${s}</div></div>`;}).join('');
+  if(reduce){for(let i=0;i<40;i++)drawFlow(3);}
+}
+document.getElementById('fOn').addEventListener('click',()=>setNorm(true));
+document.getElementById('fOff').addEventListener('click',()=>setNorm(false));
+
+/* ---------- next link from hash-safe constant ---------- */
+const NEXT='/post/attention-is-all-you-need'; if(NEXT) document.getElementById('nextLink').href=NEXT; else document.getElementById('nextLink').removeAttribute('href');
+
+/* ---------- boot / resize / theme ---------- */
+function layout(){
+  sizeCanvas(mc); fDpr=sizeCanvas(fc,220); initParts();
+  drawBitter(); drawStairs(); updMix(); setNorm(norm);
+  if(reduce){mixCur=mixTarget;drawMix();}
+}
+layout();
+if(!reduce){cancelAnimationFrame(mixRaf);mixLoop();requestAnimationFrame(flowLoop);}
+let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(layout,150);});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',layout);
+new MutationObserver(layout).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+</script>
+

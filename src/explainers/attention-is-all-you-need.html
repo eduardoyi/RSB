@@ -1,0 +1,420 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<style>
+/* Layout: one magazine reading column with full-bleed watercolor plates; interactives sit in tinted wells. Madder rose + highlighter gold. */
+:root{
+  --paper:#f8f7f4; --ink:#1d1a1f; --muted:#5f5a62; --rule:#dfdbd6; --well:#f0ede9;
+  --madder:#a82d4b; --gold:#c79312; --hl:#e9b72a; --indigo:#2e3d80; --teal:#237a74; --rose:#c95d7c;
+  --plate-radius:0px; --plate-shadow:none;
+  --f-display:"Libre Caslon Display", "Libre Caslon Text", Georgia, serif;
+  --f-body:"Newsreader", Georgia, "Times New Roman", serif;
+  --f-ui:"Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#16131a; --ink:#ece8e4; --muted:#a8a1aa; --rule:#2f2a33; --well:#1f1b24;
+  --madder:#ef7d98; --gold:#e8b94a; --hl:#c8961c; --indigo:#9aa9ef; --teal:#6cc6bd; --rose:#ee95ae;
+  --plate-radius:6px; --plate-shadow:0 0 0 1px #2f2a33; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#16131a; --ink:#ece8e4; --muted:#a8a1aa; --rule:#2f2a33; --well:#1f1b24;
+  --madder:#ef7d98; --gold:#e8b94a; --hl:#c8961c; --indigo:#9aa9ef; --teal:#6cc6bd; --rose:#ee95ae;
+  --plate-radius:6px; --plate-shadow:0 0 0 1px #2f2a33; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:19px;line-height:1.6;
+  font-optical-sizing:auto;-webkit-font-smoothing:antialiased;padding-inline:20px;padding-block:0 64px}
+.col{max-width:640px;margin-inline:auto}
+.wide{max-width:900px;margin-inline:auto}
+.bleed{max-width:1180px;margin-inline:auto}
+p{margin:0 0 1.05em}
+a{color:var(--madder);text-decoration-thickness:1px;text-underline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0}
+h1{font-size:clamp(44px,9.4vw,88px);line-height:.98;letter-spacing:-.01em}
+h2{font-size:clamp(32px,6vw,46px);line-height:1.08;margin-bottom:.45em}
+h3{font-size:22px;line-height:1.2}
+.kicker{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--madder)}
+.dek{font-size:clamp(20px,3.4vw,24px);line-height:1.45;color:var(--muted);margin-top:18px}
+.byline{font-family:var(--f-ui);font-size:13px;color:var(--muted);margin-top:18px}
+header{padding-top:40px}
+.plate{display:block;width:100%;height:auto;max-width:100%;border-radius:var(--plate-radius);box-shadow:var(--plate-shadow)}
+figure{margin:0}
+figcaption{font-family:var(--f-ui);font-size:13px;line-height:1.45;color:var(--muted);margin-top:8px}
+section{margin-top:72px}
+.sec-label{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-label::after{content:"";flex:1;height:1px;background:var(--rule)}
+.drop::first-letter{font-family:var(--f-display);float:left;font-size:4.1em;line-height:.82;padding:.06em .08em 0 0;color:var(--madder)}
+mark{background:linear-gradient(transparent 18%, color-mix(in srgb, var(--hl) 45%, transparent) 18%, color-mix(in srgb, var(--hl) 45%, transparent) 88%, transparent 88%);color:inherit;padding:0 .08em}
+.big-idea{font-family:var(--f-display);font-size:clamp(28px,5.4vw,40px);line-height:1.18;text-wrap:balance;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);padding-block:22px;margin-block:36px}
+
+.well{background:var(--well);border-radius:4px;padding:22px 18px 18px;margin-block:28px}
+.well h4{font-family:var(--f-ui);font-size:15px;font-weight:700;margin:0 0 4px}
+.well .sub{font-family:var(--f-ui);font-size:13.5px;color:var(--muted);margin:0 0 14px;line-height:1.45}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button,.btn{font-family:var(--f-ui);font-size:14px;font-weight:500;border:1px solid var(--rule);background:var(--paper);color:var(--ink);padding:8px 12px;border-radius:999px;cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary{background:var(--madder);border-color:var(--madder);color:var(--paper);font-weight:600}
+button:focus-visible{outline:2px solid var(--madder);outline-offset:2px}
+.readout{font-family:var(--f-ui);font-size:14.5px;line-height:1.5;margin-top:12px}
+.illus{font-family:var(--f-ui);font-size:11.5px;color:var(--muted);margin-top:10px;font-style:italic}
+.tag{font-family:var(--f-ui);font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* keyhole race */
+.lanes{display:grid;gap:16px;margin-top:6px}
+.lane .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-family:var(--f-ui);font-size:13.5px;margin-bottom:6px}
+.lane .head b{font-weight:700}
+.lane .steps{font-variant-numeric:tabular-nums;color:var(--muted)}
+.words{display:flex;flex-wrap:wrap;gap:4px 5px;font-family:var(--f-body);font-size:17px}
+.words span{padding:1px 5px;border-radius:2px;transition:background-color .25s, opacity .25s;opacity:.35}
+.words span.lit{opacity:1;background:color-mix(in srgb, var(--hl) 55%, transparent)}
+.words span.faded{opacity:.55;background:color-mix(in srgb, var(--hl) 14%, transparent)}
+
+/* attention sentence */
+.sentence{display:flex;flex-wrap:wrap;gap:6px 4px;font-family:var(--f-display);font-size:clamp(24px,5vw,32px);line-height:1.3;margin:6px 0 4px}
+.sentence button{font:inherit;color:var(--ink);border:0;border-bottom:2px solid transparent;background:transparent;padding:0 4px;border-radius:3px;cursor:pointer;transition:background-color .3s}
+.sentence button.sel{border-bottom-color:var(--madder);color:var(--madder)}
+.bars{display:grid;gap:5px;margin-top:14px}
+.bar{display:grid;grid-template-columns:76px 1fr 40px;gap:8px;align-items:center;font-family:var(--f-ui);font-size:13.5px}
+.bar .t{height:12px;background:var(--rule);border-radius:2px;overflow:hidden}
+.bar .t i{display:block;height:100%;background:var(--madder);transition:width .35s}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.bar .w{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* qkv */
+.qkv{display:grid;grid-template-columns:1fr;gap:14px;margin-top:6px}
+@media (min-width:720px){.qkv{grid-template-columns:repeat(2,1fr)}}
+.step{background:var(--paper);border-radius:4px;padding:14px;min-width:0}
+.step .k{font-family:var(--f-ui);font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.step h3{font-size:21px;margin:4px 0 6px}
+.step p{font-size:16px;line-height:1.5;margin:0 0 8px}
+.step .bars{margin-top:6px}
+.party{display:grid;grid-template-columns:1fr;gap:10px;margin-block:20px}
+@media (min-width:600px){.party{grid-template-columns:repeat(3,1fr)}}
+.party div{border-top:2px solid var(--ink);padding-top:10px}
+.party b{font-family:var(--f-display);font-weight:400;font-size:24px;display:block}
+.party .r{font-family:var(--f-ui);font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.party p{font-size:16.5px;line-height:1.5;margin:4px 0 0}
+
+/* heads */
+.hsent{font-family:var(--f-display);font-size:clamp(22px,4.6vw,30px);line-height:1.45;display:flex;flex-wrap:wrap;gap:2px 6px;margin-top:16px}
+.hsent span{padding:0 3px;border-radius:3px;transition:background-color .3s}
+.links{font-family:var(--f-ui);font-size:14px;margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+.links span{padding:4px 9px;border-radius:999px;border:1px solid var(--rule);background:var(--paper)}
+
+/* order */
+.order{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.order div{background:var(--paper);border-radius:4px;padding:12px;min-width:0}
+.order .s{font-family:var(--f-display);font-size:22px;line-height:1.2}
+.order .seen{font-family:ui-monospace,"SFMono-Regular",Menlo,monospace;font-size:13px;margin-top:8px;overflow-wrap:anywhere;color:var(--muted)}
+.order .seen b{color:var(--madder);font-weight:600}
+.verdict{font-family:var(--f-ui);font-size:15px;margin-top:12px}
+.verdict b{color:var(--madder)}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;background:var(--rule);border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);margin-block:24px}
+.facts div{background:var(--paper);padding:16px 14px 16px 0}
+.facts .n{font-family:var(--f-display);font-size:40px;line-height:1;color:var(--madder);font-variant-numeric:tabular-nums}
+.facts .l{font-family:var(--f-ui);font-size:13.5px;line-height:1.4;color:var(--muted);margin-top:6px}
+
+.recap{border-top:2px solid var(--ink);padding-top:16px;margin-top:20px}
+.recap ol{margin:0;padding-left:1.2em}.recap li{margin-bottom:.7em}
+.next{display:block;margin-top:28px;padding:18px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink)}
+.next .kicker{color:var(--indigo)}
+.next .t{font-family:var(--f-display);font-size:28px;line-height:1.15;display:block;margin-top:4px}
+.next .d{font-family:var(--f-ui);font-size:14px;color:var(--muted)}
+.sources{font-family:var(--f-ui);font-size:13px;line-height:1.55;color:var(--muted);margin-top:48px;border-top:1px solid var(--rule);padding-top:14px}
+.sources a{color:var(--muted)}
+@media (prefers-reduced-motion: reduce){.words span,.sentence button,.bar .t i,.hsent span{transition:none}}
+</style>
+
+<header class="col">
+  <div class="kicker">Big ideas in AI, illustrated · No. 2</div>
+  <h1>Attention Is All You Need</h1>
+  <p class="dek">In 2017, eight researchers at Google published a 15-page paper about translating between languages. The design it introduced, the Transformer, now sits inside nearly every AI system you've heard of. It's the T in ChatGPT.</p>
+  <div class="byline"><!--rsb:byline--> · An explainer for non-engineers · about 10 minutes · 6 things to play with</div>
+</header>
+
+<figure class="bleed" style="margin-top:28px">
+  <img class="plate" src="https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/explainers/attention-is-all-you-need/hero.webp" alt="Watercolor: a row of dots, each connected to others by colored arcs of different thickness" width="1600" height="900">
+  <figcaption class="col">Every word reaches out to every other word. The thicker the thread, the more one word "pays attention" to another. That picture is the whole paper in one image.</figcaption>
+</figure>
+
+<section class="col">
+  <div class="sec-label">The problem</div>
+  <p class="drop">Before 2017, the best language AIs read the way you'd read a book through a keyhole: one word at a time, left to right, carrying a small summary of everything so far in their heads. By the end of a long sentence, the start had mostly faded, like the first message in a game of telephone.</p>
+  <p>There was a second, less obvious problem: speed. If you have to finish word 49 before you can start word 50, it doesn't matter how many computer chips you own. They all wait in line. That made it very hard to feed these systems the huge amounts of text and computing power that make AI good, the "Big Blob of Compute" from the first piece in this series.</p>
+  <div class="well">
+    <h4>Read the same sentence two ways</h4>
+    <p class="sub">Press play. The old way reads one word per step, and earlier words fade. The new way takes in every word at once.</p>
+    <div class="lanes">
+      <div class="lane"><div class="head"><b>Old way: one word at a time</b><span class="steps" id="oldSteps">0 steps</span></div><div class="words" id="oldWords"></div></div>
+      <div class="lane"><div class="head"><b>Transformer: all at once</b><span class="steps" id="newSteps">0 steps</span></div><div class="words" id="newWords"></div></div>
+    </div>
+    <div style="margin-top:14px"><button class="btn primary" type="button" id="race">Play</button></div>
+    <div class="readout" id="raceOut">Same sentence, same result. One takes 18 steps in a row; the other takes one step, because every word can be handled by a different chip at the same moment.</div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-label">The big idea</div>
+  <h2>Let every word look at every other word</h2>
+  <p>The paper's answer was a mechanism called <em>attention</em>. Instead of reading through a keyhole, each word gets to look across the whole sentence and decide which other words matter most for understanding it.</p>
+  <p>The classic example is a sentence with a tricky "it". In <em>"The animal didn't cross the street because it was too tired"</em>, "it" means the animal. Change one word, <em>"…because it was too wide"</em>, and "it" now means the street. You figured that out instantly by glancing back at the right word. Attention lets a model do the same.</p>
+  <div class="well">
+    <h4>Tap any word to see where it looks</h4>
+    <p class="sub">The highlight shows how much attention the selected word pays to each other word. Then flip the last word.</p>
+    <div class="seg" role="group" aria-label="Ending">
+      <button type="button" id="eT" aria-pressed="true">…too tired</button>
+      <button type="button" id="eW" aria-pressed="false">…too wide</button>
+    </div>
+    <div class="sentence" id="sent"></div>
+    <div class="bars" id="attnBars"></div>
+    <div class="readout" id="attnOut" aria-live="polite"></div>
+    <div class="illus">Hand-set weights to show the idea. Real models learn these on their own from data.</div>
+  </div>
+  <div class="big-idea">Attention is a <mark>highlighter</mark> each word uses on the rest of the sentence. Nobody tells it what to highlight. It learns that from billions of examples.</div>
+</section>
+
+<section class="col">
+  <div class="sec-label">How a word decides</div>
+  <h2>Questions, name tags, and what people say</h2>
+  <p>The paper describes attention with three words that sound technical but map neatly onto a party. You walk in looking for someone who can tell you about football.</p>
+  <div class="party">
+    <div><span class="r" style="color:var(--madder)">Query</span><b>What you're looking for</b><p>"Anyone here into football?" Every word asks its own question.</p></div>
+    <div><span class="r" style="color:var(--teal)">Key</span><b>Each person's name tag</b><p>"Sports fan." "Chef." "Coach." Every word advertises what it's about.</p></div>
+    <div><span class="r" style="color:var(--indigo)">Value</span><b>What they actually tell you</b><p>Once you pick who to listen to, you take away what they say, weighted by how much you listened.</p></div>
+  </div>
+  <p>Here's that process for the word "it", step by step.</p>
+  <div class="well">
+    <h4>Follow "it" through the four steps</h4>
+    <div class="seg" role="group" aria-label="Ending" style="margin-bottom:14px">
+      <button type="button" id="qT" aria-pressed="true">…too tired</button>
+      <button type="button" id="qW" aria-pressed="false">…too wide</button>
+    </div>
+    <div class="qkv">
+      <div class="step"><div class="k" style="color:var(--madder)">1 · Ask</div><h3>"it" sends a query</h3><p id="qAsk"></p></div>
+      <div class="step"><div class="k" style="color:var(--teal)">2 · Compare</div><h3>Check every name tag</h3><p>Each word's key is compared with the query. A better match gets a higher score.</p><div class="bars" id="qScores"></div></div>
+      <div class="step"><div class="k" style="color:var(--gold)">3 · Share out attention</div><h3>Turn scores into a budget</h3><p>Scores become percentages that add up to 100%. Big scores get most of the budget.</p><div class="bars" id="qPct"></div></div>
+      <div class="step"><div class="k" style="color:var(--indigo)">4 · Blend</div><h3>Listen and update</h3><p id="qBlend"></p></div>
+    </div>
+    <div class="illus">Simplified numbers. In a real model, queries, keys and values are long lists of numbers the model learns.</div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-label">Many heads</div>
+  <h2>Eight highlighters are better than one</h2>
+  <p>One highlighter can only track one kind of relationship. So the Transformer runs several attention "heads" side by side, each free to learn its own job. The original paper used eight. One head might track who did what, another who a pronoun refers to, another when things happened. Their findings are combined at the end.</p>
+</section>
+<figure class="bleed" style="margin-top:6px">
+  <img class="plate" src="https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/explainers/attention-is-all-you-need/heads.webp" alt="Watercolor: lines of scribbled text with overlapping gold, rose, indigo and teal highlighter strokes" width="1600" height="640" loading="lazy">
+  <figcaption class="col">Same text, several readers, each with a different color of highlighter.</figcaption>
+</figure>
+<div class="col">
+  <div class="well">
+    <h4>Switch between heads</h4>
+    <p class="sub">Each head notices a different kind of link in the same sentence.</p>
+    <div class="seg" role="group" aria-label="Attention head" id="headBtns"></div>
+    <div class="hsent" id="hsent"></div>
+    <div class="links" id="hlinks"></div>
+    <div class="readout" id="hOut" aria-live="polite"></div>
+    <div class="illus">Illustrative. Real heads aren't labeled; researchers study them afterwards to work out what each one learned.</div>
+  </div>
+</div>
+
+<section class="col">
+  <div class="sec-label">Word order</div>
+  <h2>Seat numbers for words</h2>
+  <p>Reading everything at once creates a new problem. If the model sees the whole sentence as one pile of words, then "dog bites man" and "man bites dog" are the same pile. The fix is simple: before anything else, every word gets its position stamped on it, like a seat number on a concert ticket. The paper did this with a pattern of waves, which works for sentences of any length.</p>
+  <div class="well">
+    <h4>Turn seat numbers on and off</h4>
+    <div class="seg" role="group" aria-label="Position stamps">
+      <button type="button" id="pOff" aria-pressed="true">No seat numbers</button>
+      <button type="button" id="pOn" aria-pressed="false">With seat numbers</button>
+    </div>
+    <div class="order">
+      <div><div class="tag">Sentence A</div><div class="s">Dog bites man.</div><div class="seen" id="seenA"></div></div>
+      <div><div class="tag">Sentence B</div><div class="s">Man bites dog.</div><div class="seen" id="seenB"></div></div>
+    </div>
+    <div class="verdict" id="pOut" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="col">
+  <div class="sec-label">Why it changed everything</div>
+  <h2>One checkout lane vs. a hundred</h2>
+  <p>On its own, attention was a nice improvement in quality. What made it historic was that it threw out the one-word-at-a-time reading entirely. That's what the title means: you don't need the old machinery, attention is enough.</p>
+  <p>With every word processed at the same moment, a Transformer can keep thousands of chips busy at once, like opening a hundred checkout lanes instead of one. Suddenly it was practical to train on far more text, far faster. This is the bridge between the two ideas in this series: the Transformer is the design that let the Big Blob of Compute be poured into language.</p>
+</section>
+<div class="wide">
+  <div class="facts">
+    <div><div class="n">8</div><div class="l">authors at Google Brain and Google Research</div></div>
+    <div><div class="n">3.5 days</div><div class="l">to train their biggest model, on 8 graphics chips</div></div>
+    <div><div class="n">2</div><div class="l">translation records broken: English to German and English to French</div></div>
+    <div><div class="n">8</div><div class="l">attention heads working side by side in each layer</div></div>
+  </div>
+</div>
+<div class="col">
+  <p>The paper's results were about translation, and it beat the best existing systems while costing a fraction as much to train. But the authors guessed it might work for other kinds of data too. They were right.</p>
+</div>
+
+<section class="col">
+  <div class="sec-label">The legacy</div>
+  <h2>From a translation paper to everything</h2>
+  <p>Within about a year, OpenAI's first GPT (the T is "Transformer") and Google's BERT showed the design worked far beyond translation. Since then it has spread to chatbots like ChatGPT and Claude, image generators, speech recognition, and even systems that predict the shapes of proteins. It is one of the most cited scientific papers of the century.</p>
+</section>
+<figure class="bleed" style="margin-top:6px">
+  <img class="plate" src="https://pub-54fd8d7ed7d74876bf7af598d20e0c7b.r2.dev/explainers/attention-is-all-you-need/web.webp" alt="Watercolor: colored dots scattered across the page, joined by many crisscrossing lines" width="1600" height="760" loading="lazy">
+  <figcaption class="col">Everything connected to everything: the shape of attention, and of the field it reshaped.</figcaption>
+</figure>
+<div class="col">
+  <p>Two footnotes people love. The title is a nod to the Beatles' "All You Need Is Love". And all eight authors eventually left Google; several went on to found AI companies of their own.</p>
+</div>
+
+<section class="col">
+  <div class="sec-label">One-minute recap</div>
+  <div class="recap">
+    <ol>
+      <li>Old language AIs read one word at a time and forgot the beginning. They were also slow, because steps had to happen in order.</li>
+      <li>Attention lets every word look at every other word and decide which ones matter, like a learned highlighter. Several heads do this side by side, and position stamps keep word order.</li>
+      <li>Because everything happens at once, Transformers can use huge numbers of chips in parallel. That made it practical to scale language models up, and led to GPT, Claude and the rest.</li>
+    </ol>
+  </div>
+  <a class="next" id="prevLink" href="/post/big-blob-of-compute">
+    <span class="kicker">Also in the series</span>
+    <span class="t">The Big Blob of Compute</span>
+    <span class="d">Why scale, more than clever tricks, drives progress in AI.</span>
+  </a>
+  <div class="sources">
+    Sources: <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">Vaswani et al., "Attention Is All You Need" (2017)</a> ·
+    <a href="https://research.google/blog/transformer-a-novel-neural-network-architecture-for-language-understanding/" target="_blank" rel="noopener">Google Research blog on the Transformer (2017), source of the animal/street example</a> ·
+    <a href="https://www.wired.com/story/eight-google-employees-invented-modern-ai-transformers-paper/" target="_blank" rel="noopener">Wired on the paper's authors (2024)</a>.
+    Watercolor plates generated with OpenCV.
+  </div>
+</section>
+
+<script>
+(function(){
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = id => document.getElementById(id);
+const mixHL = (a,c='var(--hl)') => `color-mix(in srgb, ${c} ${Math.round(a*100)}%, transparent)`;
+
+/* ---------- race ---------- */
+const RACE = 'The keys to the old cabinet in the hallway near the kitchen were finally found under the rug'.split(' ');
+function renderRace(){
+  $('oldWords').innerHTML = RACE.map(w=>`<span>${w}</span>`).join(' ');
+  $('newWords').innerHTML = RACE.map(w=>`<span>${w}</span>`).join(' ');
+}
+let raceTimer=null;
+function finalRace(){
+  [...$('oldWords').children].forEach((s,i,a)=>{s.className = i===a.length-1?'lit':'faded'; s.style.opacity = (0.25+0.75*Math.pow(0.86,a.length-1-i)).toFixed(2);});
+  [...$('newWords').children].forEach(s=>s.className='lit');
+  $('oldSteps').textContent=RACE.length+' steps'; $('newSteps').textContent='1 step';
+}
+function runRace(){
+  clearInterval(raceTimer); renderRace();
+  if(reduce){finalRace();return;}
+  const old=[...$('oldWords').children], nw=[...$('newWords').children];
+  let i=0;
+  $('oldSteps').textContent='0 steps'; $('newSteps').textContent='0 steps';
+  setTimeout(()=>{nw.forEach(s=>s.className='lit');$('newSteps').textContent='1 step';},220);
+  raceTimer=setInterval(()=>{
+    old.forEach((s,j)=>{ if(j<i){s.className='faded'; s.style.opacity=(0.25+0.75*Math.pow(0.86,i-j)).toFixed(2);} });
+    if(i<old.length){old[i].className='lit';old[i].style.opacity='1';i++;$('oldSteps').textContent=i+(i===1?' step':' steps');}
+    else clearInterval(raceTimer);
+  },220);
+}
+$('race').addEventListener('click',runRace);
+renderRace(); finalRace();
+
+/* ---------- attention sentence ---------- */
+const BASE = ['The','animal',"didn't",'cross','the','street','because','it','was','too'];
+const W = {
+ tired:{0:{1:.7},1:{0:.25,3:.25,10:.2,7:.15},2:{3:.45,1:.25},3:{1:.35,5:.35,2:.15},4:{5:.7},5:{4:.3,3:.4,1:.1},6:{10:.3,3:.2,7:.2},7:{1:.6,10:.12,5:.06,7:.05,3:.04},8:{7:.4,10:.3},9:{10:.6},10:{7:.4,1:.3,9:.12}},
+ wide:{0:{1:.7},1:{0:.3,3:.3,7:.1},2:{3:.45,1:.25},3:{1:.35,5:.35,2:.15},4:{5:.7},5:{4:.3,3:.3,10:.2,7:.15},6:{10:.3,3:.2,7:.2},7:{5:.58,10:.14,1:.07,7:.05,3:.04},8:{7:.4,10:.3},9:{10:.6},10:{7:.35,5:.35,9:.12}}
+};
+let ending='tired', selWord=7;
+function weights(e,from){
+  const words=[...BASE,e]; const row=W[e][from]||{};
+  let w=words.map((_,j)=>(row[j]||0)+0.012); const s=w.reduce((a,b)=>a+b,0); return w.map(x=>x/s);
+}
+function renderAttn(){
+  const words=[...BASE,ending];
+  const w=weights(ending,selWord);
+  const max=Math.max(...w.filter((_,j)=>j!==selWord));
+  $('sent').innerHTML='';
+  words.forEach((t,j)=>{
+    const b=document.createElement('button'); b.type='button'; b.textContent=t;
+    if(j===selWord) b.className='sel';
+    else b.style.backgroundColor=mixHL(Math.min(.85,w[j]/max*.8));
+    b.setAttribute('aria-label',`${t}${j===selWord?' (selected)':`, ${Math.round(w[j]*100)}% attention`}`);
+    b.addEventListener('click',()=>{selWord=j;renderAttn();});
+    $('sent').appendChild(b);
+  });
+  const top=words.map((t,j)=>({t,j,v:w[j]})).filter(o=>o.j!==selWord).sort((a,b)=>b.v-a.v).slice(0,4);
+  $('attnBars').innerHTML=top.map(o=>`<div class="bar"><span class="w">${o.t}</span><span class="t"><i style="width:${(o.v*100).toFixed(0)}%"></i></span><span class="n">${Math.round(o.v*100)}%</span></div>`).join('');
+  const sw=words[selWord];
+  let msg;
+  if(selWord===7) msg = ending==='tired' ? `<b>"it" looks mostly at "animal".</b> Streets don't get tired, so the model links "it" to the creature.` : `<b>"it" now looks mostly at "street".</b> Animals aren't wide, so the same word gets a different meaning from one change at the end.`;
+  else msg = `<b>"${sw}" looks most at "${top[0].t}".</b> Every word does this at the same time, building its meaning from the words around it.`;
+  $('attnOut').innerHTML=msg;
+}
+function setEnding(e){ending=e;$('eT').setAttribute('aria-pressed',e==='tired');$('eW').setAttribute('aria-pressed',e==='wide');renderAttn();}
+$('eT').addEventListener('click',()=>setEnding('tired'));
+$('eW').addEventListener('click',()=>setEnding('wide'));
+renderAttn();
+
+/* ---------- QKV ---------- */
+const Q = {
+ tired:{ask:'"it" asks: which word here could be <em>tired</em>? Something alive, probably a noun.', s:{animal:3.2,street:1.1,cross:0.4,tired:1.5},
+   blend:'"it" takes in mostly what "animal" has to say, plus a little of "tired". Its meaning is now roughly <b>"the tired animal"</b>. That updated meaning is passed on to the next layer, which repeats the whole process.'},
+ wide:{ask:'"it" asks: which word here could be <em>wide</em>? Something with a physical size, like a place.', s:{animal:0.9,street:3.0,cross:0.4,wide:1.6},
+   blend:'"it" now takes in mostly what "street" has to say, plus a little of "wide". Its meaning becomes roughly <b>"the wide street"</b>. Same word, different meaning, purely from attention.'}
+};
+const barHTML=(label,v,txt,color)=>`<div class="bar"><span class="w">${label}</span><span class="t"><i style="width:${v}%;background:${color}"></i></span><span class="n">${txt}</span></div>`;
+function renderQ(e){
+  $('qT').setAttribute('aria-pressed',e==='tired');$('qW').setAttribute('aria-pressed',e==='wide');
+  const q=Q[e]; $('qAsk').innerHTML=q.ask;
+  const ent=Object.entries(q.s); const mx=Math.max(...ent.map(x=>x[1]));
+  $('qScores').innerHTML=ent.map(([k,v])=>barHTML(k,v/mx*100,v.toFixed(1),'var(--teal)')).join('');
+  const ex=ent.map(([k,v])=>[k,Math.exp(v)]); const s=ex.reduce((a,b)=>a+b[1],0);
+  $('qPct').innerHTML=ex.map(([k,v])=>barHTML(k,v/s*100,Math.round(v/s*100)+'%','var(--gold)')).join('');
+  $('qBlend').innerHTML=q.blend;
+}
+$('qT').addEventListener('click',()=>renderQ('tired'));
+$('qW').addEventListener('click',()=>renderQ('wide'));
+renderQ('tired');
+
+/* ---------- heads ---------- */
+const HS='The chef who won the award cooked dinner for her parents yesterday'.split(' ');
+const HEADS=[
+ {name:'Who did it?',c:'var(--hl)',idx:[1,2,3,6],links:['cooked → chef','won → who → chef'],msg:'This head tracks who is doing each action. "Cooked" and "won" both point back to the chef.'},
+ {name:'Who is "her"?',c:'var(--rose)',idx:[9,1],links:['her → chef'],msg:'This head resolves pronouns. "Her" means the chef, not the parents.'},
+ {name:'When?',c:'var(--teal)',idx:[11,6],links:['yesterday → cooked'],msg:'This head connects time words to the actions they describe.'},
+ {name:'What, for whom?',c:'var(--indigo)',idx:[6,7,8,10],links:['cooked → dinner','dinner → for parents'],msg:'This head links an action to its object and who it was for.'}
+];
+let head=0;
+function renderHeads(){
+  $('headBtns').innerHTML='';
+  HEADS.forEach((h,i)=>{const b=document.createElement('button');b.type='button';b.textContent=h.name;b.setAttribute('aria-pressed',i===head);b.addEventListener('click',()=>{head=i;renderHeads();});$('headBtns').appendChild(b);});
+  const h=HEADS[head];
+  $('hsent').innerHTML=HS.map((w,i)=>`<span style="background:${h.idx.includes(i)?`color-mix(in srgb, ${h.c} 42%, transparent)`:'transparent'}">${w}</span>`).join('');
+  $('hlinks').innerHTML=h.links.map(l=>`<span style="border-color:${h.c}">${l}</span>`).join('');
+  $('hOut').textContent=h.msg;
+}
+renderHeads();
+
+/* ---------- order ---------- */
+function renderOrder(on){
+  $('pOn').setAttribute('aria-pressed',on);$('pOff').setAttribute('aria-pressed',!on);
+  const fmt=ws=> on ? ws.map((w,i)=>`${w}<b>@${i+1}</b>`).join('  ') : '{ '+[...ws].sort().join(', ')+' }';
+  $('seenA').innerHTML='Model sees: '+fmt(['dog','bites','man']);
+  $('seenB').innerHTML='Model sees: '+fmt(['man','bites','dog']);
+  $('pOut').innerHTML= on ? '<b>Different.</b> Now the model knows who bit whom.' : '<b>Identical.</b> Without positions, both sentences are the same bag of words, and the model can’t tell who bit whom.';
+}
+$('pOn').addEventListener('click',()=>renderOrder(true));
+$('pOff').addEventListener('click',()=>renderOrder(false));
+renderOrder(false);
+
+const PREV='/post/big-blob-of-compute'; if(PREV) $('prevLink').href=PREV;
+})();
+</script>
+

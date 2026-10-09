@@ -52,11 +52,11 @@ const posts = await getPublishedPosts();
         {posts.map((post) => (
           <a class="explorer-file-row" href={`/post/${post.data.slug || post.id}`}>
             <div class="explorer-col-name">
-              <img src="/icons/win98/notepad_file.ico" alt="" width="16" height="16" style="flex-shrink:0;" />
+              <img src={post.data.layout === 'standalone' ? '/icons/win98/html.ico' : '/icons/win98/notepad_file.ico'} alt="" width="16" height="16" style="flex-shrink:0;" />
               <span>{post.data.title}</span>
             </div>
             <div class="explorer-col-size"></div>
-            <div class="explorer-col-type">Blog Post</div>
+            <div class="explorer-col-type">{post.data.layout === 'standalone' ? 'Interactive' : 'Blog Post'}</div>
             <div class="explorer-col-date">
               {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}
             </div>

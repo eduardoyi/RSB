@@ -34,6 +34,17 @@ Posts live in `src/content/posts/*.md` and support these frontmatter fields:
 
 Only `published` posts appear on the public site, in generated `/post/*` routes, and in the RSS feed.
 
+### Standalone (interactive) posts
+
+Set `layout: standalone` in a post's frontmatter to publish a self-contained HTML page instead of a Markdown body. The page body lives in `src/explainers/<slug>.html` (styles, markup and inline scripts) and renders full-page at `/post/<slug>` via `src/pages/post/[...standalone].astro`, outside the Win98 desktop and without `98.css`. The post still appears in My Documents (as "Interactive"), the RSS feed and the sitemap. A `<!--rsb:byline-->` marker in the HTML is replaced with the author and date from frontmatter.
+
+Media for these pages lives in R2 under `explainers/<slug>/`, uploaded with:
+
+```bash
+cd worker
+npx wrangler r2 object put rsb-media/explainers/<slug>/<file>.webp --file <file>.webp --remote
+```
+
 ## CMS Setup
 
 The live CMS entrypoint is `/admin/`.

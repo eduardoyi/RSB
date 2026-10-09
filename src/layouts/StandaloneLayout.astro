@@ -1,0 +1,50 @@
+---
+// Full-page layout for posts that bring their own design (e.g. interactive
+// explainers). Shares the site <head> but skips 98.css and the desktop chrome.
+import SiteHead from '../components/SiteHead.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  ogType?: string;
+}
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <SiteHead {...Astro.props}>
+      <slot name="head" />
+    </SiteHead>
+    <style is:global>
+      :root { color-scheme: light; box-sizing: border-box; }
+      body { margin: 0; padding: 0; background: #fff; color: #000; }
+      img { max-width: 100%; }
+      [hidden]:not([hidden=until-found i]) { display: none !important; }
+    </style>
+    <style>
+      .site-strip {
+        max-width: 640px;
+        margin-inline: auto;
+        padding-top: 16px;
+        display: flex;
+        gap: 8px;
+        align-items: baseline;
+        font-family: var(--f-ui, system-ui, sans-serif);
+        font-size: 13px;
+        color: var(--muted, #666);
+      }
+      .site-strip a { color: inherit; text-decoration: none; }
+      .site-strip a:hover { color: var(--ink, #000); text-decoration: underline; }
+      .site-strip .home { font-weight: 600; color: var(--ink, #000); }
+    </style>
+  </head>
+  <body>
+    <nav class="site-strip" aria-label="Site">
+      <a class="home" href="/">← Real Serious Business</a>
+      <span aria-hidden="true">/</span>
+      <a href="/post">My Documents</a>
+    </nav>
+    <slot />
+  </body>
+</html>

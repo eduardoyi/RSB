@@ -8,7 +8,9 @@ import { getPublishedPosts } from '../../utils/posts';
 import '../../styles/post.css';
 
 export async function getStaticPaths() {
-  const posts = await getPublishedPosts();
+  // Standalone posts are served by [...standalone].astro, which keeps the
+  // Win98 styles out of their CSS bundle.
+  const posts = (await getPublishedPosts()).filter((post) => post.data.layout !== 'standalone');
   return posts.map((post) => ({
     params: { slug: post.data.slug || post.id },
     props: { post },
