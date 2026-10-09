@@ -13,6 +13,9 @@ const posts = defineCollection({
     featured_image: z.string().optional(),
     featured_image_alt: z.string().optional(),
     podcast_audio: z.string().optional(),
+    // 'standalone' posts render src/explainers/<slug>.html full-page instead of
+    // the Markdown body inside a Win98 window.
+    layout: z.enum(['window', 'standalone']).default('window'),
   }),
 });
 
