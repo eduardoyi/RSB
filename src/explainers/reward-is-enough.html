@@ -1,0 +1,1271 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap">
+<style>
+/* Layout: the series' single reading column with full-bleed watercolor plates, act dividers, and tinted wells for each interactive. Cake colors encode the training stages: sponge = imitation, icing = examples, cherry = reward. */
+:root{
+  --paper:#f8f7f4; --ink:#1f1b1a; --muted:#625b58; --rule:#e0dbd5; --well:#f1ede8;
+  --water:#d5e6ec; --land:#ebe5dc; --cherry:#a8142c; --sponge:#b07a1c; --icing:#c9567a; --plum:#7a3a74; --leaf:#2f6e43; --wall:#3b3433;
+  --plate-radius:0px; --plate-shadow:none;
+  --f-display:"Libre Caslon Display", "Libre Caslon Text", Georgia, serif;
+  --f-body:"Newsreader", Georgia, "Times New Roman", serif;
+  --f-ui:"Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#171416; --ink:#eee9e5; --muted:#aaa2a0; --rule:#322c2e; --well:#201c1f;
+  --water:#1e3540; --land:#262126; --cherry:#f0687c; --sponge:#e3ad52; --icing:#ee8fae; --plum:#cc8ec6; --leaf:#77c38f; --wall:#8e8486;
+  --plate-radius:6px; --plate-shadow:0 0 0 1px #322c2e; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#171416; --ink:#eee9e5; --muted:#aaa2a0; --rule:#322c2e; --well:#201c1f;
+  --water:#1e3540; --land:#262126; --cherry:#f0687c; --sponge:#e3ad52; --icing:#ee8fae; --plum:#cc8ec6; --leaf:#77c38f; --wall:#8e8486;
+  --plate-radius:6px; --plate-shadow:0 0 0 1px #322c2e; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:19px;line-height:1.6;font-optical-sizing:auto;-webkit-font-smoothing:antialiased;padding-inline:20px;padding-block:0 64px}
+.col{max-width:640px;margin-inline:auto}
+.wide{max-width:900px;margin-inline:auto}
+.bleed{max-width:1180px;margin-inline:auto}
+p{margin:0 0 1.05em}
+a{color:var(--cherry);text-decoration-thickness:1px;text-underline-offset:3px}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0}
+h1{font-size:clamp(50px,11vw,100px);line-height:.96;letter-spacing:-.01em}
+h1 .q{color:var(--cherry)}
+h2{font-size:clamp(31px,6vw,44px);line-height:1.08;margin-bottom:.45em}
+h3{font-size:22px;line-height:1.2}
+.kicker{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--cherry)}
+.dek{font-size:clamp(20px,3.4vw,24px);line-height:1.45;color:var(--muted);margin-top:18px}
+.byline{font-family:var(--f-ui);font-size:13px;color:var(--muted);margin-top:18px}
+header{padding-top:40px}
+.plate{display:block;width:100%;height:auto;max-width:100%;border-radius:var(--plate-radius);box-shadow:var(--plate-shadow)}
+figure{margin:0}
+figcaption{font-family:var(--f-ui);font-size:13px;line-height:1.45;color:var(--muted);margin-top:8px}
+section{margin-top:72px}
+.sec-label{font-family:var(--f-ui);font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sec-label::after{content:"";flex:1;height:1px;background:var(--rule)}
+.drop::first-letter{font-family:var(--f-display);float:left;font-size:4.1em;line-height:.82;padding:.06em .08em 0 0;color:var(--cherry)}
+.big-idea{font-family:var(--f-display);font-size:clamp(28px,5.4vw,40px);line-height:1.18;text-wrap:balance;border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);padding-block:22px;margin-block:36px}
+.big-idea .c{color:var(--cherry)} .big-idea .s{color:var(--sponge)}
+blockquote{margin:28px 0;padding:0 0 0 18px;border-left:3px solid var(--cherry);font-family:var(--f-display);font-size:clamp(23px,4.4vw,29px);line-height:1.3}
+blockquote cite{display:block;font-family:var(--f-ui);font-style:normal;font-size:13px;color:var(--muted);margin-top:8px;line-height:1.4}
+
+/* Act dividers */
+.act{margin-top:96px;text-align:left;border-top:2px solid var(--ink);padding-top:14px}
+.act .n{font-family:var(--f-ui);font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--cherry)}
+.act .t{font-family:var(--f-display);font-size:clamp(40px,8.4vw,68px);line-height:1;margin-top:6px}
+.act .d{font-family:var(--f-ui);font-size:14px;color:var(--muted);margin-top:8px}
+
+/* Contents */
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1px;background:var(--rule);border-top:2px solid var(--ink);border-bottom:1px solid var(--rule);margin-block:28px}
+.toc a{background:var(--paper);padding:14px 14px 14px 0;text-decoration:none;color:var(--ink);display:block}
+.toc .n{font-family:var(--f-ui);font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--cherry)}
+.toc .t{font-family:var(--f-display);font-size:23px;line-height:1.15;display:block;margin-top:2px}
+.toc .d{font-family:var(--f-ui);font-size:13px;color:var(--muted);display:block;margin-top:4px;line-height:1.4}
+
+/* Wells */
+.well{background:var(--well);border-radius:4px;padding:22px 18px 18px;margin-block:28px}
+.well h4{font-family:var(--f-ui);font-size:15px;font-weight:700;margin:0 0 4px}
+.well .sub{font-family:var(--f-ui);font-size:13.5px;color:var(--muted);margin:0 0 14px;line-height:1.45}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button,.btn{font-family:var(--f-ui);font-size:14px;font-weight:500;border:1px solid var(--rule);background:var(--paper);color:var(--ink);padding:8px 12px;border-radius:999px;cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.btn.primary{background:var(--cherry);border-color:var(--cherry);color:var(--paper);font-weight:600}
+.btn:disabled{opacity:.45;cursor:default}
+button:focus-visible,a:focus-visible{outline:2px solid var(--cherry);outline-offset:2px}
+.readout{font-family:var(--f-ui);font-size:14.5px;line-height:1.5;margin-top:12px}
+.readout b{font-weight:700}
+.illus{font-family:var(--f-ui);font-size:11.5px;color:var(--muted);margin-top:10px;font-style:italic}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.stat{font-family:var(--f-ui);font-size:13.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.stat b{color:var(--ink)}
+
+/* Maze */
+.mazes{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:640px){.mazes{grid-template-columns:1fr 1fr}}
+.maze{min-width:0}
+.maze .who{font-family:var(--f-ui);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px;display:flex;justify-content:space-between;gap:8px}
+.maze .who span:last-child{font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted);font-variant-numeric:tabular-nums}
+.maze svg{width:100%;height:auto;display:block;background:var(--paper);border-radius:3px}
+
+/* Next word */
+.nw-prompt{font-family:var(--f-display);font-size:clamp(23px,4.6vw,30px);line-height:1.3;margin:6px 0 12px}
+.nw-prompt .blank{display:inline-block;min-width:3.2em;border-bottom:2px solid var(--sponge);color:var(--sponge);text-align:center}
+.choices{display:flex;flex-wrap:wrap;gap:6px}
+.choices button{font-family:var(--f-body);font-size:17px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);padding:6px 12px;border-radius:4px;cursor:pointer;min-height:38px}
+.choices button.pick{border-color:var(--sponge);box-shadow:inset 0 0 0 1px var(--sponge)}
+.bars{display:grid;gap:5px;margin-top:12px}
+.bar{display:grid;grid-template-columns:96px 1fr 40px;gap:8px;align-items:center;font-family:var(--f-ui);font-size:13.5px}
+.bar .t{height:12px;background:var(--rule);border-radius:2px;overflow:hidden}
+.bar .t i{display:block;height:100%;transition:width .4s}
+.bar .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+.bar .w{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Pipeline */
+.pipe{display:grid;grid-template-columns:1fr;gap:16px}
+@media (min-width:760px){.pipe{grid-template-columns:230px 1fr}}
+.stages{display:grid;gap:6px;align-content:start}
+.stages button{display:grid;grid-template-columns:14px 1fr;gap:10px;align-items:start;text-align:left;font-family:var(--f-ui);background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:10px 12px;cursor:pointer;color:var(--ink)}
+.stages button .sw{width:14px;height:14px;border-radius:50%;margin-top:3px}
+.stages button .nm{font-weight:700;font-size:14px;line-height:1.3;display:block}
+.stages button .an{font-size:12.5px;color:var(--muted);display:block;line-height:1.35;margin-top:2px}
+.stages button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.stage-body{background:var(--paper);border-radius:4px;padding:16px;min-width:0}
+.stage-body .k{font-family:var(--f-ui);font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.stage-body h3{font-size:25px;margin:4px 0 8px}
+.stage-body p{font-size:16.5px;line-height:1.5}
+.kv{display:grid;grid-template-columns:96px 1fr;gap:6px 12px;font-family:var(--f-ui);font-size:13.5px;line-height:1.45;margin:10px 0 14px}
+.kv dt{color:var(--muted);font-weight:600}
+.kv dd{margin:0}
+.chat{border-top:1px solid var(--rule);padding-top:12px;font-family:var(--f-ui);font-size:14px;line-height:1.5}
+.chat .u{color:var(--muted);margin-bottom:6px}
+.chat .m{white-space:pre-line;background:var(--well);border-radius:4px;padding:10px 12px}
+
+/* Cake era */
+.era{display:grid;grid-template-columns:1fr;gap:14px;align-items:center}
+@media (min-width:700px){.era{grid-template-columns:1fr 1fr}}
+.era svg{width:100%;height:auto;max-width:100%;display:block}
+.legend{display:grid;gap:8px;font-family:var(--f-ui);font-size:13.5px;min-width:0}
+.legend div{display:grid;grid-template-columns:14px 1fr auto;gap:8px;align-items:center}
+.legend i{width:12px;height:12px;border-radius:50%;display:block}
+.legend .v{font-variant-numeric:tabular-nums;color:var(--muted)}
+
+/* Sorter */
+.sorter{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.task{background:var(--paper);border-radius:4px;padding:12px;display:grid;gap:8px;align-content:start;min-width:0;border:1px solid transparent}
+.task .tt{font-family:var(--f-display);font-size:20px;line-height:1.2}
+.task .opts{display:flex;gap:6px;flex-wrap:wrap}
+.task .opts button{font-family:var(--f-ui);font-size:13px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 10px;cursor:pointer;min-height:34px}
+.task .why{font-family:var(--f-ui);font-size:13px;line-height:1.45;color:var(--muted)}
+.task .res{font-family:var(--f-ui);font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.task.right{border-color:var(--leaf)} .task.wrong{border-color:var(--cherry)}
+.res.ok{color:var(--leaf)} .res.no{color:var(--cherry)}
+
+/* Straw */
+.steps{display:grid;gap:6px;margin-top:12px}
+.stp{display:grid;grid-template-columns:28px 1fr 58px;gap:10px;align-items:center;background:var(--paper);border-radius:4px;padding:10px 12px;font-family:var(--f-ui);font-size:14.5px;line-height:1.4;border-left:4px solid var(--rule);transition:border-color .3s}
+.stp .i{font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
+.stp .sc{text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.stp.good{border-left-color:var(--leaf)} .stp.good .sc{color:var(--leaf)}
+.stp.bad{border-left-color:var(--cherry)} .stp.bad .sc{color:var(--cherry)}
+
+/* Boat */
+.boat canvas{width:100%;height:auto;aspect-ratio:16/9;max-width:100%;display:block;border-radius:3px;background:var(--paper)}
+.meters{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.meters div{background:var(--paper);border-radius:3px;padding:8px 10px;font-family:var(--f-ui);min-width:0}
+.meters .l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.meters .v{font-size:18px;font-weight:600;font-variant-numeric:tabular-nums}
+
+/* Map */
+.map svg{width:100%;height:auto;display:block}
+.map text{font-family:var(--f-ui)}
+.camp-card{background:var(--paper);border-radius:4px;padding:16px;margin-top:12px}
+.camp-card .who{font-family:var(--f-ui);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.camp-card h3{font-size:26px;margin:4px 0 6px}
+.camp-card q{display:block;font-family:var(--f-display);font-size:21px;line-height:1.3;quotes:"\201C" "\201D";margin:10px 0}
+.camp-card dl{display:grid;grid-template-columns:1fr;gap:10px;margin:12px 0 0}
+@media (min-width:600px){.camp-card dl{grid-template-columns:1fr 1fr}}
+.camp-card dt{font-family:var(--f-ui);font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.camp-card dd{margin:2px 0 0;font-size:16px;line-height:1.5}
+
+/* Timeline */
+.tl{list-style:none;margin:20px 0 0;padding:0;border-left:1px solid var(--rule)}
+.tl li{position:relative;padding:0 0 20px 22px}
+.tl li::before{content:"";position:absolute;left:-5px;top:8px;width:9px;height:9px;border-radius:50%;background:var(--tc,var(--muted))}
+.tl .yr{font-family:var(--f-ui);font-weight:700;font-size:14px;font-variant-numeric:tabular-nums}
+.tl .ev{font-size:17px;line-height:1.5}
+.tl-key{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-ui);font-size:13px;color:var(--muted);margin-top:8px}
+.tl-key span{display:flex;align-items:center;gap:6px}
+.tl-key i{width:9px;height:9px;border-radius:50%;display:block}
+
+.recap{border-top:2px solid var(--ink);padding-top:16px;margin-top:20px}
+.recap ol{margin:0;padding-left:1.2em}.recap li{margin-bottom:.7em}
+.series{display:grid;grid-template-columns:1fr;gap:10px;margin-top:28px}
+@media (min-width:600px){.series{grid-template-columns:1fr 1fr}}
+.series a{display:block;padding:16px;border:1px solid var(--rule);border-radius:4px;text-decoration:none;color:var(--ink)}
+.series .kicker{color:var(--muted)}
+.series .t{font-family:var(--f-display);font-size:24px;line-height:1.15;display:block;margin-top:4px}
+.sources{font-family:var(--f-ui);font-size:13px;line-height:1.6;color:var(--muted);margin-top:48px;border-top:1px solid var(--rule);padding-top:14px}
+.sources a{color:var(--muted)}
+
+/* v2 widgets */
+.chart{width:100%;height:auto;display:block;overflow:visible;margin-top:12px}
+.chart text{font-family:var(--f-ui);fill:var(--muted);font-size:11px}
+.slider-row{display:grid;grid-template-columns:112px 1fr 48px;gap:10px;align-items:center;font-family:var(--f-ui);font-size:14px;margin-top:10px}
+.slider-row output{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted)}
+input[type=range]{width:100%;accent-color:var(--cherry);height:28px}
+.writer-text{font-family:var(--f-display);font-size:clamp(22px,4.4vw,28px);line-height:1.4;margin:14px 0 12px;min-height:2.8em}
+.writer-text .pre{color:var(--muted)}
+.writer-text .ch{border-bottom:2px solid var(--sponge);padding-bottom:1px}
+.writer-text .ch.rare{border-bottom-color:var(--cherry)}
+.writer-text .caret{display:inline-block;width:2px;height:1em;background:var(--ink);vertical-align:-0.12em;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.opts-list{display:grid;gap:6px}
+.opts-list button{position:relative;display:grid;grid-template-columns:1fr 48px;align-items:center;text-align:left;font-family:var(--f-body);font-size:17px;color:var(--ink);background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:8px 12px;cursor:pointer;overflow:hidden;min-height:40px}
+.opts-list button i{position:absolute;inset:0 auto 0 0;background:color-mix(in srgb, var(--sponge) 30%, transparent);transition:width .35s}
+.opts-list button span{position:relative}
+.opts-list button .pc{font-family:var(--f-ui);font-size:13px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.opts-list button.top i{background:color-mix(in srgb, var(--sponge) 48%, transparent)}
+.opts-list .done{font-family:var(--f-ui);font-size:14px;color:var(--muted);padding:6px 0}
+.pipe2{display:grid;grid-template-columns:1fr;gap:16px;margin-top:14px}
+@media (min-width:760px){.pipe2{grid-template-columns:220px 1fr}}
+.pp-side{display:grid;gap:10px;align-content:start}
+.pp-side svg{width:100%;max-width:220px;height:auto;display:block}
+.stepper{display:grid;gap:6px}
+.stepper button{display:grid;grid-template-columns:22px 1fr;gap:8px;align-items:center;text-align:left;font-family:var(--f-ui);font-size:13.5px;font-weight:600;background:var(--paper);border:1px solid var(--rule);border-radius:4px;padding:8px 10px;cursor:pointer;color:var(--ink)}
+.stepper button .d{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:700;color:var(--paper)}
+.stepper button[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.stepper button.future{opacity:.55}
+.era2{display:grid;grid-template-columns:1fr;gap:14px;align-items:start}
+@media (min-width:640px){.era2{grid-template-columns:1fr 1fr;align-items:center}}
+.era-chart,.era-cake{min-width:0}
+.era-cake svg{width:100%;height:auto;display:block}
+.qcard{background:var(--paper);border-radius:4px;padding:18px;display:grid;gap:12px}
+.qcard .ct{font-family:var(--f-ui);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:8px}
+.qcard .tt{font-family:var(--f-display);font-size:clamp(24px,4.6vw,30px);line-height:1.2}
+.qcard .opts{display:flex;gap:8px;flex-wrap:wrap}
+.qcard .res{font-family:var(--f-ui);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.qcard .why{font-size:17px;line-height:1.5}
+.res.ok{color:var(--leaf)} .res.no{color:var(--cherry)}
+.spec{margin-top:14px;display:grid;gap:4px}
+.spec .ax{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:10px;font-family:var(--f-ui);font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.spec .ax div{display:flex;justify-content:space-between}
+.spec .row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:10px;align-items:center;font-family:var(--f-ui);font-size:13.5px;padding:5px 0;border-top:1px solid var(--rule)}
+.spec .trk{position:relative;height:14px;background:linear-gradient(90deg,color-mix(in srgb, var(--leaf) 30%, transparent),color-mix(in srgb, var(--cherry) 26%, transparent));border-radius:7px}
+.spec .trk b{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;background:var(--ink);transform:translate(-50%,-50%);border:2px solid var(--paper)}
+.quiz{display:grid;gap:12px;margin-bottom:12px}
+.quiz .q{font-family:var(--f-ui);font-size:14px;font-weight:600;margin-bottom:6px}
+.quiz .res{font-family:var(--f-ui);font-size:14.5px;background:var(--paper);border-radius:4px;padding:10px 12px}
+.habits{display:grid;gap:10px;margin-top:12px}
+.habit{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px;align-items:center;font-family:var(--f-ui);font-size:13.5px}
+.habit .bb{display:grid;gap:3px}
+.habit .b{display:grid;grid-template-columns:1fr 38px;gap:6px;align-items:center}
+.habit .b .t{height:9px;background:var(--rule);border-radius:2px;overflow:hidden}
+.habit .b .t i{display:block;height:100%}
+.habit .b .n{text-align:right;font-variant-numeric:tabular-nums;color:var(--muted);font-size:12px}
+.habit .good{color:var(--leaf);font-weight:700} .habit .badh{color:var(--cherry);font-weight:700}
+.key{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-ui);font-size:12.5px;color:var(--muted);margin-top:8px}
+.key span{display:flex;align-items:center;gap:6px}
+.key i{width:14px;height:3px;display:block;border-radius:2px}
+@media (prefers-reduced-motion: reduce){.bar .t i,.stp,.opts-list button i{transition:none}.writer-text .caret{animation:none}}
+</style>
+
+<header class="col">
+  <div class="kicker">Big ideas in AI, illustrated · No. 3</div>
+  <h1>Reward Is Enough<span class="q">?</span></h1>
+  <p class="dek">There are two basic ways to teach a machine: show it what people did, or let it try things and score the results. Today's AI uses both. The big bet in the field is which one carries us the rest of the way.</p>
+  <div class="byline"><!--rsb:byline--> · An explainer for non-engineers · about 25 minutes · 9 things to play with</div>
+</header>
+
+<figure class="bleed" style="margin-top:28px">
+  <img class="plate" src="/media/explainers/reward-is-enough/hero.webp" alt="Watercolor: a layered sponge cake with pink icing and a single red cherry on top" width="1600" height="1000">
+  <figcaption class="col">Yann LeCun's famous cake. Most of the learning is the sponge. Reward is just the cherry on top. Or is it?</figcaption>
+</figure>
+
+<section class="col">
+  <div class="sec-label">The claim</div>
+  <p class="drop">In 2021, four researchers at DeepMind, among them Richard Sutton and David Silver, published a paper with a provocative title: "Reward Is Enough." Its argument was simple. Give a learning system one goal, a score to push as high as possible, and a rich enough world to try things in, and everything we call intelligence (perception, language, planning, social skill) could grow out of that single pursuit. Nature did it once already: evolution had one goal, survive and reproduce, and it produced us.</p>
+  <p>It's a bold claim, and it sits at the center of today's biggest argument about how we get to superintelligence. To follow that argument, you need to know what the two ingredients are, where each came from, and how they're baked together inside models like ChatGPT and Claude. Then the argument itself makes sense.</p>
+  <div class="big-idea">Learning by <span class="s">imitation</span>: study what people did. Learning by <span class="c">reward</span>: try, get scored, adjust.</div>
+  <p>Think of someone becoming a chef. One way is to read every cookbook ever written. The other is to cook a thousand dinners and pay close attention to which ones people finish. Real chefs do both. The question is which one makes a great chef, and which one could make a chef better than any who has ever lived.</p>
+</section>
+
+<nav class="wide" aria-label="Contents">
+  <div class="toc">
+    <a href="#act1"><span class="n">Act I</span><span class="t">Two traditions</span><span class="d">Where learning by reward and learning by imitation came from</span></a>
+    <a href="#act2"><span class="n">Act II</span><span class="t">The cake</span><span class="d">How today's models are trained, layer by layer</span></a>
+    <a href="#act3"><span class="n">Act III</span><span class="t">The bets</span><span class="d">Four views on what gets us to superintelligence</span></a>
+  </div>
+</nav>
+
+<!-- ============ ACT I ============ -->
+<div class="col act" id="act1"><div class="n">Act I</div><div class="t">Two traditions</div><div class="d">Learning by reward, and learning by imitation</div></div>
+
+<section class="col" style="margin-top:40px">
+  <div class="sec-label">Learning by reward</div>
+  <h2>Try, fail, adjust, repeat</h2>
+  <p>Reinforcement learning, or RL, is the oldest idea in this story. It's how you train a dog: no instructions, just a treat when it does the right thing. Psychologists studied it in animals more than a century ago. In the 1980s, two computer scientists, Richard Sutton and Andrew Barto, worked out how to make computers learn this way, and in 2025 they won the Turing Award, computing's highest honor, for it.</p>
+  <p>The core trick is learning from a score that arrives late. A chess program doesn't learn whether move 12 was good until the game ends. RL is the bookkeeping that works backward from "you won" to figure out which earlier moves deserve the credit.</p>
+  <p>Its great strength is that it isn't limited by any teacher. An RL system can discover things nobody showed it. Its great weakness is that it starts out clueless, and it needs a lot of tries to get anywhere.</p>
+</section>
+<div class="wide">
+  <div class="well" id="mazeWell">
+    <h4>Two students, one maze</h4>
+    <p class="sub">A person showed the way once, taking the long way around the top. The left student copies that route exactly. The right student gets no demo, only a score: −1 for every step, +20 for reaching the goal. Watch it fumble, then let it practice.</p>
+    <div class="mazes">
+      <div class="maze"><div class="who"><span style="color:var(--sponge)">Copies the teacher</span><span id="mazeAStat">22 steps</span></div><svg id="mazeA" viewBox="0 0 420 252" role="img" aria-label="Maze with the copied human route"></svg></div>
+      <div class="maze"><div class="who"><span style="color:var(--cherry)">Learns from reward</span><span id="mazeStat">0 tries</span></div><svg id="mazeB" viewBox="0 0 420 252" role="img" aria-label="Maze with the reward-trained student's route and what it has learned"></svg></div>
+    </div>
+    <div class="ctl">
+      <button class="btn primary" type="button" id="mWatch">Watch one try</button>
+      <button class="btn" type="button" id="m10">Practice 10 tries</button>
+      <button class="btn" type="button" id="m100">Practice 100 tries</button>
+      <button class="btn" type="button" id="mStorm">Change the maze</button>
+      <button class="btn" type="button" id="mReset">Start over</button>
+    </div>
+    <svg class="chart" id="mazeChart" viewBox="0 0 640 220" role="img" aria-label="Steps taken on each try"></svg>
+    <div class="readout" id="mazeOut" aria-live="polite"></div>
+    <div class="illus">Real reinforcement learning (Q-learning) running in your browser, with a fresh random start each time. Green marks where the student has learned the goal is close. Watch it spread backward from the goal as the student practices.</div>
+  </div>
+</div>
+
+<section class="col">
+  <div class="sec-label">The games era</div>
+  <h2>From backgammon to Move 37</h2>
+  <p>For decades, RL shone wherever there was a clear score. In 1992, an IBM program called TD-Gammon taught itself backgammon by playing against itself and came close to the level of the best human players. Between 2013 and 2015, DeepMind showed a single program learning dozens of Atari video games from nothing but the pixels and the score.</p>
+  <p>Then came Go, a board game with more possible positions than there are atoms in the universe. DeepMind's AlphaGo was built in two stages, which will sound familiar by the end of this piece. First it studied about 30 million moves from human expert games, learning by imitation. Then it played millions of games against itself, learning by reward.</p>
+</section>
+<figure class="wide" style="margin-top:8px">
+  <img class="plate" src="/media/explainers/reward-is-enough/go.webp" alt="Watercolor: a Go board with dark and light stones, one stone circled in red" width="1600" height="900">
+  <figcaption class="col">Game 2, move 37. AlphaGo estimated that a human would play this move about 1 time in 10,000. It helped win the game.</figcaption>
+</figure>
+<div class="col">
+  <p>In March 2016, AlphaGo beat Lee Sedol, one of the best Go players in the world, four games to one. The moment people remember is move 37 of the second game, a placement so unusual that commentators assumed it was a mistake. It wasn't. Practice had taken AlphaGo somewhere its human teachers had never been.</p>
+  <p>The sequel made the point even more sharply. In 2017, AlphaGo Zero skipped the human games entirely. It started from random moves and learned only by playing itself. After three days, it beat the version that defeated Lee Sedol 100 games to 0.</p>
+  <blockquote>Human data got AlphaGo to the top. Leaving human data out got AlphaGo Zero past it.<cite>The lesson many RL researchers took from Go, and the seed of the "reward is enough" view.</cite></blockquote>
+  <p>But Go has something the real world mostly lacks: a perfect, instant scorekeeper. Every game ends in a clear win or loss. "Write a good novel" or "run this company well" don't. For years, that kept RL's biggest wins inside games.</p>
+</div>
+
+<section class="col">
+  <div class="sec-label">Learning by imitation</div>
+  <h2>Read the whole library</h2>
+  <p>The second tradition arrived through a side door. In 2018, OpenAI released GPT-1, a model with a humble job: read a huge amount of text and, at every point, guess the next word. That's it. No rewards, no goals. Just "what comes next?", trillions of times. This is called pretraining, and it's how a large language model (LLM) gets its knowledge.</p>
+  <p>It sounds too simple to matter. The surprise is how much a model has to understand to get good at it. To guess the next word in a recipe, you need to know cooking. To guess the next word in a mystery novel, you need to follow the plot. To guess the next line of a proof, you need some math.</p>
+</section>
+<div class="col">
+  <div class="well" id="writer">
+    <h4>Be the language model</h4>
+    <p class="sub">The bars are the model's bets on what comes next. Tap one to add it, or let the model pick. Temperature controls how adventurous its picks are.</p>
+    <div class="seg" role="group" aria-label="Starting text" id="wrTabs"></div>
+    <div class="writer-text" id="wrText"></div>
+    <div class="opts-list" id="wrOpts"></div>
+    <label class="slider-row" for="wrTemp"><span>Temperature</span><input type="range" id="wrTemp" min="0.1" max="2" step="0.05" value="1"><output id="wrTempOut">1.0</output></label>
+    <div class="ctl">
+      <button class="btn primary" type="button" id="wrAuto">Let the model write</button>
+      <button class="btn" type="button" id="wrBack">Undo</button>
+      <button class="btn" type="button" id="wrReset">Start over</button>
+    </div>
+    <div class="readout" id="wrOut" aria-live="polite"></div>
+    <div class="illus">Probabilities are illustrative, chosen to show how real models behave.</div>
+  </div>
+</div>
+<figure class="bleed">
+  <img class="plate" src="/media/explainers/reward-is-enough/library.webp" alt="Watercolor: two long shelves of colorful books" width="1600" height="760">
+  <figcaption class="col">Pretraining is a reading marathon: much of the public internet, digitized books, and huge amounts of code.</figcaption>
+</figure>
+<div class="col">
+  <p>Scale did the rest, just as the Big Blob of Compute predicted. GPT-2 in 2019 could write convincing paragraphs. GPT-3 in 2020, with 175 billion adjustable numbers, could translate, summarize and write simple code from a few examples, without being trained for any of those tasks specifically.</p>
+  <p>Imitation has the opposite profile to RL. It starts out incredibly strong, because it inherits everything humans ever wrote down. But it has a ceiling built in. A model trained only to predict what people would write is, at heart, a superb mimic of people, mistakes included. Silver and Sutton put it bluntly: on its own, it risks becoming "an echo chamber of existing human knowledge."</p>
+  <p>That isn't just a worry. In 2021, researchers built a test called TruthfulQA, full of questions that many people answer wrongly, and found that the largest language models of the time were generally the <em>least</em> truthful. Getting better at imitating people meant getting better at repeating their misconceptions. The best model was truthful on 58% of the questions; people managed 94%.</p>
+  <div class="big-idea">Imitation is a <span class="s">fast start with a ceiling</span>. Reward is a <span class="c">slow start with no ceiling</span>, if you can define the score.</div>
+</div>
+
+<!-- ============ ACT II ============ -->
+<div class="col act" id="act2"><div class="n">Act II</div><div class="t">The cake</div><div class="d">How the two traditions got baked together</div></div>
+
+<section class="col" style="margin-top:40px">
+  <div class="sec-label">LeCun's cake</div>
+  <p>At a major AI conference in December 2016, Yann LeCun, then Facebook's chief AI scientist, showed a slide that people still argue about. If intelligence is a cake, he said, the bulk of it, the sponge, is a machine learning on its own from raw data. The icing is learning from labeled examples. Reinforcement learning is just the cherry on top.</p>
+  <p>His reasoning came down to how much each kind of learning tells you. Every chunk of raw data carries millions of bits of information to learn from. A score carries only a few: good or bad, win or lose. You can't build a mind from a trickle like that. You need the sponge.</p>
+  <p>The funny thing is that, a few years later, LLMs ended up with almost exactly this recipe. Here's how a model like Claude or ChatGPT is made today.</p>
+</section>
+<div class="wide">
+  <div class="well" id="pipeWell">
+    <h4>Train a model, one stage at a time</h4>
+    <p class="sub">Pick a request, then step through training. The same model's answer changes as each layer of the cake is added.</p>
+    <div class="seg" role="group" aria-label="Request" id="ppPrompts"></div>
+    <div class="pipe2">
+      <div class="pp-side">
+        <svg id="ppCake" viewBox="0 0 220 192" role="img" aria-label="The cake so far"></svg>
+        <div class="stepper" id="ppSteps" role="group" aria-label="Training stage"></div>
+        <button class="btn primary" type="button" id="ppPlay">Play all four stages</button>
+      </div>
+      <div class="stage-body" id="ppBody" aria-live="polite"></div>
+    </div>
+    <div class="illus">Answers written to show typical behavior at each stage. Real pipelines vary by lab and change often.</div>
+  </div>
+</div>
+
+<section class="col">
+  <div class="sec-label">The first cherry</div>
+  <h2>The feedback that made ChatGPT</h2>
+  <p>The step that turned a raw text predictor into a useful assistant came from RL. In 2017, a team from OpenAI and DeepMind, including Dario Amodei, who was then at OpenAI and later cofounded Anthropic, showed you could train with RL even when you can't write the score down. Instead, people simply compared two attempts and picked the better one. Using about 900 of those comparisons, a simulated robot learned to do a backflip. This became known as RLHF: reinforcement learning from human feedback.</p>
+  <p>In early 2022, OpenAI applied it to language. People preferred answers from the RLHF-trained model, called InstructGPT, over the original GPT-3, even though it was about 100 times smaller. Later that year, the same recipe produced ChatGPT.</p>
+  <p>A small amount of reward, on top of a huge amount of imitation, had made all the difference. LeCun's cherry was tiny, but it was what people tasted first.</p>
+</section>
+
+<section class="col">
+  <div class="sec-label">The cherry grows</div>
+  <h2>Practice exams with an answer key</h2>
+  <p>Human feedback has a limit: people have to judge every answer, and people can only judge what they understand. So in 2024, labs turned to tasks where the computer can check the answer itself. A math problem has a correct answer. Code either passes its tests or it doesn't. That's the Go scorekeeper again, finally available for language models.</p>
+  <p>In September 2024, OpenAI released o1, a model trained with large amounts of this kind of RL to "think" step by step before answering. In January 2025, the Chinese lab DeepSeek published how it trained a similar model and reported something striking: with RL alone, the model learned on its own to reflect, double-check its work and change strategy mid-problem. Nobody had demonstrated that for it. It came from practice.</p>
+  <p>Since then, the share of training devoted to RL has grown fast. Labs rarely publish exact numbers, but they talk about it openly. xAI said its 2025 model Grok 4 used more than ten times as much RL compute as it had used before. Dario Amodei said in February 2026: "We're seeing the same scaling in RL that we saw for pre-training."</p>
+</section>
+<div class="wide">
+  <div class="well" id="eraWell">
+    <h4>Is the cherry becoming the cake?</h4>
+    <p class="sub">Drag through the years to see roughly how the training effort behind frontier language models has shifted. Then place your own bet for 2030.</p>
+    <svg class="chart" id="eraChart" viewBox="0 0 560 270" role="img" aria-label="Stacked area chart of training effort by stage, 2018 to 2030"></svg>
+    <div class="era2">
+      <div class="era-chart">
+        <label class="slider-row" for="eraYear"><span>Year</span><input type="range" id="eraYear" min="2018" max="2026" step="0.1" value="2026"><output id="eraYearOut">2026</output></label>
+        <label class="slider-row" for="eraBet"><span>Your 2030 bet</span><input type="range" id="eraBet" min="5" max="90" step="1" value="50"><output id="eraBetOut">50%</output></label>
+        <div class="legend" id="eraLegend" style="margin-top:14px"></div>
+      </div>
+      <div class="era-cake">
+        <svg id="cake" viewBox="0 0 400 300" role="img" aria-label="Cake whose layers show training effort by stage"></svg>
+      </div>
+    </div>
+    <div class="readout" id="eraOut" aria-live="polite"></div>
+    <div class="readout" id="betOut" aria-live="polite"></div>
+    <div class="illus">A rough sketch of the reported trend, not measured data. Labs don't publish these splits, and they vary from model to model. "Reward" here counts both human feedback and RL on checkable tasks.</div>
+  </div>
+</div>
+
+<section class="col">
+  <div class="sec-label">The catch</div>
+  <h2>RL is only as good as its scorekeeper</h2>
+  <p>All this works beautifully where answers can be checked. It gets much harder where they can't. That's why AI models can now handle hard competition math and serious coding work while still giving mediocre advice about your career. Their skills grow fastest wherever the score is clear.</p>
+  <div class="well" id="sortWell">
+    <h4>Can a computer grade it?</h4>
+    <p class="sub">Eight tasks. For each, guess whether a computer could score an attempt automatically. That's roughly whether RL can train it well today.</p>
+    <div class="qcard" id="sortCard" aria-live="polite"></div>
+    <div id="sortSpectrum"></div>
+  </div>
+</section>
+
+<!-- ============ ACT III ============ -->
+<div class="col act" id="act3"><div class="n">Act III</div><div class="t">The bets</div><div class="d">Four views on what gets us the rest of the way</div></div>
+
+<section class="col" style="margin-top:40px">
+  <p>Everyone agrees on the current recipe: a big sponge of imitation, a growing cherry of reward. The disagreement is about what comes next. Is the recipe nearly complete, so that we just keep scaling? Or is something essential missing? Four views come up again and again.</p>
+</section>
+<figure class="bleed" style="margin-top:8px">
+  <img class="plate" src="/media/explainers/reward-is-enough/paths.webp" alt="Watercolor: four colored paths diverging from a single point" width="1600" height="680">
+</figure>
+<div class="wide">
+  <div class="well map">
+    <h4>Where do you land?</h4>
+    <p class="sub">Answer three questions to see which camp your intuitions match. Or tap any camp on the map to read its case.</p>
+    <div class="quiz" id="quiz"></div>
+    <svg id="campMap" viewBox="0 0 640 390" role="img" aria-label="Map placing four camps by data source and how much must change"></svg>
+    <div class="camp-card" id="campCard" aria-live="polite"></div>
+    <div class="illus">Positions are my rough reading of each camp's public statements, not their own self-placement.</div>
+  </div>
+</div>
+
+<section class="col">
+  <div class="sec-label">Sticking point 1</div>
+  <h2>Sucking supervision through a straw</h2>
+  <p>Even RL's defenders admit it learns in a crude way. In most setups, a model makes a long attempt and gets one score at the end. Andrej Karpathy, a founding member of OpenAI, described it on Dwarkesh Patel's podcast in October 2025: "Reinforcement learning is terrible." He added that it's still better than what came before. The problem, in his words, is that "you're sucking the bits of supervision of the final reward signal through a straw."</p>
+  <p>Here's what he means. If the final answer is right, every step in the attempt gets credit, including the steps that were wrong.</p>
+  <div class="well">
+    <h4>Grade this attempt</h4>
+    <p class="sub">Problem: pens cost $2 for a pack of 3. How much do 12 pens cost? The model's attempt reaches the right answer, but not cleanly.</p>
+    <div class="seg" role="group" aria-label="Grading method">
+      <button type="button" id="gOut" aria-pressed="true">Score the final answer only</button>
+      <button type="button" id="gStep" aria-pressed="false">Score every step</button>
+    </div>
+    <div class="steps" id="steps"></div>
+    <div class="readout" id="strawOut" aria-live="polite"></div>
+  </div>
+  <div class="well" id="trainWell">
+    <h4>Now train it 1,000 times, both ways</h4>
+    <p class="sub">Two copies of the same model start with the same four habits. One copy is graded only on its final answers. The other is graded on every step. Watch which habits each one ends up with.</p>
+    <svg class="chart" id="trChart" viewBox="0 0 600 210" role="img" aria-label="Accuracy over training for both grading methods"></svg>
+    <div class="habits" id="trHabits"></div>
+    <div class="ctl">
+      <button class="btn primary" type="button" id="trGo">Train 1,000 attempts</button>
+      <button class="btn" type="button" id="trReset">Reset</button>
+    </div>
+    <div class="readout" id="trOut" aria-live="polite"></div>
+    <div class="illus">A toy reinforcement-learning simulation running live, with fresh randomness each run. Real models have billions of habits instead of four, but the same thing happens: whatever was in an attempt that scored well gets reinforced.</div>
+  </div>
+  <p>A person learning this way would replay the attempt and notice the slip. Giving models that kind of step-by-step feedback is an active area of research, but checking every step is far harder and more expensive than checking the final answer.</p>
+</section>
+
+<section class="col">
+  <div class="sec-label">Sticking point 2</div>
+  <h2>You get what you reward</h2>
+  <p>The second problem is the oldest in RL. A system pushing hard on a score will find the cheapest way to raise it, whether or not that's what you meant. Researchers call this reward hacking. In 2016, OpenAI trained an agent on a boat-racing game called CoastRunners, scoring it on points. It found a lagoon where three targets kept reappearing and spun there in circles forever, catching fire and crashing, never finishing the race. It still beat human players' scores by about 20%.</p>
+</section>
+<figure class="wide" style="margin-top:8px">
+  <img class="plate" src="/media/explainers/reward-is-enough/boat.webp" alt="Watercolor: a boat's wake looping in a circle around three targets, far from a finish flag" width="1600" height="760">
+</figure>
+<div class="col">
+  <div class="well boat" id="boatWell">
+    <h4>Write the reward, train the boat</h4>
+    <p class="sub">This boat learns by real trial and error, right here in your browser. Choose what earns points, train it, and see what it learns to do.</p>
+    <div class="seg" role="group" aria-label="Reward" id="bModes">
+      <button type="button" data-m="points" aria-pressed="true">Points for targets</button>
+      <button type="button" data-m="finish" aria-pressed="false">Points for finishing</button>
+      <button type="button" data-m="once" aria-pressed="false">Patch: each target pays once</button>
+    </div>
+    <canvas id="boatCanvas" style="margin-top:12px" role="img" aria-label="Race course with a boat, a lagoon with three targets, and a finish flag"></canvas>
+    <div class="ctl">
+      <button class="btn primary" type="button" id="bTrain">Train 100 races</button>
+      <button class="btn" type="button" id="bReset">Start over</button>
+      <span class="stat" id="bRaces"><b>0</b> races of practice</span>
+    </div>
+    <div class="meters">
+      <div><div class="l">Points this race</div><div class="v" id="bScore">0</div></div>
+      <div><div class="l">Finished?</div><div class="v" id="bFinished">No</div></div>
+      <div><div class="l">Avg points, last 20</div><div class="v" id="bAvg">–</div></div>
+    </div>
+    <svg class="chart" id="bChart" viewBox="0 0 600 150" role="img" aria-label="Points per race during training"></svg>
+    <div class="readout" id="boatOut" aria-live="polite"></div>
+    <div class="illus">Real Q-learning. The targets pay out in clockwise order, so the only way to keep scoring is to loop around the lagoon. A careful human racer grabs all three targets once and then finishes, for 80 points.</div>
+  </div>
+  <p>It's funny in a video game. With language models trained by RL, it shows up as models that learn to look right instead of being right: code that skips the hard part but still passes a weak test, or answers that tell a human grader what they want to hear. In a 2017 experiment, a robot hand trained on human feedback learned to hover between the camera and the object so it only <em>looked</em> like it was grabbing it. The more of the cake we hand to reward, the more this matters. Labs treat it as one of the central safety problems of the RL era.</p>
+</div>
+
+<section class="col">
+  <div class="sec-label">Sticking point 3</div>
+  <h2>Learning on the job</h2>
+  <p>The last gap is the one Sutton cares most about. Today's models learn in a big training run, then get frozen. A new employee is clumsy in week one and sharp by month three. A deployed model is the same on day 300 as on day one, apart from what you paste into the conversation.</p>
+  <p>The experience camp thinks real intelligence means learning continuously from your own life, the way animals do. The scaling camp thinks that may matter less than it seems. Dario has said continual learning "might not be a barrier at all," and that generalization from pretraining and RL may get there anyway. Whether that's right is one of the most watched open questions in the field.</p>
+</section>
+
+<section class="col">
+  <div class="sec-label">So, is reward enough?</div>
+  <p>Nobody knows, and anyone who sounds certain is guessing. Here's where things stand. Imitation got AI to roughly human level in a lot of things remarkably fast. Reward has started to push past it where answers can be checked, as it did in Go. The bet that matters is whether reward can stretch into the messy, unscored parts of life. That would take better scorekeepers, models that learn from their own ongoing experience, or something nobody has invented yet.</p>
+  <p>LeCun's 2016 cake was mostly sponge. The cake being baked in 2026 has a much bigger cherry. Whether the cherry ends up as the whole cake is, more or less, the question of how we get to superintelligence.</p>
+</section>
+
+<section class="col">
+  <div class="sec-label">The whole story</div>
+  <div class="tl-key"><span><i style="background:var(--cherry)"></i>Reward</span><span><i style="background:var(--sponge)"></i>Imitation</span><span><i style="background:var(--plum)"></i>Both, combined</span><span><i style="background:var(--muted)"></i>The debate</span></div>
+  <ol class="tl">
+    <li style="--tc:var(--cherry)"><div class="yr">1980s</div><div class="ev">Sutton and Barto lay the foundations of reinforcement learning.</div></li>
+    <li style="--tc:var(--cherry)"><div class="yr">1992</div><div class="ev">TD-Gammon teaches itself backgammon by self-play.</div></li>
+    <li style="--tc:var(--cherry)"><div class="yr">2013</div><div class="ev">DeepMind's agent learns Atari games from pixels and score alone.</div></li>
+    <li style="--tc:var(--plum)"><div class="yr">2016</div><div class="ev">AlphaGo, trained on human games and then self-play, beats Lee Sedol. LeCun presents the cake.</div></li>
+    <li style="--tc:var(--cherry)"><div class="yr">2017</div><div class="ev">AlphaGo Zero, with no human games, wins 100–0. RLHF is introduced. The Transformer is published.</div></li>
+    <li style="--tc:var(--sponge)"><div class="yr">2018–20</div><div class="ev">GPT-1, GPT-2 and GPT-3 show how far next-word prediction can go.</div></li>
+    <li style="--tc:var(--muted)"><div class="yr">2021</div><div class="ev">Silver, Singh, Precup and Sutton publish "Reward Is Enough."</div></li>
+    <li style="--tc:var(--plum)"><div class="yr">2022</div><div class="ev">InstructGPT, then ChatGPT: imitation plus a small cherry of human feedback.</div></li>
+    <li style="--tc:var(--plum)"><div class="yr">2024–25</div><div class="ev">Reasoning models (o1, DeepSeek-R1) trained with large-scale RL on checkable problems.</div></li>
+    <li style="--tc:var(--muted)"><div class="yr">2025</div><div class="ev">Sutton and Barto win the Turing Award. Silver and Sutton publish "Welcome to the Era of Experience." Sutton calls LLMs a dead end; Karpathy calls RL "terrible" but better than the alternatives. LeCun leaves Meta to build world models.</div></li>
+    <li style="--tc:var(--muted)"><div class="yr">2026</div><div class="ev">Dario Amodei: RL is scaling like pretraining did. LeCun's AMI Labs raises about $1 billion.</div></li>
+  </ol>
+</section>
+
+<section class="col">
+  <div class="sec-label">One-minute recap</div>
+  <div class="recap">
+    <ol>
+      <li>There are two basic ways to learn: imitate what people did (fast start, human ceiling) or try things and get scored (slow start, no ceiling, but you need a good score).</li>
+      <li>Today's models use both, like LeCun's cake: a huge sponge of pretraining, a layer of example conversations, and a cherry of reward that's growing fast now that computers can check math and code.</li>
+      <li>The camps disagree on what's next: keep scaling this recipe, learn mainly from experience, build world models, or find the missing pieces. Weak scores, reward hacking and continual learning are the open problems all of them have to face.</li>
+    </ol>
+  </div>
+  <div class="series">
+    <a href="/post/big-blob-of-compute"><span class="kicker">No. 1</span><span class="t">The Big Blob of Compute</span></a>
+    <a href="/post/attention-is-all-you-need"><span class="kicker">No. 2</span><span class="t">Attention Is All You Need</span></a>
+  </div>
+  <div class="sources">
+    Sources:
+    <a href="https://www.sciencedirect.com/science/article/pii/S0004370221000862" target="_blank" rel="noopener">Silver, Singh, Precup &amp; Sutton, "Reward is enough" (2021)</a> ·
+    <a href="https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf" target="_blank" rel="noopener">Silver &amp; Sutton, "Welcome to the Era of Experience" (2025)</a> ·
+    <a href="https://syncedreview.com/2019/02/22/yann-lecun-cake-analogy-2-0/" target="_blank" rel="noopener">LeCun's cake analogy (Synced)</a> ·
+    <a href="https://openai.com/index/learning-from-human-preferences/" target="_blank" rel="noopener">OpenAI, "Learning from human preferences" (2017)</a> ·
+    <a href="https://arxiv.org/abs/2203.02155" target="_blank" rel="noopener">Ouyang et al., InstructGPT (2022)</a> ·
+    <a href="https://arxiv.org/abs/2501.12948" target="_blank" rel="noopener">DeepSeek-R1 (2025)</a> ·
+    <a href="https://x.ai/news/grok-4" target="_blank" rel="noopener">xAI, Grok 4 (2025)</a> ·
+    <a href="https://openai.com/index/faulty-reward-functions/" target="_blank" rel="noopener">OpenAI, "Faulty reward functions in the wild" (2016)</a> ·
+    <a href="https://www.dwarkesh.com/p/richard-sutton" target="_blank" rel="noopener">Richard Sutton on the Dwarkesh Podcast (Sept 2025)</a> ·
+    <a href="https://www.dwarkesh.com/p/andrej-karpathy" target="_blank" rel="noopener">Andrej Karpathy on the Dwarkesh Podcast (Oct 2025)</a> ·
+    <a href="https://www.dwarkesh.com/p/dario-amodei-2" target="_blank" rel="noopener">Dario Amodei on the Dwarkesh Podcast (Feb 2026)</a> ·
+    <a href="https://heise.de/-11206350" target="_blank" rel="noopener">heise on AMI Labs (2026)</a> ·
+    <a href="https://www.transformernews.ai/p/teaching-ai-to-continual-learning" target="_blank" rel="noopener">Transformer on continual learning (2026)</a> ·
+    <a href="https://openai.com/index/truthfulqa" target="_blank" rel="noopener">Lin, Hilton &amp; Evans, TruthfulQA (2021)</a>.
+    Watercolor plates generated with OpenCV.
+  </div>
+</section>
+
+<script>
+(function(){
+const $=id=>document.getElementById(id);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS='http://www.w3.org/2000/svg';
+const el=(tag,attrs,parent,text)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;};
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+const redraws=[];
+const fitW=(svg,H)=>{const w=Math.round(clamp(svg.getBoundingClientRect().width||640,300,900));svg.setAttribute('viewBox',`0 0 ${w} ${H}`);return w;};
+const btnSet=(id,on)=>{const b=$(id);if(b)b.disabled=!on;};
+
+/* =====================================================================
+   1. MAZE: imitation vs reward, with a changing world
+   ===================================================================== */
+const MZ=['...............','.#############.','.#......######.','.#.######...##.','S....##...#...G','.###....#.##.#.','.#....###..###.','.#############.','...............'];
+const MR=MZ.length,MC=MZ[0].length,CS=28;
+const MS=[4,0],MG=[4,14];
+const TEACH=[[4,0],[3,0],[2,0],[1,0],[0,0]];for(let c=1;c<=14;c++)TEACH.push([0,c]);TEACH.push([1,14],[2,14],[3,14],[4,14]);
+const BLOCKS=['0,7','4,8'];
+const MD=[[-1,0],[1,0],[0,-1],[0,1]];
+const M={Q:new Map(),tries:0,storm:false,stormAt:-1,hist:[],trail:[],busy:false,best:[]};
+const mOpen=(r,c)=>r>=0&&r<MR&&c>=0&&c<MC&&MZ[r][c]!=='#'&&!(M.storm&&BLOCKS.includes(r+','+c));
+const mq=(r,c)=>{const k=r*MC+c;let v=M.Q.get(k);if(!v){v=[-20,-20,-20,-20];M.Q.set(k,v);}return v;};
+function mEpisode(){
+  const e=Math.max(0.1,0.4*Math.pow(0.995,M.tries));M.tries++;
+  let [r,c]=MS;const trail=[[r,c]];
+  for(let s=0;s<400;s++){
+    const qs=mq(r,c);let a;
+    if(Math.random()<e)a=Math.floor(Math.random()*4);
+    else{const m=Math.max(...qs);const b=[0,1,2,3].filter(i=>qs[i]===m);a=pick(b);}
+    let nr=r+MD[a][0],nc=c+MD[a][1];if(!mOpen(nr,nc)){nr=r;nc=c;}
+    const goal=nr===MG[0]&&nc===MG[1];
+    qs[a]+=0.25*((goal?20:-1)+(goal?0:0.97*Math.max(...mq(nr,nc)))-qs[a]);
+    r=nr;c=nc;trail.push([r,c]);if(goal)break;
+  }
+  M.trail=trail;
+  const g=mGreedy();
+  M.hist.push({steps:trail.length-1,storm:M.storm,greedy:g?g.length-1:null});
+  return trail;
+}
+function mGreedy(){let [r,c]=MS;const p=[[r,c]];const seen=new Set();for(let i=0;i<80;i++){const k=r*MC+c;if(seen.has(k))return null;seen.add(k);const qs=M.Q.get(k);if(!qs)return null;const m=Math.max(...qs);if(m===-20)return null;const a=qs.indexOf(m);const nr=r+MD[a][0],nc=c+MD[a][1];if(!mOpen(nr,nc))return null;r=nr;c=nc;p.push([r,c]);if(r===MG[0]&&c===MG[1])return p;}return null;}
+function copierRoute(){if(!M.storm)return {route:TEACH,stuck:false};const out=[];for(const p of TEACH){if(BLOCKS.includes(p+''))return {route:out,stuck:true,at:p};out.push(p);}return {route:out,stuck:false};}
+const mpt=([r,c])=>(c*CS+CS/2)+','+(r*CS+CS/2);
+function mGrid(svg,heat){
+  svg.innerHTML='';
+  const wall=css('--wall'),leaf=css('--leaf'),rule=css('--rule'),paper=css('--paper');
+  let vmin=Infinity,vmax=-Infinity;
+  if(heat)M.Q.forEach(v=>{const m=Math.max(...v);if(m>-20){vmin=Math.min(vmin,m);vmax=Math.max(vmax,m);}});
+  for(let r=0;r<MR;r++)for(let c=0;c<MC;c++){
+    const x=c*CS,y=r*CS;
+    if(MZ[r][c]==='#'){el('rect',{x:x+1,y:y+1,width:CS-2,height:CS-2,rx:3,fill:wall,opacity:.85},svg);continue;}
+    el('rect',{x:x+.5,y:y+.5,width:CS-1,height:CS-1,fill:paper,stroke:rule},svg);
+    if(heat){const v=M.Q.get(r*MC+c);if(v){const m=Math.max(...v);if(m>-20&&vmax>vmin){const t=(m-vmin)/(vmax-vmin);el('rect',{x:x+1,y:y+1,width:CS-2,height:CS-2,fill:leaf,opacity:(0.06+0.62*t*t).toFixed(2)},svg);}}}
+  }
+  if(M.storm)BLOCKS.forEach(b=>{const [r,c]=b.split(',').map(Number);const x=c*CS,y=r*CS;el('rect',{x:x+1,y:y+1,width:CS-2,height:CS-2,rx:3,fill:css('--cherry'),opacity:.85},svg);el('path',{d:`M${x+8} ${y+8}L${x+CS-8} ${y+CS-8}M${x+CS-8} ${y+8}L${x+8} ${y+CS-8}`,stroke:paper,'stroke-width':3,'stroke-linecap':'round'},svg);});
+  const lab=(p,t,fill)=>{el('circle',{cx:p[1]*CS+CS/2,cy:p[0]*CS+CS/2,r:10,fill},svg);el('text',{x:p[1]*CS+CS/2,y:p[0]*CS+CS/2+4,'text-anchor':'middle','font-size':11,'font-family':'Libre Franklin, Arial, sans-serif','font-weight':700,fill:paper},svg,t);};
+  lab(MS,'S',css('--ink'));lab(MG,'G',leaf);
+}
+function mDraw(posA,posB,trailUpTo){
+  const A=$('mazeA'),B=$('mazeB');const sponge=css('--sponge'),cherry=css('--cherry');
+  mGrid(A,false);
+  const cr=copierRoute();
+  el('polyline',{points:cr.route.map(mpt).join(' '),fill:'none',stroke:sponge,'stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round',opacity:.9},A);
+  if(posA)el('circle',{cx:posA[1]*CS+CS/2,cy:posA[0]*CS+CS/2,r:8,fill:sponge,stroke:css('--paper'),'stroke-width':2},A);
+  mGrid(B,true);
+  const g=mGreedy();
+  const tr=trailUpTo!=null?M.trail.slice(0,trailUpTo+1):M.trail;
+  if(tr.length>1&&(trailUpTo!=null||!g))el('polyline',{points:tr.slice(-140).map(mpt).join(' '),fill:'none',stroke:cherry,'stroke-width':2,'stroke-linejoin':'round',opacity:.45},B);
+  if(g&&trailUpTo==null)el('polyline',{points:g.map(mpt).join(' '),fill:'none',stroke:cherry,'stroke-width':5,'stroke-linecap':'round','stroke-linejoin':'round'},B);
+  if(posB)el('circle',{cx:posB[1]*CS+CS/2,cy:posB[0]*CS+CS/2,r:8,fill:cherry,stroke:css('--paper'),'stroke-width':2},B);
+  $('mazeAStat').textContent=cr.stuck?'stuck':'22 steps';
+  $('mazeStat').textContent=M.tries+(M.tries===1?' try':' tries')+(g?` · best route ${g.length-1} steps`:'');
+}
+function mChart(){
+  const svg=$('mazeChart');svg.innerHTML='';const W=fitW(svg,220);
+  const X0=44,X1=W-16,Y0=180,Y1=14;
+  const n=M.hist.length,XM=Math.max(100,Math.ceil(n/100)*100);
+  const px=i=>X0+(X1-X0)*i/XM, ys=v=>Math.sqrt(Math.min(400,v)/400), py=v=>Y0-(Y0-Y1)*ys(v);
+  const rule=css('--rule'),muted=css('--muted'),cherry=css('--cherry'),sponge=css('--sponge'),leaf=css('--leaf'),ink=css('--ink');
+  [18,50,100,200,400].forEach(v=>{el('line',{x1:X0,x2:X1,y1:py(v),y2:py(v),stroke:rule,'stroke-dasharray':'2 4'},svg);el('text',{x:X0-6,y:py(v)+4,'text-anchor':'end'},svg,v===400?'400+':v);});
+  el('line',{x1:X0,x2:X1,y1:Y0,y2:Y0,stroke:rule},svg);
+  for(let t=0;t<=XM;t+=XM/4)el('text',{x:px(t),y:Y0+16,'text-anchor':'middle'},svg,t);
+  el('text',{x:(X0+X1)/2,y:Y0+32,'text-anchor':'middle'},svg,'Tries');
+  el('text',{x:12,y:(Y0+Y1)/2,transform:`rotate(-90 12 ${(Y0+Y1)/2})`,'text-anchor':'middle'},svg,'Steps to reach the goal');
+  // copier line
+  const sx=M.stormAt>=0?px(M.stormAt):X1;
+  el('line',{x1:X0,x2:sx,y1:py(22),y2:py(22),stroke:sponge,'stroke-width':2.5},svg);
+  if(M.stormAt>=0){el('line',{x1:sx,x2:sx,y1:Y1,y2:Y0,stroke:ink,'stroke-dasharray':'3 3',opacity:.6},svg);el('text',{x:sx+5,y:Y0-6,style:`fill:${ink};font-weight:600`},svg,'maze changes');el('line',{x1:sx,x2:X1,y1:Y1,y2:Y1,stroke:sponge,'stroke-width':2.5,'stroke-dasharray':'6 4'},svg);el('text',{x:X1,y:Y1-4,'text-anchor':'end',style:`fill:${sponge};font-weight:600`},svg,'Copier: stuck');}
+  el('text',{x:X0+4,y:py(22)-6,style:`fill:${sponge};font-weight:600`},svg,'Copier: 22 steps');
+  // dots
+  M.hist.forEach((h,i)=>el('circle',{cx:px(i+0.5),cy:py(h.steps),r:n>300?1.6:2.4,fill:cherry,opacity:.55},svg));
+  // rolling avg
+  if(n>3){let d='';for(let i=0;i<n;i++){const w=M.hist.slice(Math.max(0,i-7),i+1);const a=w.reduce((s,h)=>s+h.steps,0)/w.length;d+=(i?'L':'M')+px(i+0.5).toFixed(1)+' '+py(a).toFixed(1);}el('path',{d,fill:'none',stroke:cherry,'stroke-width':2},svg);}
+  // best possible
+  const bestPre=18,bestPost=22;
+  el('line',{x1:X0,x2:sx,y1:py(bestPre),y2:py(bestPre),stroke:leaf,'stroke-width':1.5,'stroke-dasharray':'5 4'},svg);
+  el('text',{x:Math.min(sx,X1)-4,y:py(bestPre)+14,'text-anchor':'end',style:`fill:${leaf};font-weight:600`},svg,'Shortest possible');
+  if(M.stormAt>=0)el('line',{x1:sx,x2:X1,y1:py(bestPost),y2:py(bestPost),stroke:leaf,'stroke-width':1.5,'stroke-dasharray':'5 4'},svg);
+}
+function mReadout(){
+  const g=mGreedy(),n=M.tries,o=$('mazeOut');
+  const recent=M.hist.slice(-10),avg=recent.length?Math.round(recent.reduce((s,h)=>s+h.steps,0)/recent.length):0;
+  if(n===0){o.innerHTML='The reward student has never seen this maze and knows nothing. Press <b>Watch one try</b> to see what that looks like.';return;}
+  if(!M.storm){
+    if(!g){o.innerHTML=n<3?`<b>Pure stumbling.</b> It walked into walls and wandered for ${M.hist[n-1].steps} steps before it hit the goal by accident. The copier was done after 22. But the student learned a little: the green near the goal is where it now knows the goal is close.`:`<b>Still fumbling</b> after ${n} tries, averaging ${avg} steps lately. Each time it reaches the goal, the green spreads a bit further back along the way it came. That's the credit for "you won" flowing back to earlier moves.`;return;}
+    const L=g.length-1;
+    if(L>22)o.innerHTML=`<b>It has a route</b> (${L} steps), but a clumsy one. The copier is still ahead. Keep practicing.`;
+    else if(L>18)o.innerHTML=`<b>Caught up with the teacher</b> after ${n} tries. Can it do better?`;
+    else o.innerHTML=`<b>It beat the teacher:</b> 18 steps instead of 22, after ${n} tries. It found the passage through the middle that the human never used, the way AlphaGo found move 37. The copier can't find it, because it only knows what it was shown. Now press <b>Change the maze</b>.`;
+    return;
+  }
+  const since=n-M.stormAt;
+  if(!g||g.length-1>30)o.innerHTML=`<b>The maze changed.</b> Two passages are blocked, including one on the teacher's route. The copier is stuck: it only knows one route and has no way to find another. The reward student is fumbling again${since>0?` (${since} ${since===1?'try':'tries'} since the change)`:''}, but it is still learning. Let it practice.`;
+  else{let rec=since;for(let i=M.stormAt;i<M.hist.length;i++){const h=M.hist[i];if(h.greedy!=null&&h.greedy<=24){rec=i-M.stormAt+1;break;}}o.innerHTML=`<b>Recovered after ${rec} tries.</b> It found the long way around the bottom (${g.length-1} steps). The copier is still stuck. This is the experience camp's argument in miniature: a learner that keeps learning from the world can adapt when the world changes. A copier can't.`;}
+}
+function mRender(){mDraw(null,null,null);mChart();mReadout();}
+function mLock(on){['mWatch','m10','m100','mStorm','mReset'].forEach(id=>btnSet(id,!on));if(!on)btnSet('mStorm',!M.storm);}
+function mWatch(){
+  if(M.busy)return;mEpisode();const tr=M.trail;const cr=copierRoute();
+  if(reduce){mRender();return;}
+  M.busy=true;mLock(true);
+  const per=Math.max(1,tr.length/200);let f=0;
+  const tick=()=>{f+=per;const i=Math.min(tr.length-1,Math.floor(f));
+    mDraw(cr.route[Math.min(cr.route.length-1,i)],tr[i],i);
+    if(i<tr.length-1)requestAnimationFrame(tick);else{M.busy=false;mLock(false);mRender();}};
+  requestAnimationFrame(tick);
+}
+function mPractice(k){if(M.busy)return;for(let i=0;i<k;i++)mEpisode();mRender();}
+$('mWatch').addEventListener('click',mWatch);
+$('m10').addEventListener('click',()=>mPractice(10));
+$('m100').addEventListener('click',()=>mPractice(100));
+$('mStorm').addEventListener('click',()=>{if(M.busy||M.storm)return;M.storm=true;M.stormAt=M.tries;btnSet('mStorm',false);mRender();});
+$('mReset').addEventListener('click',()=>{if(M.busy)return;M.Q=new Map();M.tries=0;M.storm=false;M.stormAt=-1;M.hist=[];M.trail=[];btnSet('mStorm',true);mRender();});
+redraws.push(mRender);
+
+/* =====================================================================
+   2. WRITER: be the language model
+   ===================================================================== */
+const WR={
+ facts:{tab:'Facts',start:'The Eiffel Tower is in',note:'To put its money on "Paris," the model has to know a fact about the world. It even keeps a small bet on Las Vegas, which has a half-size copy.',nodes:{
+  '':[[' Paris',.84,'paris'],[' France',.08,'france'],[' Las Vegas',.04,'vegas'],[' a park',.04,'park']],
+  paris:[['.',.46,null],[',',.36,'parisc'],[' and',.18,'parisand']],
+  parisc:[[' France.',.55,null],[' the capital of France.',.3,null],[' on the banks of the Seine.',.15,null]],
+  parisand:[[' was finished in 1889.',.6,null],[' is about 330 meters tall.',.4,null]],
+  france:[['.',.7,null],[', in Paris.',.3,null]],
+  vegas:[['? No, that one is a half-size copy.',.6,null],['. Well, a copy of it is.',.4,null]],
+  park:[[' called the Champ de Mars.',.8,null],[' near the river.',.2,null]]}},
+ reason:{tab:'Reasoning',start:'Ana is taller than Ben. Ben is taller than Cy. So the shortest of the three is',note:'Nobody wrote this exact sentence in the training data. To bet on "Cy," the model has to follow the logic. Pretraining rewards models that pick up reasoning, because reasoning helps predict text.',nodes:{
+  '':[[' Cy',.86,'cy'],[' Ben',.07,'ben'],[' Ana',.04,'ana'],[' obviously',.03,'obv']],
+  cy:[['.',.75,null],[', and the tallest is Ana.',.25,null]],
+  ben:[['. No, wait: it’s Cy.',.55,null],['.',.45,null]],
+  ana:[['. (That’s wrong: Ana is the tallest.)',1,null]],
+  obv:[[' Cy.',1,null]]}},
+ myth:{tab:'Myth',start:'If you swallow chewing gum, it stays in your stomach for',note:'The top bet is the myth, because that’s what people most often write. A model trained only to imitate repeats popular mistakes. (Swallowed gum passes through in a few days.)',nodes:{
+  '':[[' seven years',.55,'seven'],[' years',.11,'years'],[' a few days',.2,'days'],[' about a week',.09,'week'],[' a long time',.05,'long']],
+  seven:[['. That’s why your parents warned you.',.45,null],['!',.3,null],['. Actually, that’s a myth.',.25,null]],
+  years:[['.',.6,null],[', or so people say.',.4,null]],
+  days:[[' before it passes through.',.75,null],['.',.25,null]],
+  week:[['.',1,null]],
+  long:[['. Or does it?',.5,null],['.',.5,null]]}},
+ story:{tab:'Story',start:'Once upon a time, a dragon',note:'There’s no right answer here, and the model knows it, so it spreads its bets. Try a high temperature.',nodes:{
+  '':[[' lived',.34,'lived'],[' who',.26,'who'],[' named',.16,'named'],[' woke up',.14,'woke'],[' opened a bakery',.06,'bakery'],[' filed his taxes',.04,'taxes']],
+  lived:[[' in a cave',.5,'cave'],[' on a mountain',.35,'mtn'],[' under the sea',.15,'sea']],
+  cave:[[' full of gold.',.6,null],[' near a quiet village.',.3,null],[' with a leaky roof.',.1,null]],
+  mtn:[[' above the clouds.',.7,null],[' made of glass.',.3,null]],
+  sea:[['. Nobody believed it.',.6,null],[', which made breathing fire hard.',.4,null]],
+  who:[[' loved gold',.4,'gold'],[' was afraid of the dark',.35,'dark'],[' collected teacups',.25,'cups']],
+  gold:[[' more than anything.',.7,null],[', and hated knights.',.3,null]],
+  dark:[['.',.5,null],[', which is awkward for a cave dweller.',.5,null]],
+  cups:[['.',.4,null],[' from every kingdom.',.6,null]],
+  named:[[' Ember',.45,'ember'],[' Bartholomew',.3,'bart'],[' Steve',.25,'steve']],
+  ember:[[' guarded the mountain pass.',1,null]],
+  bart:[[' insisted on his full name.',1,null]],
+  steve:[['. Just Steve.',1,null]],
+  woke:[[' to find his gold gone.',.7,null],[' with a terrible cold.',.3,null]],
+  bakery:[['. The croissants were extremely well done.',1,null]],
+  taxes:[[' late, again.',1,null]]}}
+};
+const W={tab:'facts',path:[],T:1,busy:false,timer:null};
+const wrDist=(opts)=>{const T=W.T;const w=opts.map(o=>Math.pow(o[1],1/T));const s=w.reduce((a,b)=>a+b,0);return w.map(x=>x/s);};
+function wrNode(){const d=WR[W.tab];let key='';for(const ch of W.path){key=ch.next;}return W.path.length&&W.path[W.path.length-1].next===null?null:d.nodes[key];}
+function wrRender(){
+  const d=WR[W.tab];
+  $('wrTabs').innerHTML='';
+  Object.entries(WR).forEach(([k,v])=>{const b=document.createElement('button');b.type='button';b.textContent=v.tab;b.setAttribute('aria-pressed',k===W.tab);b.addEventListener('click',()=>{wrStop();W.tab=k;W.path=[];wrRender();});$('wrTabs').appendChild(b);});
+  const node=wrNode();
+  $('wrText').innerHTML=`<span class="pre"></span>`+W.path.map(p=>`<span class="ch${p.p<0.12?' rare':''}" title="${Math.round(p.p*100)}% likely"></span>`).join('')+(node?'<span class="caret"></span>':'');
+  $('wrText').querySelector('.pre').textContent=d.start;
+  $('wrText').querySelectorAll('.ch').forEach((s,i)=>s.textContent=W.path[i].t);
+  const box=$('wrOpts');box.innerHTML='';
+  if(!node){box.innerHTML='<div class="done">The end. Start over, switch the text, or try a different temperature.</div>';}
+  else{const pr=wrDist(node);const order=node.map((o,i)=>i).sort((a,b)=>pr[b]-pr[a]);const mx=Math.max(...pr);
+    order.forEach((i,rank)=>{const o=node[i];const b=document.createElement('button');b.type='button';if(rank===0)b.className='top';
+      b.innerHTML=`<i style="width:${(pr[i]/mx*100).toFixed(1)}%"></i><span class="w"></span><span class="pc">${pr[i]<0.01?'<1':Math.round(pr[i]*100)}%</span>`;
+      b.querySelector('.w').textContent=o[0].trim()||o[0];b.disabled=W.busy;
+      b.addEventListener('click',()=>{W.path.push({t:o[0],p:pr[i],next:o[2]});wrRender();});box.appendChild(b);});}
+  btnSet('wrBack',W.path.length>0&&!W.busy);btnSet('wrAuto',!!node);
+  $('wrAuto').textContent=W.busy?'Pause':'Let the model write';
+  $('wrTempOut').textContent=W.T.toFixed(1);
+  const T=W.T;let tmsg=T<0.45?'<b>Low temperature:</b> it nearly always takes the top bet. Safe, predictable, a bit dull.':T>1.45?'<b>High temperature:</b> unlikely words get a real chance. More surprising, and more likely to go off the rails.':'<b>Temperature around 1</b> picks words in proportion to the model’s real bets.';
+  const rare=W.path.some(p=>p.p<0.12);
+  $('wrOut').innerHTML=(W.path.length===0?d.note+' ':'')+tmsg+(rare?' Words underlined in red were long shots.':'');
+}
+function wrSample(){const node=wrNode();if(!node)return false;const pr=wrDist(node);let r=Math.random(),i=0;for(;i<pr.length-1;i++){r-=pr[i];if(r<=0)break;}W.path.push({t:node[i][0],p:pr[i],next:node[i][2]});return true;}
+function wrStop(){clearTimeout(W.timer);W.busy=false;}
+function wrAuto(){
+  if(W.busy){wrStop();wrRender();return;}
+  if(!wrNode())return;
+  if(reduce){while(wrSample());wrRender();return;}
+  W.busy=true;wrRender();
+  const step=()=>{if(!W.busy)return;const ok=wrSample();if(!ok||!wrNode()){W.busy=false;wrRender();return;}wrRender();W.timer=setTimeout(step,650);};
+  W.timer=setTimeout(step,250);
+}
+$('wrTemp').addEventListener('input',e=>{W.T=+e.target.value;wrRender();});
+$('wrAuto').addEventListener('click',wrAuto);
+$('wrBack').addEventListener('click',()=>{wrStop();W.path.pop();wrRender();});
+$('wrReset').addEventListener('click',()=>{wrStop();W.path=[];wrRender();});
+wrRender();
+
+/* =====================================================================
+   3. PIPELINE: one request, four stages
+   ===================================================================== */
+const STG=[
+ {nm:'Pretraining',c:'--sponge',k:'Stage 1 · The sponge',h:'Read the whole library',d:'Predict the next word across trillions of words of text. Nearly all of its knowledge comes from here.',how:'Imitation'},
+ {nm:'Example conversations',c:'--icing',k:'Stage 2 · The icing',h:'Copy good examples',d:'Imitate tens of thousands of conversations written by people, showing what a helpful answer looks like.',how:'Imitation'},
+ {nm:'Human feedback',c:'--plum',k:'Stage 3 · The first cherry',h:'Practice for a human judge',d:'Write two answers; people pick the better one. The model practices with RL to win those comparisons.',how:'Reward, judged by people'},
+ {nm:'RL on checkable tasks',c:'--cherry',k:'Stage 4 · The growing cherry',h:'Practice exams with an answer key',d:'Attempt thousands of math, coding and logic problems whose answers a computer can check. Correct attempts are reinforced.',how:'Reward, checked automatically'}
+];
+const PP=[
+ {tab:'Boil an egg',u:'How do I boil an egg?',o:[
+  'How do I poach an egg?\nHow do I make scrambled eggs fluffy?\nHow long do eggs last in the fridge?\n\nPosted in: Cooking Basics · 214 replies',
+  'Put the egg in boiling water for 7 to 9 minutes. Then put it in cold water.',
+  'Lower the egg into gently boiling water, then time it:\n• 6–7 min: jammy, soft yolk\n• 9–10 min: fully hard-boiled\n\nMove it straight into ice water for a few minutes. It stops the cooking and makes the shell easier to peel.',
+  'Lower the egg into gently boiling water, then time it:\n• 6–7 min: jammy, soft yolk\n• 9–10 min: fully hard-boiled\n\nMove it straight into ice water for a few minutes. It stops the cooking and makes the shell easier to peel.'],
+  n:['It doesn’t answer. It continues the text as if your question were the start of a list on a forum page, because that’s what usually follows a question like this on the internet.',
+     'Now it answers. Correct, but flat. It can only be as good as the examples it copied.',
+     'People prefer answers that are organized and anticipate the next question, so the model learns to write them.',
+     'No change. There’s no answer key for "a good egg explanation," so this stage has little to teach here.']},
+ {tab:'Bat and ball',u:'A bat and a ball cost $1.10. The bat costs $1 more than the ball. How much is the ball?',o:[
+  'A bat and a ball cost $1.10. The bat costs $1 more than the ball. How much is the ball? This is one of three questions on the Cognitive Reflection Test. Most people answer…',
+  'The ball costs $0.10.',
+  'Great question! This is a classic puzzle. The ball costs $0.10 and the bat costs $1.00, for a total of $1.10.',
+  'First instinct: 10¢. Let me check. Then the bat is $1.10 and the total is $1.20. That’s wrong.\n\nLet the ball be x. Then x + (x + 1.00) = 1.10, so 2x = 0.10 and x = 0.05.\n\nCheck: $0.05 + $1.05 = $1.10. ✓\n\nThe ball costs 5 cents.'],
+  n:['Again it just continues the web page it thinks it’s on.',
+     'It answers, and gets it wrong, the same way most people do. It learned from people, so it learned their intuitive mistake.',
+     'Friendlier and more confident, and still wrong. A busy human grader might not catch it, so this stage can reward sounding right.',
+     'Fixed. This stage can check the answer, so it rewards the habit of slowing down and verifying. Nobody wrote "check your first instinct" into the training. It emerged because it led to more correct answers.']},
+ {tab:'Great Wall',u:'Can you see the Great Wall of China from space?',o:[
+  'Can you see the Great Wall of China from space? Can you see the pyramids from space? 10 man-made wonders you can see from orbit (number 7 will surprise you)',
+  'Yes. The Great Wall of China is the only man-made structure visible from space.',
+  'Not with the naked eye, despite the popular claim. The wall is long but only a few meters wide, about the width of a road, and its color blends into the landscape. Astronauts have photographed it from orbit using zoom lenses.',
+  'Not with the naked eye, despite the popular claim. The wall is long but only a few meters wide, about the width of a road, and its color blends into the landscape. Astronauts have photographed it from orbit using zoom lenses.'],
+  n:['Clickbait continuation. The internet is full of pages like this.',
+     'A popular myth, repeated confidently. Imitation copies what people commonly say, true or not.',
+     'Fixed, because the people writing and judging answers knew better and preferred the accurate one.',
+     'Mostly unchanged. Facts like this aren’t part of the auto-graded math and code practice, though some labs do train on checkable factual questions.']},
+ {tab:'Poem',u:'Write a two-line poem about Mondays.',o:[
+  'Write a two-line poem about Mondays.\nWrite a haiku about Tuesdays.\nWrite a limerick about the weekend.\n\n— 50 creative writing prompts for kids',
+  'Monday comes, the week begins,\nwe start again with coffee grins.',
+  'The alarm insists the weekend’s done;\nI bargain with it, and it’s won.',
+  'The alarm insists the weekend’s done;\nI bargain with it, and it’s won.'],
+  n:['A list of writing prompts, because that’s where a line like yours usually appears.',
+     'A poem! Rhymes, scans, and could have been written by anyone.',
+     'Wittier. Human judges reward charm, so the model learns to aim for it.',
+     'Unchanged. Nobody can auto-score a poem, so RL on checkable tasks has nothing to teach here. This is the cherry’s blind spot.']}
+];
+const PPS={p:0,s:0,timer:null,playing:false,typed:0};
+function ppCake(stage){
+  const svg=$('ppCake');svg.innerHTML='';
+  const sp=css('--sponge'),ic=css('--icing'),pl=css('--plum'),ch=css('--cherry'),rule=css('--rule'),leaf=css('--leaf');
+  el('ellipse',{cx:110,cy:158,rx:96,ry:8,fill:rule},svg);
+  el('rect',{x:30,y:84,width:160,height:72,rx:8,fill:sp,opacity:.6},svg);
+  if(stage>=1)el('rect',{x:28,y:72,width:164,height:20,rx:8,fill:ic,opacity:.85},svg);
+  if(stage>=2)el('circle',{cx:stage>=3?92:110,cy:60,r:10,fill:pl},svg);
+  if(stage>=3){el('circle',{cx:124,cy:48,r:24,fill:ch,opacity:.9},svg);el('path',{d:'M128 25 q 6 -14 22 -18',fill:'none',stroke:leaf,'stroke-width':3,'stroke-linecap':'round'},svg);}
+  const labels=['sponge only','+ icing','+ a small cherry','+ a growing cherry'];
+  el('text',{x:110,y:184,'text-anchor':'middle','font-family':'Libre Franklin, Arial, sans-serif','font-size':12,fill:css('--muted')},svg,labels[stage]);
+}
+function ppRender(type){
+  $('ppPrompts').innerHTML='';
+  PP.forEach((p,i)=>{const b=document.createElement('button');b.type='button';b.textContent=p.tab;b.setAttribute('aria-pressed',i===PPS.p);b.addEventListener('click',()=>{ppStop();PPS.p=i;PPS.s=0;ppRender(true);});$('ppPrompts').appendChild(b);});
+  $('ppSteps').innerHTML='';
+  STG.forEach((s,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',i===PPS.s);if(i>PPS.s)b.className='future';
+    b.innerHTML=`<span class="d" style="background:var(${s.c})">${i+1}</span><span>${s.nm}</span>`;
+    b.addEventListener('click',()=>{ppStop();PPS.s=i;ppRender(true);});$('ppSteps').appendChild(b);});
+  ppCake(PPS.s);
+  const s=STG[PPS.s],p=PP[PPS.p];
+  $('ppBody').innerHTML=`<div class="k" style="color:var(${s.c})">${s.k} · learns by ${s.how.toLowerCase()}</div><h3>${s.h}</h3><p>${s.d}</p>
+   <div class="chat"><div class="u"></div><div class="m"></div><p class="nt" style="font-size:14px;color:var(--muted);margin:10px 0 0;font-family:var(--f-ui)"></p></div>`;
+  $('ppBody').querySelector('.u').textContent='You: '+p.u;
+  const m=$('ppBody').querySelector('.m'),nt=$('ppBody').querySelector('.nt');
+  const full=p.o[PPS.s];
+  const same=PPS.s>0&&p.o[PPS.s]===p.o[PPS.s-1];
+  if(!type||reduce||same){m.textContent=full;nt.textContent=p.n[PPS.s];return;}
+  let i=0;nt.textContent='';clearInterval(PPS.timer);
+  PPS.timer=setInterval(()=>{i+=3;m.textContent=full.slice(0,i);if(i>=full.length){clearInterval(PPS.timer);m.textContent=full;nt.textContent=p.n[PPS.s];if(PPS.playing)ppNext();}},16);
+}
+function ppStop(){clearInterval(PPS.timer);clearTimeout(PPS.adv);PPS.playing=false;$('ppPlay').textContent='Play all four stages';}
+function ppNext(){PPS.adv=setTimeout(()=>{if(!PPS.playing)return;if(PPS.s<3){PPS.s++;ppRender(true);const p=PP[PPS.p];if(p.o[PPS.s]===p.o[PPS.s-1])ppNext();}else ppStop();},1800);}
+$('ppPlay').addEventListener('click',()=>{if(PPS.playing){ppStop();return;}PPS.playing=true;$('ppPlay').textContent='Pause';PPS.s=0;ppRender(true);if(reduce)ppNext();});
+redraws.push(()=>ppRender(false));
+
+/* =====================================================================
+   4. ERA: stacked area of training effort + your bet
+   ===================================================================== */
+const EK=[[2018,[100,0,0,0]],[2020,[100,0,0,0]],[2021.5,[99,1,0,0]],[2022,[95,3,2,0]],[2023,[93,3,3,1]],[2024,[87,3,3,7]],[2024.7,[80,3,3,14]],[2025,[72,3,3,22]],[2026,[62,2,3,33]]];
+const ELAB=[['Pretraining','--sponge'],['Example conversations','--icing'],['Human feedback','--plum'],['RL on checkable tasks','--cherry']];
+const EMS=[[2018.5,'GPT-1'],[2020.4,'GPT-3'],[2022.9,'ChatGPT'],[2024.7,'o1'],[2025.05,'R1']];
+const ENOTE=[[2018,'<b>2018–2021:</b> it’s all sponge. GPT-1, GPT-2 and GPT-3 learn purely by predicting the next word.'],
+ [2021.8,'<b>2022:</b> InstructGPT and ChatGPT add icing and a small cherry. A sliver of the effort, but it’s what made chatbots usable.'],
+ [2024.5,'<b>Late 2024:</b> reasoning models like o1 arrive, trained with large amounts of RL on problems a computer can check.'],
+ [2025,'<b>2025:</b> DeepSeek publishes R1; labs openly describe scaling up RL. xAI says it used ten times more RL compute than before.'],
+ [2025.7,'<b>2026:</b> Dario Amodei says RL is showing the same steady scaling pretraining did. The cherry keeps growing.']];
+const E={year:2026,bet:50};
+function eAt(y){if(y<=EK[0][0])return EK[0][1];for(let i=1;i<EK.length;i++){if(y<=EK[i][0]){const [y0,a]=EK[i-1],[y1,b]=EK[i];const t=(y-y0)/(y1-y0);return a.map((v,j)=>v+(b[j]-v)*t);}}return EK[EK.length-1][1];}
+function eFuture(y){const a=EK[EK.length-1][1];const t=(y-2026)/4;const rl0=a[2]+a[3],rl1=E.bet;const rl=rl0+(rl1-rl0)*t;const ic=2;const hf=Math.min(3,rl*.1);return [100-ic-rl,ic,hf,rl-hf];}
+function blobPath(cx,cy,r,seedv){let d='';for(let i=0;i<=36;i++){const a=i/36*Math.PI*2;const k=1+0.05*Math.sin(a*3+seedv)+0.03*Math.sin(a*5-seedv);const x=cx+Math.cos(a)*r*k,y=cy+Math.sin(a)*r*k;d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);}return d+'Z';}
+function eCake(v,label){
+  const svg=$('cake');svg.innerHTML='';
+  const sponge=css('--sponge'),icing=css('--icing'),plum=css('--plum'),cherry=css('--cherry'),rule=css('--rule'),leaf=css('--leaf');
+  const base=284,W=280,x0=60,maxH=150;
+  el('ellipse',{cx:200,cy:base+4,rx:170,ry:10,fill:rule},svg);
+  const hS=Math.max(10,maxH*v[0]/100),hI=Math.max(5,maxH*v[1]/100*2.5);
+  el('rect',{x:x0,y:base-hS,width:W,height:hS,rx:8,fill:sponge,opacity:.55},svg);
+  el('rect',{x:x0-2,y:base-hS-hI,width:W+4,height:hI+6,rx:7,fill:icing,opacity:.8},svg);
+  const top=base-hS-hI;const rl=v[2]+v[3];
+  const r=Math.min(110,Math.max(7,Math.sqrt(Math.max(rl,0.5)/100)*150));
+  const cy=Math.max(r+30,top-r*0.82);
+  if(v[3]>0.3)el('path',{d:blobPath(200,cy,r,1),fill:cherry,opacity:.88},svg);
+  const pr=Math.max(5,Math.sqrt(Math.max(v[2],0.4)/100)*150);
+  el('path',{d:blobPath(v[3]>0.3?200-r*0.55:200,v[3]>0.3?cy+r*0.55:top-pr*0.8,pr,3),fill:plum,opacity:.92},svg);
+  el('path',{d:`M${200+r*0.12} ${cy-r*0.96} q 8 -20 30 -28`,fill:'none',stroke:leaf,'stroke-width':3,'stroke-linecap':'round'},svg);
+  el('text',{x:200,y:14,'text-anchor':'middle','font-family':'Libre Caslon Display, Georgia, serif','font-size':20,fill:css('--ink')},svg,label);
+  $('eraLegend').innerHTML=ELAB.map(([n,c],i)=>`<div><i style="background:var(${c})"></i><span>${n}</span><span class="v">~${Math.round(v[i])}%</span></div>`).join('');
+}
+function eRender(){
+  const svg=$('eraChart');svg.innerHTML='';const W=fitW(svg,270);
+  const X0=40,X1=W-14,Y0=226,Y1=12;
+  const px=y=>X0+(X1-X0)*(y-2018)/12, py=v=>Y0-(Y0-Y1)*v/100;
+  const cols=ELAB.map(l=>css(l[1]));const rule=css('--rule'),muted=css('--muted'),ink=css('--ink');
+  const ys=[];for(let y=2018;y<=2026.001;y+=0.1)ys.push(+y.toFixed(1));
+  const fys=[];for(let y=2026;y<=2030.001;y+=0.1)fys.push(+y.toFixed(1));
+  // draw stacked: bottom = pretraining
+  const drawStack=(yrs,fn,future)=>{let lower=yrs.map(()=>0);
+    for(let k=0;k<4;k++){const upper=yrs.map((y,i)=>lower[i]+fn(y)[k]);
+      let d='';yrs.forEach((y,i)=>{d+=(i?'L':'M')+px(y).toFixed(1)+' '+py(upper[i]).toFixed(1);});
+      for(let i=yrs.length-1;i>=0;i--)d+='L'+px(yrs[i]).toFixed(1)+' '+py(lower[i]).toFixed(1);
+      el('path',{d:d+'Z',fill:cols[k],opacity:future?(k===3?.38:.22):(k===0?.55:.85)},svg);lower=upper;}
+    return lower;};
+  el('rect',{x:px(2026),y:Y1,width:px(2030)-px(2026),height:Y0-Y1,fill:css('--well')},svg);
+  drawStack(ys,eAt,false);drawStack(fys,eFuture,true);
+  // future boundary dashed
+  let d='';fys.forEach((y,i)=>{const v=eFuture(y);d+=(i?'L':'M')+px(y).toFixed(1)+' '+py(v[0]+v[1]).toFixed(1);});
+  el('path',{d,fill:'none',stroke:ink,'stroke-width':1.5,'stroke-dasharray':'5 4'},svg);
+  [0,50,100].forEach(v=>{el('text',{x:X0-6,y:py(v)+4,'text-anchor':'end'},svg,v+'%');});
+  [2018,2020,2022,2024,2026,2028,2030].forEach(y=>el('text',{x:px(y),y:Y0+16,'text-anchor':'middle'},svg,y));
+  el('text',{x:(px(2026)+px(2030))/2,y:Y1+16,'text-anchor':'middle',style:`fill:${ink};font-weight:600`},svg,'Your bet');
+  EMS.forEach(([y,t],i)=>{el('line',{x1:px(y),x2:px(y),y1:Y0,y2:Y0+4,stroke:muted},svg);el('text',{x:px(y),y:Y0+30+(i%2)*12,'text-anchor':'middle','font-size':10},svg,t);});
+  // labels inside bands
+  el('text',{x:px(2019),y:py(50),style:`fill:${ink};font-weight:600`},svg,'Pretraining');
+  const v26=eAt(2026);el('text',{x:px(2025.95),y:py(100-(v26[3])/2)+4,'text-anchor':'end',style:`fill:${css('--paper')};font-weight:700`},svg,'RL');
+  // cursor
+  const cx=px(E.year);el('line',{x1:cx,x2:cx,y1:Y1,y2:Y0,stroke:ink,'stroke-width':1.5},svg);el('circle',{cx,cy:Y1,r:4,fill:ink},svg);
+  const v=eAt(E.year);eCake(v,E.year>=2025.95?'2026':String(Math.floor(E.year)));
+  $('eraYearOut').textContent=E.year>=2025.95?'2026':Math.floor(E.year);
+  $('eraBetOut').textContent=E.bet+'%';
+  let note=ENOTE[0][1];ENOTE.forEach(([y,t])=>{if(E.year>=y)note=t;});$('eraOut').innerHTML=note;
+  const b=E.bet;
+  $('betOut').innerHTML=`<b>Your 2030 bet: reward is ${b}% of the effort.</b> `+(b<22?'You’re betting the sponge stays the main event: most progress still comes from learning on human data, or on richer data like video. That leans toward LeCun’s view, or toward RL hitting a wall.':b<=55?'You’re betting on a balanced cake, with pretraining and RL both still growing. That’s roughly the scaling camp’s picture.':'You’re betting the cherry becomes the cake: most learning comes from practice and reward. That’s the direction the experience camp argues for, though Sutton and Silver would add that the reward must come from real-world experience, not just puzzles with answer keys.');
+}
+$('eraYear').addEventListener('input',e=>{E.year=+e.target.value;eRender();});
+$('eraBet').addEventListener('input',e=>{E.bet=+e.target.value;eRender();});
+redraws.push(eRender);
+
+/* =====================================================================
+   5. SORTER: can a computer grade it?
+   ===================================================================== */
+const TASKS=[
+ {t:'Solve a competition math problem',a:'easy',x:.06,w:'The answer is a number. Check it against the key.'},
+ {t:'Write a moving poem about loss',a:'hard',x:.95,w:'There’s no answer key for "moving." People disagree, and judging takes a human.'},
+ {t:'Fix a bug so the software’s tests pass',a:'easy',x:.12,w:'Run the tests. They pass or they fail. This is why AI coding improved so fast.'},
+ {t:'Give someone good career advice',a:'hard',x:.88,w:'Whether it was good may not be clear for years, and even then it’s debatable.'},
+ {t:'Win a game of chess',a:'easy',x:.03,w:'The game itself is the scorekeeper. This is where RL first shone.'},
+ {t:'Translate a menu from Japanese',a:'mid',x:.5,w:'In between: partly checkable (did the dish names match?), partly taste (does it read naturally?). Many real tasks sit here.'},
+ {t:'Run a small business for a year',a:'hard',x:.8,w:'The score exists (profit) but arrives a year later, mixed with luck and a thousand other decisions.'},
+ {t:'Design a drug that works in people',a:'hard',x:.72,w:'The final test is a clinical trial that takes years. Grounded rewards like this are what the experience camp wants agents to learn from eventually.'}
+];
+const SO={i:0,ans:[]};
+function soRender(){
+  const card=$('sortCard'),spec=$('sortSpectrum');
+  if(SO.i>=TASKS.length){
+    const right=SO.ans.filter(a=>a.ok).length;
+    card.innerHTML=`<div class="ct"><span>Done</span><span>${right} of ${TASKS.length} right</span></div><div class="tt">The easier a task is to grade, the faster AI has improved at it.</div><div class="why">Math, coding and games sit at the easy end, and that’s exactly where the biggest jumps since 2024 have come. The hard end is where RL can’t easily reach yet, and where the debate in Act III lives.</div><div class="opts"><button class="btn" type="button" id="soAgain">Try again</button></div>`;
+    $('soAgain').addEventListener('click',()=>{SO.i=0;SO.ans=[];soRender();});
+    const rows=[...TASKS].map((t,i)=>({...t,ok:SO.ans[i]&&SO.ans[i].ok})).sort((a,b)=>a.x-b.x);
+    spec.innerHTML=`<div class="spec"><div class="ax"><span></span><div><span>Easy to grade</span><span>Hard to grade</span></div></div>${rows.map(r=>`<div class="row"><span>${r.ok?'✓':'✗'} ${r.t}</span><div class="trk"><b style="left:${(r.x*100).toFixed(0)}%"></b></div></div>`).join('')}</div>`;
+    return;
+  }
+  spec.innerHTML='';
+  const t=TASKS[SO.i],a=SO.ans[SO.i];
+  card.innerHTML=`<div class="ct"><span>Task ${SO.i+1} of ${TASKS.length}</span><span>${SO.ans.filter(x=>x.ok).length} right so far</span></div><div class="tt"></div>
+   <div class="opts"><button class="btn" type="button" data-v="easy">Easy to grade</button><button class="btn" type="button" data-v="hard">Hard to grade</button></div>
+   ${a?`<div class="res ${a.ok?'ok':'no'}">${a.ok?'Right':'Not quite'} · ${t.a==='easy'?'easy to grade':t.a==='hard'?'hard to grade':'somewhere in between'}</div><div class="why">${t.w}</div><div class="opts"><button class="btn primary" type="button" id="soNext">${SO.i===TASKS.length-1?'See the pattern':'Next task'}</button></div>`:''}`;
+  card.querySelector('.tt').textContent=t.t;
+  card.querySelectorAll('[data-v]').forEach(b=>{if(a){b.disabled=true;if(a.v===b.dataset.v){b.style.background='var(--ink)';b.style.color='var(--paper)';}}
+    b.addEventListener('click',()=>{SO.ans[SO.i]={v:b.dataset.v,ok:b.dataset.v===t.a||t.a==='mid'};soRender();});});
+  if(a)$('soNext').addEventListener('click',()=>{SO.i++;soRender();});
+}
+soRender();
+
+/* =====================================================================
+   6. STRAW: one attempt, then a training run
+   ===================================================================== */
+const STEPS=[['12 pens is 12 ÷ 3 = 4 packs.',true],['Each pack costs $2, so 4 × $2 = $9.',false],['Hmm, $9 seems odd. I’ll guess something rounder: $8.',false],['Answer: $8.',true]];
+let gradeStep=false;
+function renderStraw(){
+  $('gOut').setAttribute('aria-pressed',!gradeStep);$('gStep').setAttribute('aria-pressed',gradeStep);
+  $('steps').innerHTML=STEPS.map(([t,ok],i)=>{const cls=gradeStep?(ok?'good':'bad'):'good';const sc=gradeStep?(ok?'✓':'✗'):'+1';return `<div class="stp ${cls}"><span class="i">${i+1}</span><span>${t}</span><span class="sc">${sc}</span></div>`;}).join('');
+  $('strawOut').innerHTML=gradeStep?'<b>Step-by-step grading catches it.</b> The multiplication was wrong and the fix was a lucky guess. This is the feedback a good teacher gives, and the kind of reflection Karpathy says people do naturally.':'<b>Every step gets +1</b>, including the bad arithmetic and the lucky guess, because the final answer matched. The model is nudged to repeat all of it. One bit of feedback, smeared across the whole attempt.';
+}
+$('gOut').addEventListener('click',()=>{gradeStep=false;renderStraw();});
+$('gStep').addEventListener('click',()=>{gradeStep=true;renderStraw();});
+renderStraw();
+
+const sig=x=>1/(1+Math.exp(-x)),logit=p=>Math.log(p/(1-p));
+const HAB=[['setup','Read the problem carefully',true],['careful','Do the arithmetic carefully',true],['check','Double-check when something looks off',true],['guess','Guess a round number when stuck',false]];
+const TR={n:0,runs:null,busy:false};
+function trNew(){const h=()=>({setup:logit(.55),careful:logit(.5),check:logit(.08),guess:logit(.7)});return {outcome:{H:h(),base:.3,acc:[],reach:-1},process:{H:h(),base:.3,acc:[],reach:-1}};}
+function trStep(run,method){
+  const H=run.H,p={};for(const k in H)p[k]=sig(H[k]);
+  const used=[];const setup=Math.random()<p.setup;used.push(['setup',setup,setup?1:-1]);
+  const careful=Math.random()<p.careful;used.push(['careful',careful,careful?1:-1]);
+  let err=!setup||Math.random()<(careful?0.15:0.6),correct=!err;
+  if(err){const chk=Math.random()<p.check;used.push(['check',chk,chk?1:-1]);
+    if(chk&&Math.random()<0.85)correct=true;else{const g=Math.random()<p.guess;used.push(['guess',g,g?-1:0.5]);if(g&&Math.random()<0.3)correct=true;}}
+  const R=correct?1:0;
+  for(const [h,ch,sr] of used){const adv=method==='outcome'?(R-run.base):sr;H[h]=clamp(H[h]+0.15*adv*((ch?1:0)-p[h]),-6,6);}
+  run.base+=0.02*(R-run.base);run.acc.push(R);
+  const n=run.acc.length;if(run.reach<0&&n>=100){const a=run.acc.slice(n-100).reduce((s,x)=>s+x,0)/100;if(a>=0.9)run.reach=n;}
+}
+function trRender(){
+  const R=TR.runs;const svg=$('trChart');svg.innerHTML='';const W=fitW(svg,210);
+  const X0=40,X1=W-12,Y0=176,Y1=12;const px=i=>X0+(X1-X0)*i/1000,py=v=>Y0-(Y0-Y1)*v;
+  const rule=css('--rule'),cherry=css('--cherry'),leaf=css('--leaf'),ink=css('--ink');
+  [0,.5,.9,1].forEach(v=>{el('line',{x1:X0,x2:X1,y1:py(v),y2:py(v),stroke:rule,'stroke-dasharray':v===.9?'0':'2 4'},svg);el('text',{x:X0-6,y:py(v)+4,'text-anchor':'end'},svg,Math.round(v*100)+'%');});
+  [0,250,500,750,1000].forEach(t=>el('text',{x:px(t),y:Y0+16,'text-anchor':'middle'},svg,t.toLocaleString('en-US')));
+  el('text',{x:(X0+X1)/2,y:Y0+31,'text-anchor':'middle'},svg,'Attempts');
+  el('text',{x:X1,y:py(.9)+14,'text-anchor':'end'},svg,'90% correct');
+  const line=(acc,col)=>{if(acc.length<5)return;let d='';for(let i=4;i<acc.length;i+=2){const w=acc.slice(Math.max(0,i-60),i+1);const a=w.reduce((s,x)=>s+x,0)/w.length;d+=(d?'L':'M')+px(i).toFixed(1)+' '+py(a).toFixed(1);}el('path',{d,fill:'none',stroke:col,'stroke-width':2.5,'stroke-linejoin':'round'},svg);};
+  if(R){line(R.outcome.acc,cherry);line(R.process.acc,leaf);
+    [[R.outcome,cherry],[R.process,leaf]].forEach(([r,c])=>{if(r.reach>0){el('circle',{cx:px(r.reach),cy:py(.9),r:5,fill:c,stroke:css('--paper'),'stroke-width':2},svg);}});}
+  const H0={setup:.55,careful:.5,check:.08,guess:.7};
+  $('trHabits').innerHTML=`<div class="key"><span><i style="background:var(--cherry)"></i>Graded on final answer only</span><span><i style="background:var(--leaf)"></i>Graded on every step</span></div>`+HAB.map(([k,label,good])=>{
+    const a=R?sig(R.outcome.H[k]):H0[k],b=R?sig(R.process.H[k]):H0[k];
+    return `<div class="habit"><span><span class="${good?'good':'badh'}">${good?'Good':'Bad'} habit:</span> ${label}</span><div class="bb"><div class="b"><span class="t"><i style="width:${(a*100).toFixed(0)}%;background:var(--cherry)"></i></span><span class="n">${Math.round(a*100)}%</span></div><div class="b"><span class="t"><i style="width:${(b*100).toFixed(0)}%;background:var(--leaf)"></i></span><span class="n">${Math.round(b*100)}%</span></div></div></div>`;}).join('');
+  const o=$('trOut');
+  if(!R||R.outcome.acc.length===0){o.innerHTML='Both copies start out right about a third of the time, with a strong habit of guessing when stuck. Press <b>Train</b>.';return;}
+  const n=R.outcome.acc.length;
+  if(n<1000){o.innerHTML=`Training… ${n.toLocaleString('en-US')} attempts.`;return;}
+  const ro=R.outcome.reach,rp=R.process.reach,go=Math.round(sig(R.outcome.H.guess)*100),gp=Math.round(sig(R.process.H.guess)*100);
+  o.innerHTML=`<b>Step-by-step grading learned ${ro>0&&rp>0?`${(ro/rp).toFixed(1)}× faster`:'faster'}</b> (90% correct after ${rp>0?rp:'more than 1,000'} attempts, vs ${ro>0?ro:'more than 1,000'}). And look at the bad habit: graded only on final answers, the model still guesses ${go}% of the time when stuck, because lucky guesses sometimes scored. Graded step by step, it dropped to ${gp}%. Same final scores can hide very different habits.`;
+}
+$('trGo').addEventListener('click',()=>{
+  if(TR.busy)return;TR.runs=trNew();TR.busy=true;btnSet('trGo',false);btnSet('trReset',false);
+  const fin=()=>{TR.busy=false;btnSet('trGo',true);btnSet('trReset',true);$('trGo').textContent='Train again';trRender();};
+  if(reduce){for(let i=0;i<1000;i++){trStep(TR.runs.outcome,'outcome');trStep(TR.runs.process,'process');}fin();return;}
+  const tick=()=>{for(let k=0;k<8&&TR.runs.outcome.acc.length<1000;k++){trStep(TR.runs.outcome,'outcome');trStep(TR.runs.process,'process');}trRender();if(TR.runs.outcome.acc.length<1000)requestAnimationFrame(tick);else fin();};
+  requestAnimationFrame(tick);
+});
+$('trReset').addEventListener('click',()=>{if(TR.busy)return;TR.runs=null;$('trGo').textContent='Train 1,000 attempts';trRender();});
+redraws.push(trRender);
+
+/* =====================================================================
+   7. BOAT: real Q-learning on a tiny race course
+   ===================================================================== */
+const BMAP=['##############','#####....#####','#####.##.#####','#####.##.#####','#####....#####','######.#######','S............F','##############'];
+const BR=BMAP.length,BC=BMAP[0].length;
+const TGT=[[4,6],[1,6],[2,8]];const TK=TGT.map(t=>t+'');
+const BS=[6,0],BF=[6,13];
+const bOpen=(r,c)=>r>=0&&r<BR&&c>=0&&c<BC&&BMAP[r][c]!=='#';
+const B={mode:'points',Q:new Map(),races:0,hist:[],busy:false,
+  show:{r:6,c:0,pr:6,pc:0,last:-1,mask:0,pts:0,t:0,fin:false,frac:1,trail:[],pause:0,flash:null}};
+const bkey=(r,c,l,m)=>((r*BC+c)*4+(l+1))*8+m;
+const bq=k=>{let v=B.Q.get(k);if(!v){v=[0,0,0,0];B.Q.set(k,v);}return v;};
+function bAct(r,c,last,mask,e){const qs=bq(bkey(r,c,last,B.mode==='once'?mask:0));if(Math.random()<e)return Math.floor(Math.random()*4);const m=Math.max(...qs);return pick([0,1,2,3].filter(i=>qs[i]===m));}
+function bStep(st,a){
+  let nr=st.r+MD[a][0],nc=st.c+MD[a][1];let rew=B.mode==='finish'?-1:0;
+  if(!bOpen(nr,nc)){nr=st.r;nc=st.c;}
+  const ti=TK.indexOf(nr+','+nc);let nl=st.last,nm=st.mask,hit=-1;
+  if(ti>=0){if(B.mode==='points'&&ti===(st.last+1)%3){rew+=10;nl=ti;hit=ti;}if(B.mode==='once'&&!(st.mask>>ti&1)){rew+=10;nm=st.mask|1<<ti;hit=ti;}}
+  const goal=nr===BF[0]&&nc===BF[1];if(goal)rew+=B.mode==='finish'?100:50;
+  return {nr,nc,nl,nm,rew,goal,hit,shown:(hit>=0?10:0)+(goal?(B.mode==='finish'?100:50):0)};
+}
+function bEpisode(){
+  const e=Math.max(0.05,0.5*Math.pow(0.99,B.races));B.races++;
+  const st={r:BS[0],c:BS[1],last:-1,mask:0};let pts=0,fin=false;
+  for(let t=0;t<80;t++){
+    const a=bAct(st.r,st.c,st.last,st.mask,e);const k=bkey(st.r,st.c,st.last,B.mode==='once'?st.mask:0);const qs=bq(k);
+    const o=bStep(st,a);pts+=o.shown;
+    qs[a]+=0.3*(o.rew+(o.goal?0:0.97*Math.max(...bq(bkey(o.nr,o.nc,o.nl,B.mode==='once'?o.nm:0))))-qs[a]);
+    st.r=o.nr;st.c=o.nc;st.last=o.nl;st.mask=o.nm;if(o.goal){fin=true;break;}
+  }
+  B.hist.push({pts,fin});
+}
+function bResetShow(){Object.assign(B.show,{r:BS[0],c:BS[1],pr:BS[0],pc:BS[1],last:-1,mask:0,pts:0,t:0,fin:false,frac:1,trail:[],pause:0,flash:null});}
+function bShowStep(){
+  const s=B.show;
+  if(s.fin||s.t>=80){s.pause++;if(s.pause>70)bResetShow();return;}
+  const e=B.races===0?1:0.03;
+  const a=bAct(s.r,s.c,s.last,s.mask,e);const o=bStep(s,a);
+  s.trail.push([s.r,s.c]);if(s.trail.length>14)s.trail.shift();
+  s.pr=s.r;s.pc=s.c;s.r=o.nr;s.c=o.nc;s.last=o.nl;s.mask=o.nm;s.pts+=o.shown;s.t++;s.frac=0;if(o.hit>=0)s.flash={i:o.hit,f:0};if(o.goal)s.fin=true;
+}
+const bc=$('boatCanvas'),bx=bc.getContext('2d');let bDpr=1;
+function bSize(){const r=bc.getBoundingClientRect();bDpr=Math.min(2,window.devicePixelRatio||1);const w=Math.max(10,r.width);bc.width=w*bDpr;bc.height=w*BR/BC*bDpr;bc.style.height=(w*BR/BC)+'px';}
+function bDraw(){
+  const w=bc.width,h=bc.height,cw=w/BC,ch=h/BR;const land=css('--land'),water=css('--water'),ink=css('--ink'),muted=css('--muted');
+  bx.fillStyle=land;bx.fillRect(0,0,w,h);
+  for(let r=0;r<BR;r++)for(let c=0;c<BC;c++)if(BMAP[r][c]!=='#'){bx.fillStyle=water;bx.fillRect(c*cw-0.5,r*ch-0.5,cw+1,ch+1);}
+  // lagoon island
+  bx.fillStyle=land;bx.beginPath();bx.roundRect?bx.roundRect(6*cw+cw*0.1,2*ch+ch*0.1,2*cw-cw*0.2,2*ch-ch*0.2,cw*0.3):bx.rect(6*cw,2*ch,2*cw,2*ch);bx.fill();
+  bx.font=`600 ${Math.round(ch*0.36)}px Libre Franklin, Arial, sans-serif`;bx.fillStyle=muted;bx.textAlign='center';bx.textBaseline='middle';
+  bx.fillText('LAGOON',7*cw,3*ch);
+  bx.textAlign='left';bx.fillText('START',0.12*cw,7.45*ch);bx.textAlign='center';
+  // finish flag
+  const fx=13.5*cw,fy=6.5*ch;bx.strokeStyle=ink;bx.lineWidth=2*bDpr;bx.beginPath();bx.moveTo(fx,fy+ch*0.35);bx.lineTo(fx,fy-ch*0.4);bx.stroke();
+  bx.fillStyle=css('--leaf');bx.beginPath();bx.moveTo(fx,fy-ch*0.4);bx.lineTo(fx+cw*0.35,fy-ch*0.25);bx.lineTo(fx,fy-ch*0.1);bx.fill();
+  bx.fillStyle=muted;bx.textAlign='right';bx.fillText('FINISH',13.88*cw,7.45*ch);bx.textAlign='center';
+  // targets
+  const s=B.show;
+  TGT.forEach(([r,c],i)=>{
+    let on=true,next=false;
+    if(B.mode==='finish')on=false;
+    if(B.mode==='once')on=!(s.mask>>i&1);
+    if(B.mode==='points')next=i===(s.last+1)%3;
+    const x=(c+.5)*cw,y=(r+.5)*ch;
+    bx.globalAlpha=on?(B.mode==='points'&&!next?0.4:1):0.15;
+    bx.fillStyle=css('--sponge');bx.beginPath();bx.arc(x,y,Math.min(cw,ch)*0.24,0,6.283);bx.fill();
+    bx.globalAlpha=1;
+    if(on&&B.mode==='points'&&next){bx.strokeStyle=css('--sponge');bx.lineWidth=1.5*bDpr;bx.beginPath();bx.arc(x,y,Math.min(cw,ch)*0.38,0,6.283);bx.stroke();}
+    if(s.flash&&s.flash.i===i&&s.flash.f<20){bx.fillStyle=ink;bx.font=`700 ${Math.round(ch*0.4)}px Libre Franklin, Arial, sans-serif`;bx.fillText('+10',x,y-ch*(0.45+s.flash.f*0.02));}
+  });
+  // trail
+  bx.strokeStyle=css('--cherry');bx.globalAlpha=0.3;bx.lineWidth=3*bDpr;bx.lineCap='round';bx.beginPath();
+  s.trail.forEach(([r,c],i)=>{const x=(c+.5)*cw,y=(r+.5)*ch;i?bx.lineTo(x,y):bx.moveTo(x,y);});bx.stroke();bx.globalAlpha=1;
+  // boat
+  const f=Math.min(1,s.frac);const x=((s.pc+(s.c-s.pc)*f)+.5)*cw,y=((s.pr+(s.r-s.pr)*f)+.5)*ch;
+  const ang=(s.c!==s.pc||s.r!==s.pr)?Math.atan2(s.r-s.pr,s.c-s.pc):0;
+  bx.save();bx.translate(x,y);bx.rotate(ang);bx.fillStyle=css('--cherry');const u=Math.min(cw,ch);
+  bx.beginPath();bx.moveTo(u*0.36,0);bx.lineTo(-u*0.26,-u*0.2);bx.lineTo(-u*0.26,u*0.2);bx.closePath();bx.fill();bx.restore();
+  if(s.fin){bx.fillStyle=ink;bx.font=`700 ${Math.round(ch*0.45)}px Libre Franklin, Arial, sans-serif`;bx.fillText('Finished!',10.5*cw,5.3*ch);}
+}
+function bMeters(){
+  const s=B.show;$('bScore').textContent=s.pts;$('bFinished').textContent=s.fin?'Yes':(s.t>=80?'No, out of time':'Not yet');
+  const L=B.hist.slice(-20);$('bAvg').textContent=L.length?Math.round(L.reduce((a,h)=>a+h.pts,0)/L.length):'–';
+  $('bRaces').innerHTML=`<b>${B.races}</b> races of practice`;
+}
+function bChart(){
+  const svg=$('bChart');svg.innerHTML='';const W=fitW(svg,150);const X0=40,X1=W-12,Y0=118,Y1=10;
+  const n=B.hist.length,XM=Math.max(100,Math.ceil(n/100)*100);const ymax=Math.max(120,...B.hist.map(h=>h.pts));
+  const px=i=>X0+(X1-X0)*i/XM,py=v=>Y0-(Y0-Y1)*v/ymax;
+  const rule=css('--rule'),cherry=css('--cherry'),leaf=css('--leaf'),sponge=css('--sponge');
+  el('line',{x1:X0,x2:X1,y1:Y0,y2:Y0,stroke:rule},svg);
+  [0,Math.round(ymax/2/10)*10,Math.round(ymax/10)*10].forEach(v=>{el('line',{x1:X0,x2:X1,y1:py(v),y2:py(v),stroke:rule,'stroke-dasharray':'2 4'},svg);el('text',{x:X0-6,y:py(v)+4,'text-anchor':'end'},svg,v);});
+  el('line',{x1:X0,x2:X1,y1:py(80),y2:py(80),stroke:sponge,'stroke-width':1.5,'stroke-dasharray':'5 4'},svg);
+  el('text',{x:X0+4,y:py(80)-5,style:`fill:${sponge};font-weight:600`},svg,'Careful human: 80');
+  el('text',{x:(X0+X1)/2,y:Y0+28,'text-anchor':'middle'},svg,'Races of practice (dots mark races that finished)');
+  for(let t=0;t<=XM;t+=XM/4)el('text',{x:px(t),y:Y0+14,'text-anchor':'middle'},svg,t);
+  if(n>1){let d='';B.hist.forEach((h,i)=>{const w=B.hist.slice(Math.max(0,i-9),i+1);const a=w.reduce((s,x)=>s+x.pts,0)/w.length;d+=(i?'L':'M')+px(i+.5).toFixed(1)+' '+py(a).toFixed(1);});el('path',{d,fill:'none',stroke:cherry,'stroke-width':2.2},svg);}
+  B.hist.forEach((h,i)=>{if(h.fin)el('circle',{cx:px(i+.5),cy:Y0-3,r:1.8,fill:leaf},svg);});
+}
+function bReadout(){
+  const o=$('boatOut');const L=B.hist.slice(-20);const fr=L.filter(h=>h.fin).length/(L.length||1);const avg=L.length?L.reduce((a,h)=>a+h.pts,0)/L.length:0;
+  if(B.races===0){o.innerHTML='<b>Untrained:</b> the boat steers at random. It knows nothing about targets or finish lines. Press <b>Train 100 races</b>.';return;}
+  if(B.races<100){o.innerHTML='Still learning…';return;}
+  if(B.mode==='points'){o.innerHTML=fr<0.1&&avg>90?`<b>It found the loophole.</b> Circling the lagoon earns about ${Math.round(avg)} points a race, more than the 80 a careful human gets, and it never finishes. Nobody told it to do this. The reward said "points," and this is the cheapest way to get them.`:`It has noticed the targets pay. Keep training and see what it settles on.`;return;}
+  if(B.mode==='finish'){o.innerHTML=fr>0.8?'<b>It races straight for the flag.</b> With the reward aimed at what the designers actually meant, there’s no loophole to find.':'It’s learning that the flag is what pays. Keep training.';return;}
+  o.innerHTML=fr>0.8&&avg>=75?'<b>Patched.</b> Each target now pays once, so it grabs all three and then finishes, scoring 80 like a careful human. Patches work when you can spot the loophole in advance. With open-ended real-world tasks, you often can’t.':'It’s collecting targets but hasn’t worked out the full plan yet. Keep training. This version takes longer to learn.';
+}
+function bAll(){bMeters();bChart();bReadout();}
+$('bTrain').addEventListener('click',()=>{
+  if(B.busy)return;B.busy=true;btnSet('bTrain',false);btnSet('bReset',false);let k=0;
+  const tick=()=>{for(let i=0;i<10&&k<100;i++,k++)bEpisode();bAll();if(k<100)requestAnimationFrame(tick);else{B.busy=false;btnSet('bTrain',true);btnSet('bReset',true);bResetShow();bAll();}};
+  if(reduce){for(;k<100;k++)bEpisode();B.busy=false;btnSet('bTrain',true);btnSet('bReset',true);bResetShow();bAll();bDraw();return;}
+  requestAnimationFrame(tick);
+});
+function bSetMode(m){B.mode=m;B.Q=new Map();B.races=0;B.hist=[];bResetShow();document.querySelectorAll('#bModes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.m===m));bAll();bDraw();}
+document.querySelectorAll('#bModes button').forEach(b=>b.addEventListener('click',()=>{if(!B.busy)bSetMode(b.dataset.m);}));
+$('bReset').addEventListener('click',()=>{if(!B.busy)bSetMode(B.mode);});
+let bVisible=true;
+if('IntersectionObserver' in window){new IntersectionObserver(es=>{bVisible=es[0].isIntersecting;}).observe(bc);}
+let bLast=0;
+function bLoop(ts){
+  if(bVisible){const dt=bLast?Math.min(50,ts-bLast):16;const s=B.show;s.frac+=dt/120;if(s.flash)s.flash.f++;
+    if(s.frac>=1){bShowStep();bMeters();}
+    bDraw();}
+  bLast=ts;requestAnimationFrame(bLoop);
+}
+redraws.push(()=>{bSize();bDraw();bAll();});
+
+/* =====================================================================
+   8. MAP + quiz
+   ===================================================================== */
+const CAMPS=[
+ {id:'scale',c:'--plum',x:.42,y:.2,lab:'Scale the recipe',who:'Dario Amodei and many at the big labs',h:'More of the same, much bigger',
+  q:'We’re seeing the same scaling in RL that we saw for pre-training.',qw:'Dario Amodei, Feb 2026',
+  bet:'Pretraining plus RL keeps improving predictably as it scales. Keep widening the range of tasks RL practices on, from math to code to everything else, and the skills will generalize.',
+  best:'It has worked, on schedule, for nearly a decade. Reasoning models arrived just as critics said scaling was stalling.',
+  weak:'Models need vastly more data than people do. Dario concedes there is "an actual sample efficiency difference" with humans.',
+  test:'Whether RL trained on checkable tasks carries over to skills nobody can score automatically.'},
+ {id:'exp',side:'l',c:'--cherry',x:.86,y:.66,lab:'Era of experience',who:'Richard Sutton and David Silver',h:'Learn from your own life',
+  q:'They have the ability to predict what a person would say. They don’t have the ability to predict what will happen.',qw:'Richard Sutton on LLMs, Sept 2025',
+  bet:'Human data is "rapidly approaching a limit." Going beyond it takes agents that act in the world, learn continuously over long "streams" of experience, and get rewards grounded in reality, like test results or lab measurements.',
+  best:'AlphaGo Zero. Remove the human data, and the system goes further than any human ever did.',
+  weak:'The real world has no instant scorekeeper. And imitation clearly matters: children learn a lot by copying, and LLMs make a strong starting point.',
+  test:'Whether agents that keep learning after deployment beat ones that are trained once and frozen.'},
+ {id:'world',side:'l',c:'--leaf',x:.7,y:.9,lab:'World models',who:'Yann LeCun (AMI Labs)',h:'Learn how the world works first',
+  q:'Real intelligence does not start in language. It starts in the world.',qw:'AMI Labs, LeCun’s startup',
+  bet:'Text is a thin slice of reality. LeCun often notes that a four-year-old has taken in more data through their eyes than an LLM reads in text. AI needs to learn from video and the physical world, building internal models it can use to plan.',
+  best:'LLMs still struggle with physical common sense and with robotics, where text-trained intelligence has been slowest to arrive.',
+  weak:'Skeptics of LLMs have repeatedly predicted things they couldn’t do, and LLMs then did them.',
+  test:'Whether world-model systems beat LLM-based agents at planning and acting in the physical world.'},
+ {id:'mid',c:'--sponge',x:.56,y:.52,lab:'Missing pieces',who:'Andrej Karpathy, Dwarkesh Patel',h:'Useful, but not the whole story',
+  q:'You’re sucking the bits of supervision of the final reward signal through a straw.',qw:'Andrej Karpathy, Oct 2025, on why RL is a crude teacher',
+  bet:'The current recipe is real progress, but a crude learner. One score per attempt is a weak teacher, and models can’t keep learning on the job. Expect steady progress plus a few new ideas still to be invented, over something like a decade.',
+  best:'Today’s models are brilliant at some things and baffling at others. That pattern fits a missing ingredient better than a recipe that’s nearly done.',
+  weak:'Similar "missing piece" arguments have been made before, and scale kept covering the gap.',
+  test:'Whether continual learning and richer feedback get solved, and whether by new ideas or by scale.'}
+];
+const QZ=[
+ {q:'Where will the next big leap in AI mostly come from?',o:[['Bigger models, more data',{x:.3}],['Practice with feedback on many more tasks',{x:.5}],['AI’s own experience in the world',{x:.85}]]},
+ {q:'Does AI need to keep learning on the job, like a new hire does?',o:[['Not really',{y:.12}],['Yes, and today’s methods can get there',{y:.3}],['Yes, and that needs new ideas',{y:.72}]]},
+ {q:'Can AI understand the world mostly through text?',o:[['Yes, text describes nearly everything',{dy:-.08}],['Partly; add images and video',{dy:0}],['No, it must learn how the physical world works',{dy:.18,dx:.1}]]}
+];
+const QA=[null,null,null];let campI=0,you=null,youCamp=0;
+function quizRender(){
+  const box=$('quiz');box.innerHTML='';
+  QZ.forEach((qq,qi)=>{const d=document.createElement('div');d.innerHTML=`<div class="q">${qi+1}. ${qq.q}</div><div class="seg" role="group"></div>`;
+    qq.o.forEach(([t],oi)=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.setAttribute('aria-pressed',QA[qi]===oi);b.addEventListener('click',()=>{QA[qi]=oi;quizCompute();quizRender();renderMap();});d.querySelector('.seg').appendChild(b);});box.appendChild(d);});
+  if(you){const c=CAMPS[youCamp];const r=document.createElement('div');r.className='res';r.innerHTML=`Your answers sit closest to <b style="color:var(${c.c})">${c.lab}</b>. Its case is below. <button class="btn" type="button" id="qzClear" style="margin-left:6px;min-height:30px;padding:4px 10px">Clear</button>`;box.appendChild(r);
+    $('qzClear').addEventListener('click',()=>{QA.fill(null);you=null;quizRender();renderMap();});}
+}
+function quizCompute(){
+  if(QA.some(a=>a===null)){you=null;return;}
+  const a=QZ[0].o[QA[0]][1],b=QZ[1].o[QA[1]][1],c=QZ[2].o[QA[2]][1];
+  you={x:clamp(a.x+(c.dx||0),.03,.97),y:clamp(b.y+(c.dy||0),.03,.97)};
+  let best=0,bd=9;CAMPS.forEach((k,i)=>{const d=Math.hypot(k.x-you.x,k.y-you.y);if(d<bd){bd=d;best=i;}});campI=best;youCamp=best;
+}
+function renderMap(){
+  const svg=$('campMap');svg.innerHTML='';
+  const k=Math.max(1,Math.min(1.75,560/Math.max(1,svg.getBoundingClientRect().width||640)));
+  const ink=css('--ink'),muted=css('--muted'),rule=css('--rule'),paper=css('--paper');
+  const X0=70,X1=630,Y0=330,Y1=20;const px=x=>X0+(X1-X0)*x,py=y=>Y0-(Y0-Y1)*y;
+  el('rect',{x:X0,y:Y1,width:X1-X0,height:Y0-Y1,fill:paper,rx:4},svg);
+  el('line',{x1:px(.5),x2:px(.5),y1:Y1,y2:Y0,stroke:rule,'stroke-dasharray':'3 4'},svg);
+  el('line',{x1:X0,x2:X1,y1:py(.5),y2:py(.5),stroke:rule,'stroke-dasharray':'3 4'},svg);
+  const t=(x,y,s,anchor,extra)=>el('text',Object.assign({x,y,'text-anchor':anchor||'start',fill:muted,'font-size':12*k,'font-family':'Libre Franklin, Arial, sans-serif'},extra||{}),svg,s);
+  t(X0,Y0+20*k,'← Human data');t(X1,Y0+20*k,'Own experience →','end');
+  t(4,py(.1),'Keep');t(4,py(.1)+14*k,'recipe');t(4,py(.94),'Change');t(4,py(.94)+14*k,'a lot');
+  if(you){el('line',{x1:px(you.x),y1:py(you.y),x2:px(CAMPS[youCamp].x),y2:py(CAMPS[youCamp].y),stroke:ink,'stroke-dasharray':'3 3',opacity:.5},svg);}
+  CAMPS.forEach((c,i)=>{
+    const g=el('g',{tabindex:0,role:'button','aria-label':c.lab,style:'cursor:pointer'},svg);const col=css(c.c);
+    el('circle',{cx:px(c.x),cy:py(c.y),r:(i===campI?14:10)*k,fill:col,opacity:i===campI?1:.75,stroke:i===campI?ink:'none','stroke-width':2},g);
+    const right=c.side!=='l';
+    el('text',{x:px(c.x)+(right?20:-20)*k,y:py(c.y)+5*k,'text-anchor':right?'start':'end',fill:ink,'font-size':15*k,'font-weight':i===campI?700:500,'font-family':'Libre Franklin, Arial, sans-serif'},g,c.lab);
+    const go=()=>{campI=i;renderMap();quizRender();};g.addEventListener('click',go);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});
+  });
+  if(you){const x=px(you.x),y=py(you.y);el('circle',{cx:x,cy:y,r:9*k,fill:paper,stroke:ink,'stroke-width':3},svg);el('circle',{cx:x,cy:y,r:3*k,fill:ink},svg);el('text',{x:x,y:y-14*k,'text-anchor':'middle','font-size':13*k,'font-weight':700,fill:ink,'font-family':'Libre Franklin, Arial, sans-serif'},svg,'You');}
+  const c=CAMPS[campI];
+  $('campCard').innerHTML=`<div class="who" style="color:var(${c.c})">${c.who}</div><h3>${c.h}</h3><q>${c.q}</q><div style="font-family:var(--f-ui);font-size:13px;color:var(--muted);margin-top:-4px">${c.qw}</div>
+   <p style="margin-top:12px;font-size:17px">${c.bet}</p>
+   <dl><div><dt>Strongest evidence</dt><dd>${c.best}</dd></div><div><dt>Best objection</dt><dd>${c.weak}</dd></div><div style="grid-column:1/-1"><dt>What would settle it</dt><dd>${c.test}</dd></div></dl>`;
+}
+quizRender();
+redraws.push(renderMap);
+
+/* ================= boot ================= */
+function all(){redraws.forEach(f=>{try{f();}catch(e){console.error(e);}});}
+bSize();all();
+requestAnimationFrame(bLoop);
+let rt,lastW=innerWidth;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(Math.abs(innerWidth-lastW)<2)return;lastW=innerWidth;bSize();all();},150);});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',all);
+new MutationObserver(all).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+
+</script>
