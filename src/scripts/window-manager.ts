@@ -45,6 +45,8 @@ interface ShellApi {
   fitContent(target: Element | null, width: number, height: number): void;
   frameReady(frame: Element | null, meta: FrameMeta): void;
   frameFocus(frame: Element | null): void;
+  /** Mouse position inside a window's iframe (null: it left), for live cursors. */
+  framePointer(frame: Element | null, x: number | null, y: number | null): void;
   activity(): void;
 }
 
@@ -788,6 +790,13 @@ function runDesktop(): void {
       if (w && w !== activeWindow()) focus(w);
     },
 
+    framePointer(frameEl, x, y) {
+      if (!(frameEl instanceof HTMLIFrameElement)) return;
+      const r = frameEl.getBoundingClientRect();
+      const detail = x === null || y === null ? null : { x: r.left + x, y: r.top + y };
+      document.dispatchEvent(new CustomEvent('rsb:pointer', { detail }));
+    },
+
     activity() {
       document.dispatchEvent(new Event('rsb:activity'));
     },
@@ -893,6 +902,12 @@ function runEmbedded(shell: ShellApi): void {
   ['mousemove', 'mousedown', 'keydown', 'touchstart', 'wheel'].forEach(type =>
     document.addEventListener(type, poke, { capture: true, passive: true })
   );
+
+  // Other visitors see this mouse as a live cursor on the desktop
+  document.addEventListener('pointermove', (e) => {
+    if (e.pointerType === 'mouse') shell.framePointer(frame, e.clientX, e.clientY);
+  }, { passive: true });
+  document.documentElement.addEventListener('mouseleave', () => shell.framePointer(frame, null, null));
 
   document.addEventListener('click', (e) => {
     const url = clickedLink(e);

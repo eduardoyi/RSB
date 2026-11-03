@@ -1,0 +1,20 @@
+name = "rsb-presence"
+main = "src/index.ts"
+compatibility_date = "2026-11-01"
+
+# One Durable Object instance, "desktop", holds everyone on the site: live
+# cursors, who's online, the chat, the guestbook and the hit counter.
+[[durable_objects.bindings]]
+name = "ROOM"
+class_name = "Room"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Room"]
+
+[vars]
+# Pages allowed to connect (comma-separated). Localhost is for `npm run dev`.
+ALLOWED_ORIGINS = "https://realseriousbusiness.com,http://localhost:4321,http://localhost:4323"
+
+# Secret, set with `npx wrangler secret put ADMIN_TOKEN`: enables the
+# /admin endpoints for deleting chat messages and guestbook entries.

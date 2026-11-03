@@ -7,7 +7,12 @@
   </button>
   <div class="taskbar-separator" aria-hidden="true"></div>
   <div id="taskbar-windows"></div>
-  <div class="taskbar-tray" aria-label="System clock">
+  <div class="taskbar-tray" aria-label="System tray">
+    <!-- People online right now; shown once connected (src/scripts/presence.ts) -->
+    <button class="tray-icon" id="tray-presence" hidden aria-label="People online — open Chat">
+      <img src="/icons/win98/network_cool_two_pcs.ico" alt="" width="16" height="16" />
+      <span id="tray-presence-count">1</span>
+    </button>
     <span id="taskbar-clock">12:00:00 AM</span>
   </div>
 </div>

@@ -1,0 +1,76 @@
+/* ─── Live cursors (src/scripts/presence.ts) ─────────────────────────────── */
+
+.rsb-cursors {
+  position: fixed;
+  inset: 0;
+  z-index: 9990; /* over windows, under the taskbar and menus */
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.rsb-cursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  /* Moves arrive every ~150ms; glide between them */
+  transition: transform 150ms linear;
+  will-change: transform;
+}
+
+.rsb-cursor svg {
+  display: block;
+  filter: drop-shadow(1px 1px 0 rgba(0, 0, 0, 0.4));
+}
+
+/* Name tag in the style of a Win98 tooltip, edged in the visitor's colour */
+.rsb-cursor-name {
+  margin-top: 14px;
+  padding: 0 3px;
+  background: #ffffe1;
+  border: 1px solid currentColor;
+  color: #000;
+  font: 11px Arial, sans-serif;
+  white-space: nowrap;
+}
+
+/* ─── Taskbar tray: people online ────────────────────────────────────────── */
+
+.taskbar-tray {
+  gap: 8px;
+}
+
+.tray-icon {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 2px;
+  border: none;
+  box-shadow: none;
+  background: none;
+  font: inherit;
+  cursor: pointer;
+}
+
+.tray-icon[hidden] {
+  display: none;
+}
+
+.tray-icon img {
+  width: 16px;
+  height: 16px;
+  image-rendering: pixelated;
+}
+
+.tray-icon:focus {
+  outline: 1px dotted #000;
+}
+
+.tray-icon:active {
+  box-shadow: none;
+  text-shadow: none;
+}

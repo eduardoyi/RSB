@@ -1,0 +1,265 @@
+---
+import DesktopLayout from '../layouts/DesktopLayout.astro';
+import Window from '../components/Window.astro';
+---
+<DesktopLayout title="Chat — Real Serious Business" description="Chat live with whoever else is on Real Serious Business right now.">
+  <Window
+    title="Chat"
+    icon="/icons/win98/netmeeting.ico"
+    path="/chat"
+    backHref="/"
+    defaultWidth={560}
+    defaultHeight={420}
+    noBodyScroll={true}
+  >
+    <div class="chat">
+      <div class="chat-toolbar">
+        <label for="chat-name">Your name:</label>
+        <input type="text" id="chat-name" maxlength="20" autocomplete="off" spellcheck="false" />
+      </div>
+      <div class="chat-main">
+        <div class="chat-log" id="chat-log" role="log" aria-live="polite"></div>
+        <div class="chat-side">
+          <div class="chat-side-title">Online (<span id="chat-count">0</span>)</div>
+          <ul class="chat-users" id="chat-users"></ul>
+        </div>
+      </div>
+      <form class="chat-send" id="chat-form">
+        <input type="text" id="chat-text" maxlength="200" autocomplete="off" placeholder="Type a message…" aria-label="Message" />
+        <button type="submit" id="chat-send">Send</button>
+      </form>
+      <div class="status-bar">
+        <p class="status-bar-field" id="chat-status">Connecting…</p>
+      </div>
+    </div>
+  </Window>
+</DesktopLayout>
+
+<script>
+  import { getPresence, subscribeWhileOpen, type ChatMessage, type PresenceApi, type PresenceUser } from '../scripts/presence-client';
+
+  const log = document.getElementById('chat-log')!;
+  const users = document.getElementById('chat-users')!;
+  const count = document.getElementById('chat-count')!;
+  const status = document.getElementById('chat-status')!;
+  const nameInput = document.getElementById('chat-name') as HTMLInputElement;
+  const form = document.getElementById('chat-form') as HTMLFormElement;
+  const text = document.getElementById('chat-text') as HTMLInputElement;
+  const sendBtn = document.getElementById('chat-send') as HTMLButtonElement;
+
+  function clock(ts: number): string {
+    return new Date(ts).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+
+  /** Append a line, keeping the log scrolled to the bottom if it was there. */
+  function addLine(line: HTMLElement): void {
+    const atBottom = log.scrollHeight - log.scrollTop - log.clientHeight < 24;
+    log.appendChild(line);
+    if (atBottom) log.scrollTop = log.scrollHeight;
+  }
+
+  function addMessage(msg: ChatMessage): void {
+    const line = document.createElement('div');
+    line.className = 'chat-line';
+    line.dataset.id = String(msg.id);
+    line.title = clock(msg.ts);
+    const who = document.createElement('b');
+    who.style.color = msg.color;
+    who.textContent = msg.name + ': ';
+    line.append(who, msg.text);
+    addLine(line);
+  }
+
+  function addNotice(textContent: string, kind = ''): void {
+    const line = document.createElement('div');
+    line.className = 'chat-line chat-notice ' + kind;
+    line.textContent = textContent;
+    addLine(line);
+  }
+
+  function renderUsers(p: PresenceApi): void {
+    const everyone: PresenceUser[] = p.me ? [p.me, ...p.others] : [];
+    users.replaceChildren(...everyone.map(u => {
+      const li = document.createElement('li');
+      li.style.color = u.color;
+      li.textContent = u.name + (u === p.me ? ' (you)' : '');
+      return li;
+    }));
+    count.textContent = String(everyone.length);
+  }
+
+  function setConnected(p: PresenceApi): void {
+    status.textContent = p.connected ? 'Connected' : 'Not connected. Trying again…';
+    text.disabled = sendBtn.disabled = !p.connected;
+    renderUsers(p);
+    if (p.connected) {
+      if (p.me) nameInput.value = p.me.name;
+      p.requestChatHistory();
+    }
+  }
+
+  getPresence().then(p => {
+    if (!p) {
+      status.textContent = 'Chat is unavailable right now.';
+      text.disabled = sendBtn.disabled = nameInput.disabled = true;
+      return;
+    }
+
+    subscribeWhileOpen(p, (e) => {
+      switch (e.t) {
+        case 'status':
+          setConnected(p);
+          if (!e.connected) addNotice('* Disconnected', 'chat-error');
+          break;
+        case 'chat-history':
+          log.replaceChildren();
+          e.msgs.forEach(addMessage);
+          addNotice(`* Welcome! ${p.others.length ? `${p.others.length + 1} people are here.` : 'You\'re the only one here right now.'}`);
+          log.scrollTop = log.scrollHeight;
+          break;
+        case 'chat':
+          addMessage(e.msg);
+          break;
+        case 'chat-del':
+          log.querySelector(`[data-id="${e.id}"]`)?.remove();
+          break;
+        case 'join':
+          addNotice(`* ${e.user.name} joined`);
+          renderUsers(p);
+          break;
+        case 'leave':
+          addNotice(`* ${e.user.name} left`);
+          renderUsers(p);
+          break;
+        case 'rename':
+          addNotice(e.user === p.me ? `* You are now ${e.user.name}` : `* ${e.old} is now ${e.user.name}`);
+          renderUsers(p);
+          break;
+        case 'err':
+          if (e.for === 'chat' || e.for === 'name') addNotice(`* ${e.text}`, 'chat-error');
+          break;
+      }
+    });
+
+    nameInput.value = p.me?.name ?? '';
+    setConnected(p);
+
+    function rename(): void {
+      const name = nameInput.value.trim();
+      if (name && name !== p!.me?.name) p!.setName(name);
+    }
+    nameInput.addEventListener('change', rename);
+    nameInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') { e.preventDefault(); rename(); text.focus(); }
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const message = text.value.trim();
+      if (!message) return;
+      p.chat(message);
+      text.value = '';
+    });
+  });
+</script>
+
+<style is:global>
+  .chat {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: silver;
+    font-size: 11px;
+  }
+
+  .chat-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px;
+    border-bottom: 1px solid #808080;
+    box-shadow: 0 1px 0 #fff;
+  }
+
+  .chat-toolbar input {
+    width: 150px;
+  }
+
+  .chat-main {
+    flex: 1;
+    display: flex;
+    gap: 4px;
+    min-height: 0;
+    padding: 4px 4px 0;
+  }
+
+  .chat-log,
+  .chat-users {
+    background: #fff;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    overflow-y: auto;
+  }
+
+  .chat-log {
+    flex: 1;
+    min-width: 0;
+    padding: 4px 6px;
+    font: 12px/1.45 'Courier New', monospace;
+    user-select: text;
+    overflow-wrap: anywhere;
+  }
+
+  .chat-notice {
+    color: #808080;
+  }
+
+  .chat-notice.chat-error {
+    color: #c00000;
+  }
+
+  .chat-side {
+    display: flex;
+    flex-direction: column;
+    width: 130px;
+    flex-shrink: 0;
+  }
+
+  .chat-side-title {
+    padding: 2px 2px 3px;
+  }
+
+  .chat-users {
+    flex: 1;
+    margin: 0;
+    padding: 3px 5px;
+    list-style: none;
+    font-weight: bold;
+  }
+
+  .chat-users li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .chat-send {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+  }
+
+  .chat-send input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .chat .status-bar {
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 480px) {
+    .chat-side {
+      display: none;
+    }
+  }
+</style>

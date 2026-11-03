@@ -1,0 +1,255 @@
+---
+import DesktopLayout from '../layouts/DesktopLayout.astro';
+import Window from '../components/Window.astro';
+---
+<DesktopLayout title="Guestbook — Real Serious Business" description="Sign the Real Serious Business guestbook.">
+  <Window
+    title="Guestbook"
+    icon="/icons/win98/address_book_pad.ico"
+    path="/guestbook"
+    backHref="/"
+    defaultWidth={520}
+    defaultHeight={540}
+  >
+    <div class="gb">
+      <header class="gb-header">
+        <h1>Sign my Guestbook!</h1>
+        <p>Visitors so far:</p>
+        <div class="gb-counter" id="gb-counter" aria-live="polite">------</div>
+      </header>
+
+      <form class="gb-form" id="gb-form">
+        <label for="gb-name">Name:</label>
+        <input type="text" id="gb-name" maxlength="20" autocomplete="off" required />
+        <label for="gb-text">Message:</label>
+        <textarea id="gb-text" maxlength="500" rows="3" required></textarea>
+        <div class="gb-actions">
+          <button type="submit" id="gb-sign">Sign Guestbook</button>
+          <span id="gb-status" role="status"></span>
+        </div>
+      </form>
+
+      <div class="gb-entries" id="gb-entries">
+        <p class="gb-empty">Loading entries…</p>
+      </div>
+    </div>
+  </Window>
+</DesktopLayout>
+
+<script>
+  import { getPresence, subscribeWhileOpen, type GuestbookEntry, type PresenceApi } from '../scripts/presence-client';
+
+  const counter = document.getElementById('gb-counter')!;
+  const entries = document.getElementById('gb-entries')!;
+  const form = document.getElementById('gb-form') as HTMLFormElement;
+  const nameInput = document.getElementById('gb-name') as HTMLInputElement;
+  const textInput = document.getElementById('gb-text') as HTMLTextAreaElement;
+  const signBtn = document.getElementById('gb-sign') as HTMLButtonElement;
+  const status = document.getElementById('gb-status')!;
+
+  function renderCounter(hits: number): void {
+    counter.replaceChildren(...String(hits).padStart(6, '0').split('').map(d => {
+      const span = document.createElement('span');
+      span.textContent = d;
+      return span;
+    }));
+    counter.setAttribute('aria-label', `${hits} visitors`);
+  }
+
+  function entryEl(entry: GuestbookEntry): HTMLElement {
+    const article = document.createElement('article');
+    article.className = 'gb-entry';
+    article.dataset.id = String(entry.id);
+    const head = document.createElement('div');
+    head.className = 'gb-entry-head';
+    const name = document.createElement('b');
+    name.textContent = entry.name;
+    const date = document.createElement('time');
+    date.dateTime = new Date(entry.ts).toISOString();
+    date.textContent = new Date(entry.ts).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+    head.append(name, ' wrote on ', date);
+    const body = document.createElement('p');
+    body.textContent = entry.text;
+    article.append(head, body);
+    return article;
+  }
+
+  function showEmpty(): void {
+    if (!entries.querySelector('.gb-entry')) {
+      entries.innerHTML = '<p class="gb-empty">No entries yet. Be the first to sign!</p>';
+    }
+  }
+
+  function setConnected(p: PresenceApi): void {
+    signBtn.disabled = !p.connected;
+    if (p.connected) {
+      renderCounter(p.hits);
+      p.requestGuestbook();
+      if (!nameInput.value && p.me) nameInput.value = p.me.name;
+    } else {
+      status.textContent = 'Offline. Trying again…';
+    }
+  }
+
+  getPresence().then(p => {
+    if (!p) {
+      entries.innerHTML = '<p class="gb-empty">The guestbook is unavailable right now.</p>';
+      signBtn.disabled = true;
+      return;
+    }
+
+    let signing = false;
+
+    subscribeWhileOpen(p, (e) => {
+      switch (e.t) {
+        case 'status':
+          setConnected(p);
+          if (e.connected) status.textContent = '';
+          break;
+        case 'hits':
+          renderCounter(e.hits);
+          break;
+        case 'gb':
+          entries.replaceChildren(...e.entries.map(entryEl));
+          showEmpty();
+          break;
+        case 'gb-new':
+          entries.querySelector('.gb-empty')?.remove();
+          entries.prepend(entryEl(e.entry));
+          if (signing) {
+            signing = false;
+            signBtn.disabled = false;
+            textInput.value = '';
+            status.textContent = 'Thanks for signing!';
+          }
+          break;
+        case 'gb-del':
+          entries.querySelector(`[data-id="${e.id}"]`)?.remove();
+          showEmpty();
+          break;
+        case 'err':
+          if (e.for === 'sign') {
+            signing = false;
+            signBtn.disabled = false;
+            status.textContent = e.text;
+          }
+          break;
+      }
+    });
+
+    setConnected(p);
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = nameInput.value.trim();
+      const text = textInput.value.trim();
+      if (!name || !text) return;
+      signing = true;
+      signBtn.disabled = true;
+      status.textContent = 'Signing…';
+      p.sign(name, text);
+    });
+  });
+</script>
+
+<style is:global>
+  .gb {
+    font-size: 12px;
+  }
+
+  .gb-header {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  .gb-header h1 {
+    margin: 4px 0 6px;
+    font: bold 20px 'Times New Roman', serif;
+    color: #000080;
+  }
+
+  .gb-header p {
+    margin: 0 0 4px;
+  }
+
+  /* Old-school odometer hit counter */
+  .gb-counter {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    background: #000;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey;
+  }
+
+  .gb-counter span {
+    width: 16px;
+    padding: 2px 0;
+    background: linear-gradient(#333, #000 45%, #111 55%, #333);
+    color: #fff;
+    font: bold 16px 'Courier New', monospace;
+    text-align: center;
+  }
+
+  .gb-form {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 6px 8px;
+    align-items: start;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 2px groove #fff;
+  }
+
+  .gb-form label {
+    padding-top: 3px;
+  }
+
+  .gb-form textarea {
+    resize: vertical;
+    font: 12px Arial, sans-serif;
+  }
+
+  .gb-actions {
+    grid-column: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .gb-entries {
+    background: #fff;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    padding: 6px 10px;
+    user-select: text;
+  }
+
+  .gb-entry {
+    padding: 6px 0;
+    border-bottom: 1px dashed #c0c0c0;
+  }
+
+  .gb-entry:last-child {
+    border-bottom: none;
+  }
+
+  .gb-entry-head {
+    color: #808080;
+    font-size: 11px;
+  }
+
+  .gb-entry-head b {
+    color: #000080;
+    font-size: 12px;
+  }
+
+  .gb-entry p {
+    margin: 3px 0 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .gb-empty {
+    color: #808080;
+    text-align: center;
+  }
+</style>

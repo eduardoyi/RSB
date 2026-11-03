@@ -1,0 +1,15 @@
+{
+  "name": "rsb-presence-worker",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "types": "wrangler types"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "wrangler": "4.157.0"
+  }
+}

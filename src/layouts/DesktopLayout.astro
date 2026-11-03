@@ -7,6 +7,7 @@ import '../styles/desktop.css';
 import '../styles/window.css';
 import '../styles/monitor.css';
 import '../styles/boot.css';
+import '../styles/presence.css';
 
 interface Props {
   title?: string;
@@ -28,6 +29,14 @@ const { title = 'Real Serious Business', description, ogImage, ogType } = Astro.
       <a class="desktop-icon" href="#" title="Newsletter" onclick="event.preventDefault();showSubscribeWindow();">
         <img src="/icons/win98/envelope_closed.ico" alt="Newsletter" />
         <span>Newsletter</span>
+      </a>
+      <a class="desktop-icon" href="/chat" title="Chat">
+        <img src="/icons/win98/netmeeting.ico" alt="Chat" />
+        <span>Chat</span>
+      </a>
+      <a class="desktop-icon" href="/guestbook" title="Guestbook">
+        <img src="/icons/win98/address_book_pad.ico" alt="Guestbook" />
+        <span>Guestbook</span>
       </a>
       <a class="desktop-icon" href="/programs" title="Programs">
         <img src="/icons/win98/directory_program_group.ico" alt="Programs" />
@@ -132,4 +141,5 @@ const { title = 'Real Serious Business', description, ogImage, ogType } = Astro.
   import '../scripts/window-manager.ts';
   import '../scripts/boot-animation.ts';
   import '../scripts/screensaver.ts';
+  import '../scripts/presence.ts';
 </script>

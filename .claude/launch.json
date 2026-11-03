@@ -8,6 +8,12 @@
       "port": 4321
     },
     {
+      "name": "Presence Worker",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "worker-presence", "run", "dev"],
+      "port": 8787
+    },
+    {
       "name": "Astro Preview",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "preview", "--", "--port", "4323"],
