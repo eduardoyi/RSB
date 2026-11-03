@@ -2,155 +2,48 @@
 import DesktopLayout from '../../layouts/DesktopLayout.astro';
 import Window from '../../components/Window.astro';
 import '../../styles/games.css';
+import '../../styles/menubar.css';
 ---
 <DesktopLayout title="Minesweeper — Real Serious Business">
-  <Window title="Minesweeper" icon="/icons/win98/minesweeper.ico" path="/games/minesweeper" backHref="/games" defaultWidth={322} defaultHeight={440} defaultX={80} defaultY={30} noBodyScroll={true} resizable={false}>
-    <div class="ms-wrapper">
-
-      <!-- Win98-style difficulty toolbar -->
-      <div class="ms-toolbar" role="toolbar" aria-label="Difficulty">
-        <button class="ms-diff active" data-cols="9"  data-rows="9"  data-mines="10">Beginner</button>
-        <button class="ms-diff"       data-cols="16" data-rows="16" data-mines="40">Intermediate</button>
-        <button class="ms-diff"       data-cols="30" data-rows="16" data-mines="99">Expert</button>
-        <!-- Flag mode toggle — useful on touch where right-click isn't available -->
-        <label class="ms-flag-label" title="Tap to flag instead of reveal">
-          <input type="checkbox" id="ms-flag-toggle"> 🚩 Flag
-        </label>
-      </div>
-
-      <!-- Canvas — scrollable so Expert (920px wide) fits -->
-      <div class="ms-canvas-wrap">
-        <canvas id="jsminesweeper" width="290" height="350"></canvas>
-      </div>
-
-      <!-- Win98 dialog — replaces the native alert() on win/lose -->
-      <div id="ms-result" class="ms-result" style="display:none">
-        <div class="ms-result-titlebar">Minesweeper</div>
-        <div class="ms-result-body">
-          <p id="ms-result-msg"></p>
-          <button onclick="document.getElementById('ms-result').style.display='none'">OK</button>
+  <Window title="Minesweeper" icon="/icons/win98/minesweeper.ico" path="/games/minesweeper" backHref="/games" defaultWidth={246} defaultHeight={334} defaultX={80} defaultY={30} noBodyScroll={true} resizable={false}>
+    <!-- Scrolls only on phones, where Expert is wider than the screen; on the
+         desktop the window is sized to fit the game exactly -->
+    <div class="ms-viewport">
+      <div class="ms" id="ms">
+        <div class="win-menubar">
+          <button class="win-menubar-btn" data-menu="ms-menu-game"><u>G</u>ame</button>
+          <button class="win-menubar-btn" data-menu="ms-menu-help"><u>H</u>elp</button>
         </div>
-      </div>
+        <ul class="win-dropdown ms-menu" id="ms-menu-game" role="menu">
+          <li><button data-action="new">New<span class="ms-key">F2</span></button></li>
+          <li class="win-dropdown-sep" role="separator"></li>
+          <li><button data-level="beginner" role="menuitemradio">Beginner</button></li>
+          <li><button data-level="intermediate" role="menuitemradio">Intermediate</button></li>
+          <li><button data-level="expert" role="menuitemradio">Expert</button></li>
+          <li class="win-dropdown-sep" role="separator"></li>
+          <li><button data-action="marks" role="menuitemcheckbox">Marks (?)</button></li>
+          <li class="win-dropdown-sep" role="separator"></li>
+          <li><button data-action="best">Best Times...</button></li>
+          <li class="win-dropdown-sep" role="separator"></li>
+          <li><button data-action="exit">Exit</button></li>
+        </ul>
+        <ul class="win-dropdown ms-menu" id="ms-menu-help" role="menu">
+          <li><button data-action="help">How to Play</button></li>
+        </ul>
 
+        <div class="ms-body">
+          <div class="ms-header">
+            <div class="ms-led" id="ms-mines" aria-label="Mines left"></div>
+            <button class="ms-face" id="ms-face" data-face="smile" aria-label="New game"></button>
+            <div class="ms-led" id="ms-time" aria-label="Seconds"></div>
+          </div>
+          <div class="ms-board" id="ms-board"></div>
+        </div>
+
+        <div class="ms-dialog" id="ms-dialog" hidden></div>
+      </div>
     </div>
   </Window>
 </DesktopLayout>
 
 <script src="/games/minesweeper/minesweeper.js" is:inline></script>
-<script is:inline>
-  // Replace native alert with a Win98 dialog
-  window.alert = function (msg) {
-    document.getElementById('ms-result-msg').textContent = msg;
-    document.getElementById('ms-result').style.display = 'flex';
-  };
-
-  window.addEventListener('load', function () {
-    init();
-    jsminesweeper(9, 9, 10);
-
-    // Difficulty buttons
-    document.querySelectorAll('.ms-diff').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        document.querySelectorAll('.ms-diff').forEach(function (b) { b.classList.remove('active'); });
-        this.classList.add('active');
-
-        var cols  = parseInt(this.dataset.cols,  10);
-        var rows  = parseInt(this.dataset.rows,  10);
-        var mines = parseInt(this.dataset.mines, 10);
-
-        var canvas = document.getElementById('jsminesweeper');
-        canvas.width  = 30 * cols + 20;
-        canvas.height = 30 * rows + 80;
-
-        // Grow or shrink the window to fit the board, like the real one
-        var winW = canvas.width + 32, winH = canvas.height + 90;
-        if (document.documentElement.classList.contains('rsb-embedded')) {
-          parent.__rsbShell.resizeFrame(frameElement, winW, winH);
-        } else {
-          var wEl = document.querySelector('.w98-window[data-window-path="/games/minesweeper"]');
-          if (wEl) {
-            wEl.style.width  = winW + 'px';
-            wEl.style.height = winH + 'px';
-          }
-        }
-
-        clearInterval(gametimer);
-        gametimer     = null;
-        timer         = 0;
-        end           = false;
-        win           = false;
-        numberofmines = 0;
-
-        jsminesweeper(cols, rows, mines);
-      });
-    });
-
-    var msCanvas = document.getElementById('jsminesweeper');
-
-    // Runs before minesweeper.js's own mousedown handler (capture phase on the
-    // wrapper). Classic rule: the first click is never a mine; the mine moves
-    // to the first free square from the top-left. Also ignores clicks in the
-    // margin right of / below the grid, which minesweeper.js would throw on.
-    msCanvas.parentElement.addEventListener('mousedown', function (e) {
-      if (e.target !== msCanvas) return;
-      var rect = msCanvas.getBoundingClientRect();
-      var i = Math.floor((e.clientX - rect.left - xo) / c);
-      var j = Math.floor((e.clientY - rect.top  - yo) / c);
-      if (i >= size.w || j >= size.h) { e.stopPropagation(); return; }
-      if (i < 0 || j < 0 || e.button !== 0 || gametimer !== null || end) return;
-      var started = mines.some(function (col) { return col.some(function (m) { return m.isDown; }); });
-      if (!started && mines[i][j].isMine) moveMine(i, j);
-    }, true);
-
-    function moveMine(i, j) {
-      search:
-      for (var y = 0; y < size.h; y++) {
-        for (var x = 0; x < size.w; x++) {
-          if (!mines[x][y].isMine && (x !== i || y !== j)) { mines[x][y].isMine = true; break search; }
-        }
-      }
-      mines[i][j].isMine = false;
-      // Recount neighbouring mines for every square
-      for (var x = 0; x < size.w; x++) {
-        for (var y = 0; y < size.h; y++) {
-          var n = 0;
-          for (var dx = -1; dx <= 1; dx++) {
-            for (var dy = -1; dy <= 1; dy++) {
-              var m = mines[x + dx] && mines[x + dx][y + dy];
-              if ((dx || dy) && m && m.isMine) n++;
-            }
-          }
-          mines[x][y].weight = n;
-        }
-      }
-    }
-
-    // Touch-to-flag: when flag mode is on, a tap flags the cell instead of revealing it
-    msCanvas.addEventListener('touchend', function (e) {
-      var flagMode = document.getElementById('ms-flag-toggle').checked;
-      if (!flagMode) return; // let the default tap-as-click handle reveal
-      e.preventDefault();
-      var touch = e.changedTouches[0];
-      var rect  = msCanvas.getBoundingClientRect();
-      var i = Math.floor((touch.clientX - rect.left  - xo) / c);
-      var j = Math.floor((touch.clientY - rect.top   - yo) / c);
-      if (i >= 0 && j >= 0 && i < size.w && j < size.h) {
-        if (gametimer === null && !end) {
-          gametimer = setInterval(function () {
-            timer++;
-            win = checkGame();
-            if (win) { end = true; }
-            updateHeader();
-          }, 1000);
-        }
-        var mine = mines[i][j];
-        if (!mine.isDown) {
-          if (numberofmines !== 0 || mine.isFlagged) {
-            mine.isFlagged = !mine.isFlagged;
-          }
-        }
-        update();
-      }
-    }, { passive: false });
-  });
-</script>

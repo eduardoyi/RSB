@@ -40,7 +40,9 @@ interface FrameMeta {
 interface ShellApi {
   open(href: string): void;
   closeFrame(frame: Element | null): void;
-  resizeFrame(frame: Element | null, width: number, height: number): void;
+  /** Size a window so its content area is exactly width × height. `target`
+   *  is the window's iframe, or the window element for the page's own window. */
+  fitContent(target: Element | null, width: number, height: number): void;
   frameReady(frame: Element | null, meta: FrameMeta): void;
   frameFocus(frame: Element | null): void;
   activity(): void;
@@ -71,7 +73,8 @@ type Edge = 'n' | 's' | 'e' | 'w' | 'ne' | 'nw' | 'se' | 'sw';
 const TASKBAR_HEIGHT = 40;
 const BEZEL_SIDE   = 18;  // top / left / right bezel thickness (px)
 const BEZEL_BOTTOM = 50;  // bottom bezel thickness (px)
-const MIN_SIZE = 320;
+const MIN_SIZE = 320;     // smallest a window can be resized to by dragging
+const MIN_FITTED = 160;   // smallest a window may size itself to its content
 const WINDOW_GAP = 6;     // min gap between window edge and screen boundary (px)
 const GRAB_MARGIN = 60;   // title bar width that must stay on screen when dragging (px)
 const CASCADE_STEP = 24;  // offset between successively opened windows (px)
@@ -154,8 +157,9 @@ function centered(width: number, height: number, offset = 0): WindowState {
 
 function applyState(el: HTMLElement, state: WindowState): void {
   const b = screenBounds();
-  const width  = clamp(state.width,  MIN_SIZE, b.right  - b.left - WINDOW_GAP);
-  const height = clamp(state.height, MIN_SIZE, b.bottom - b.top  - WINDOW_GAP);
+  // MIN_SIZE only limits dragging; a page may size itself smaller (Minesweeper)
+  const width  = clamp(state.width,  MIN_FITTED, b.right  - b.left - WINDOW_GAP);
+  const height = clamp(state.height, MIN_FITTED, b.bottom - b.top  - WINDOW_GAP);
   el.style.left   = clampX(state.x, width) + 'px';
   el.style.top    = clampY(state.y) + 'px';
   el.style.width  = width  + 'px';
@@ -738,12 +742,16 @@ function runDesktop(): void {
       if (w) close(w);
     },
 
-    // A page asking for a new window size (Minesweeper fitting its board)
-    resizeFrame(frameEl, width, height) {
-      const w = windows.find(o => o.frame === frameEl);
+    // A page sizing its window to its content (Minesweeper fitting its board)
+    fitContent(target, width, height) {
+      const w = windows.find(o => o.frame === target || o.el === target);
       if (!w || w.el.classList.contains('maximized')) return;
-      const b = screenBounds();
+      const inner = w.frame ?? w.el.querySelector<HTMLElement>('.window-body');
+      if (!inner) return;
+      width  += w.el.offsetWidth  - inner.clientWidth;
+      height += w.el.offsetHeight - inner.clientHeight;
       // Pull it back on screen if it grows past the right / bottom edge
+      const b = screenBounds();
       w.state.width = width;
       w.state.height = height;
       w.state.x = Math.max(b.left, Math.min(w.el.offsetLeft, b.right - width));

@@ -1,8 +1,10 @@
 /* Floating window positioning */
 .w98-window {
   position: absolute;
-  min-width: 320px;
-  min-height: 200px;
+  /* Dragging stops at 320px (window-manager.ts); pages like Minesweeper may
+     size their window smaller to fit their content */
+  min-width: 160px;
+  min-height: 120px;
   z-index: 100;
   display: flex;
   flex-direction: column;
