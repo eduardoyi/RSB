@@ -50,7 +50,8 @@ const posts = await getPublishedPosts();
       <!-- File list -->
       <div class="explorer-filelist">
         {posts.map((post) => (
-          <a class="explorer-file-row" href={`/post/${post.data.slug || post.id}`}>
+          <!-- Standalone posts render full-page, so they replace the desktop rather than open a window -->
+          <a class="explorer-file-row" href={`/post/${post.data.slug || post.id}`} target={post.data.layout === 'standalone' ? '_top' : undefined}>
             <div class="explorer-col-name">
               <img src={post.data.layout === 'standalone' ? '/icons/win98/html.ico' : '/icons/win98/notepad_file.ico'} alt="" width="16" height="16" style="flex-shrink:0;" />
               <span>{post.data.title}</span>

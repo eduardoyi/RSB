@@ -39,7 +39,8 @@ interface Props {
       .site-strip .home { font-weight: 600; color: var(--ink, #000); }
     </style>
   </head>
-  <body>
+  <!-- data-standalone: the desktop opens this page full-page, never in a window -->
+  <body data-standalone>
     <nav class="site-strip" aria-label="Site">
       <a class="home" href="/">← Real Serious Business</a>
       <span aria-hidden="true">/</span>

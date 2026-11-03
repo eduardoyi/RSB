@@ -709,11 +709,20 @@ function runDesktop(): void {
     desktop!.setAttribute('aria-busy', 'true');
     desktop!.appendChild(el);
 
-    // Pages without a Window component never call frameReady; show them anyway
+    // Pages without a Window component never call frameReady. Full-page
+    // layouts (standalone explainers) take over the tab; anything else, like a
+    // 404, still shows in a window.
     frame.addEventListener('load', () => {
       if (w.ready) return;
       let title = path;
-      try { title = frame.contentDocument?.title || path; } catch {}
+      try {
+        const doc = frame.contentDocument;
+        if (doc?.querySelector('[data-standalone]')) {
+          location.href = frame.contentWindow!.location.href;
+          return;
+        }
+        title = doc?.title || path;
+      } catch {}
       w.docTitle = title;
       setTitle(w, title);
       reveal(w, { width: 640, height: 480 });
