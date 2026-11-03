@@ -23,7 +23,7 @@ import '../styles/menubar.css';
         <button class="win-menubar-btn">Help</button>
       </div>
       <div class="notepad-body">Privacy Policy
-Last updated: March 2026
+Last updated: November 2026
 ----------------------------------------
 
 OVERVIEW
@@ -46,9 +46,11 @@ privacy policy (https://kit.com/privacy).
 You can unsubscribe at any time using the link
 included in every email.
 
-Beyond the newsletter, this site does not
-collect, store, or process any other personal
-data on a server.
+Beyond the newsletter and the shared desktop
+features described below (live cursors, chat
+and guestbook), this site does not collect,
+store, or process any other personal data on
+a server.
 
   - No cookies from this site
 
@@ -61,13 +63,48 @@ No personally identifiable information is
 collected. See PostHog's privacy policy at
 https://posthog.com/privacy for details.
 
+LIVE CURSORS, CHAT AND GUESTBOOK
+----------------------------------------
+
+While you have the site open, your browser
+stays connected to a server (a Cloudflare
+Worker) so visitors can see each other.
+
+  - Other visitors online at the same time see
+    your mouse pointer moving on the desktop,
+    with your nickname next to it. Nicknames
+    start as a random "GuestNNNN" and you can
+    change them in Chat.
+  - Cursor positions and who is online are not
+    saved; they disappear when you leave.
+  - Chat messages are shown to everyone online.
+    The latest 100 are kept so newcomers can
+    see recent conversation.
+  - Guestbook entries (the name and message you
+    type) are public and kept until removed.
+  - A total visit count is kept. It is only a
+    number and says nothing about who visited.
+
+Please don't post personal information in the
+chat or guestbook. Messages and entries can be
+removed by the site owner; ask via the contact
+details on this site if you want yours taken
+down.
+
+To stop spam, a scrambled one-way hash of your
+IP address (not the address itself) is used to
+limit guestbook signing to once every 10
+minutes. It is deleted after those 10 minutes.
+
 LOCAL STORAGE
 ----------------------------------------
 
-Your browser's localStorage is used solely to
-remember window positions and font preferences
-on this site. This data never leaves your
-device and is not accessible to anyone else.
+Your browser's localStorage is used to remember
+window positions, font preferences, your chat
+nickname, and Minesweeper settings and best
+times. This data stays on your device, except
+that your nickname is shown to others when you
+are online (see above).
 
 THIRD-PARTY LINKS
 ----------------------------------------

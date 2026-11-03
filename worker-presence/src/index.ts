@@ -109,6 +109,9 @@ export class Room extends DurableObject<Env> {
     if (this.ctx.getWebSockets().length >= MAX_CONNECTIONS) {
       return new Response('Room is full', { status: 503 });
     }
+    // Hashed IPs are only kept while their guestbook limit applies (the
+    // privacy policy promises this), so clear expired ones on every visit
+    this.sql.exec('DELETE FROM sign_limits WHERE ts < ?', Date.now() - SIGN_INTERVAL_MS);
     const conn: Conn = {
       id: crypto.randomUUID().slice(0, 8),
       name: 'Guest',

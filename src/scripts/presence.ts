@@ -273,7 +273,7 @@ function startPresence(): void {
     const online = users.size + 1;
     trayCount.textContent = String(online);
     tray.title = `${online} ${online === 1 ? 'person' : 'people'} on Real Serious Business right now`
-      + (hits ? ` · ${hits.toLocaleString('en-US')} visits so far` : '');
+      + (hits ? ` · ${hits.toLocaleString('en-US')} ${hits === 1 ? 'visit' : 'visits'} so far` : '');
   }
 
   tray?.addEventListener('click', () => {
