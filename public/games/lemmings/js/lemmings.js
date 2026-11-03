@@ -5,7 +5,7 @@ var Lemmings;
         constructor(rootPath) {
             this.rootPath = rootPath;
             this.fileProvider = new Lemmings.FileProvider(rootPath);
-            let configFileReader = this.fileProvider.loadString("config.json");
+            let configFileReader = this.fileProvider.loadString(rootPath + "config.json"); // RSB: resolve against rootPath, not the page URL
             this.configReader = new Lemmings.ConfigReader(configFileReader);
         }
         /** return a game object to controle/run the game */
@@ -7995,7 +7995,7 @@ var Lemmings;
             this.musicPlayer = null;
             this.soundPlayer = null;
             this.game = null;
-            this.gameFactory = new Lemmings.GameFactory("./");
+            this.gameFactory = new Lemmings.GameFactory("/games/lemmings/"); // RSB: absolute, so /games/lemmings works without a trailing slash
             this.stage = null;
             this.elementSoundNumber = null;
             this.elementTrackNumber = null;

@@ -3,6 +3,8 @@
 
 (function () {
   if (window.innerWidth < 768) return;
+  // Inside a desktop window: the parent desktop runs the screensaver
+  if (document.documentElement.classList.contains('rsb-embedded')) return;
 
   const IDLE_MS = 120_000;
   const EMBED   = 'https://www.youtube.com/embed/I0hypYunmwI?autoplay=1&mute=1&loop=1&list=PLfIhUmTWHNva3Tt_L80lErZfEWMROTX5y&index=0';
@@ -41,7 +43,8 @@
     idleTimer = window.setTimeout(show, IDLE_MS);
   }
 
-  ['mousemove', 'mousedown', 'keydown', 'touchstart', 'wheel'].forEach(e =>
+  // rsb:activity is forwarded from windows' iframes by the window manager
+  ['mousemove', 'mousedown', 'keydown', 'touchstart', 'wheel', 'rsb:activity'].forEach(e =>
     document.addEventListener(e, bump, { passive: true })
   );
 

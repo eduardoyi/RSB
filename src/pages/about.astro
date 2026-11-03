@@ -85,7 +85,7 @@ import Window from '../components/Window.astro';
     </div>
 
     <div style="border-top:1px solid #808080;padding:8px 12px;display:flex;justify-content:flex-end;gap:6px;">
-      <button onclick="location.href='/'" style="min-width:75px;">OK</button>
+      <button onclick="this.closest('.w98-window').querySelector('[aria-label=Close]').click()" style="min-width:75px;">OK</button>
     </div>
   </Window>
 </DesktopLayout>

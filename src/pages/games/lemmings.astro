@@ -35,10 +35,9 @@ import Window from '../../components/Window.astro';
 <script is:inline src="/games/lemmings/js/lemmings.js"></script>
 <script is:inline>
   window.addEventListener('load', function () {
+    // lemmings.js is patched to load from /games/lemmings/ (marked "RSB:"),
+    // so it works whether or not the URL has a trailing slash.
     window.lemmings = new Lemmings.GameView();
-    // Override the default "./" base path with an absolute path so it works
-    // regardless of whether the browser URL has a trailing slash.
-    window.lemmings.gameFactory = new Lemmings.GameFactory('/games/lemmings/');
     window.lemmings.elementLevelName = document.getElementById('levelName');
     window.lemmings.gameCanvas       = document.getElementById('gameCanvas');
     window.lemmings.setup();

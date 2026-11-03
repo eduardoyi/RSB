@@ -64,10 +64,34 @@
     );
 }
 
+/* Win98 keeps the normal arrow over the title bar, even while dragging */
 .w98-window .title-bar {
-  cursor: move;
   user-select: none;
   flex-shrink: 0;
+  touch-action: none;
+}
+
+/* Invisible grab strips along every edge and corner */
+.w98-window .resize-edge {
+  position: absolute;
+  z-index: 11;
+  touch-action: none;
+}
+.w98-window .resize-edge[data-edge="n"]  { top: 0;    left: 8px;  right: 8px;  height: 4px; cursor: ns-resize; }
+.w98-window .resize-edge[data-edge="s"]  { bottom: 0; left: 8px;  right: 8px;  height: 4px; cursor: ns-resize; }
+.w98-window .resize-edge[data-edge="e"]  { right: 0;  top: 8px;   bottom: 8px; width: 4px;  cursor: ew-resize; }
+.w98-window .resize-edge[data-edge="w"]  { left: 0;   top: 8px;   bottom: 8px; width: 4px;  cursor: ew-resize; }
+.w98-window .resize-edge[data-edge="nw"] { top: 0;    left: 0;    width: 8px;  height: 8px; cursor: nwse-resize; }
+.w98-window .resize-edge[data-edge="se"] { bottom: 0; right: 0;   width: 8px;  height: 8px; cursor: nwse-resize; }
+.w98-window .resize-edge[data-edge="ne"] { top: 0;    right: 0;   width: 8px;  height: 8px; cursor: nesw-resize; }
+.w98-window .resize-edge[data-edge="sw"] { bottom: 0; left: 0;    width: 8px;  height: 8px; cursor: nesw-resize; }
+
+.w98-window .resize-handle {
+  touch-action: none;
+}
+
+.w98-window.maximized .resize-edge {
+  display: none;
 }
 
 /* Maximized state — position/size set entirely by JS (screenBounds) */
@@ -79,6 +103,140 @@
 
 .w98-window.maximized .title-bar {
   cursor: default;
+}
+
+.w98-window.minimized {
+  display: none;
+}
+
+/* Iframe holding another page inside a desktop window */
+.w98-window .window-frame {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  display: block;
+  background: silver;
+}
+
+/* While dragging or resizing, keep iframes from swallowing mouse events */
+.rsb-dragging iframe {
+  pointer-events: none;
+}
+
+.rsb-dragging {
+  user-select: none;
+}
+
+/* Hold the resize / move cursor everywhere while it's in use */
+.rsb-dragging[style*="--rsb-drag-cursor"],
+.rsb-dragging[style*="--rsb-drag-cursor"] * {
+  cursor: var(--rsb-drag-cursor) !important;
+}
+
+/* Title bar copy that flies between window and taskbar (caption zoom) */
+.caption-zoom {
+  position: fixed;
+  margin: 0;
+  z-index: 10005;
+  pointer-events: none;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Window system menu: Restore / Move / Size / Minimize / Maximize / Close */
+.sys-menu {
+  position: fixed;
+  z-index: 10006;
+  min-width: 170px;
+  padding: 2px;
+  background: silver;
+  box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+.sys-menu button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+  min-width: 0;
+  min-height: 0;
+  padding: 3px 20px;
+  border: none;
+  box-shadow: none;
+  background: none;
+  color: black;
+  font: inherit;
+  text-align: left;
+}
+
+.sys-menu button:not(:disabled):hover,
+.sys-menu button:not(:disabled):focus {
+  background: #000080;
+  color: white;
+  outline: none;
+}
+
+.sys-menu button:disabled {
+  color: grey;
+  text-shadow: 1px 1px 0 #fff;
+}
+
+.sys-menu-key {
+  margin-left: auto;
+}
+
+.sys-menu-sep {
+  height: 2px;
+  margin: 3px 2px;
+  border-top: 1px solid grey;
+  border-bottom: 1px solid #fff;
+}
+
+/* ── Page loaded inside a desktop window's iframe ─────────────────────────
+   Show only the window's content, filling the frame; the parent desktop
+   draws the title bar and border. */
+.rsb-embedded body,
+.rsb-embedded .desktop {
+  background: silver;
+  min-height: 0;
+  height: 100%;
+  padding: 0;
+}
+
+.rsb-embedded .desktop-icons,
+.rsb-embedded .taskbar,
+.rsb-embedded .start-menu,
+.rsb-embedded #subscribe-wrap,
+.rsb-embedded .monitor-frame,
+.rsb-embedded .monitor-bezel,
+.rsb-embedded #boot-overlay {
+  display: none !important;
+}
+
+.rsb-embedded .w98-window {
+  position: fixed !important;
+  inset: 0 !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0;
+  min-height: 0;
+  visibility: visible;
+  z-index: auto;
+}
+
+.rsb-embedded .w98-window .window {
+  padding: 0;
+  box-shadow: none;
+}
+
+.rsb-embedded .w98-window .title-bar,
+.rsb-embedded .w98-window .resize-edge,
+.rsb-embedded .w98-window .resize-handle {
+  display: none;
 }
 
 /* Notepad-style content area */

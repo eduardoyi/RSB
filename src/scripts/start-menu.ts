@@ -24,6 +24,17 @@ if (startBtn && startMenu) {
       startBtn.setAttribute('aria-expanded', 'false');
     }
   });
+
+  // Links now open windows in place instead of loading a new page, and clicks
+  // inside a window's iframe never reach this document — close on both
+  const close = () => {
+    startMenu.classList.remove('open');
+    startBtn.setAttribute('aria-expanded', 'false');
+  };
+  startMenu.addEventListener('click', (e) => {
+    if ((e.target as Element).closest('a[href]')) close();
+  });
+  document.addEventListener('rsb:frame-pointerdown', close);
 }
 
 // Programs submenu: show on hover (CSS handles desktop), toggle on click for mobile

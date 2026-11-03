@@ -6,7 +6,7 @@ import { getCollection } from 'astro:content';
 const programs = await getCollection('programs');
 ---
 <DesktopLayout title="Programs — Real Serious Business">
-  <Window title="Programs" path="/programs" backHref="/" defaultWidth={500} defaultHeight={380} defaultX={120} defaultY={70}>
+  <Window title="Programs" icon="/icons/win98/directory_program_group.ico" path="/programs" backHref="/" defaultWidth={500} defaultHeight={380} defaultX={120} defaultY={70}>
     <div style="display:flex;flex-wrap:wrap;gap:16px;padding:8px;">
       {programs.map((prog) => (
         <a

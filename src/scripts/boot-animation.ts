@@ -47,7 +47,8 @@ async function runBoot(): Promise<void> {
   localStorage.setItem(BOOT_KEY, '1');
 }
 
-// Guard: desktop width only, first visit only
-if (window.innerWidth >= 1100 && !localStorage.getItem(BOOT_KEY)) {
+// Guard: desktop width only, first visit only, never inside a desktop window
+if (window.innerWidth >= 1100 && !localStorage.getItem(BOOT_KEY)
+    && !document.documentElement.classList.contains('rsb-embedded')) {
   runBoot();
 }

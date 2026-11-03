@@ -4,7 +4,7 @@ import Window from '../../components/Window.astro';
 import '../../styles/games.css';
 ---
 <DesktopLayout title="Minesweeper — Real Serious Business">
-  <Window title="Minesweeper" icon="/icons/win98/minesweeper.ico" path="/games/minesweeper" backHref="/games" defaultWidth={320} defaultHeight={440} defaultX={80} defaultY={30} noBodyScroll={true}>
+  <Window title="Minesweeper" icon="/icons/win98/minesweeper.ico" path="/games/minesweeper" backHref="/games" defaultWidth={322} defaultHeight={440} defaultX={80} defaultY={30} noBodyScroll={true} resizable={false}>
     <div class="ms-wrapper">
 
       <!-- Win98-style difficulty toolbar -->
@@ -62,10 +62,16 @@ import '../../styles/games.css';
         canvas.width  = 30 * cols + 20;
         canvas.height = 30 * rows + 80;
 
-        var wEl = document.querySelector('.w98-window[data-window-path="/games/minesweeper"]');
-        if (wEl) {
-          wEl.style.width  = (canvas.width  + 32) + 'px';
-          wEl.style.height = (canvas.height + 90) + 'px';
+        // Grow or shrink the window to fit the board, like the real one
+        var winW = canvas.width + 32, winH = canvas.height + 90;
+        if (document.documentElement.classList.contains('rsb-embedded')) {
+          parent.__rsbShell.resizeFrame(frameElement, winW, winH);
+        } else {
+          var wEl = document.querySelector('.w98-window[data-window-path="/games/minesweeper"]');
+          if (wEl) {
+            wEl.style.width  = winW + 'px';
+            wEl.style.height = winH + 'px';
+          }
         }
 
         clearInterval(gametimer);
@@ -79,8 +85,47 @@ import '../../styles/games.css';
       });
     });
 
-    // Touch-to-flag: when flag mode is on, a tap flags the cell instead of revealing it
     var msCanvas = document.getElementById('jsminesweeper');
+
+    // Runs before minesweeper.js's own mousedown handler (capture phase on the
+    // wrapper). Classic rule: the first click is never a mine; the mine moves
+    // to the first free square from the top-left. Also ignores clicks in the
+    // margin right of / below the grid, which minesweeper.js would throw on.
+    msCanvas.parentElement.addEventListener('mousedown', function (e) {
+      if (e.target !== msCanvas) return;
+      var rect = msCanvas.getBoundingClientRect();
+      var i = Math.floor((e.clientX - rect.left - xo) / c);
+      var j = Math.floor((e.clientY - rect.top  - yo) / c);
+      if (i >= size.w || j >= size.h) { e.stopPropagation(); return; }
+      if (i < 0 || j < 0 || e.button !== 0 || gametimer !== null || end) return;
+      var started = mines.some(function (col) { return col.some(function (m) { return m.isDown; }); });
+      if (!started && mines[i][j].isMine) moveMine(i, j);
+    }, true);
+
+    function moveMine(i, j) {
+      search:
+      for (var y = 0; y < size.h; y++) {
+        for (var x = 0; x < size.w; x++) {
+          if (!mines[x][y].isMine && (x !== i || y !== j)) { mines[x][y].isMine = true; break search; }
+        }
+      }
+      mines[i][j].isMine = false;
+      // Recount neighbouring mines for every square
+      for (var x = 0; x < size.w; x++) {
+        for (var y = 0; y < size.h; y++) {
+          var n = 0;
+          for (var dx = -1; dx <= 1; dx++) {
+            for (var dy = -1; dy <= 1; dy++) {
+              var m = mines[x + dx] && mines[x + dx][y + dy];
+              if ((dx || dy) && m && m.isMine) n++;
+            }
+          }
+          mines[x][y].weight = n;
+        }
+      }
+    }
+
+    // Touch-to-flag: when flag mode is on, a tap flags the cell instead of revealing it
     msCanvas.addEventListener('touchend', function (e) {
       var flagMode = document.getElementById('ms-flag-toggle').checked;
       if (!flagMode) return; // let the default tap-as-click handle reveal

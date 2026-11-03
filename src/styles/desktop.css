@@ -109,8 +109,9 @@
   align-items: center;
   gap: 5px;
   padding: 2px 8px;
-  max-width: 180px;
-  min-width: 100px;
+  /* Shrink to share the taskbar as more windows open */
+  flex: 0 1 180px;
+  min-width: 40px;
   font-size: 12px;
   font-family: Arial, sans-serif;
   -webkit-font-smoothing: auto;

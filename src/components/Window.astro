@@ -30,12 +30,34 @@ const {
 <div
   class={`w98-window${noBodyScroll ? ' no-body-scroll' : ''}${className ? ' ' + className : ''}`}
   data-window-path={path}
+  data-title={title}
+  data-icon={icon}
+  data-resizable={String(resizable)}
   data-default-width={defaultWidth}
   data-default-height={defaultHeight}
   data-default-x={defaultX}
   data-default-y={defaultY}
   style={`width:${defaultWidth}px;height:${defaultHeight}px;left:${defaultX}px;top:${defaultY}px;`}
 >
+  <script is:inline>
+    // Inside a desktop window's iframe: hand this window's title and size to
+    // the parent desktop now, before the rest of the page (and its scripts) load.
+    (function (el) {
+      if (!document.documentElement.classList.contains('rsb-embedded')) return;
+      try {
+        parent.__rsbShell.frameReady(frameElement, {
+          path: location.pathname + location.search,
+          docTitle: document.title,
+          key: el.dataset.windowPath,
+          title: el.dataset.title,
+          icon: el.dataset.icon,
+          width: Number(el.dataset.defaultWidth),
+          height: Number(el.dataset.defaultHeight),
+          resizable: el.dataset.resizable !== 'false',
+        });
+      } catch (e) {}
+    })(document.currentScript.parentElement);
+  </script>
   <div class="window" style="width:100%;height:100%;display:flex;flex-direction:column;">
     <div class="title-bar">
       <div class="title-bar-text">
@@ -54,14 +76,3 @@ const {
     {resizable && <div class="resize-handle" aria-hidden="true"></div>}
   </div>
 </div>
-
-<script>
-  document.querySelectorAll<HTMLButtonElement>('[aria-label="Close"][data-back-href]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      window.location.href = btn.dataset.backHref ?? '/';
-    });
-  });
-  document.querySelectorAll<HTMLButtonElement>('[aria-label="Minimize"]').forEach(btn => {
-    btn.addEventListener('click', (e) => e.preventDefault());
-  });
-</script>

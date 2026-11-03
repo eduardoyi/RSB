@@ -16,6 +16,7 @@ const { prog } = Astro.props;
 <DesktopLayout title={`${prog.data.title} — Real Serious Business`} description={prog.data.description}>
   <Window
     title={prog.data.title}
+    icon="/icons/win98/executable.ico"
     path={`/programs/${prog.data.id}`}
     backHref="/programs"
     defaultWidth={480}
