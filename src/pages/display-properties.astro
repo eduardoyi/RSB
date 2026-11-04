@@ -1,0 +1,381 @@
+---
+import DesktopLayout from '../layouts/DesktopLayout.astro';
+import Window from '../components/Window.astro';
+import { WALLPAPERS } from '../scripts/display-settings';
+---
+<DesktopLayout title="Display Properties — Real Serious Business">
+  <Window
+    title="Display Properties"
+    icon="/icons/win98/display_properties.ico"
+    path="/display-properties"
+    backHref="/"
+    defaultWidth={406}
+    defaultHeight={448}
+    noBodyScroll={true}
+    resizable={false}
+  >
+    <div class="dp" id="dp">
+      <menu role="tablist" class="dp-tabs">
+        <li role="tab" aria-selected="true"><a href="#" data-tab="background">Background</a></li>
+        <li role="tab"><a href="#" data-tab="screensaver">Screen Saver</a></li>
+      </menu>
+
+      <div class="dp-panel" role="tabpanel" data-panel="background">
+        <div class="dp-monitor"><div class="dp-screen" id="dp-preview"></div></div>
+        <p class="dp-label">Wallpaper — select a picture:</p>
+        <div class="dp-row">
+          <ul class="dp-list" id="dp-wallpapers" role="listbox" tabindex="0" aria-label="Wallpaper">
+            {WALLPAPERS.map(w => (
+              <li role="option" data-id={w.id}>
+                {w.src
+                  ? <img src="/icons/win98/file_blue_grad_paint.ico" alt="" width="16" height="16" />
+                  : <span class="dp-noicon"></span>}
+                {w.name}
+              </li>
+            ))}
+          </ul>
+          <div class="dp-side">
+            <button type="button" disabled>Browse...</button>
+            <button type="button" disabled>Pattern...</button>
+            <label for="dp-mode">Display:</label>
+            <select id="dp-mode">
+              <option value="center">Center</option>
+              <option value="tile">Tile</option>
+              <option value="stretch">Stretch</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="dp-panel" role="tabpanel" data-panel="screensaver" hidden>
+        <div class="dp-monitor"><div class="dp-screen dp-saver" id="dp-saver-preview"><span>Real Serious TV</span></div></div>
+        <fieldset class="dp-fieldset">
+          <legend>Screen Saver</legend>
+          <div class="dp-saver-row">
+            <select id="dp-saver" aria-label="Screen saver">
+              <option value="off">(None)</option>
+              <option value="on">Real Serious TV</option>
+            </select>
+            <label for="dp-wait">Wait:</label>
+            <input type="number" id="dp-wait" min="1" max="60" />
+            <span>minutes</span>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="dp-buttons">
+        <button type="button" id="dp-ok">OK</button>
+        <button type="button" id="dp-cancel">Cancel</button>
+        <button type="button" id="dp-apply" disabled>Apply</button>
+      </div>
+    </div>
+  </Window>
+</DesktopLayout>
+
+<script>
+  import {
+    WALLPAPERS, applyWallpaper, readScreensaver, readWallpaper, saveScreensaver, saveWallpaper,
+    type WallpaperMode,
+  } from '../scripts/display-settings';
+
+  const root = document.getElementById('dp')!;
+  const list = document.getElementById('dp-wallpapers')!;
+  const preview = document.getElementById('dp-preview')!;
+  const modeSelect = document.getElementById('dp-mode') as HTMLSelectElement;
+  const saverSelect = document.getElementById('dp-saver') as HTMLSelectElement;
+  const waitInput = document.getElementById('dp-wait') as HTMLInputElement;
+  const saverPreview = document.getElementById('dp-saver-preview')!;
+  const applyBtn = document.getElementById('dp-apply') as HTMLButtonElement;
+
+  let wallpaper = readWallpaper();
+  let saver = readScreensaver();
+
+  // ── Tabs ───────────────────────────────────────────────────────────────
+  root.querySelectorAll<HTMLAnchorElement>('[data-tab]').forEach(tab => {
+    tab.addEventListener('click', (e) => {
+      e.preventDefault();
+      root.querySelectorAll('[role="tab"]').forEach(li => li.setAttribute('aria-selected', 'false'));
+      tab.parentElement!.setAttribute('aria-selected', 'true');
+      root.querySelectorAll<HTMLElement>('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== tab.dataset.tab; });
+    });
+  });
+
+  // ── Background ─────────────────────────────────────────────────────────
+
+  // Center and Tile show the picture at its real size, so scale the preview
+  // by how much smaller its screen is than the actual desktop
+  const desktopWidth = (document.documentElement.classList.contains('rsb-embedded') ? parent : window).innerWidth;
+  let naturalWidth = 1536;
+
+  function renderPreview(): void {
+    applyWallpaper(preview, wallpaper);
+    const scale = preview.clientWidth / desktopWidth;
+    preview.style.backgroundSize = wallpaper.mode === 'stretch' ? 'cover' : `${Math.round(naturalWidth * scale)}px auto`;
+    const src = WALLPAPERS.find(w => w.id === wallpaper.id)?.src;
+    if (src) {
+      const img = new Image();
+      img.onload = () => {
+        if (img.naturalWidth !== naturalWidth) { naturalWidth = img.naturalWidth; renderPreview(); }
+      };
+      img.src = src;
+    }
+  }
+
+  function renderBackground(): void {
+    list.querySelectorAll<HTMLElement>('[role="option"]').forEach(li => {
+      const selected = li.dataset.id === wallpaper.id;
+      li.setAttribute('aria-selected', String(selected));
+      if (selected) li.scrollIntoView({ block: 'nearest' });
+    });
+    modeSelect.value = wallpaper.mode;
+    modeSelect.disabled = wallpaper.id === 'none';
+    renderPreview();
+  }
+
+  function changed(): void {
+    applyBtn.disabled = false;
+  }
+
+  list.addEventListener('click', (e) => {
+    const li = (e.target as HTMLElement).closest<HTMLElement>('[role="option"]');
+    if (!li) return;
+    wallpaper = { ...wallpaper, id: li.dataset.id! };
+    renderBackground();
+    changed();
+  });
+
+  list.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+    e.preventDefault();
+    const i = WALLPAPERS.findIndex(w => w.id === wallpaper.id) + (e.key === 'ArrowDown' ? 1 : -1);
+    if (i < 0 || i >= WALLPAPERS.length) return;
+    wallpaper = { ...wallpaper, id: WALLPAPERS[i].id };
+    renderBackground();
+    changed();
+  });
+
+  modeSelect.addEventListener('change', () => {
+    wallpaper = { ...wallpaper, mode: modeSelect.value as WallpaperMode };
+    renderPreview();
+    changed();
+  });
+
+  // ── Screen saver ───────────────────────────────────────────────────────
+
+  function renderSaver(): void {
+    saverSelect.value = saver.enabled ? 'on' : 'off';
+    waitInput.value = String(saver.minutes);
+    waitInput.disabled = !saver.enabled;
+    saverPreview.classList.toggle('off', !saver.enabled);
+  }
+
+  saverSelect.addEventListener('change', () => {
+    saver = { ...saver, enabled: saverSelect.value === 'on' };
+    renderSaver();
+    changed();
+  });
+
+  waitInput.addEventListener('change', () => {
+    const minutes = Math.min(60, Math.max(1, Math.round(Number(waitInput.value) || 2)));
+    saver = { ...saver, minutes };
+    renderSaver();
+    changed();
+  });
+
+  // ── OK / Cancel / Apply ────────────────────────────────────────────────
+
+  function apply(): void {
+    saveWallpaper(wallpaper);
+    saveScreensaver(saver);
+    applyBtn.disabled = true;
+  }
+
+  function close(): void {
+    root.closest('.w98-window')?.querySelector<HTMLButtonElement>('.title-bar [aria-label="Close"]')?.click();
+  }
+
+  applyBtn.addEventListener('click', apply);
+  document.getElementById('dp-ok')!.addEventListener('click', () => {
+    if (!applyBtn.disabled) apply();
+    close();
+  });
+  document.getElementById('dp-cancel')!.addEventListener('click', close);
+
+  renderBackground();
+  renderSaver();
+</script>
+
+<style is:global>
+  .dp {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 8px 8px 6px;
+    background: silver;
+    font-size: 11px;
+  }
+
+  .dp-tabs {
+    margin: 0 0 -2px;
+  }
+
+  .dp-tabs a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .dp-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 10px;
+    background: silver;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+  }
+
+  .dp-panel[hidden] {
+    display: none;
+  }
+
+  /* The little monitor showing a preview */
+  .dp-monitor {
+    align-self: center;
+    position: relative;
+    width: 184px;
+    height: 136px;
+    margin-bottom: 26px;
+    padding: 12px 14px 14px;
+    background: #d4cfc0;
+    border-radius: 6px 6px 3px 3px;
+    box-shadow: inset -2px -2px #8c8775, inset 2px 2px #f2efe6, 1px 1px 0 #555;
+  }
+
+  .dp-monitor::after {
+    /* Stand */
+    content: '';
+    position: absolute;
+    left: 62px;
+    bottom: -22px;
+    width: 60px;
+    height: 20px;
+    background: linear-gradient(#bdb7a5, #d4cfc0 40%);
+    clip-path: polygon(25% 0, 75% 0, 100% 100%, 0 100%);
+    box-shadow: 0 1px 0 #555;
+  }
+
+  .dp-screen {
+    width: 100%;
+    height: 100%;
+    background-color: #008080;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: inset 1px 1px #555, inset -1px -1px #fff;
+  }
+
+  .dp-screen[data-wallpaper="tile"] {
+    background-repeat: repeat;
+    background-position: 0 0;
+  }
+
+  .dp-saver {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    color: #ffde59;
+    font: bold 12px 'Times New Roman', serif;
+    letter-spacing: 1px;
+  }
+
+  .dp-saver.off {
+    background: #008080;
+  }
+
+  .dp-saver.off span {
+    display: none;
+  }
+
+  .dp-label {
+    margin: 0 0 4px;
+  }
+
+  .dp-row {
+    display: flex;
+    gap: 10px;
+    min-height: 0;
+  }
+
+  .dp-list {
+    flex: 1;
+    height: 104px;
+    margin: 0;
+    padding: 2px;
+    list-style: none;
+    overflow-y: auto;
+    background: #fff;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+    outline: none;
+  }
+
+  .dp-list li {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 1px 3px;
+    cursor: default;
+    white-space: nowrap;
+  }
+
+  .dp-list li img,
+  .dp-noicon {
+    width: 16px;
+    height: 16px;
+    image-rendering: pixelated;
+  }
+
+  .dp-list li[aria-selected="true"] {
+    background: #000080;
+    color: #fff;
+  }
+
+  .dp-list:focus li[aria-selected="true"] {
+    outline: 1px dotted #fff;
+    outline-offset: -1px;
+  }
+
+  .dp-side {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 92px;
+  }
+
+  .dp-side label {
+    margin-top: 4px;
+  }
+
+  .dp-fieldset {
+    margin: 0;
+  }
+
+  .dp-saver-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .dp-saver-row select {
+    flex: 1;
+  }
+
+  .dp-saver-row input {
+    width: 46px;
+  }
+
+  .dp-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    padding-top: 8px;
+  }
+</style>

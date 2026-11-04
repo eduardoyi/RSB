@@ -16,7 +16,7 @@
 // on minimize / maximize / restore, a system menu on the title bar icon and on
 // right-click, and clicking the desktop deactivates every window.
 
-export {};
+import { openExternal } from './dialup';
 
 interface WindowState {
   x: number;
@@ -39,6 +39,8 @@ interface FrameMeta {
 
 interface ShellApi {
   open(href: string): void;
+  /** Open an outside link in a new tab, via the dial-up dialog. */
+  openExternal(href: string): void;
   closeFrame(frame: Element | null): void;
   /** Size a window so its content area is exactly width × height. `target`
    *  is the window's iframe, or the window element for the page's own window. */
@@ -201,10 +203,13 @@ function clickedLink(e: MouseEvent): URL | null {
   if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return null;
   const a = (e.target as Element | null)?.closest?.('a[href]') as HTMLAnchorElement | null;
   if (!a || a.hasAttribute('download')) return null;
-  if (a.target && a.target !== '_self') return null;
   if (a.getAttribute('href')!.startsWith('#')) return null;
   const url = new URL(a.href);
   if (!/^https?:$/.test(url.protocol)) return null;
+  // Explicit targets are left alone, except new-tab links to other sites,
+  // which get the dial-up treatment like any outside link
+  const external = url.origin !== location.origin;
+  if (a.target && a.target !== '_self' && !(a.target === '_blank' && external)) return null;
   if (url.origin === location.origin && url.hash && url.pathname === location.pathname) return null;
   return url;
 }
@@ -738,6 +743,7 @@ function runDesktop(): void {
 
   const shell: ShellApi = {
     open,
+    openExternal,
 
     closeFrame(frameEl) {
       const w = windows.find(o => o.frame === frameEl);
@@ -849,10 +855,9 @@ function runDesktop(): void {
     const url = clickedLink(e);
     if (!url) return;
     if (url.origin !== location.origin) {
-      // Same as links inside iframe windows: don't tear down the desktop
-      if (!(e.target as Element).closest('.w98-window')) return;
+      // Outside links open in a new tab so the desktop stays put
       e.preventDefault();
-      window.open(url.href, '_blank', 'noopener');
+      openExternal(url.href);
     } else if (isWindowable(url.pathname)) {
       e.preventDefault();
       open(url.href);
@@ -915,7 +920,7 @@ function runEmbedded(shell: ShellApi): void {
     e.preventDefault();
     if (url.origin !== location.origin) {
       // Most sites refuse to load in a frame; open them in a browser tab
-      window.open(url.href, '_blank', 'noopener');
+      shell.openExternal(url.href);
     } else if (isWindowable(url.pathname)) {
       shell.open(url.href);
     } else {

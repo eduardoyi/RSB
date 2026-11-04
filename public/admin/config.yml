@@ -75,7 +75,9 @@ collections:
       - { label: Title, name: title, widget: string }
       - { label: Version, name: version, widget: string }
       - { label: Description, name: description, widget: text }
-      - { label: Splash Image, name: splash_image, widget: image, required: false }
+      - { label: Splash Image, name: splash_image, widget: image, required: false, hint: "Small icon for the Start menu and Programs folder" }
+      - { label: Launcher Image, name: launcher_image, widget: image, required: false, hint: "Wide 16:9 artwork shown when the program starts" }
+      - { label: Launch Button Label, name: launch_label, widget: string, required: false, default: "Launch", hint: "e.g. Play" }
       - { label: Launch URL, name: launch_url, widget: string, hint: "Full URL to the program" }
 
   - name: redirects

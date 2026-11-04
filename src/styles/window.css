@@ -191,6 +191,78 @@
   margin-left: auto;
 }
 
+/* Dial-up "Connecting…" dialog before outside links (src/scripts/dialup.ts) */
+.dialup {
+  position: fixed;
+  inset: 0;
+  z-index: 10010;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dialup-window {
+  width: 340px;
+}
+
+.dialup-body {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: 10px 12px;
+  padding: 12px 12px 8px;
+  font-size: 11px;
+}
+
+.dialup-icon {
+  image-rendering: pixelated;
+  animation: dialup-blink 0.5s steps(2, jump-none) infinite alternate;
+}
+
+@keyframes dialup-blink {
+  from { opacity: 1; }
+  to { opacity: 0.55; }
+}
+
+.dialup-text p {
+  margin: 0 0 6px;
+}
+
+.dialup-actions {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Flyout submenus (desktop right-click menu) */
+.sys-menu-sub {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.sys-menu-arrow {
+  margin-left: auto;
+  font-size: 9px;
+}
+.sys-menu-sub > .sys-menu {
+  display: none;
+  position: absolute;
+  top: -3px;
+  left: calc(100% - 3px);
+}
+.sys-menu-flip .sys-menu-sub > .sys-menu {
+  left: auto;
+  right: calc(100% - 3px);
+}
+.sys-menu-sub:hover > .sys-menu,
+.sys-menu-sub:focus-within > .sys-menu {
+  display: flex;
+}
+.sys-menu-sub:hover > button {
+  background: #000080;
+  color: white;
+}
+
 .sys-menu-sep {
   height: 2px;
   margin: 3px 2px;

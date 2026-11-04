@@ -6,6 +6,23 @@
   padding-bottom: 40px; /* taskbar height */
 }
 
+/* Wallpaper from Display Properties, over the teal background colour */
+.desktop[data-wallpaper] {
+  background-attachment: fixed;
+}
+.desktop[data-wallpaper="stretch"] {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.desktop[data-wallpaper="center"] {
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.desktop[data-wallpaper="tile"] {
+  background-repeat: repeat;
+}
+
 .desktop-icons {
   display: flex;
   flex-direction: column;

@@ -35,7 +35,9 @@ const programs = defineCollection({
     title: z.string(),
     version: z.string(),
     description: z.string(),
-    splash_image: z.string().optional(),
+    splash_image: z.string().optional(),       // icon, in Start menu and Programs
+    launcher_image: z.string().optional(),     // 16:9 artwork for the launcher window
+    launch_label: z.string().default('Launch'),
     launch_url: z.string().url(),
   }),
 });

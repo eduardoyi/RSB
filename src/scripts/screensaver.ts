@@ -1,18 +1,21 @@
-// Screensaver: fullscreen YouTube embed after 2 min idle (desktop ≥768px).
+// Screensaver: fullscreen YouTube embed after a few idle minutes (desktop
+// ≥768px). On/off and the wait come from Display Properties > Screen Saver.
 // Any input dismisses it.
+
+import { SCREENSAVER_KEY, readScreensaver } from './display-settings';
 
 (function () {
   if (window.innerWidth < 768) return;
   // Inside a desktop window: the parent desktop runs the screensaver
   if (document.documentElement.classList.contains('rsb-embedded')) return;
 
-  const IDLE_MS = 120_000;
   const EMBED   = 'https://www.youtube.com/embed/I0hypYunmwI?autoplay=1&mute=1&loop=1&list=PLfIhUmTWHNva3Tt_L80lErZfEWMROTX5y&index=0';
 
+  let settings = readScreensaver();
   let overlay: HTMLDivElement | null = null;
 
   function show() {
-    if (overlay) return;
+    if (overlay || !settings.enabled) return;
     overlay = document.createElement('div');
     overlay.style.cssText = 'position:fixed;inset:0;z-index:99999;background:#000;cursor:none;';
 
@@ -35,12 +38,16 @@
   let idleTimer = 0;
   let hideTimer = 0;
 
-  function bump() {
+  function startIdleTimer() {
     clearTimeout(idleTimer);
+    if (settings.enabled) idleTimer = window.setTimeout(show, settings.minutes * 60_000);
+  }
+
+  function bump() {
     // Delay hiding so the screensaver is briefly visible before dismissing
     clearTimeout(hideTimer);
     hideTimer = window.setTimeout(hide, 1000);
-    idleTimer = window.setTimeout(show, IDLE_MS);
+    startIdleTimer();
   }
 
   // rsb:activity is forwarded from windows' iframes by the window manager
@@ -48,6 +55,13 @@
     document.addEventListener(e, bump, { passive: true })
   );
 
+  // Settings changed in Display Properties
+  window.addEventListener('storage', (e) => {
+    if (e.key !== SCREENSAVER_KEY) return;
+    settings = readScreensaver();
+    startIdleTimer();
+  });
+
   // Start the idle timer on load (no hide delay needed on first run)
-  idleTimer = window.setTimeout(show, IDLE_MS);
+  startIdleTimer();
 })();

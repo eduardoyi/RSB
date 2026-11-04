@@ -139,6 +139,7 @@ export default defineConfig({
         !page.includes('/shutdown') &&
         !page.includes('/ms-dos') &&
         !page.includes('/paint') &&
+        !page.includes('/display-properties') &&
         !page.includes('/games/'),
     }),
     cloudflareRedirects(),

@@ -12,71 +12,411 @@ export async function getStaticPaths() {
 }
 
 const { prog } = Astro.props;
+const { title, version, description, splash_image, launcher_image, launch_label, launch_url } = prog.data;
+const host = new URL(launch_url).hostname.replace(/^www\./, '');
 ---
-<DesktopLayout title={`${prog.data.title} — Real Serious Business`} description={prog.data.description}>
+<DesktopLayout title={`${title} — Real Serious Business`} description={description} ogImage={launcher_image}>
   <Window
-    title={prog.data.title}
-    icon="/icons/win98/executable.ico"
+    title={title}
+    icon={splash_image ?? '/icons/win98/executable.ico'}
     path={`/programs/${prog.data.id}`}
     backHref="/programs"
-    defaultWidth={480}
-    defaultHeight={400}
-    defaultX={100}
-    defaultY={60}
+    defaultWidth={720}
+    defaultHeight={433}
+    noBodyScroll={true}
+    resizable={false}
   >
-    <div style="display:flex;flex-direction:column;align-items:center;padding:16px;gap:10px;height:100%;">
-      {prog.data.splash_image && (
-        <img
-          src={prog.data.splash_image}
-          alt={prog.data.title}
-          style="max-width:200px;max-height:100px;object-fit:contain;image-rendering:pixelated;"
-        />
-      )}
-      <div style="text-align:center;">
-        <h2 style="margin:0 0 2px;font-family:Arial,sans-serif;-webkit-font-smoothing:antialiased;">{prog.data.title}</h2>
-        <p style="margin:0;color:#666;font-size:12px;font-family:Arial,sans-serif;">Version {prog.data.version}</p>
-      </div>
-      <p style="text-align:center;max-width:320px;font-size:13px;font-family:Arial,sans-serif;-webkit-font-smoothing:antialiased;margin:0;">{prog.data.description}</p>
+    <!-- CD-ROM autorun-style launcher: artwork fades in, the title drops in,
+         a loading bar fills, then the menu appears. Click to skip. -->
+    <div
+      class:list={['launcher', { 'launcher-no-art': !launcher_image }]}
+      id="launcher"
+      data-state="loading"
+      data-title={title}
+      style={launcher_image ? `--art: url("${launcher_image}")` : undefined}
+    >
+      <div class="launcher-art" aria-hidden="true"></div>
+      <div class="launcher-shade" aria-hidden="true"></div>
 
-      <!-- Fake loading bar -->
-      <div class="progress-bar" style="width:280px;">
-        <div class="progress-bar-fill" id="loading-bar" style="width:0%;transition:width 0.05s linear;"></div>
-      </div>
-      <p id="loading-label" style="font-size:11px;color:#444;margin:0;">Loading...</p>
+      <header class="launcher-title">
+        {!launcher_image && splash_image && <img class="launcher-logo" src={splash_image} alt="" />}
+        <h1>{title}</h1>
+        <p>{description}</p>
+      </header>
 
-      <a
-        href={prog.data.launch_url}
-        id="launch-btn"
-        class="button"
-        style="display:none;"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Launch
-      </a>
+      <div class="launcher-loading" aria-live="polite">
+        <div class="launcher-progress"><span id="launcher-fill"></span></div>
+        <p id="launcher-status">Reading CD-ROM...</p>
+      </div>
+
+      <nav class="launcher-menu" aria-label={`${title} menu`}>
+        <a class="launcher-btn" href={launch_url} target="_blank" rel="noopener">{launch_label}</a>
+        <button type="button" class="launcher-btn" data-action="about">About</button>
+        <button type="button" class="launcher-btn" data-action="exit">Exit</button>
+      </nav>
+
+      <footer class="launcher-version">Version {version}</footer>
+
+      <div class="launcher-about" id="launcher-about" hidden>
+        <div class="launcher-about-box" role="dialog" aria-labelledby="launcher-about-title">
+          <div class="launcher-about-titlebar" id="launcher-about-title">About {title}</div>
+          <div class="launcher-about-body">
+            {splash_image && <img src={splash_image} alt="" width="48" height="48" />}
+            <div>
+              <p><b>{title}</b><br />Version {version}</p>
+              <p>{description}</p>
+              <p class="launcher-about-host">{host}</p>
+            </div>
+          </div>
+          <div class="launcher-about-buttons">
+            <button type="button" data-action="about-close">OK</button>
+          </div>
+        </div>
+      </div>
     </div>
   </Window>
 </DesktopLayout>
 
 <script>
-  const bar = document.getElementById('loading-bar') as HTMLElement | null;
-  const label = document.getElementById('loading-label') as HTMLElement | null;
-  const btn = document.getElementById('launch-btn') as HTMLElement | null;
+  const root = document.getElementById('launcher')!;
+  const fill = document.getElementById('launcher-fill')!;
+  const status = document.getElementById('launcher-status')!;
+  const about = document.getElementById('launcher-about')!;
+  const title = root.dataset.title ?? '';
 
-  if (bar && label && btn) {
-    let progress = 0;
-    const interval = setInterval(() => {
-      progress += Math.random() * 8 + 2;
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(interval);
-        label.textContent = 'Ready.';
-        btn.style.display = 'inline-block';
-      }
-      bar.style.width = progress + '%';
-      if (progress < 100) {
-        label.textContent = `Loading... ${Math.floor(progress)}%`;
-      }
-    }, 80);
+  const LOAD_MS = 1800;
+  const ART_WAIT_MS = 4000;  // give up waiting for a slow picture after this
+
+  // Start the fade-in when the artwork has arrived, not before
+  const artUrl = /url\("(.+)"\)/.exec(root.style.getPropertyValue('--art'))?.[1];
+  const artLoaded = new Promise<void>(resolve => {
+    const done = () => { root.dataset.art = 'ready'; resolve(); };
+    if (!artUrl) return done();
+    const img = new Image();
+    img.onload = img.onerror = done;
+    img.src = artUrl;
+    setTimeout(done, ART_WAIT_MS);
+  });
+  const STAGES: [number, string][] = [
+    [0, 'Reading CD-ROM...'],
+    [0.3, 'Loading artwork...'],
+    [0.65, `Starting ${title}...`],
+  ];
+
+  function ready(): void {
+    if (root.dataset.state === 'ready') return;
+    root.dataset.state = 'ready';
+    fill.style.width = '100%';
+    root.querySelector<HTMLElement>('.launcher-btn')?.focus({ preventScroll: true });
   }
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.add('launcher-still');
+    ready();
+  } else {
+    const start = performance.now() + 400;  // let the artwork start fading in
+    const tick = (now: number) => {
+      if (root.dataset.state === 'ready') return;
+      const t = Math.min(1, Math.max(0, (now - start) / LOAD_MS));
+      // Loading bars of the era moved in fits and starts
+      fill.style.width = `${Math.round(t * 20) * 5}%`;
+      const stage = [...STAGES].reverse().find(([at]) => t >= at);
+      if (stage && status.textContent !== stage[1]) status.textContent = stage[1];
+      if (t < 1) requestAnimationFrame(tick);
+      else artLoaded.then(() => setTimeout(ready, 250));
+    };
+    requestAnimationFrame(tick);
+  }
+
+  // Click anywhere to skip the intro
+  root.addEventListener('click', (e) => {
+    if (root.dataset.state !== 'ready' && !(e.target as HTMLElement).closest('a, button')) ready();
+  });
+
+  root.querySelector('[data-action="about"]')!.addEventListener('click', () => {
+    about.hidden = false;
+    about.querySelector('button')!.focus();
+  });
+  about.querySelector('[data-action="about-close"]')!.addEventListener('click', () => { about.hidden = true; });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') about.hidden = true; });
+
+  root.querySelector('[data-action="exit"]')!.addEventListener('click', () => {
+    root.closest('.w98-window')?.querySelector<HTMLButtonElement>('.title-bar [aria-label="Close"]')?.click();
+  });
 </script>
+
+<style is:global>
+  .launcher {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    background: #000;
+    color: #fff;
+    font-family: Georgia, 'Times New Roman', serif;
+    user-select: none;
+  }
+
+  /* Fades in once the picture has downloaded (data-art="ready") */
+  .launcher-art {
+    position: absolute;
+    inset: 0;
+    background: var(--art) center / cover no-repeat;
+    opacity: 0;
+  }
+
+  .launcher[data-art="ready"] .launcher-art {
+    animation: launcher-art 3.2s ease-out both;
+  }
+
+  .launcher-no-art .launcher-art {
+    background: radial-gradient(circle at 30% 40%, #1d3a8a, #000033 70%);
+  }
+
+  @keyframes launcher-art {
+    from { opacity: 0; transform: scale(1.08); }
+    35%  { opacity: 1; }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* Darken the left (title) and right (menu) edges and the bottom */
+  .launcher-shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0) 62%, rgba(0, 0, 0, 0.65) 100%),
+      linear-gradient(0deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 30%);
+  }
+
+  .launcher-title {
+    position: absolute;
+    top: 22px;
+    left: 26px;
+    max-width: 52%;
+    animation: launcher-drop 0.7s 0.5s cubic-bezier(0.2, 0.8, 0.3, 1.2) both;
+  }
+
+  @keyframes launcher-drop {
+    from { opacity: 0; transform: translateY(-18px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  .launcher-title h1 {
+    margin: 0 0 8px;
+    font-size: 32px;
+    line-height: 1.05;
+    color: #ffd56b;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 0 #4a2e00, 2px 3px 0 #000, 0 0 14px rgba(0, 0, 0, 0.9);
+  }
+
+  .launcher-title p {
+    margin: 0;
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.4;
+    text-shadow: 1px 1px 2px #000, 0 0 8px rgba(0, 0, 0, 0.9);
+  }
+
+  .launcher-logo {
+    width: 72px;
+    height: 72px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .launcher-loading {
+    position: absolute;
+    left: 50%;
+    bottom: 26px;
+    width: 46%;
+    transform: translateX(-50%);
+    text-align: center;
+    transition: opacity 0.3s;
+  }
+
+  .launcher[data-state="ready"] .launcher-loading {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Chunky Win98 progress bar */
+  .launcher-progress {
+    height: 18px;
+    padding: 2px;
+    background: silver;
+    box-shadow: inset -1px -1px #fff, inset 1px 1px grey, inset -2px -2px #dfdfdf, inset 2px 2px #0a0a0a;
+  }
+
+  .launcher-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: repeating-linear-gradient(90deg, #000080 0 9px, transparent 9px 11px);
+  }
+
+  .launcher-loading p {
+    margin: 6px 0 0;
+    font: 12px Arial, sans-serif;
+    text-shadow: 1px 1px 2px #000;
+  }
+
+  .launcher-menu {
+    position: absolute;
+    top: 50%;
+    right: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transform: translateY(-50%);
+  }
+
+  .launcher-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 150px;
+    height: 36px;
+    padding: 0 12px;
+    background: silver;
+    color: #000;
+    font: bold 14px Arial, sans-serif;
+    text-decoration: none;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf, 2px 3px 6px rgba(0, 0, 0, 0.5);
+    /* Hidden until loading finishes, then slide in one by one */
+    opacity: 0;
+    transform: translateX(24px);
+    transition: opacity 0.35s, transform 0.35s cubic-bezier(0.2, 0.8, 0.3, 1.2);
+  }
+
+  .launcher-btn:first-child {
+    color: #000080;
+  }
+
+  .launcher[data-state="ready"] .launcher-btn {
+    opacity: 1;
+    transform: none;
+  }
+  .launcher[data-state="ready"] .launcher-btn:nth-child(2) { transition-delay: 0.08s; }
+  .launcher[data-state="ready"] .launcher-btn:nth-child(3) { transition-delay: 0.16s; }
+
+  .launcher-btn:hover {
+    background: #d4d0c8;
+  }
+
+  .launcher-btn:active {
+    box-shadow: inset -1px -1px #fff, inset 1px 1px #0a0a0a, inset -2px -2px #dfdfdf, inset 2px 2px grey;
+  }
+
+  .launcher-btn:focus-visible {
+    outline: 1px dotted #000;
+    outline-offset: -5px;
+  }
+
+  .launcher-version {
+    position: absolute;
+    left: 12px;
+    bottom: 8px;
+    font: 11px Arial, sans-serif;
+    color: rgba(255, 255, 255, 0.75);
+    text-shadow: 1px 1px 1px #000;
+  }
+
+  /* Reduced motion: everything just appears */
+  .launcher-still .launcher-art,
+  .launcher-still[data-art="ready"] .launcher-art,
+  .launcher-still .launcher-title {
+    animation: none;
+    opacity: 1;
+  }
+  .launcher-still .launcher-btn {
+    transition: none;
+  }
+
+  /* About box */
+  .launcher-about {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.35);
+  }
+
+  .launcher-about[hidden] {
+    display: none;
+  }
+
+  .launcher-about-box {
+    width: min(340px, calc(100% - 24px));
+    padding: 3px;
+    background: silver;
+    color: #000;
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #dfdfdf, inset -2px -2px grey, inset 2px 2px #fff;
+    font: 12px Arial, sans-serif;
+    user-select: text;
+  }
+
+  .launcher-about-titlebar {
+    padding: 3px 4px;
+    background: linear-gradient(90deg, navy, #1084d0);
+    color: #fff;
+    font-weight: bold;
+  }
+
+  .launcher-about-body {
+    display: flex;
+    gap: 12px;
+    padding: 12px 12px 4px;
+  }
+
+  .launcher-about-body img {
+    object-fit: contain;
+    image-rendering: pixelated;
+  }
+
+  .launcher-about-body p {
+    margin: 0 0 8px;
+    line-height: 1.4;
+  }
+
+  .launcher-about-host {
+    color: #444;
+  }
+
+  .launcher-about-buttons {
+    display: flex;
+    justify-content: center;
+    padding: 4px 0 8px;
+  }
+
+  /* Narrow windows and phones: menu along the bottom */
+  @media (max-width: 560px) {
+    .launcher-title {
+      max-width: none;
+      right: 20px;
+    }
+    .launcher-title h1 {
+      font-size: 24px;
+    }
+    .launcher-title p {
+      display: none;
+    }
+    .launcher-menu {
+      top: auto;
+      bottom: 34px;
+      left: 16px;
+      right: 16px;
+      flex-direction: row;
+      transform: none;
+    }
+    .launcher-btn {
+      flex: 1;
+      width: auto;
+    }
+    .launcher-loading {
+      width: 70%;
+    }
+  }
+</style>
